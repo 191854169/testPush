@@ -11,12 +11,9 @@ import {
 import handleResponseInterceptor from './handleResponseInterceptor'
 import MRErrorTip from '@/config/MRErrorTip'
 import { Toast } from 'vant'
-import { getLangType, isTHSApp } from '@/utils/tools'
+import { getLangType } from '@/utils/tools'
 import { getXSource } from '../http.tool'
-import { getRunEnv } from '@/utils/env'
 import freezeError from './freezeError'
-import RYLogout from './RYLogout'
-import THSI18nLogout from '@fs/http/dist/lib/http/common/thsI18nLogoutInterceptor'
 
 const { VUE_APP_ENV, VUE_APP_ARMS_ENV, NODE_ENV } = process.env
 
@@ -40,14 +37,14 @@ export default function (http) {
         }
 
         http.registerInterceptor('request', ArmsRquestInterceptor(armsOptions))
-        console.log(`Feng.chen:: 16:09:38 VconsoleRequestInterceptor ===> `, VconsoleRequestInterceptor)
         http.registerInterceptor('request', VconsoleRequestInterceptor())
         // defaultOptions必须要传入的值
         // uin、session、lang、xSource、rndKey
-        const sessionKey = isTHSApp() || getRunEnv() === 2 ? 'WTtoken' : 'session'
+        const sessionKey = 'session'
         const session = () => localStorage.getItem(sessionKey) || ''
         const uin = () => localStorage.getItem('uin') || ''
         const rndKey = () => localStorage.getItem('rndKey') || ''
+
         http.registerInterceptor(
             'request',
             CommonHeaderIntercepotr({
@@ -72,11 +69,8 @@ export default function (http) {
         http.registerInterceptor('response', VconsoleResponseInterceptor())
         // 冻结账户拦截处理
         freezeError(http)
-        // 瑞银项目登出错误处理
-        RYLogout(http)
 
         http.registerInterceptor('response', CommonErrorInterceptor({ MRErrorTip, Toast }))
-        http.registerInterceptor('response', THSI18nLogout({ Toast: Toast }))
         http.registerInterceptor('response', handleResponseInterceptor())
     } catch (e) {
         console.log(`Feng.chen:: 16:20:43 e ===> `, e)

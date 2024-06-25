@@ -1,3 +1,6 @@
+/**
+ * @description: 监听页面显示与否，同时支持app和非app页面
+ */
 import { getPageVisibleSupportProperty } from '@/utils'
 
 export default {

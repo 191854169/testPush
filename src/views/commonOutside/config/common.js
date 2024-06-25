@@ -1,4 +1,4 @@
-import { i18n } from '@/i18n/cmhk/index.js'
+import { i18n } from '@/i18n/commonOutside/index.js'
 import { generateMap } from '@/utils/tools'
 
 // 订单状态 - 映射集合

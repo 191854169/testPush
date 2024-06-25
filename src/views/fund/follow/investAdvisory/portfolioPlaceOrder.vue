@@ -381,7 +381,7 @@ export default {
             }
         },
 
-        gotoOrderRecords(orderId = '') {
+        gotoOrderRecords() {
             const url = `${location.origin}${location.pathname}#/invest-advisory/order-records?type=${0}&portfolioId=${
                 this.portfolioId
             }&applyAccountId=${this.applyAccountId}`
@@ -820,7 +820,7 @@ export default {
 
             .left {
                 display: flex;
-                align-items: start;
+                align-items: flex-start;
                 width: 100px;
                 font-weight: 700;
                 font-size: 16px;

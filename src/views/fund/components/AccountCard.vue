@@ -208,22 +208,6 @@
                 <multi-img name="icon_arrow_left" directory="fund"></multi-img>
             </div>
         </div>
-        <!-- 定存宝到期回款订单 -->
-        <div class="doing-order" v-if="showRepayment && haveRepayment">
-            <div class="divide"></div>
-            <div class="content" @click="jumpRepaymentOrderList('fixedDeposit')">
-                <div class="content-msg" v-html="repaymentOrderMsg"></div>
-                <multi-img name="icon_arrow_left" directory="fund"></multi-img>
-            </div>
-        </div>
-        <!-- 星财宝专户到期回款订单 -->
-        <div class="doing-order" v-if="showRepayment && haveXcbRepayment">
-            <div class="divide"></div>
-            <div class="content" @click="jumpRepaymentOrderList('starSpecialAccount')">
-                <div class="content-msg" v-html="xcbRepaymentOrderMsg"></div>
-                <multi-img name="icon_arrow_left" directory="fund"></multi-img>
-            </div>
-        </div>
     </div>
 </template>
 
@@ -237,9 +221,6 @@ import { WEALTH_ACCOUNT_MAP, WEALTH_AMOUNT_STATUS_kEY } from '@/config/common.js
 import dayjs from 'dayjs'
 import { ASSET_TYPE_MAP } from '@/views/fund/config/common'
 import { getThemeType } from '@/utils/env'
-// ftd
-import { ORDER_STATUS_MAP } from '@/views/fixedDepositTreasure/config/common'
-import pathnames from '@/config/H5Pathname'
 
 const USD = 'USD'
 const HKD = 'HKD'
@@ -691,20 +672,6 @@ export default {
                 accountType: this.accountType,
                 productType: this.assetType === 'alterInvestment' ? 4 : ASSET_TYPE_MAP.keysMap[this.assetType] || '',
             })
-        },
-        /**
-         * 跳转定存宝+星财宝专户订单
-         * @param {String} 跳转类型
-         */
-        jumpRepaymentOrderList(type) {
-            let url = ''
-            if (type === 'fixedDeposit') {
-                url = `${pathnames.VUE_APP_FIXEDDEPOSIT_PAGE}order-list?status=${ORDER_STATUS_MAP.keysMap.receivedMoney}`
-            }
-            if (type === 'starSpecialAccount') {
-                url = `${pathnames.VUE_APP_STARSPECIALACCOUNT_PAGE}order-list?status=${ORDER_STATUS_MAP.keysMap.receivedMoney}`
-            }
-            this.$goPage(url)
         },
         // 根据账户同步币种
         async syncCurrencyByAccountType() {

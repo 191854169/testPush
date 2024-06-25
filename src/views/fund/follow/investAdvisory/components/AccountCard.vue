@@ -133,15 +133,11 @@
 
 <script>
 import { Overlay } from 'vant'
-import { FUND_ACCOUNT } from '@/entries/Fund.js'
-import { floatToRatio, addOrUpdateQuery, getAppVersion, compareVersion, dynamicFontSize } from '@/utils'
+import { floatToRatio, dynamicFontSize } from '@/utils'
 import AccountChoose from '@/components/AccountChoose'
 import { WEALTH_ACCOUNT_MAP, WEALTH_AMOUNT_STATUS_kEY } from '@/config/common.js'
 import dayjs from 'dayjs'
 import { getThemeType } from '@/utils/env'
-// ftd
-import { ORDER_STATUS_MAP } from '@/views/fixedDepositTreasure/config/common'
-import pathnames from '@/config/H5Pathname'
 
 const USD = 'USD'
 const HKD = 'HKD'

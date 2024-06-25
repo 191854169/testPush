@@ -13,10 +13,9 @@ import MultiImg from '@/components/MultiImg.vue'
 import Loading from '@/components/Loading.vue'
 import { thousandsFilter, amountFilter } from '@/config/filters.js'
 import SvgIcon from '@/components/SvgIcon.vue'
-import { isHLApp, isTHSI18NApp, getQueryString } from '@/utils/tools.js'
+import { isHLApp } from '@/utils/tools.js'
 import { i18n } from '@/i18n/fund/index.js'
-import { getRunEnv } from '@/utils/env.js'
-import { getAccountStatus, getFtdAccountStatus, getStarSpecialAccountStatus, getInvesetmentAccountStatus, nextAfterJudgeAccountStatus } from './init'
+import { getAccountStatus, getInvesetmentAccountStatus, nextAfterJudgeAccountStatus } from './init'
 
 export { FINANCE_ACCOUNT, FUND_ACCOUNT } from './init'
 
@@ -44,7 +43,6 @@ window.onerror = function () {
     console.error('global error ===>', arguments)
 }
 
-const isWT = getRunEnv() === 2 // 是否在网厅
 const app = new Vue({
     data() {
         return {
@@ -57,8 +55,6 @@ const app = new Vue({
     methods: {
         login,
         getAccountStatus: getAccountStatus(store),
-        getFtdAccountStatus: getFtdAccountStatus(store),
-        getStarSpecialAccountStatus: getStarSpecialAccountStatus(store),
         getInvesetmentAccountStatus: getInvesetmentAccountStatus(store),
         nextAfterJudgeAccountStatus,
         /**
@@ -99,15 +95,7 @@ const app = new Vue({
 app.$watch(
     'isLogin',
     v => {
-        // 国际版2期同花顺自身财富商城跳转财富页面(fund.html)不需要登录态
-        if (!isWT && !(isTHSI18NApp() && getQueryString('ticket'))) {
-            app.$mount('#app')
-        } else {
-            // 网厅、同花顺国际版九宫格入口链接中带ticket参数获取用户登录态之后才挂载APP
-            if (v) {
-                app.$mount('#app')
-            }
-        }
+        app.$mount('#app')
     },
     {
         immediate: true,
@@ -115,7 +103,6 @@ app.$watch(
 )
 
 async function initIsLoginStatus() {
-    await store.dispatch('user/checkI18nThsAuthorization')
     // 页面初始化登录态
     store
         .dispatch('user/getUserInfo', false)
@@ -144,10 +131,6 @@ function login() {
                 location.reload()
             }
         })
-        return false
-    }
-    // 同花顺 - 进入页面一定是登录态
-    if (isWT) {
         return false
     }
     // 站外

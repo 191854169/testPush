@@ -2,11 +2,7 @@ import { getUserDetail, getSubAcctDetail, getIpoQuestionnaireStatus } from '@/ap
 import { ecashUserStatus } from '@/apis/wealth/index.js'
 import JSBridge from '@fs/jsbridge/dist/lib/jsBridge.js'
 import { env } from '@/config/globalProterties/env'
-import { getQueryString, isEmpty, isUndefined, isTHSI18NApp } from '@/utils'
-import { TicketCheck } from '@/apis/uc'
-import { Toast } from 'vant'
-import { getHKDFEncryptKey } from '@/httpRequest/encrypt'
-import { THS_I18N_TICKET_KEY } from '@/httpRequest/constants'
+import { getQueryString, isEmpty, isUndefined } from '@/utils'
 
 // import {isDeviceMobile} from '@/utils/tools.js'
 const LASTLOGIN_KEY = 'lastLogin'
@@ -520,28 +516,6 @@ const actions = {
         })
 
         return retPromise
-    },
-    async checkI18nThsAuthorization({ dispatch }) {
-        if (isTHSI18NApp()) {
-            const ticket = getQueryString('ticket') || localStorage.getItem(THS_I18N_TICKET_KEY)
-            try {
-                console.log('ths i18n get userinfo, run here every time')
-                const key = await getHKDFEncryptKey(ticket)
-                // 生成rndKey供接口解密使用，接口请求成功后使用后端返回的数据覆盖rndKey，只有此接口需要额外设置rndKey
-                localStorage.setItem('rndKey', key)
-                localStorage.setItem(THS_I18N_TICKET_KEY, ticket)
-                const res = await TicketCheck({ ticket })
-                dispatch('setSession', res?.result)
-                dispatch('setSession2', res?.result)
-                console.log('res,key', res, key)
-                console.log('this is THSI18NApp ticketCheck decrypt result:', res)
-                return Promise.resolve()
-            } catch {
-                Toast('同花顺国际版授权失败')
-                return Promise.resolve()
-            }
-        }
-        return Promise.resolve()
     },
     // 获取虚拟资产ETF的IPO问卷评估状态  force:是否强制刷新重新获取信息
     async getEtfIpoQuestionnaireStatus({ commit, state }, force = false) {

@@ -6,7 +6,7 @@
  * http://www.axios-js.com/zh-cn/docs/
  *
  */
-import { getPathVersion, getRunEnv } from '@/utils/env'
+import { getPathVersion } from '@/utils/env'
 import { ENCRYPT_TYPES as ENCRYPT_TYPES_TEMP, ERROR_COCES as ERROR_COCES_TEMP } from './constants'
 
 import { setUserInfoFromLocaltempFile } from './http.tool'
@@ -33,7 +33,7 @@ initInterceptors(http)
 
 export const get = (url, paramet) => {
     // 网厅内部打开默认为不加密，除此之外均默认加密
-    const encrypt = getRunEnv() === 2 ? ENCRYPT_TYPES.NO_ENCRYPT : ENCRYPT_TYPES.LOGIN
+    const encrypt = ENCRYPT_TYPES.LOGIN
     const config = Object.assign(
         {
             jsBridge: true,
@@ -46,7 +46,7 @@ export const get = (url, paramet) => {
 
 export const post = (url, paramet) => {
     // 网厅内部打开默认为不加密，除此之外均默认加密
-    const encrypt = getRunEnv() === 2 ? ENCRYPT_TYPES.NO_ENCRYPT : ENCRYPT_TYPES.LOGIN
+    const encrypt = ENCRYPT_TYPES.LOGIN
     const postConfig = {
         jsonRpc: true, // post 默认开启 jsonRpc 2.0
         encrypt, // 1: 临时加密； 2 登录加密  0:所有状态不加密

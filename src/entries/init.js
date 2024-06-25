@@ -1,17 +1,12 @@
-import './initLocalStorage'
 import Vue from 'vue'
 import '@babel/polyfill'
-import VueRouter from 'vue-router'
 import { addCurParamsForUrl } from '@/utils/utils.js'
-import { getRunEnv } from '@/utils/env.js'
-import '@fs/jsbridge/dist/lib/thsI18NJsBridge.js'
-import thsJsBridge from '@fs/jsbridge/dist/lib/thsJsBridge.js'
 
 // 注册全局属性
 import '@/config/globalProterties/index.js'
 import pathnames from '../config/H5Pathname.js'
 import initSensors from '@/utils/bury.js'
-import { isHLApp, isTHSApp } from '@/utils/tools'
+import { isHLApp } from '@/utils/tools'
 import { isInOutsideH5 } from '@/utils'
 import LogoAd from '@/components/logo.vue'
 
@@ -20,91 +15,6 @@ initSensors()
 
 Vue.prototype.$jsBridge = window.JSBridge
 Vue.component(LogoAd.name, LogoAd)
-
-const addWtToken = path => {
-    const href = location.href
-    let queryString = ''
-    if (href.search(/(&|\?)wtToken/) > 0) {
-        queryString = (href.match(/(&|\?)wtToken(.+)/g) || [])[0] || ''
-        queryString = queryString.replace(/^(&|\?)/, '')
-    }
-    if (typeof path === 'string') {
-        const tempPath = addCurParamsForUrl(path, { needAddProtocol: false })
-        // 正则作用：tempPath会返回包含全路径（http://sit.mfosuhani.com/wealth/fund.html#/list?test=1）
-        // 例子：http://sit.mfosuhani.com/wealth/fund.html#/list?test=1  => /list?test=1
-        path = tempPath.replace(/^[^#]+#/, '')
-    } else {
-        path.query = {
-            ...queryString.split('&').reduce((o, i) => {
-                const [k, v] = i.split('=')
-                o[k] = v
-                return o
-            }, {}),
-            ...(path.query || {}),
-        }
-    }
-    return path
-}
-const originPush = VueRouter.prototype.push
-const originReplace = VueRouter.prototype.replace
-VueRouter.prototype.push = function () {
-    let path = arguments[0]
-    path = addWtToken(path)
-    if (pushInThsApp.call(this, path)) return
-    return originPush.call(this, path, ...[...arguments].slice(1))
-}
-VueRouter.prototype.replace = function () {
-    let path = arguments[0]
-    path = addWtToken(path)
-    // replace在同花顺不需要新开webview
-    // if (pushInThsApp.call(this, path)) return
-    return originReplace.call(this, path, ...[...arguments].slice(1))
-}
-
-function pushInThsApp(path) {
-    if (isTHSApp()) {
-        // eslint-disable-line
-        if (typeof path === 'object') {
-            if (path.name) {
-                path = this.resolve(path)?.route || {} // 通过名称查找当前的路由对象
-            }
-            path =
-                path.path +
-                '?' +
-                Object.entries(path.query)
-                    .reduce((str, [k, v]) => {
-                        if (!k) return str
-                        return (str += `${k}=${v}&`)
-                    }, '')
-                    .replace(/&$/, '')
-        }
-        if (typeof path === 'string') {
-            path = ('/' + path).replace('//', '/')
-            const href = `${location.origin}${location.pathname}?t=${Date.now()}#${path}`
-            // 兼容 私募认购页 查看风险提示 文件的路由
-            if (path.includes('tipsPage')) {
-                return false
-            }
-            console.log('pushInThsApp ===>', path, href)
-            location.href = href
-            return true
-        }
-    }
-    return false
-}
-//判断是否处于同花顺android app里面，初始化后退拦截为客户端自行管理
-thsJsBridge()
-
-// var ths = window.navigator.userAgent.includes('Hexin_Gphone')
-// if (ths) {
-//     var data = {
-//         method: 'setBrowserField',
-//         params: {
-//             isUseDefaultBack: 'true',
-//         },
-//     }
-//     callNativeHandler('notifyWebHandleEvent', JSON.stringify(data)) // eslint-disable-line
-// }
 
 export const FINANCE_ACCOUNT = 1 // 资金账户
 export const FUND_ACCOUNT = 2 // 基金账户
@@ -148,26 +58,6 @@ export function getAccountStatus(store) {
     fn.FUND_ACCOUNT = FUND_ACCOUNT
     return fn
 }
-/**
- * 获取定存宝账户开通状态
- * @returns { Boolean } 是否开户 开户 - true 未开户 - false
- */
-export function getFtdAccountStatus(store) {
-    async function fn() {
-        try {
-            if (fn.fetching) return
-            fn.fetching = true
-            const info = await store.dispatch('user/getSpecialAccountStatus', { type: 'ftd' })
-            // info === null 未开通（包含未提交、提交但未开通完成） info !== null 表示开通完成 暂未考虑账户开通后异常情况
-            return !!info
-        } catch (e) {
-            return false
-        } finally {
-            fn.fetching = false
-        }
-    }
-    return fn
-}
 
 /**
  * 获取投顾组合账户信息
@@ -182,27 +72,6 @@ export function getInvesetmentAccountStatus(store) {
             // info === null 未开通（包含未提交、提交但未开通完成） info !== null 表示开通完成 暂未考虑账户开通后异常情况
             return !!info
         } catch (e) {
-            return false
-        } finally {
-            fn.fetching = false
-        }
-    }
-    return fn
-}
-/**
- * 获取星财宝专户账户开通状态
- * @returns { Boolean } 是否开户 开户 - true 未开户 - false
- */
-export function getStarSpecialAccountStatus(store) {
-    async function fn() {
-        try {
-            if (fn.fetching) return
-            fn.fetching = true
-            const info = await store.dispatch('user/getSpecialAccountStatus', { type: 'xcb' })
-            // info === null 未开通（包含未提交、提交但未开通完成） info !== null 表示开通完成 暂未考虑账户开通后异常情况
-            return !!info
-        } catch (e) {
-            console.error(`Feng.chen:: 15:08:02 e ===> `, e)
             return false
         } finally {
             fn.fetching = false
@@ -252,7 +121,6 @@ export function nextAfterJudgeAccountStatus(to = 'openAccount', params = {}) {
  * @returns
  */
 export function login(store, getApp = () => {}) {
-    const isWT = getRunEnv() === 2 // 是否在网厅
     return () => {
         const app = getApp()
         // 恒利
@@ -264,10 +132,6 @@ export function login(store, getApp = () => {}) {
                     location.reload()
                 }
             })
-            return false
-        }
-        // 同花顺 - 进入页面一定是登录态
-        if (isWT) {
             return false
         }
         // 站外

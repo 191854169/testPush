@@ -59,8 +59,6 @@ export const ERROR_CODE_MAP = {
     MR: 100029, // mr测试会统一返回的错误码
 }
 
-export const THS_I18N_TICKET_KEY = 'thsI18NTicket'
-
 export const ENCRYPT_TYPES = {
     NO_ENCRYPT: 0, // 不加密
     EDCH: 1, // 临时加密

@@ -17,7 +17,7 @@ import SvgIcon from '@/components/SvgIcon.vue'
 import { isHLApp, isInRyH5 } from '@/utils/tools.js'
 import { i18n } from '@/i18n/commonOutside/index.js'
 import { getRunEnv } from '@/utils/env.js'
-import { getAccountStatus, getFtdAccountStatus, getStarSpecialAccountStatus, nextAfterJudgeAccountStatus } from './init'
+import { getAccountStatus, nextAfterJudgeAccountStatus } from './init'
 
 export { FINANCE_ACCOUNT, FUND_ACCOUNT } from './init'
 
@@ -67,8 +67,6 @@ const app = new Vue({
     methods: {
         login,
         getAccountStatus: getAccountStatus(store),
-        getFtdAccountStatus: getFtdAccountStatus(store),
-        getStarSpecialAccountStatus: getStarSpecialAccountStatus(store),
         nextAfterJudgeAccountStatus,
         /**
          * 注册页面监听事件 - 触发页面刷新

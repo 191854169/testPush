@@ -40,7 +40,7 @@ export default {
         async handleRejectConfirm() {
             this.close?.()
 
-            const store = (await import('@/store/cmhk'))?.default
+            const store = (await import('@/store/commonOutside'))?.default
             store?.dispatch('user/clearUserInfo')
 
             if (isCMHK()) {

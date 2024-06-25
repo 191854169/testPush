@@ -297,8 +297,7 @@ export default {
             this.isLoading = true
             this.$loading.show = true
             // Promise 内部均消化了报错
-            await this.getStarSpecialAccountStatus()
-            await Promise.all([this.getAssetsDetail(), this.getEcashUserStatus(), this.getFtdAccountStatus()])
+            await Promise.all([this.getAssetsDetail(), this.getEcashUserStatus()])
             this.isLoading = false
             this.$loading.show = false
         },
@@ -325,31 +324,6 @@ export default {
                 this.cashBoxOpenStatus = result?.openStatus || 0
             } catch (e) {
                 console.error('ecashUserStatus===>e:', e)
-            }
-        },
-        /**
-         * 获取定存宝账户状态
-         */
-        async getFtdAccountStatus() {
-            try {
-                const result = await this.$root.getFtdAccountStatus()
-                console.log('getFtdAccountStatus-res:', result)
-                this.fixedDepositTreasureOpenStatus = result
-            } catch (e) {
-                console.error('getFtdAccountStatus===>e:', e)
-            }
-        },
-        /**
-         * 获取星财宝专户账户状态
-         */
-        async getStarSpecialAccountStatus() {
-            try {
-                const result = await this.$root.getStarSpecialAccountStatus()
-                console.log('getStarSpecialAccountStatus-res:', result)
-                this.starSpecialAccountOpenStatus = result
-            } catch (e) {
-                console.error('getStarSpecialAccountStatus===>e:', e)
-                this.starSpecialAccountOpenStatus = false
             }
         },
         // 持仓点击事件

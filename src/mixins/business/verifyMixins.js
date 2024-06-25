@@ -411,13 +411,6 @@ export default {
                 return false
             }
 
-            if (!(await this.$root.getFtdAccountStatus())) {
-                const { VUE_APP_FIXEDDEPOSIT_OPEN_ACCOUNT_PAGE: fixedDepositTreasureOpenAccountUrl } = pathnames
-                // TODO 是否需要参数
-                this.$goPage(fixedDepositTreasureOpenAccountUrl)
-                return false
-            }
-
             // 基金开户校验
             if (!this.$root.getAccountStatus(FUND_ACCOUNT)) {
                 this.initAccountWatch()
