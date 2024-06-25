@@ -125,7 +125,7 @@
             "prettier "
         ],
         "**/*.{vue,scss,sass,css,less}": [
-            "stylelint"
+            "stylelint --allow-empty-input"
         ],
         "**/*.{vue,js,jsx,ts,tsx}": [
             "eslint"
