@@ -1,0 +1,49 @@
+.init-btn-dialog {
+    .van-dialog__footer {
+        display: flex;
+        flex-direction: column-reverse !important;
+
+        .van-dialog__confirm {
+            height: 44px;
+            color: #fff;
+            background: #ff6907;
+            border-radius: 22px;
+
+            .van-button__text {
+                font-weight: 500;
+                font-size: 16px;
+            }
+        }
+
+        .van-dialog__cancel {
+            margin-top: 12px;
+            color: #2f2f2f;
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 20px;
+            background: #fff;
+        }
+
+        .van-dialog__cancel::before {
+            background-color: transparent !important;
+        }
+    }
+
+    .van-dialog__message {
+        white-space: normal;
+
+        .cusspan {
+            color: #ff6907;
+        }
+    }
+
+    button {
+        width: 100%;
+        color: #fff;
+        font-weight: 700;
+        font-size: 16px;
+        line-height: 36px;
+        background: #ff6907;
+        border-radius: 18px;
+    }
+}

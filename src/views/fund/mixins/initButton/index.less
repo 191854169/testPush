@@ -1,0 +1,226 @@
+/deep/ footer {
+    position: relative;
+    display: flex;
+    flex: 0 0 auto;
+    align-items: center;
+    justify-content: space-between;
+    height: 50px;
+    padding: 0 12px;
+    // 基金不支持认购和赎回操作时
+    &.disabled-operate {
+        justify-content: flex-start !important;
+
+        .footer-content {
+            width: auto;
+        }
+
+        .comparison,
+        .self-select,
+        .share {
+            flex: 1 0 auto;
+            align-items: center;
+            margin: 0;
+        }
+    }
+
+    button {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        background: transparent;
+        border: none;
+        outline: none;
+
+        span {
+            &.mask {
+                position: relative;
+
+                &::after {
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                    bottom: 0;
+                    left: 0;
+                    z-index: 1;
+                    content: '';
+                }
+            }
+        }
+    }
+
+    .footer-content {
+        width: 100%;
+
+        button {
+            width: 100%;
+            color: #fff;
+            font-weight: 700;
+            font-size: 16px;
+            line-height: 36px;
+            border-radius: 18px;
+
+            .normal-btn {
+                background: #ff6907;
+                border-radius: 118px;
+            }
+        }
+
+        .big-btn {
+            width: calc(100% - 38px);
+            margin-right: 19px;
+            margin-left: 19px;
+            line-height: 44px;
+            border-radius: 28px;
+        }
+
+        .dis-private-fund {
+            background: linear-gradient(272.87deg, #eca46a 0.6%, #ffc07e 118.57%);
+            border-radius: 28px;
+            opacity: 0.4;
+        }
+
+        span:first-child:last-child {
+            width: 100%;
+        }
+    }
+
+    .open-account {
+        background: #ff6907;
+    }
+
+    .buy:not(.sell) {
+        .disabled-buy {
+            background: rgba(#ff6907, 0.3);
+            border-radius: 118px;
+        }
+
+        .buyable {
+            background: #ff6907;
+            border-radius: 118px;
+        }
+    }
+
+    .sell.buy {
+        span {
+            width: 50%;
+            text-align: center;
+        }
+
+        .buyable {
+            background: linear-gradient(90.13deg, #ff8d07 2.3%, #ff6907 99.86%);
+            border-radius: 118px 0 0 118px;
+        }
+
+        .disabled-buy {
+            color: rgba(#fff, 0.3);
+            background: linear-gradient(90.13deg, #ff8d07 2.3%, #ff6907 99.86%);
+            border-radius: 118px 0 0 118px;
+        }
+
+        .sellable {
+            background: linear-gradient(90deg, #ffa724 0%, #ffba07 100%);
+            border-radius: 0 118px 118px 0;
+        }
+
+        .disabled-sell {
+            color: rgba(#fff, 0.3);
+            background: linear-gradient(90deg, #ffa724 0%, #ffba07 100%);
+            border-radius: 0 118px 118px 0;
+        }
+    }
+
+    .self-select,
+    .share,
+    .comparison {
+        flex: 0 0 40px;
+        flex-direction: column;
+        align-items: center;
+
+        i {
+            font-size: 22px;
+        }
+
+        span {
+            color: #9c9c9c;
+            font-size: 10px;
+            line-height: 14px;
+        }
+    }
+
+    .private-btn {
+        color: #4c2620 !important;
+        background: linear-gradient(272.87deg, #eca46a 0.6%, #ffc07e 118.57%) !important;
+        border-radius: 28px !important;
+    }
+
+    .self-select {
+        flex-basis: 40px;
+        margin-left: 21px;
+
+        &.selected {
+            i {
+                color: #ff6907;
+            }
+        }
+
+        .self-icon {
+            width: 24px;
+            height: 24px;
+        }
+    }
+
+    .comparison {
+        flex-basis: 24px;
+        margin-left: 23px;
+
+        .comparsion-icon {
+            width: 24px;
+            height: 24px;
+        }
+    }
+
+    .share {
+        flex-basis: 24px;
+        margin-left: 31px;
+    }
+}
+
+/deep/.footer-content {
+    .van-dialog__footer {
+        display: flex;
+        flex-direction: column-reverse !important;
+
+        .van-dialog__confirm {
+            height: 44px;
+            color: #fff;
+            background: #ff6907;
+            border-radius: 22px;
+
+            .van-button__text {
+                font-weight: 500;
+                font-size: 16px;
+            }
+        }
+
+        .van-dialog__cancel {
+            margin-top: 12px;
+            color: #2f2f2f;
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 20px;
+            background: #fff;
+        }
+
+        .van-dialog__cancel::before {
+            background-color: transparent !important;
+        }
+    }
+
+    .van-dialog__message {
+        white-space: normal;
+
+        .cusspan {
+            color: #ff6907;
+        }
+    }
+}

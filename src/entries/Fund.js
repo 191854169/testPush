@@ -1,0 +1,165 @@
+import './init.js'
+import Vue from 'vue'
+import Fund from '@/views/fund/App.vue'
+
+import getTitleDialog from '@/views/fund/follow/components/titleDialog/index.js'
+import VantComponents from '@/config/vant.components.js'
+import setDirectives from '@/config/directives.js'
+import router from '@/router/fund'
+import store from '@/store/fund'
+import '../utils/remH5.js'
+import '@/assets/css/index.js'
+import MultiImg from '@/components/MultiImg.vue'
+import Loading from '@/components/Loading.vue'
+import { thousandsFilter, amountFilter } from '@/config/filters.js'
+import SvgIcon from '@/components/SvgIcon.vue'
+import { isHLApp, isTHSI18NApp, getQueryString } from '@/utils/tools.js'
+import { i18n } from '@/i18n/fund/index.js'
+import { getRunEnv } from '@/utils/env.js'
+import { getAccountStatus, getFtdAccountStatus, getStarSpecialAccountStatus, getInvesetmentAccountStatus, nextAfterJudgeAccountStatus } from './init'
+
+export { FINANCE_ACCOUNT, FUND_ACCOUNT } from './init'
+
+// error handler
+import { initErrorLoggerHandler } from '@/utils/logService'
+initErrorLoggerHandler()
+
+Vue.component(MultiImg.name, MultiImg)
+Vue.component(SvgIcon.name, SvgIcon)
+Vue.component(Loading.name, Loading)
+
+Vue.filter('thousandsFilter', thousandsFilter)
+Vue.filter('amountFilter', amountFilter)
+
+VantComponents(Vue)
+// 设置全局指令
+setDirectives(Vue)
+Vue.config.productionTip = false
+
+Vue.config.errorHandler = function (err, vm, info) {
+    console.error('Vue config error ===> ', err, '\n', 'vm ===>', vm, '\n', 'info ===> ', info)
+}
+
+window.onerror = function () {
+    console.error('global error ===>', arguments)
+}
+
+const isWT = getRunEnv() === 2 // 是否在网厅
+const app = new Vue({
+    data() {
+        return {
+            isLogin: undefined,
+        }
+    },
+    mounted() {
+        this.initPageVisibleHandler()
+    },
+    methods: {
+        login,
+        getAccountStatus: getAccountStatus(store),
+        getFtdAccountStatus: getFtdAccountStatus(store),
+        getStarSpecialAccountStatus: getStarSpecialAccountStatus(store),
+        getInvesetmentAccountStatus: getInvesetmentAccountStatus(store),
+        nextAfterJudgeAccountStatus,
+        /**
+         * 注册页面监听事件 - 触发页面刷新
+         * @param {Array} pages 需要监听登录状态的页面
+         */
+        initPageVisibleHandler(pages = ['/', '/account-hold', '/detail']) {
+            if (this.$jsBridge) {
+                const onVisible = () => {
+                    if (!pages.length || pages.includes(this.$route.path)) {
+                        // 校验用户是否已经退出登录了 - 只用处理在app内部的
+                        this.$store
+                            .dispatch('user/getUserInfo', false)
+                            .then(() => {
+                                // 未登录 -> 登录
+                                if (!this.$root.isLogin) {
+                                    location.reload()
+                                }
+                            })
+                            .catch(() => {
+                                // 登录 -> 未登录
+                                if (this.$root.isLogin) {
+                                    location.reload()
+                                }
+                            }) // 登录失效会触发页面刷新
+                    }
+                }
+                this.$jsBridge.watchPageVisible(onVisible)
+            }
+        },
+    },
+    router,
+    store,
+    i18n,
+    render: h => h(Fund),
+})
+
+app.$watch(
+    'isLogin',
+    v => {
+        // 国际版2期同花顺自身财富商城跳转财富页面(fund.html)不需要登录态
+        if (!isWT && !(isTHSI18NApp() && getQueryString('ticket'))) {
+            app.$mount('#app')
+        } else {
+            // 网厅、同花顺国际版九宫格入口链接中带ticket参数获取用户登录态之后才挂载APP
+            if (v) {
+                app.$mount('#app')
+            }
+        }
+    },
+    {
+        immediate: true,
+    }
+)
+
+async function initIsLoginStatus() {
+    await store.dispatch('user/checkI18nThsAuthorization')
+    // 页面初始化登录态
+    store
+        .dispatch('user/getUserInfo', false)
+        .then(data => {
+            // 有数据说明app获取数据正常
+            if (data) {
+                app.isLogin = true
+            } else {
+                app.isLogin = !!localStorage.getItem('session') || !!localStorage.getItem('WTtoken')
+            }
+        })
+        .catch(() => {
+            app.isLogin = false
+        })
+}
+
+initIsLoginStatus()
+/* 登录操作 - 内含各个环境的是否存在登录态及后续的登陆操作 */
+function login() {
+    // 恒利
+    if (isHLApp()) {
+        // 内部会进行是否登录状态判断
+        store.dispatch('user/login', false).then(data => {
+            if (data) {
+                app.isLogin = true
+                location.reload()
+            }
+        })
+        return false
+    }
+    // 同花顺 - 进入页面一定是登录态
+    if (isWT) {
+        return false
+    }
+    // 站外
+    const session = localStorage.getItem('session')
+    if (!session) {
+        let curPage = location.href
+        curPage = encodeURIComponent(curPage)
+        const loginPageHref = `${location.origin}/pages/login.html?path=${curPage}#/`
+        location.href = loginPageHref
+        return false
+    }
+    return true
+}
+// 全局组件
+Vue.prototype.$titleDialog = getTitleDialog(Vue)

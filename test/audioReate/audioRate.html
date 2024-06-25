@@ -1,0 +1,29 @@
+<!-- 
+    文档地址：https://developer.mozilla.org/zh-CN/docs/Web/API/HTMLMediaElement/playbackRate 
+-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>音频倍速测试</title>
+    </head>
+    <body>
+        <audio id="myAudio" controls>
+            <source src="test.mp3" type="audio/mpeg" />
+            您的浏览器不支持 audio 元素。
+        </audio>
+        <br />
+        <button onclick="getPlaySpeed()" type="button">获取音频播放速度</button>
+        <button onclick="setPlaySpeed()" type="button">设置音频快速播放</button>
+        <script>
+            var x = document.getElementById('myAudio')
+            function getPlaySpeed() {
+                alert(x.playbackRate)
+            }
+            function setPlaySpeed() {
+                // 设置范围 0.5 - 5
+                x.playbackRate = 2
+            }
+        </script>
+    </body>
+</html>

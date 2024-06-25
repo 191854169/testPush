@@ -1,0 +1,19 @@
+{
+    "javascript.updateImportsOnFileMove.enabled": "always",
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true,
+    "[vue]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "stylelint.enable": true,
+    "stylelint.validate": ["css", "scss", "less", "vue"],
+    "css.validate": false,
+    "less.validate": false,
+    "scss.validate": false,
+    "editor.codeActionsOnSave": {
+      "source.fixAll.stylelint": "explicit",
+      "source.fixAll.markdownlint": "explicit",
+      "source.fixAll": "explicit"
+    },
+    "files.autoSave": "onFocusChange"
+}

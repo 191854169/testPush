@@ -1,0 +1,302 @@
+@import './theme.less';
+
+html,
+body {
+    // -webkit-overflow-scrolling: touch;
+}
+
+.content {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 16px;
+    padding-bottom: 40px;
+    color: @text_color;
+    font-size: 14px;
+    background: #fff;
+}
+
+.flex {
+    display: flex;
+}
+// 页面需要上下结构
+.page-col {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: calc(100vh - 84px);
+}
+
+.title-lab {
+    color: @text_title_lab;
+}
+
+.lab {
+    color: @text_lab;
+}
+
+.text {
+    color: @text_color;
+}
+
+.info {
+    color: @text_info_color;
+}
+
+.link {
+    color: @text_link_color;
+    text-decoration: none;
+}
+
+.des {
+    color: #7a7a7a;
+}
+
+.tc {
+    text-align: center;
+}
+
+.text-err {
+    color: #f31414;
+}
+
+@size: 12, 13, 14, 15, 16, 18, 19, 20, 22, 24, 25, 26, 28, 30, 32, 34, 36, 38, 40, 46, 60, 70;
+@sizeLen: length(@size);
+each(@size,{
+  .f@{value} {
+    font-size: ~'@{value}px';
+  }
+})
+
+
+//h3 是通用二级标题，影响所有页面
+h3 {
+    margin-top: 18px;
+    color: #262626;
+    font-weight: 500;
+    font-size: 22px;
+}
+
+//通用 普通弹出层列表的选择
+.popup-ul {
+    padding: 0 8px;
+    padding-top: 12px;
+    padding-bottom: 20px;
+
+    li {
+        padding: 21px 16px;
+        color: #1f1f1f;
+        font-size: 16px;
+    }
+
+    .active {
+        background: #fff5ef;
+        border-radius: 8px;
+    }
+}
+
+// 通用 多选列表的样式 两列
+.other-checkbox {
+    .title {
+        display: flex;
+        align-items: center;
+        padding: 13px 0;
+
+        img {
+            width: 16px;
+            height: 16px;
+            margin-left: 10px;
+        }
+    }
+
+    .checkbox-list {
+        flex-wrap: wrap;
+        padding-top: 3px;
+
+        li {
+            display: flex;
+            width: 50%;
+            padding-bottom: 16px;
+
+            div {
+                margin-right: 7px;
+            }
+        }
+
+        .other-loan {
+            display: flex;
+            align-items: center;
+            width: 80%;
+            min-height: 43px;
+
+            input {
+                max-width: 40%;
+                margin-left: 8px;
+                padding: 5px 0;
+                border: 0;
+                border-bottom: 1px solid #d8d8d8;
+            }
+        }
+    }
+
+    .checkbox {
+        margin-right: 7px;
+    }
+
+    .dispute {
+        padding-left: 23px;
+        font-size: 12px;
+    }
+}
+// 增加 col 成为1列
+.other-checkbox.radio {
+    .van-radio-group {
+        display: flex;
+        flex-wrap: wrap;
+
+        .van-radio {
+            display: flex;
+            align-items: center;
+            width: 50%;
+            margin-bottom: 14px;
+            color: #1f1f1f;
+            font-size: 14px;
+        }
+    }
+}
+
+.other-checkbox.col {
+    .van-radio-group {
+        .van-radio {
+            width: 100%;
+        }
+    }
+
+    .checkbox-list {
+        li {
+            display: flex;
+            align-items: flex-start;
+            width: 100%;
+
+            .van-checkbox {
+                min-width: 18px;
+                padding-top: 2px;
+            }
+        }
+    }
+}
+
+// 修改UI框架本身样式
+.van-button {
+    .van-button__text {
+        font-size: 16px;
+    }
+}
+
+.van-checkbox__icon--checked {
+    .van-icon {
+        background-color: #2f2f2f;
+        border-color: #2f2f2f;
+    }
+}
+
+.van-radio__icon--checked {
+    .van-icon {
+        background-color: #2f2f2f;
+        border-color: #2f2f2f;
+    }
+}
+
+.van-radio-group {
+    .van-icon-success::before {
+        transform: translateY(-1px);
+    }
+}
+// popup 弹出层的遮罩
+.van-overlay {
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.van-dialog {
+    border-radius: 12px;
+
+    .van-dialog__confirm {
+        .van-button__text {
+            color: #ff6907;
+        }
+    }
+
+    .van-dialog__message {
+        padding: 28px 16px;
+    }
+
+    .van-dialog__cancel,
+    .van-dialog__confirm {
+        height: 44px;
+    }
+}
+
+.dialog-popup {
+    padding: 28px 16px 0;
+
+    p {
+        padding-bottom: 24px;
+        font-size: 14px;
+        text-align: left;
+
+        span {
+            font-weight: 500;
+        }
+
+        .active {
+            color: #ff6907;
+            font-size: 400;
+        }
+    }
+}
+
+.van-dialog__content--isolated {
+    min-height: 0;
+}
+
+// toast 样式
+.van-toast {
+    padding: 8px 12px;
+    background: #000;
+    border-radius: 6px;
+
+    &.van-toast--fail,
+    &.van-toast--loading,
+    &.van-toast--success {
+        box-sizing: border-box;
+        width: 120px;
+        min-height: 108px;
+        padding: 16px 8px;
+
+        .van-toast__text {
+            margin-top: 12px;
+        }
+    }
+}
+
+// 修改日期选择的样式
+.van-picker-column {
+    z-index: 10;
+}
+
+.van-picker__mask {
+    z-index: 20;
+}
+
+.van-hairline-unset--top-bottom.van-picker__frame {
+    z-index: 1;
+    background: #f9f9f9;
+    border-radius: 4px;
+
+    &::after {
+        display: none;
+    }
+}
+// 弹出框圆角
+.van-popover__content {
+    border-radius: 0;
+}

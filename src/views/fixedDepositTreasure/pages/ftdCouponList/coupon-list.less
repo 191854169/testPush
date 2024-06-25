@@ -1,0 +1,554 @@
+.wealth-activity-card-page {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    // background-color: rgba(0, 0, 0, 0.04);
+    background-color: #f9f9f9;
+    // position: absolute;
+    // position:fixed
+    .dhBtn {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 72px;
+        padding-bottom: 15px;
+        background: #fff;
+        box-shadow: inset 0 0.5px 0 #efefef;
+
+        img {
+            width: 24px;
+            margin-right: 8px;
+        }
+
+        span {
+            font-weight: 600;
+            font-size: 16px;
+        }
+    }
+
+    .tab-list {
+        position: relative;
+        z-index: 10;
+        display: flex;
+        width: 100%;
+        max-width: 750px;
+        height: 36px;
+        line-height: 36px;
+        background-color: #fff;
+
+        li {
+            position: relative;
+            flex: 1;
+            color: #666;
+            font-weight: 400;
+            font-size: 15px;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .num {
+            position: absolute;
+            top: 4px;
+            right: -9px;
+            width: 14px;
+            height: 10px;
+            color: #fff;
+            font-weight: bold;
+            line-height: 10px;
+            text-align: center;
+            // height: 10px;
+            background: #f31414;
+            border-radius: 7px;
+        }
+
+        .active {
+            color: #2f2f2f;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .dhzx-li {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            .dhzx-icon {
+                width: 24px;
+                height: 24px;
+            }
+        }
+    }
+
+    .type-bar {
+        position: relative;
+        z-index: 10;
+        height: 36px;
+        background: #fff;
+        box-shadow: inset 0 -0.5px 0 #efefef;
+
+        .type-bar-value {
+            padding: 8px 16px;
+            color: #2f2f2f;
+            font-size: 14px;
+            line-height: 20px;
+        }
+
+        .expand-icon {
+            float: right;
+            width: 14px;
+            height: 14px;
+            margin-top: 2px;
+        }
+
+        .expand {
+            transform: rotate(-180deg);
+        }
+    }
+
+    .van-list {
+        flex: 1;
+        padding-top: 0;
+    }
+
+    .van-item {
+        position: relative;
+        margin-bottom: 12px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.04);
+    }
+
+    .text-bottom {
+        width: 185px;
+        line-height: 14px;
+    }
+
+    .list-item {
+        position: relative;
+        z-index: 1;
+        display: flex;
+        width: 100%;
+        overflow: hidden;
+        border-radius: 8px;
+
+        .card-left {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-items: center;
+            width: 112px;
+            padding: 31px 0;
+            color: #ff6907;
+            font-weight: bold;
+            // font-size: 32px;
+            font-size: 26px;
+            line-height: 34px;
+            text-align: center;
+            background-size: cover;
+
+            p {
+                width: 112px;
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+
+                .percent-marker {
+                    font-size: 12px;
+                }
+            }
+
+            .currency {
+                padding-left: 4px;
+                font-size: 12px;
+                line-height: 16px;
+            }
+
+            .icon-img {
+                width: 88px;
+                height: 88px;
+                margin: -27px 0 -27px -3px;
+
+                &.gray {
+                    opacity: 0.25;
+                    filter: grayscale(100%);
+                }
+            }
+
+            .gift-img {
+                width: 76px;
+                height: 76px;
+                margin-top: -15px;
+                margin-left: 0;
+                border-radius: 4px;
+
+                &.gray {
+                    opacity: 0.25;
+                    filter: grayscale(100%);
+                }
+            }
+        }
+
+        .mian {
+            padding-top: 23px;
+            padding-bottom: 24px;
+
+            .mian-tip {
+                color: #ff6907;
+                font-weight: normal;
+                line-height: 16px;
+            }
+        }
+
+        .card-right {
+            display: flex;
+            flex: 1;
+            flex-direction: column;
+            padding: 16px 12px 0 0;
+            overflow: hidden;
+
+            p {
+                color: #9c9c9c;
+                line-height: 16px;
+                // padding-bottom: 2px;
+                transform-origin: left;
+            }
+
+            .title {
+                padding-top: 0;
+                // padding-bottom: 10px;
+                overflow: hidden;
+                color: #1f1f1f;
+                font-weight: bold;
+                font-size: 15px;
+                line-height: 19px;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+            }
+
+            .inner-content {
+                display: flex;
+                flex: 1;
+                flex-direction: column;
+                justify-content: center;
+                // height: calc(97px - 35px);
+                padding: 8px 0;
+            }
+
+            .jm-num {
+                margin-top: -8px;
+            }
+
+            .condition-text1 {
+                padding-right: 35px;
+            }
+
+            .opacity-0 {
+                opacity: 0;
+            }
+        }
+
+        .left-tip {
+            position: absolute;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2px 10px;
+            // line-height: 12px;
+            color: #ff6907;
+            font-weight: normal;
+            font-weight: bold;
+            font-size: 12px;
+            background: #ffeadb;
+            border-radius: 8px 0;
+            transform: scale(0.84);
+            transform-origin: left top;
+        }
+
+        .usa-tip {
+            color: #3c87f7;
+            background: #e5efff;
+        }
+
+        .hk-tip {
+            color: #7933d9;
+            background: #f2ebfd;
+        }
+
+        .right-tip {
+            position: absolute;
+            top: -3px;
+            right: 0;
+            padding: 6px 10px 3px;
+            color: #f31414;
+            font-weight: normal;
+            line-height: 13px;
+            background: rgba(243, 20, 20, 0.08);
+            border-radius: 0 8px;
+            transform-origin: right;
+        }
+
+        .expired-icon {
+            position: absolute;
+            top: -12px;
+            right: -12px;
+            width: 72px;
+            height: 72px;
+        }
+
+        .btn {
+            position: absolute;
+            top: 39px;
+            right: 12px;
+            z-index: 10;
+            width: 64px;
+            height: 28px;
+            font-size: 14px;
+            line-height: 20px;
+
+            .van-button__text {
+                font-size: 14px;
+            }
+        }
+
+        .item-checkbox {
+            transform: scale(1.1);
+        }
+
+        .item-checkbox,
+        .disable-container {
+            position: absolute;
+            top: 41px;
+            right: 16px;
+        }
+
+        .disable-container {
+            z-index: 10;
+            display: none;
+            width: 16px;
+            height: 16px;
+            background: rgba(197, 197, 197, 0.2);
+            border: 1.2px solid rgba(156, 156, 156, 0.2);
+            border-radius: 50%;
+        }
+
+        .van-button--normal {
+            padding: 0;
+        }
+
+        .van-button--info {
+            background: #ff6907;
+            border: 1px solid #ff6907;
+
+            .van-button__text {
+                font-weight: bold;
+            }
+        }
+
+        .van-button--default {
+            color: #1f1f1f;
+            background: #efefef;
+            border: none;
+            // border: 1px solid #EFEFEF;
+            opacity: 1;
+        }
+
+        .inEffect.van-button--info,
+        .inEffect.van-button--default {
+            background: #ff6907;
+            border: 1px solid #ff6907;
+            opacity: 0.3;
+        }
+
+        .van-button--disabled {
+            color: #fff;
+            background: #ccc;
+            border: none;
+        }
+
+        .small-screen {
+            .condition-text1 {
+                padding-right: 30px;
+            }
+
+            .btn {
+                right: 8px;
+                transform: scale(0.9);
+                transform-origin: right;
+            }
+        }
+    }
+
+    .rule-bar {
+        display: flex;
+        justify-content: space-between;
+        margin: 0 16px;
+        padding: 9px 0;
+        background: #fff;
+        border-top: 0.75px dashed #efefef;
+
+        .rule-btn {
+            color: #9c9c9c;
+            transform-origin: left;
+
+            &.show-disabled-detail {
+                color: #f31414;
+            }
+        }
+
+        .expand-icon {
+            width: 12px;
+            height: 12px;
+        }
+
+        .expand {
+            transform: rotate(-180deg);
+        }
+    }
+
+    .list-item-dis {
+        .card-left {
+            // background: url("~@/assets/img/card/card-left-dis.png") no-repeat;
+            // background-size: cover;
+            color: #9c9c9c;
+        }
+
+        .mian {
+            .mian-tip {
+                color: #9c9c9c;
+            }
+        }
+
+        .card-right {
+            .title {
+                color: #666;
+            }
+        }
+
+        .left-tip {
+            color: #fff;
+            background: #d7d7d7;
+        }
+
+        .disable-container {
+            display: inline-block;
+        }
+    }
+
+    .rule-content {
+        position: relative;
+        padding: 16px;
+        // margin-top: -20px;
+        padding-top: 0;
+        color: #666;
+        // width: 100%;
+        background: #fff;
+        border-radius: 0 0 8px 8px;
+        // margin-bottom: 23px;
+        > .rule-content-inner {
+            margin-bottom: 6px;
+            padding-bottom: 10px;
+            border-bottom: 0.75px dashed #efefef;
+        }
+
+        p {
+            width: 120%;
+            line-height: 18px;
+            transform-origin: left;
+        }
+    }
+
+    .dialog-p {
+        min-width: 248px;
+        margin: 0 auto;
+        margin-bottom: 28px;
+        padding: 0 16px;
+        color: #1f1f1f;
+        font-size: 14px;
+        line-height: 20px;
+        text-align: center;
+
+        .phone {
+            color: #ff6907;
+        }
+
+        .total {
+            color: #29c277;
+        }
+    }
+
+    .dialog-p1 {
+        // margin: 28px auto;
+        margin-top: 28px;
+    }
+}
+
+.padt100 {
+    padding-bottom: 72px;
+}
+
+.wealth-activity-card-page-empty {
+    background-color: #fff;
+
+    .empty-page {
+        margin-top: 144px;
+        color: #9c9c9c;
+        font-size: 12px;
+        line-height: 16px;
+        text-align: center;
+
+        img {
+            width: 104px;
+            height: 104px;
+            margin-bottom: 6px;
+        }
+    }
+}
+
+/deep/.van-dialog {
+    border-radius: 12px;
+}
+
+/deep/.van-overlay {
+    background-color: rgba(0, 0, 0, 0.3) !important;
+}
+
+.send-info {
+    height: 410px;
+
+    .van-cell {
+        &:first-child {
+            margin-top: 26px;
+        }
+
+        width: auto;
+        margin: 0 16px 30px;
+        padding: 10px 0 4px;
+
+        &::after {
+            border: none;
+        }
+    }
+
+    .send-item {
+        width: auto;
+        margin: 0 16px;
+    }
+
+    .send-btn {
+        position: fixed;
+        bottom: 38px;
+        width: calc(100vw - 56px);
+        margin: 0 28px;
+    }
+}
+
+.grey-btn {
+    color: #2f2f2f;
+    background: #efefef;
+}

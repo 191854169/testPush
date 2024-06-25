@@ -1,0 +1,8 @@
+node_modules
+vue.config.js
+src/vendor/*.js
+src/utils/THSBridge.js
+/public
+/coverage
+/src/assets/font
+/dist

@@ -1,0 +1,17 @@
+node_modules
+*.log
+.nyc_output
+coverage
+flow-typed
+*.DS_Store
+build
+dist
+.idea
+.vscode
+*.md
+sjcl.js
+vue.config.js
+src/vendor/*.js
+/coverage
+/public
+/src/assets/font

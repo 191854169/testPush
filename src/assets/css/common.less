@@ -1,0 +1,270 @@
+@import url('./mixins.less');
+
+@font-face {
+    font-weight: 400;
+    font-family: MIMUN;
+    src: url('../font/MiNum-Regular.ttf?t=1681291219001') format('truetype');
+}
+
+@font-face {
+    font-weight: 700;
+    font-family: MIMUN;
+    src: url('../font/MiNum-Medium.ttf?t=1681291219001') format('truetype');
+}
+
+@font-face {
+    font-weight: 900;
+    font-family: MIMUN;
+    src: url('../font/MiNum-Demibold.ttf?t=1681291219001') format('truetype');
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+*,
+html,
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+    margin: 0;
+    padding: 0;
+    font-family: MIMUN, 'PingFang SC', Helvetica;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+html {
+    // prettier-ignore
+    max-width: 750PX;
+    margin: 0 auto;
+    margin-right: auto;
+    margin-left: auto;
+    touch-action: manipulation;
+}
+
+// @media (prefers-color-scheme: light) {
+//   html, body {
+//     background-color: #f9f9f9;
+//   }
+// }
+
+// @media (prefers-color-scheme: dark) {
+//   html, body {
+//     background-color: #0f0f0f;
+//   }
+// }
+
+body {
+    position: relative;
+    font-size: 14px;
+    backface-visibility: hidden;
+
+    /* 去除系统默认appearance的样式,常用于IOS下移除原生样式 */
+    appearance: none;
+    -webkit-tap-highlight-color: transparent;
+    -ms-progress-appearance: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: normal;
+}
+
+ul,
+li {
+    list-style-type: none;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    border-width: 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+a:active,
+a:hover,
+a:link,
+a:visited {
+    text-decoration: none;
+    outline-style: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+input,
+select,
+button,
+div {
+    outline-style: none;
+}
+
+button {
+    border: none;
+    outline: none;
+    box-shadow: none;
+}
+
+.van-dialog__header {
+    padding-top: 0;
+    font-weight: 700;
+    line-height: 56px;
+}
+
+.van-dialog__message--has-title {
+    padding-top: 0;
+    color: #1f1f1f;
+    font-size: 14px;
+}
+
+.van-dialog__confirm,
+.van-dialog__confirm:active {
+    font-weight: bold;
+    font-size: 16px;
+    #font_theme();
+}
+
+.van-dialog__cancel {
+    font-weight: bold;
+    font-size: 16px;
+    #font_h1();
+}
+
+.van-nav-bar {
+    background: none;
+}
+
+.van-nav-bar .van-icon {
+    #font_h1();
+
+    font-size: 20px;
+}
+
+.van-nav-bar__text {
+    #font_h1();
+}
+
+.van-nav-bar__left,
+.van-nav-bar__right {
+    padding: 0 8px;
+}
+
+.van-nav-bar__content {
+    height: 44px;
+}
+// 重置弹窗背景阴影，UI统一
+.custom-overlay {
+    background-color: rgba(0, 0, 0, 0.3);
+}
+// 重置弹窗间距，UI统一
+// .custom-dialog .van-dialog__message {
+//   padding-left: 16px;
+//   padding-right: 16px;
+//   text-align: justify;
+// }
+// 重置弹窗间距，UI统一 ,统一居左，单行居中时需设置messageAlign:'center',
+.custom-dialog {
+    #dialog_background();
+
+    width: 280px;
+
+    .van-dialog__header {
+        #font_h1();
+
+        font-size: 16px;
+    }
+
+    .van-dialog__message {
+        #font_h1();
+
+        padding-right: 16px;
+        padding-left: 16px;
+        text-align: justify;
+    }
+
+    .van-dialog__message--center {
+        color: #2f2f2f;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 20px;
+        text-align: center;
+    }
+
+    .van-dialog__content--isolated {
+        min-height: auto;
+        padding: 28px 0;
+
+        .van-dialog__message {
+            padding-top: 0;
+            padding-bottom: 0;
+        }
+    }
+
+    .van-dialog__footer {
+        .van-button {
+            #dialog_background();
+        }
+
+        .van-button--default {
+            #font_h1();
+        }
+
+        .van-dialog__confirm {
+            #font_theme();
+        }
+    }
+
+    [class*='van-hairline']::after {
+        #dialog_hairline();
+    }
+}
+
+.van-toast {
+    box-sizing: border-box;
+    width: 120px;
+    min-height: 108px;
+    background: rgba(0, 0, 0, 0.85);
+    // opacity: 0.85;
+    border-radius: 6px;
+    // background: #000000;
+    mix-blend-mode: normal;
+}
+
+.van-toast--text {
+    width: fit-content;
+    min-width: 0.96rem;
+    max-width: 307px;
+    min-height: 0;
+    padding: 0.08rem 0.12rem;
+}
+
+// .van-dialog{
+//   width:280px;
+//    .van-dialog__header{
+//       font-size: 16px;
+//   }
+// }
+.van-overlay {
+    background: rgba(0, 0, 0, 0.3);
+}

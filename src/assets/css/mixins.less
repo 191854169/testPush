@@ -1,0 +1,336 @@
+#iosBottom(@bottom: 0px) {
+    padding-bottom: @bottom + 16px;
+}
+
+@import './variable.less';
+
+#border_all_1px(@borderColor: '#9C9C9C', @radius: 2px) {
+    position: relative;
+
+    &::after {
+        position: absolute;
+        top: 0;
+        left: 0;
+        box-sizing: border-box;
+        width: 100%;
+        height: 100%;
+        background-color: transparent;
+        border-color: @borderColor;
+        border-style: solid;
+        border-width: 1px;
+        content: '';
+
+        @media (-webkit-min-device-pixel-ratio: 2) {
+            width: 200%;
+            height: 200%;
+            border-radius: calc(@radius * 2);
+            transform: scale(0.5);
+            transform-origin: 0 0;
+        }
+
+        /* 设备像素比 */
+        @media (-webkit-min-device-pixel-ratio: 3) {
+            width: 300%;
+            height: 300%;
+            border-radius: calc(@radius / 0.333);
+            transform: scale(0.333);
+            transform-origin: 0 0;
+        }
+    }
+}
+
+#tm_border_all_1px(@wColor: '#9C9C9C', @bColor: '#858585', @radius: 2px) {
+    [data-theme='white'] & {
+        #border_all_1px(@wColor, @radius);
+    }
+
+    [data-theme='black'] & {
+        #border_all_1px(@bColor, @radius);
+    }
+}
+
+// 背景主题色
+#bg_theme() {
+    background-color: @theme-white;
+
+    [data-theme='white'] & {
+        background-color: @theme-white;
+    }
+
+    [data-theme='black'] & {
+        background-color: @theme-black;
+    }
+}
+
+// 文字主题色
+#font_theme() {
+    color: @theme-white;
+
+    [data-theme='white'] & {
+        color: @theme-white;
+    }
+
+    [data-theme='black'] & {
+        color: @theme-black;
+    }
+}
+
+// 文字颜色, h1
+#font_h1() {
+    color: @h1-white;
+
+    [data-theme='white'] & {
+        color: @h1-white;
+    }
+
+    [data-theme='black'] & {
+        color: @h1-black;
+    }
+}
+
+// 文字颜色,h2
+#font_h2() {
+    color: @h2-white;
+
+    [data-theme='white'] & {
+        color: @h2-white;
+    }
+
+    [data-theme='black'] & {
+        color: @h2-black;
+    }
+}
+
+// 文字颜色,h3
+#font_h3() {
+    color: @h3-white;
+
+    [data-theme='white'] & {
+        color: @h3-white;
+    }
+
+    [data-theme='black'] & {
+        color: @h3-black;
+    }
+}
+
+// 文字颜色,错误提示，
+#font_error() {
+    color: @error-white;
+
+    [data-theme='white'] & {
+        color: @error-white;
+    }
+
+    [data-theme='black'] & {
+        color: @error-black;
+    }
+}
+
+// 文字颜色, 链接色
+#font_link() {
+    color: @link-white;
+
+    [data-theme='white'] & {
+        color: @link-white;
+    }
+
+    [data-theme='black'] & {
+        color: @link-black;
+    }
+}
+
+// 前景色
+#foreground() {
+    background-color: @foreground-white;
+
+    [data-theme='white'] & {
+        background-color: @foreground-white;
+    }
+
+    [data-theme='black'] & {
+        background-color: @foreground-black;
+    }
+}
+
+// 弹窗背景色
+#dialog_background() {
+    background-color: @dialog-white;
+
+    [data-theme='white'] & {
+        background-color: @dialog-white;
+    }
+
+    [data-theme='black'] & {
+        background-color: @dialog-black;
+    }
+}
+
+// 箭头颜色
+#arrow_color() {
+    color: @dialog-white;
+
+    [data-theme='white'] & {
+        color: @dialog-white;
+    }
+
+    [data-theme='black'] & {
+        color: @dialog-black;
+    }
+}
+
+// 背景色
+#background() {
+    background-color: @background-white;
+
+    [data-theme='white'] & {
+        background-color: @background-white;
+    }
+
+    [data-theme='black'] & {
+        background-color: @background-black;
+    }
+}
+
+// 分割线背景色
+#divider_back_gound() {
+    background-color: @divider-white;
+
+    [data-theme='white'] & {
+        background-color: @divider-white;
+    }
+
+    [data-theme='black'] & {
+        background-color: @divider-black;
+    }
+}
+
+// 底线
+#box_shadow() {
+    box-shadow: inset 0 -0.5px 0 @divider-white;
+
+    [data-theme='white'] & {
+        box-shadow: inset 0 -0.5px 0 @divider-white;
+    }
+
+    [data-theme='black'] & {
+        box-shadow: inset 0 -0.5px 0 @divider-black;
+    }
+}
+
+// 浅底线
+#box_shadow_2() {
+    box-shadow: inset 0 -0.5px 0 @divider-white;
+
+    [data-theme='white'] & {
+        box-shadow: inset 0 -0.5px 0 @divider-white;
+    }
+
+    [data-theme='black'] & {
+        box-shadow: inset 0 -0.5px 0 @divider-simple-black;
+    }
+}
+
+// dialog分割线
+#dialog_hairline() {
+    border-color: @divider-white;
+
+    [data-theme='white'] & {
+        border-color: @divider-white;
+    }
+
+    [data-theme='black'] & {
+        border-color: @divider-simple-black;
+    }
+}
+
+// swipe滑块样式
+#swipe_background() {
+    background-color: @swipe-bg-color-white;
+
+    [data-theme='white'] & {
+        background-color: @swipe-bg-color-white;
+    }
+
+    [data-theme='black'] & {
+        background-color: @swipe-bg-color-black;
+    }
+}
+
+// 活动swipe滑块样式
+#swipe_active_background() {
+    background-color: @swipe-active-bg-color-white;
+
+    [data-theme='white'] & {
+        background-color: @swipe-active-bg-color-white;
+    }
+
+    [data-theme='black'] & {
+        background-color: @swipe-active-bg-color-black;
+    }
+}
+
+// 按钮颜色
+#button_font() {
+    color: @btn-font-white;
+
+    [data-theme='white'] & {
+        color: @btn-font-white;
+    }
+
+    [data-theme='black'] & {
+        color: @btn-font-black;
+    }
+}
+
+// 新手引导border-color
+#noob_border_color() {
+    border-color: @overlay-color-white;
+
+    [data-theme='white'] & {
+        border-color: @overlay-color-white;
+    }
+
+    [data-theme='black'] & {
+        border-color: @overlay-color-black;
+    }
+}
+
+// 蒙层背景色
+#overlay_bg_color() {
+    background-color: @overlay-color-white;
+
+    [data-theme='white'] & {
+        background-color: @overlay-color-white;
+    }
+
+    [data-theme='black'] & {
+        background-color: @overlay-color-black;
+    }
+}
+
+// 警告背景色
+#warn_bg() {
+    background-color: @warn-background-white;
+
+    [data-theme='white'] & {
+        background-color: @warn-background-white;
+    }
+
+    [data-theme='black'] & {
+        background-color: @warn-background-black;
+    }
+}
+
+// 警告字体色
+#warn_color() {
+    color: @warn-color-white;
+
+    [data-theme='white'] & {
+        color: @warn-color-white;
+    }
+
+    [data-theme='black'] & {
+        color: @warn-color-black;
+    }
+}
