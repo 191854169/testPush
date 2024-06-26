@@ -55,10 +55,7 @@ import { thousandsFilter } from '@/config/filters'
 import { CURRENCY_MAP, BILL_UNIT_MAP } from '@/views/fund/config/common'
 import { FUND_ACCOUNT } from '@/entries/Fund.js'
 import JSBridge from '@fs/jsbridge/dist/lib/jsBridge.js'
-import { isTHSApp } from '@/utils/tools.js'
 import { AutoFxSetting } from '@/apis/cash'
-import { addCurParamsForUrl } from '@/utils'
-import { getRunEnv } from '@/utils/env'
 import pathnames from '@/config/H5Pathname.js'
 import { OPEN_DERIVATIVE } from '@/config/common'
 const { VUE_APP_DERIVATIVE_PAGE } = pathnames
@@ -135,10 +132,8 @@ export default {
         },
 
         goAutoExchange() {
-            let url = `${location.origin}/pages/autoExchange.html#/?sub=${this.$store.state.user.subAccountId}`
-            if (getRunEnv() === 2) {
-                url = addCurParamsForUrl(url)
-            }
+            const url = `${location.origin}/pages/autoExchange.html#/?sub=${this.$store.state.user.subAccountId}`
+
             location.href = url
         },
 
@@ -183,12 +178,7 @@ export default {
         },
 
         closePage() {
-            if (isTHSApp()) {
-                // eslint-disable-next-line no-undef
-                callNativeHandler('goback', { type: 'component' })
-            } else {
-                JSBridge ? JSBridge.close() : this.$router.go(-1)
-            }
+            JSBridge ? JSBridge.close() : this.$router.go(-1)
         },
 
         handleClick() {

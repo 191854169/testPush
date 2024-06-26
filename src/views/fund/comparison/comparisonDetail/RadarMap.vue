@@ -49,7 +49,7 @@ import { colorToRGB } from '@/utils/tools.js'
 import FosunTable from '@/components/Table.vue'
 import { getCompareRadarData } from '@/apis/fund/fund.js'
 import { FUND_RADAR_MAP, PERIOD_MAP } from '../../config/common'
-import { floatToRatio, isUndefined, isTHSApp } from '@/utils'
+import { floatToRatio, isUndefined } from '@/utils'
 import { accMul, accDiv } from '@/utils/accurate'
 const plugins = [GridComponent, RadarChart, CanvasRenderer, UniversalTransition, DatasetComponent, RadarComponent]
 
@@ -154,10 +154,8 @@ export default {
             const uiWidth = 375 // 设计稿宽度
             const maxClientWidth = 750 // 手机设备最大宽度
             console.log('docEl.clientWidth' + docEl.clientWidth)
-            let clientWidth = docEl.clientWidth
-            if (isTHSApp()) {
-                clientWidth = window.screen.width
-            }
+            const clientWidth = docEl.clientWidth
+
             if (!clientWidth) {
                 return
             }

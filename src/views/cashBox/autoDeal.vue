@@ -513,7 +513,7 @@ export default {
                     this.syncUserSetting(this.originUserSettingInfo)
                     return false
                 }
-            } else if (this.$mylinkJsbridge.isInMylink() || isInOutsideH5()) {
+            } else if (isInOutsideH5()) {
                 if (!this.myLinkTradeLogin) {
                     this.myLinkTradeLogin = new TradeLogin({ propsData: { subAcctId: this.accts.subAcctId } })
                 }

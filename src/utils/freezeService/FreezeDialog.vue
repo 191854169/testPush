@@ -4,8 +4,8 @@
         width="2.8rem"
         v-model="show"
         :title="$translate('tipTitle')"
-        :confirm-button-text="$translate(isInMylink ? 'iKnow' : 'onlineService')"
-        :showCancelButton="!isInMylink"
+        :confirm-button-text="$translate('onlineService')"
+        :showCancelButton="true"
         @confirm="onConfirm"
         @cancel="onCancel"
     >
@@ -28,15 +28,11 @@
 <script>
 import { i18n } from '@/i18n/common'
 import { customerService } from '@/utils'
-import mylinkJsbridge from '@fs/jsbridge/dist/lib/mylinkJsBridge.js'
-
-const isInMylink = mylinkJsbridge.isInMylink()
 
 export default {
     data() {
         return {
             show: false,
-            isInMylink,
         }
     },
     methods: {
@@ -72,8 +68,6 @@ export default {
                     .catch(() => {
                         window.JSBridge.open({ url: encodeURIComponent(link), title: '' })
                     })
-            } else if (mylinkJsbridge.isInMylink()) {
-                mylinkJsbridge.openH5InWebview(link)
             } else {
                 window.open(link)
             }

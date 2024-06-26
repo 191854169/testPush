@@ -1,28 +1,14 @@
 import { get, post, path_version, ENCRYPT_TYPES } from '@/httpRequest/http.js'
-import { getRunEnv } from '@/utils/env.js'
 import { isHLApp } from '@/utils'
 const { VUE_APP_UC = '', NODE_ENV } = process.env
 
 let domain = ''
 if (isHLApp() || NODE_ENV === 'production') domain = `${VUE_APP_UC}`
-// 判断是否是网厅 1.自研App 2.网厅 3.站外H5
-const isWangTing = getRunEnv() === 2
+
 // 统一处理参数
 const handleParams = option => {
     const params = { ...option, origin: false, encrypt: ENCRYPT_TYPES.LOGIN }
-    // 网厅需要加多一个subAccountId参数
-    if (isWangTing) {
-        // 网厅不加密 1: 临时加密； 2 登录加密  0:所有状态不加密
-        params.encrypt = ENCRYPT_TYPES.NO_ENCRYPT
-        // get请求
-        if (params?.params?.subAcctId) {
-            params.params.subAccountId = params.params.subAcctId
-        }
-        // post请求
-        if (params?.data?.subAcctId) {
-            params.data.subAccountId = params.data.subAcctId
-        }
-    }
+
     return params
 }
 

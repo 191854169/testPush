@@ -232,26 +232,9 @@ export default {
         })
     },
     methods: {
-        // listClickHander(rowData) {
-        //     console.log('rowData', rowData)
-        //     const url = `${location.origin}/wealth/fund.html#/follow-order-detail?portfolioId=${rowData.portfolioId}`
-        //     if (this.$openPageInThs(url)) return
-        //     if (this.$jsBridge) {
-        //         this.$jsBridge.open({ url: encodeURIComponent(url), title: '' })
-        //     } else {
-        //         this.$router.push({
-        //             path: `/follow-order-detail`,
-        //             query: {
-        //                 orderId: rowData.id,
-        //             },
-        //         })
-        //     }
-        // },
-
         listClickHander(rowData) {
             const id = rowData.id
             const url = `${location.origin}/wealth/fund.html#/follow-order-detail?id=${id}`
-            if (this.$openPageInThs(url)) return
             if (this.$jsBridge) {
                 this.$jsBridge.open({ url: encodeURIComponent(url), title: '' })
             } else {

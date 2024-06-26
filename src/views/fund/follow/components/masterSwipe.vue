@@ -95,8 +95,6 @@ export default {
     beforeDestroy() {},
     methods: {
         gotoMasterInvestment() {
-            const url = `${location.origin}${location.pathname}#/master-investment`
-            if (this.$openPageInI18NThs(url)) return
             this.$router.push('/master-investment')
         },
         onSwipeChange(newIndex) {

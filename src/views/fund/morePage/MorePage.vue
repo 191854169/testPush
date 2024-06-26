@@ -166,7 +166,6 @@ export default {
                 }[item.fundMode]
             if (!(type && item.symbol)) return
             const url = `${location.origin}/wealth/fund.html#/detail?type=${type}&symbol=${item.symbol}`
-            if (this.$openPageInThs(url.replace(/http(s)?/, 'https'))) return
             if (this.$jsBridge) {
                 this.$jsBridge.open({ url: encodeURIComponent(url), title: '' })
             } else {

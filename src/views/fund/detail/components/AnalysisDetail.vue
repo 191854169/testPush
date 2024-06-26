@@ -131,8 +131,6 @@ export default {
             const categoryId = this.radarData?.categoryRadarData?.symbol
             const period = this.period
             const url = `${location.origin}${location.pathname}#/analysis-detail?categoryId=${categoryId}&period=${period}`
-            const THSurl = `${location.origin}${location.pathname}#/analysis-detail?categoryId=${categoryId}`
-            if (this.$openPageInThs(THSurl)) return
             if (this.$jsBridge) {
                 return this.$jsBridge.open({ url: encodeURIComponent(url), title: '' })
             }

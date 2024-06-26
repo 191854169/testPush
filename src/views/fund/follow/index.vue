@@ -93,11 +93,7 @@ export default {
             this.$refs.instroductionRef.getData()
         },
         registerSearchButton() {
-            const inTHS = isTHSApp()
             const inHL = isHLApp()
-            const isInMylink = this.$mylinkJsbridge.isInMylink()
-            // 在同花顺 || mylink
-            if (inTHS || isInMylink || this.$thsI18NJsBridge.isTHSI18NApp()) return
             if (inHL) {
                 // app版本号大于2.15展示
                 const curVersion = getAppVersion()

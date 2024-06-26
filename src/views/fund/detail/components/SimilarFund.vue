@@ -108,7 +108,6 @@ export default {
             const { symbol } = e.target.dataset
             if (!symbol) return
             const url = `${location.origin}${location.pathname}#/detail?symbol=${symbol}&type=public`
-            if (this.$openPageInThs(url)) return
             if (this.$jsBridge) {
                 return this.$jsBridge.open({ url: encodeURIComponent(url), title: '' })
             }

@@ -101,8 +101,6 @@ export default {
                         console.log(link) // test
                         this.$jsBridge.open({ url: encodeURIComponent(link), title: '' })
                     })
-            } else if (this.$thsI18NJsBridge.isTHSI18NApp()) {
-                this.$goPage(link)
             } else {
                 window.open(link)
             }

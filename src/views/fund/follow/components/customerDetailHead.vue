@@ -228,7 +228,6 @@ export default {
             }
 
             const url = `${location.origin}${location.pathname}#/attention?pageType=${type}&otherUin=${this.otherUin}`
-            if (this.$openPageInThs(url)) return
             if (this.$jsBridge) {
                 this.$jsBridge.open({ url: encodeURIComponent(url), title: '' })
             } else {
@@ -245,8 +244,7 @@ export default {
             if (checkReleaseStatus(this, this.isSelf, this.dataModel.releaseStatus)) return
             const isPro = this.isProfessional ? '1' : '0'
             const url = `${location.origin}${location.pathname}#/edit-customer-info?isProfessional=${isPro}`
-            if (this.$openPageInThs(url)) return
-            if (this.$openPageInI18NThs(url)) return
+
             if (this.$jsBridge) {
                 this.$jsBridge.open({ url: encodeURIComponent(url), title: '', mode: 'immersive', inapp: isHLApp() })
             } else {

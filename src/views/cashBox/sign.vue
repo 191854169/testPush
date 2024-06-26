@@ -240,7 +240,6 @@ export default {
         onRemind() {
             const { VUE_APP_BUILDER_PAGE } = pathnames
             const url = `${VUE_APP_BUILDER_PAGE}?key=COMMONPROBLEM-ST`
-            if (this.$openPageInThs(url)) return
             if (this.$jsBridge) return this.$jsBridge.open({ url: encodeURIComponent(url), title: '' })
             location.href = url
         },
@@ -291,7 +290,6 @@ export default {
             const { VUE_APP_BUILDER_PAGE } = pathnames
             const key = 'CASH_BOX'
             const url = `${VUE_APP_BUILDER_PAGE}?key=${key}`
-            if (this.$openPageInThs(url)) return
             if (this.$jsBridge) return this.$jsBridge.open({ url: encodeURIComponent(url), title: '' })
             location.href = url
         },
@@ -299,7 +297,6 @@ export default {
         async goProtocol() {
             const symbols = encodeURIComponent(JSON.stringify(this.symbolList))
             const url = location.origin + `/wealth/cashBox.html#/protocol?symbols=${symbols}`
-            if (this.$openPageInThs(url)) return
             if (JSBridge) {
                 JSBridge.open({ url: encodeURIComponent(url) })
             } else {
@@ -310,13 +307,10 @@ export default {
         // 客户声明
         goStatement() {
             const fileName = `客户声明_${getLangType()}.pdf`
-            let url = `${location.origin}/wealth/static/${fileName}`
+            const url = `${location.origin}/wealth/static/${fileName}`
             const title = this.$t('clientStatement')
             if (this.$jsBridge) {
                 this.$jsBridge.openPDF({ url: encodeURIComponent(url), title })
-            } else if (this.$thsI18NJsBridge.isTHSI18NApp()) {
-                url = `${location.origin}/wealth/static/${encodeURIComponent(fileName)}`
-                this.$thsI18NJsBridge.openPDF({ url, title })
             } else {
                 window.open(url)
             }
@@ -368,7 +362,7 @@ export default {
                 } catch (e) {
                     return
                 }
-            } else if (this.$mylinkJsbridge.isInMylink() || isInOutsideH5()) {
+            } else if (isInOutsideH5()) {
                 if (!this.myLinkTradeLogin) {
                     this.myLinkTradeLogin = new TradeLogin({ propsData: { subAcctId: this.accts.subAcctId, callBack: this.openInvoke } })
                 }

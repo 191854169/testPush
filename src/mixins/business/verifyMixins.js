@@ -176,8 +176,6 @@ export default {
                     .catch(() => {
                         this.$jsBridge.open({ url: encodeURIComponent(link), title: '' })
                     })
-            } else if (this.$mylinkJsbridge.isInMylink()) {
-                this.$mylinkJsbridge.openH5InWebview(link)
             } else {
                 window.open(link)
             }
@@ -382,13 +380,6 @@ export default {
 
         // 现金宝 认购校验
         async checkCashTreasureSubscribe() {
-            // 登录校验
-            if (!this.$mylinkJsbridge.isInMylink()) {
-                if (!this.$root.isLogin) {
-                    return this.$root.login()
-                }
-            }
-
             // 开户校验
             if (!this.$root.getAccountStatus(FINANCE_ACCOUNT)) {
                 this.$root.nextAfterJudgeAccountStatus('openAccount')

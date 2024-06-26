@@ -61,7 +61,6 @@ import goPage from '@/config/globalProterties/goPage'
 import NP from 'number-precision'
 import { mapState } from 'vuex'
 import { floatToRatio, keepDecimals, milliFormat } from '@/utils'
-import { getRunEnv } from '@/utils/env'
 import pathnames from '@/config/H5Pathname'
 import { opposeCurrencyMap, sourcePageMap } from '../../config/common'
 
@@ -369,9 +368,8 @@ export default {
             const isPurchasing = this.isMarginType || this.sourcePage === sourcePageMap.upgradeInvestService
             if (this.isCashType && !isPurchasing) {
                 // 存入資金
-                const { VUE_APP_EDDA_CURRENCY_APP, VUE_APP_EDDA_CURRENCY_H5 } = pathnames
-                const isInWtOrThs = getRunEnv() === 2
-                const url = isInWtOrThs ? VUE_APP_EDDA_CURRENCY_H5 : VUE_APP_EDDA_CURRENCY_APP
+                const { VUE_APP_EDDA_CURRENCY_APP } = pathnames
+                const url = VUE_APP_EDDA_CURRENCY_APP
                 this.$goPage(url)
             }
             if (isPurchasing) {

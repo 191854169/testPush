@@ -391,8 +391,6 @@ export default {
                 if (!this.priRiskCode) return
                 if (isHLApp() && this.$jsBridge) {
                     this.$jsBridge.open({ url: encodeURIComponent(url), title: '' })
-                } else if (this.$thsI18NJsBridge.isTHSI18NApp()) {
-                    this.$thsI18NJsBridge.openPDF({ url })
                 } else {
                     window.open(url)
                 }
@@ -406,8 +404,6 @@ export default {
             console.log('pdfUrl:', url)
             if (isHLApp() && this.$jsBridge) {
                 this.$jsBridge.openPDF({ url: encodeURIComponent(url), title: item.fileType })
-            } else if (isTHSI18NApp()) {
-                this.$thsI18NJsBridge.openPDF({ url, title: item.fileType })
             } else {
                 window.open(url)
             }

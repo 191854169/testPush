@@ -179,7 +179,6 @@ export default {
         goToRule() {
             const { VUE_APP_BUILDER_PAGE } = pathnames
             const url = `${VUE_APP_BUILDER_PAGE}?key=PORTFOLIO-ORDER-DISCLAIMER` // 投资组合免责声明
-            if (this.$openPageInThs(url)) return
             if (this.$jsBridge) return this.$jsBridge.open({ url: encodeURIComponent(url), title: '' })
             location.href = url
         },
@@ -189,14 +188,11 @@ export default {
 
             if (item.local) {
                 url = `${location.origin}/wealth/static/${item.fileUrl}`
-                if (this.$thsI18NJsBridge.isTHSI18NApp()) url = `${location.origin}/wealth/static/${encodeURIComponent(item.fileUrl)}`
             }
             console.log('pdfUrl:', url)
             const title = item.fileType || ''
             if (isHLApp() && this.$jsBridge) {
                 this.$jsBridge.openPDF({ url: encodeURIComponent(url), title })
-            } else if (this.$thsI18NJsBridge.isTHSI18NApp()) {
-                this.$thsI18NJsBridge.openPDF({ url, title })
             } else {
                 window.open(url)
             }

@@ -53,7 +53,7 @@ import { CanvasRenderer } from 'echarts/renderers'
 import { colorToRGB } from '@/utils/tools.js'
 import { getRadarData } from '@/apis/fund/fund.js'
 import { FUND_RADAR_MAP, PERIOD_MAP } from '../../config/common'
-import { isTHSApp, isEmpty } from '../../../../utils'
+import { isEmpty } from '../../../../utils'
 import { accMul, accDiv } from '@/utils/accurate'
 import pathnames from '@/config/H5Pathname.js'
 const plugins = [GridComponent, RadarChart, CanvasRenderer, UniversalTransition, DatasetComponent, RadarComponent]
@@ -185,10 +185,8 @@ export default {
             const uiWidth = 375 // 设计稿宽度
             const maxClientWidth = 750 // 手机设备最大宽度
             console.log('docEl.clientWidth' + docEl.clientWidth)
-            let clientWidth = docEl.clientWidth
-            if (isTHSApp()) {
-                clientWidth = window.screen.width
-            }
+            const clientWidth = docEl.clientWidth
+
             if (!clientWidth) {
                 return
             }
@@ -366,8 +364,6 @@ export default {
                 period: this.activeTab,
             }
             const url = `${location.origin}/wealth/fund.html#${base_hash}?type=${queryObj.type}&symbol=${queryObj.symbol}&period=${queryObj.period}`
-            const THSurl = `${location.origin}/wealth/fund.html#${base_hash}?period=${queryObj.period}`
-            if (this.$openPageInThs(THSurl)) return
             if (this.$jsBridge) return this.$jsBridge.open({ url: encodeURIComponent(url), title: '' })
             this.$router.push({
                 path: `${base_hash}`,
@@ -378,8 +374,6 @@ export default {
         onRemind() {
             const { VUE_APP_BUILDER_PAGE } = pathnames
             const url = `${VUE_APP_BUILDER_PAGE}?key=FUNDRADAR-DIRECTIONS`
-            if (this.$openPageInThs(url)) return
-            if (this.$openPageInI18NThs(url)) return
             if (this.$jsBridge) return this.$jsBridge.open({ url: encodeURIComponent(url), title: '' })
             location.href = url
         },

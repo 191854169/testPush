@@ -1,7 +1,6 @@
 import { post, ENCRYPT_TYPES, path_version } from '@/httpRequest/http.js'
 const { VUE_APP_WEALTH = '', NODE_ENV, VUE_APP_ENV } = process.env
 import { isHLApp } from '@/utils'
-import { getRunEnv } from '@/utils/env.js'
 
 let domain = ''
 if (isHLApp() || NODE_ENV === 'production') domain = `${VUE_APP_WEALTH}`
@@ -26,7 +25,7 @@ const marginOptions = (data, config) => {
     })
     let defaultEncrypt = ENCRYPT_TYPES.LOGIN
     const login = !!localStorage.getItem('session')
-    if (getRunEnv() === 2 || !login || VUE_APP_ENV === 'dev') {
+    if (!login || VUE_APP_ENV === 'dev') {
         defaultEncrypt = ENCRYPT_TYPES.NO_ENCRYPT
     }
     if (!Object.prototype.hasOwnProperty.call(option, 'encrypt')) {

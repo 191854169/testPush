@@ -42,7 +42,6 @@ import { thousandsFilter } from '@/config/filters.js'
 import pathnames from '@/config/H5Pathname.js'
 import { CLIENT_TYPE } from '../../config/common'
 // const NEED_TOTAL_MONEY = 8000000 // 需要八百万的资产
-import { getRunEnv } from '@/utils'
 export default {
     name: 'pi-guide',
     data() {
@@ -125,9 +124,8 @@ export default {
         },
         // 入金
         deposit() {
-            const { VUE_APP_EDDA_H5_APP, VUE_APP_EDDA_H5 } = pathnames
-            const isInWtOrThs = getRunEnv() === 2
-            const url = isInWtOrThs ? VUE_APP_EDDA_H5 : VUE_APP_EDDA_H5_APP
+            const { VUE_APP_EDDA_H5_APP } = pathnames
+            const url = VUE_APP_EDDA_H5_APP
             this.hide()
             this.goPageWithH5(url)
         },

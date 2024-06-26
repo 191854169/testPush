@@ -163,7 +163,6 @@ export default {
             try {
                 if (!(await this.check(item))) return
                 const url = `${location.origin}${location.pathname}#/follow-order?portfolioId=${item.id}`
-                if (this.$openPageInThs(url)) return
                 if (this.$jsBridge) {
                     this.$jsBridge.open({ url: encodeURIComponent(url), title: '' })
                 } else {
@@ -185,7 +184,6 @@ export default {
         toMorePage() {
             const link = '/wealth/fund.html#/follow'
             const url = `${location.origin}${link}`
-            if (this.$openPageInThs(url.replace(/http(s)?/, 'https'))) return
             if (this.$jsBridge) {
                 this.$jsBridge.open({ url: encodeURIComponent(url), title: '' })
             } else {

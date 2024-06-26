@@ -61,10 +61,7 @@ import { loginEncrypt } from '@/utils/crypto'
 import { Toast, Dialog } from 'vant'
 import { isAndroid, getLangType } from '@/utils/tools'
 import { i18n } from '@/i18n/common'
-import mylinkJsbridge from '@fs/jsbridge/dist/lib/mylinkJsBridge.js'
 import { ERROR_CODE_MAP } from '@/httpRequest/constants'
-
-const inMylink = mylinkJsbridge.isInMylink()
 
 export default {
     data() {
@@ -166,12 +163,7 @@ export default {
             if ([4, 5].includes(cltType)) {
                 this.shownotice = true
             } else {
-                if (this.$mylinkJsbridge.isInMylink()) {
-                    // 中移动返回
-                    this.$mylinkJsbridge.openH5InWebview(url)
-                } else {
-                    window.location.href = url
-                }
+                window.location.href = url
             }
         },
         async confirm() {
@@ -197,10 +189,7 @@ export default {
                 this.callBack && this.callBack()
             } catch ({ error }) {
                 this.isLoading = false
-                // mylink项目 100034为互踢，100033  uin 错误 公共请求已处理
-                if ([ERROR_CODE_MAP.ERR_SESSION_REJECTED, ERROR_CODE_MAP.ERROR_UIN].includes(error.code) && inMylink) {
-                    return
-                }
+
                 // 睿银项目 201004 100008 100031 100033 100034 错误 公共请求已处理
                 if (
                     [
@@ -209,8 +198,7 @@ export default {
                         ERROR_CODE_MAP.IASIA_UNVALID_SESSION,
                         ERROR_CODE_MAP.ERROR_SESSION_EXPIRE,
                         ERROR_CODE_MAP.ERROR_UIN,
-                    ].includes(error.code) &&
-                    !inMylink
+                    ].includes(error.code)
                 ) {
                     return
                 }

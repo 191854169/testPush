@@ -495,13 +495,10 @@ export default {
         },
         goClientStatement() {
             const fileName = `客户声明_${getLangType()}.pdf`
-            let url = `${location.origin}/wealth/static/${fileName}`
+            const url = `${location.origin}/wealth/static/${fileName}`
             const title = this.$t('protocol.clientStatement')
             if (this.$jsBridge) {
                 this.$jsBridge.openPDF({ url: encodeURIComponent(url), title })
-            } else if (this.$thsI18NJsBridge.isTHSI18NApp()) {
-                url = `${location.origin}/wealth/static/${encodeURIComponent(fileName)}`
-                this.$thsI18NJsBridge.openPDF({ url, title })
             } else {
                 window.open(url)
             }
@@ -516,7 +513,7 @@ export default {
             try {
                 if (JSBridge) {
                     await JSBridge.tradeLogin()
-                } else if (this.$mylinkJsbridge.isInMylink() || isInOutsideH5()) {
+                } else if (isInOutsideH5()) {
                     if (!this.myLinkTradeLogin) {
                         this.myLinkTradeLogin = new TradeLogin({
                             propsData: {

@@ -46,7 +46,6 @@ export default {
         gotoCreateProtfolio() {
             if (checkReleaseStatus(this, this.isCreater, this.releaseStatus)) return
             const url = `${location.origin}/wealth/fund.html#/create-portfolio?isProfessional=${this.isProfessional}`
-            if (this.$openPageInThs(url)) return
             if (this.$jsBridge) {
                 this.$jsBridge.open({ url: encodeURIComponent(`${url}`), title: '', mode: 'immersive', inapp: isHLApp() })
             } else {

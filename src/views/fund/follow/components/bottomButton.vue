@@ -458,8 +458,7 @@ export default {
         goto(path, immersive) {
             immersive = immersive || false
             const url = `${location.origin}${location.pathname}#${path}?portfolioId=${this.$route.query.portfolioId}`
-            if (this.$openPageInThs(url)) return
-            if (this.$openPageInI18NThs(url)) return
+
             if (this.$jsBridge) {
                 this.$jsBridge.open({ url: encodeURIComponent(url), title: '', mode: immersive ? 'immersive' : '', inapp: isHLApp() })
             } else {
@@ -491,8 +490,6 @@ export default {
                     .catch(() => {
                         this.$jsBridge.open({ url: encodeURIComponent(link), title: '' })
                     })
-            } else if (this.$thsI18NJsBridge.isTHSI18NApp()) {
-                this.$goPage(link)
             } else {
                 window.open(link)
             }

@@ -3,7 +3,7 @@
         <div class="selectBox" @click="showSelect">
             <div class="asset-type mask" data-type="asset">
                 <div class="left">{{ assetType | assetTypeFilter }}</div>
-                <multi-img v-if="!isInMyLink" :name="'drop-down-solid'" directory="common" class="icon"></multi-img>
+                <multi-img :name="'drop-down-solid'" directory="common" class="icon"></multi-img>
             </div>
             <div class="account-type mask" data-type="account">
                 <div class="left">{{ accountType | accountTypeFilter }}</div>
@@ -141,7 +141,6 @@ export default {
             currency: CURRENCY_MAP.keysMap.HKD,
             showCurrencyChoose: false,
             dateText: '',
-            isInMyLink: this.$mylinkJsbridge.isInMylink(),
         }
     },
     computed: {
@@ -225,7 +224,6 @@ export default {
             try {
                 const { type } = e.target.dataset || {}
                 if (!type) return
-                if (type === 'asset' && this.isInMyLink) return // mylink只展示星财宝，无需显示弹出下拉框
                 const methodName = `${type}Selector`
                 this[methodName] && this[methodName](data)
             } catch (e) {

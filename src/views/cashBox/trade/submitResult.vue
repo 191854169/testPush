@@ -241,15 +241,8 @@ export default {
         },
 
         successHandler() {
-            if (this.$mylinkJsbridge.isInMylink()) {
-                // 中移动返回
-                this.$mylinkJsbridge.onNativeBackClick()
-            } else if (this.$jsBridge) {
+            if (this.$jsBridge) {
                 this.$jsBridge.back()
-            } else if (isTHSApp()) {
-                window?.callNativeHandler('goback', { type: 'component' })
-            } else if (this.$thsI18NJsBridge.isTHSI18NApp()) {
-                this.$thsI18NJsBridge.goBack()
             } else {
                 this.$router.replace('/')
             }

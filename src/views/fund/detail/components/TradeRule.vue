@@ -56,7 +56,6 @@ export default {
     methods: {
         moreClickHander() {
             const url = `${location.origin}/wealth/fund.html#/trade-rule?symbol=${this.symbol}&type=${this.$route.query.type}&fundType=${this.fundType}`
-            if (this.$openPageInI18NThs(url)) return
             if (this.$jsBridge) {
                 this.$jsBridge.open({ url: encodeURIComponent(url), title: '' })
             } else {

@@ -104,7 +104,6 @@ export function nextAfterJudgeAccountStatus(to = 'openAccount', params = {}) {
                 }, '?')
                 .replace(/&$/, '')
                 .replace(/^\?$/, '')
-        if (Vue.prototype.$openPageInThs(link)) return
         if (this.$jsBridge) {
             this.$jsBridge.open({ url: encodeURIComponent(link), title: '' })
         } else {

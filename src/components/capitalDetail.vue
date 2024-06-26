@@ -52,7 +52,6 @@ import goPage from '@/config/globalProterties/goPage'
 import NP from 'number-precision'
 import { mapState } from 'vuex'
 import { floatToRatio, milliFormat } from '@/utils'
-import { getRunEnv } from '@/utils/env'
 import pathnames from '@/config/H5Pathname'
 
 // 需要注意一个为产品可支持的认购类型，
@@ -246,9 +245,8 @@ export default {
         onOperation() {
             if (this.isCashType) {
                 // 存入資金
-                const { VUE_APP_EDDA_CURRENCY_APP, VUE_APP_EDDA_CURRENCY_H5 } = pathnames
-                const isInWtOrThs = getRunEnv() === 2
-                const url = isInWtOrThs ? VUE_APP_EDDA_CURRENCY_H5 : VUE_APP_EDDA_CURRENCY_APP
+                const { VUE_APP_EDDA_CURRENCY_APP } = pathnames
+                const url = VUE_APP_EDDA_CURRENCY_APP
                 this.$goPage(url)
             }
             if (this.isMarginType) {

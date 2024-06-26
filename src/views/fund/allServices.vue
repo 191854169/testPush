@@ -67,7 +67,6 @@
 <script>
 import { FINANCE_ACCOUNT, FUND_ACCOUNT } from '@/entries/Fund.js'
 import isInitedTradePwd from '@/mixins/initTradePwd'
-import { isTHSApp } from '@/utils/tools.js'
 
 export default {
     name: 'allServices',
@@ -147,10 +146,6 @@ export default {
     },
     computed: {
         toolList() {
-            if (isTHSApp() || this.$thsI18NJsBridge.isTHSI18NApp()) {
-                // 同花顺屏蔽基金对比入口、同花顺国际版屏蔽基金对比入口
-                return this.otherList.slice(1)
-            }
             return this.otherList
         },
         orderRecordList() {
@@ -196,8 +191,6 @@ export default {
             }
             const url = `${location.origin}${link}`
             console.log(`onFeaturesClick ===> ${url}`)
-            if (this.$openPageInThs(url.replace(/http(s)?/, 'https'))) return
-            if (this.$openPageInI18NThs(url)) return
             if (this.$jsBridge) {
                 this.$jsBridge.open({ url: encodeURIComponent(url), title: '' })
             } else {

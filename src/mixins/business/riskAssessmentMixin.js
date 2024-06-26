@@ -6,7 +6,6 @@ import { Dialog } from 'vant'
 import { AssessStatus } from '@/apis/riskAssessment.js'
 import JSBridge from '@fs/jsbridge/dist/lib/jsBridge.js'
 import { i18n } from '@/i18n/riskAssessment/index.js'
-import { isTHSApp } from '@/utils/tools'
 import { getQueryString } from '@/utils'
 import { isInOutsideH5 } from '@/utils'
 const $t = text => i18n.t(text)
@@ -89,14 +88,6 @@ export default {
          * @param {*} title 可选参数，默认是风险测评
          */
         openPage(url, title = $t('riskAssessemnt')) {
-            if (isTHSApp()) {
-                location.href = `client.html?action=ymtz^webid=2804^url=${url}`
-                return
-            }
-            if (this.$thsI18NJsBridge.isTHSI18NApp()) {
-                this.$goPage(url)
-                return
-            }
             JSBridge ? JSBridge.open({ url: url, title }) : (location.href = decodeURIComponent(url))
         },
 

@@ -144,7 +144,6 @@ export default {
         triggerDetail(index) {
             const date = this.list[index].date
             const url = location.origin + `/wealth/cashBox.html#/profitInfo?date=${date}&accountType=${this.accountType}&currency=${this.currency}`
-            if (this.$openPageInThs(url)) return
             if (this.$jsBridge) {
                 this.$jsBridge.open({ url: encodeURIComponent(url), title: '' })
             } else {

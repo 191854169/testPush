@@ -139,7 +139,6 @@ export default {
 
             const portfolioId = this.$route.query.portfolioId
             const url = `${location.origin}/wealth/fund.html#/portfolio-comment?portfolioId=${portfolioId}`
-            if (this.$openPageInThs(url)) return
             if (this.$jsBridge) {
                 this.$jsBridge.open({ url: encodeURIComponent(`${url}`), title: '' })
             } else {

@@ -252,7 +252,6 @@ export default {
         },
         toMorePage() {
             const url = `${location.origin}${location.pathname}#/portfolio-list`
-            if (this.$openPageInI18NThs(url)) return
             this.$router.push('/portfolio-list')
         },
         tabClickAction(index, title) {

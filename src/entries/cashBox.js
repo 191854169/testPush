@@ -13,7 +13,6 @@ import Loading from '@/components/Loading.vue'
 import { thousandsFilter } from '@/config/filters.js'
 import { i18n } from '@/i18n/cashBox/index.js'
 import { isHLApp } from '@/utils/tools.js'
-import { getRunEnv } from '@/utils/env.js'
 import { getAccountStatus, nextAfterJudgeAccountStatus } from './init'
 
 export { FINANCE_ACCOUNT, FUND_ACCOUNT } from './init'
@@ -98,7 +97,6 @@ store
         app.isLogin = false
     })
 
-const isWT = getRunEnv() === 2 // 是否在网厅
 /* 登录操作 - 内含各个环境的是否存在登录态及后续的登陆操作 */
 function login() {
     // 恒利
@@ -112,10 +110,7 @@ function login() {
         })
         return false
     }
-    // 同花顺 - 进入页面一定是登录态
-    if (isWT) {
-        return false
-    }
+
     // 站外
     const session = localStorage.getItem('session')
     if (!session) {

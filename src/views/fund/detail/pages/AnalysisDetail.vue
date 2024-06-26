@@ -68,8 +68,7 @@
 
 <script>
 import FosunTable from '@/components/Table.vue'
-import { setPageTitle } from '@/utils/thsJsBridgeTools'
-import { isTHSApp, floatToRatio } from '@/utils'
+import { floatToRatio } from '@/utils'
 import { getRadarRank } from '@/apis/fund/fund'
 import { FUND_RADAR_MAP, PERIOD_MAP, FUND_TYPE_MAP } from '../../config/common'
 import { getRunEnv } from '@/utils/env'
@@ -183,10 +182,6 @@ export default {
             const title = this.yearLabel + this.$t('radar.analysisDetail')
             if (this.$jsBridge) {
                 this.$jsBridge.setTitle(title)
-            } else if (isTHSApp()) {
-                setPageTitle(title)
-            } else if (this.$thsI18NJsBridge.isTHSI18NApp()) {
-                this.$thsI18NJsBridge.changeWebViewTitle(title)
             } else {
                 document.title = title
             }
@@ -286,7 +281,6 @@ export default {
             if (this.isDisabled) return
             const symbols = JSON.stringify(this.selectedFundList.map(i => i.symbol))
             const url = `${location.origin}${location.pathname}#/comparison-detail?symbols=${encodeURIComponent(symbols)}`
-            if (this.$openPageInThs(url)) return
             if (this.$jsBridge) return this.$jsBridge.open({ url: encodeURIComponent(url), title: '' })
             this.$router.push({
                 path: '/comparison-detail',

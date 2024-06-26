@@ -64,7 +64,6 @@ export default {
                 if (result.success) {
                     Toast('关闭成功')
                     const url = `${location.origin}/wealth/fund.html`
-                    if (this.$openPageInThs(url.replace(/http(s)?/, 'https'))) return
                     if (this.$jsBridge) {
                         this.$jsBridge.open({ url: encodeURIComponent(url) })
                     } else {

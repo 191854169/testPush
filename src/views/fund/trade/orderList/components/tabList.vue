@@ -296,13 +296,6 @@ export default {
         })
         if (this.$jsBridge && this.$jsBridge.watchPageVisible) {
             this.$jsBridge.watchPageVisible(this.handlePageVisible)
-        } else if (this.$mylinkJsbridge.isInMylink()) {
-            this.propertyData = getPageVisibleSupportProperty()
-            // 买入，卖出，开通星财宝返回时，刷新页面
-            document.addEventListener(this.propertyData.visibilityChange, this.handlePageShow, false)
-            this.$once('hook:beforeDestroy', () => {
-                document.removeEventListener(this.propertyData.visibilityChange, this.handlePageShow, false)
-            })
         }
     },
     methods: {

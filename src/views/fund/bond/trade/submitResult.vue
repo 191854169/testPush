@@ -66,13 +66,12 @@
 import TradeProcess from '@/components/TradeProcess.vue'
 import { orderDetail, ecashUserSetting } from '@/apis/wealth/index.js'
 import { thousandsFilter } from '@/config/filters.js'
-import { floatToRatio, keepDecimals, isTHSApp, addCurParamsForUrl } from '@/utils'
+import { floatToRatio, keepDecimals } from '@/utils'
 import dayjs from 'dayjs'
 import { i18n } from '@/i18n/fund/index'
 import NP from 'number-precision'
 import { CURRENCY_MAP, ORDER_DIRECTION_MAP, SOURCE_TYPE_MAP, ORDER_STATUS_MAP } from '@/views/fund/config/common'
 import { accountTypeMap as ACCOUNT_TYPE_MAP } from '@/config/common'
-import { getRunEnv } from '@/utils/env'
 import { AutoFxSetting } from '@/apis/cash'
 dayjs.extend(require('dayjs/plugin/duration'))
 
@@ -565,11 +564,6 @@ export default {
                     // 如果延时还在当前页面 认为是在webview的第一层 直接关闭webview
                     if (this.$jsBridge) {
                         this.$jsBridge.close()
-                    } else if (isTHSApp()) {
-                        // eslint-disable-next-line no-undef
-                        callNativeHandler('goback', { type: 'component' })
-                    } else if (this.$thsI18NJsBridge.isTHSI18NApp()) {
-                        this.$thsI18NJsBridge.goBack()
                     }
                 }
             }, 200)
@@ -663,10 +657,8 @@ export default {
             )
         },
         goAutoExchange() {
-            let url = `${location.origin}/pages/autoExchange.html#/?sub=${this.$store.state.user.subAccountId}`
-            if (getRunEnv() === 2) {
-                url = addCurParamsForUrl(url)
-            }
+            const url = `${location.origin}/pages/autoExchange.html#/?sub=${this.$store.state.user.subAccountId}`
+
             location.href = url
         },
 

@@ -1276,8 +1276,6 @@ export default {
                     }`
                     if (this.$jsBridge) {
                         this.$jsBridge.open({ url: encodeURIComponent(url), title: '' })
-                    } else if (this.$thsI18NJsBridge.isTHSI18NApp()) {
-                        this.$goPage(this.$addCurParamsForUrl(url))
                     } else {
                         location.href = this.$addCurParamsForUrl(url)
                     }
@@ -1290,11 +1288,6 @@ export default {
         goBack() {
             if (this.$jsBridge) {
                 this.$jsBridge.close()
-            } else if (isTHSApp()) {
-                // eslint-disable-next-line
-                callNativeHandler('goback', { type: 'component' }, function () {})
-            } else if (this.$thsI18NJsBridge.isTHSI18NApp()) {
-                this.$thsI18NJsBridge.goBack()
             } else {
                 this.$router.go(-1)
             }
@@ -1372,8 +1365,6 @@ export default {
         handleFileClick({ fileUrl = '', fileName } = {}) {
             if (isHLApp() && this.$jsBridge) {
                 this.$jsBridge.openPDF({ url: fileUrl, title: fileName })
-            } else if (this.$thsI18NJsBridge.isTHSI18NApp()) {
-                this.$thsI18NJsBridge.openPDF({ url: fileUrl.replace(`${fileName}`, encodeURIComponent(fileName)), title: fileName })
             } else {
                 window.open(fileUrl)
             }
@@ -1577,26 +1568,10 @@ export default {
             if (isHLApp() && this.$jsBridge) {
                 this.$jsBridge.openPDF({ url: encodeURIComponent(url), title })
                 this.initWatchVisible()
-            } else if (this.$thsI18NJsBridge.isTHSI18NApp()) {
-                const newUrl = `${location.origin}/wealth/${encodeURIComponent(fileUrl)}`
-                this.$thsI18NJsBridge.openPDF({ url: newUrl, title })
             } else {
                 window.open(url)
             }
         },
-        // goRiskStatement() {
-        //     const fileUrl = `static/风险披露&免责声明_${getLangType()}.pdf`
-        //     const url = `${location.origin}/wealth/${fileUrl}`
-        //     console.log('pdfUrl:', url)
-        //     if (this.$jsBridge) {
-        //         this.$jsBridge.openPDF({ url: encodeURIComponent(url), title: this.$t('protocol.publicRisk') })
-        //     } else if (this.$thsI18NJsBridge.isTHSI18NApp()) {
-        //         const newUrl = `${location.origin}/wealth/${encodeURIComponent(fileUrl)}`
-        //         this.$goPage(newUrl)
-        //     } else {
-        //         window.open(fileUrl)
-        //     }
-        // },
 
         initWatchVisible() {
             if (!this.isGoProtocol) {

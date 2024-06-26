@@ -111,11 +111,8 @@ export default {
         },
         // 存入资金
         saveCapital() {
-            const isInMylink = this.$mylinkJsbridge.isInMylink()
-            let url = this.$jsBridge || isInMylink ? VUE_APP_EDDA_CURRENCY_APP : VUE_APP_EDDA_CURRENCY_H5
-            if (isInMylink) {
-                url = `${url}?langType=${getLangType()}`
-            }
+            const url = this.$jsBridge ? VUE_APP_EDDA_CURRENCY_APP : VUE_APP_EDDA_CURRENCY_H5
+
             this.$jsBridge ? this.$jsBridge.open({ url: encodeURIComponent(url), title: '' }) : window.open(url)
         },
     },

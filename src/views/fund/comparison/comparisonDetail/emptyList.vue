@@ -8,18 +8,12 @@
     </div>
 </template>
 <script>
-import { isTHSApp } from '@/utils/tools.js'
 export default {
     name: 'emptyList',
     methods: {
         goSelect() {
             if (this.$jsBridge) {
                 this.$jsBridge.close()
-            } else if (isTHSApp()) {
-                // eslint-disable-next-line no-undef
-                callNativeHandler('goback', { type: 'component' })
-            } else if (this.$thsI18NJsBridge.isTHSI18NApp()) {
-                this.$thsI18NJsBridge.goBack()
             } else {
                 // TODO: 目前基金对比无站外环境 返回到选择基金页站外还需确认调整
                 this.$router.push({

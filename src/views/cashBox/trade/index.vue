@@ -129,8 +129,7 @@ import fosunStep from '@/components/fosunStep.vue'
 import TradeInput from '@/components/TradeInput.vue'
 import TradeAccount from '../components/tradeAccount.vue'
 import { thousandsFilter, currencyFilter } from '@/config/filters'
-import { keepDecimals, isTHSApp, getTradeRuleCalendar, isTHSI18NApp, isIos } from '@/utils'
-import { setPageTitle } from '@/utils/thsJsBridgeTools'
+import { keepDecimals, getTradeRuleCalendar } from '@/utils'
 import { i18n } from '@/i18n/cashBox'
 import { accountMap } from '../config/common'
 import { ecashSubscribe, ecashRedeem, HoldingsTradeableV3 } from '@/apis/wealth/index.js'
@@ -383,12 +382,6 @@ export default {
             if (this.$jsBridge) {
                 this.$jsBridge.setTitle(title)
             }
-            if (isTHSApp()) {
-                setPageTitle(title)
-            }
-            if (this.$thsI18NJsBridge.isTHSI18NApp()) {
-                this.$thsI18NJsBridge.changeWebViewTitle(title)
-            }
             window.document.title = title
         },
         // 初始化选择产品
@@ -491,7 +484,7 @@ export default {
         async tradeHandler() {
             if (this.$jsBridge) {
                 await this.$jsBridge.tradeLogin()
-            } else if (this.$mylinkJsbridge.isInMylink() || isInOutsideH5()) {
+            } else if (isInOutsideH5()) {
                 if (!this.myLinkTradeLogin) {
                     this.myLinkTradeLogin = new TradeLogin({
                         propsData: { subAcctId: this.accts.subAcctId, callBack: this.tradeInvoke, showCloseIcon: isInOutsideH5() },
@@ -623,14 +616,7 @@ export default {
             const orderNumbersStr = JSON.stringify(orderNumbers)
             const isAuto = this.isAuto ? '1' : '0'
             const orient = this.orient
-            // encode防止ios跳转异常
-            // const url = `${location.origin}${location.pathname}#/submit-result?orderNumbers=${encodeURIComponent(
-            //     orderNumbersStr
-            // )}&orient=${orient}&isAuto=${isAuto}`
-            // if (isTHSI18NApp() && !isIos()) {
-            //     // 买入卖出星财宝在国际版安卓端打开新webview使得跳转正常
-            //     if (this.$openPageInI18NThs(url)) return
-            // }
+
             this.$router.replace({
                 path: '/submit-result',
                 query: {
@@ -710,14 +696,10 @@ export default {
         // 客户声明
         goStatement() {
             const fileName = `客户声明_${getLangType()}.pdf`
-            let url = `${location.origin}/wealth/static/${fileName}`
+            const url = `${location.origin}/wealth/static/${fileName}`
             const title = this.$t('clientStatement')
-            if (this.$openPageInThs(url)) return
             if (this.$jsBridge) {
                 this.$jsBridge.openPDF({ url: encodeURIComponent(url), title })
-            } else if (this.$thsI18NJsBridge.isTHSI18NApp()) {
-                url = `${location.origin}/wealth/static/${encodeURIComponent(fileName)}`
-                this.$thsI18NJsBridge.openPDF({ url, title })
             } else {
                 window.open(url)
             }

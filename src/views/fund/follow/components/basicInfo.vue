@@ -147,7 +147,6 @@ export default {
         },
         gotoEdit() {
             const url = `${location.origin}${location.pathname}#/edit-portfolio-info?portfolioId=${this.$route.query.portfolioId}`
-            if (this.$openPageInThs(url)) return
             if (this.$jsBridge) {
                 this.$jsBridge.open({ url: encodeURIComponent(url), title: '', mode: 'immersive', inapp: isHLApp() })
             } else {

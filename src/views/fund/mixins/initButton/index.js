@@ -548,8 +548,6 @@ export default {
         },
 
         compareFund() {
-            const url = `${location.origin}${location.pathname}#/select-fund?symbols=${encodeURIComponent(JSON.stringify([this.symbol]))}`
-            if (this.$openPageInThs(url)) return
             this.$router.push({
                 path: '/select-fund',
                 query: {

@@ -1,7 +1,5 @@
 /* eslint-disable */
 
-import { isTHSApp } from './tools'
-
 // 移动端适配
 ;(function (doc, win) {
     console.log(document.documentElement.clientWidth)
@@ -23,9 +21,7 @@ import { isTHSApp } from './tools'
         // 针对部分安卓手机font-size bug
         if (isIOS()) return
         let clientWidth = docEl.clientWidth
-        if (isTHSApp()) {
-            clientWidth = window.screen.width
-        }
+
         var computedFontSize = 100 * (clientWidth / uiWidth)
         var newFontSize = window.getComputedStyle(document.getElementsByTagName('html')[0]).fontSize.replace('px', '')
         var scale = newFontSize / computedFontSize
@@ -39,9 +35,6 @@ import { isTHSApp } from './tools'
     console.log('docEl.clientWidth' + docEl.clientWidth)
     var recalc = function () {
         var clientWidth = docEl.clientWidth
-        if (isTHSApp()) {
-            clientWidth = window.screen.width
-        }
         if (!clientWidth) {
             return
         }

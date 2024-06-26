@@ -1,5 +1,4 @@
 import { post, path_version, ENCRYPT_TYPES } from '@/httpRequest/http.js'
-import { getRunEnv } from '@/utils/env.js'
 import { isHLApp } from '@/utils'
 
 // import store from '@/store/fund'
@@ -16,10 +15,8 @@ const assignData = option => {
         accountId: Number(accts.acctId) || undefined,
         subAccountId: subAcctId,
     })
-    let defaultEncrypt = ENCRYPT_TYPES.LOGIN
-    if (getRunEnv() === 2) {
-        defaultEncrypt = ENCRYPT_TYPES.NO_ENCRYPT
-    }
+    const defaultEncrypt = ENCRYPT_TYPES.LOGIN
+
     if (!Object.prototype.hasOwnProperty.call(option, 'encrypt')) {
         option.encrypt = defaultEncrypt
     }

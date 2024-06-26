@@ -31,9 +31,6 @@ export default {
                 await this.login(false)
                 location.reload()
                 return false
-            } else if (getRunEnv() === 2) {
-                // 同花顺 - 进入页面一定是登录态
-                return false
             }
             // 站外
             const session = localStorage.getItem('session')

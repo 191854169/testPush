@@ -214,13 +214,6 @@ export default {
             const { fileUrl: url, fileType: title } = item
             if (isHLApp() && this.$jsBridge) {
                 this.$jsBridge.openPDF({ url, title })
-            } else if (isTHSI18NApp()) {
-                // 本地测试url，基金文件较大，打开过程添加 loading
-                // const url = 'https://sit-hq-fund.oss-cn-shanghai.aliyuncs.com/fund/202401/8873b0fd285b5530a220150f20e7b617.pdf'
-                // const successCallback = () => (this.$loading.show = false)
-                // const failCallback = () => (this.$loading.show = true)
-                // this.$thsI18NJsBridge.openPDF({ url, title, failCallback, successCallback })
-                this.$thsI18NJsBridge.openPDF({ url, title })
             } else {
                 window.open(url)
             }

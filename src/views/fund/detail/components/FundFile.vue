@@ -56,8 +56,6 @@ export default {
         pdfClickHandler(item) {
             if (isHLApp() && this.$jsBridge) {
                 this.$jsBridge.openPDF({ url: item.fileUrl, title: item.fileType })
-            } else if (this.$thsI18NJsBridge.isTHSI18NApp()) {
-                this.$thsI18NJsBridge.openPDF({ url: item.fileUrl, title: item.fileType })
             } else {
                 window.open(item.fileUrl)
             }

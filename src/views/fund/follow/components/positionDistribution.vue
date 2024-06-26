@@ -265,7 +265,6 @@ export default {
         },
         toMorePage() {
             const url = `${location.origin}${location.pathname}#/follow-distribution-details?portfolioId=${this.$route.query.portfolioId}`
-            if (this.$openPageInThs(url)) return
             if (this.$jsBridge) {
                 this.$jsBridge.open({ url: encodeURIComponent(url), title: '' })
             } else {

@@ -291,7 +291,6 @@ import dayjs from 'dayjs'
 import { thousandsFilter } from '@/config/filters'
 import { CURRENCY_MAP, RISK_RATING_MAP, BILL_COMPLEX_MAP, BILL_CHECKED } from '@/views/fund/config/common'
 import JSBridge from '@fs/jsbridge/dist/lib/jsBridge.js'
-import { isTHSApp } from '@/utils/tools.js'
 import { customerService } from '@/utils'
 import { Toast } from 'vant'
 
@@ -413,14 +412,7 @@ export default {
 
         // 关闭页面
         closePage() {
-            if (isTHSApp()) {
-                // eslint-disable-next-line no-undef
-                callNativeHandler('goback', { type: 'component' })
-            } else if (this.$thsI18NJsBridge.isTHSI18NApp()) {
-                this.$thsI18NJsBridge.goBack()
-            } else {
-                JSBridge ? JSBridge.close() : this.$router.go(-1)
-            }
+            JSBridge ? JSBridge.close() : this.$router.go(-1)
         },
     },
 }

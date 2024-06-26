@@ -59,15 +59,8 @@ export default {
                 const { result = {} } = await getBannerList({ position: this.position, start: 0, count: 3 }, { encrypt: ENCRYPT_TYPES.NO_ENCRYPT })
                 const bannerList = result.records || []
                 console.log(`Feng.chen:: 13:58:13 result ===> `, bannerList)
-                // NOTE: 星财宝专户 不在同花顺banner展示
-                if (isTHSApp() && this.position === 7) {
-                    this.bannerList = bannerList.filter(item => {
-                        const jumpURL = item.jumpURL || ''
-                        return jumpURL.includes('starTreasureAccount') === false
-                    })
-                } else {
-                    this.bannerList = bannerList
-                }
+
+                this.bannerList = bannerList
             } catch (e) {
                 console.error(e)
             } finally {
@@ -80,8 +73,6 @@ export default {
             let { jumpType, jumpURL } = item || {}
             switch (jumpType) {
                 case H5:
-                    if (this.$openPageInThs(jumpURL)) return
-                    if (this.$openPageInI18NThs(jumpURL)) return
                     this.$jsBridge ? this.$jsBridge.open({ url: encodeURIComponent(jumpURL), title: '' }) : window.open(jumpURL, '_blank')
                     break
                 case Native:

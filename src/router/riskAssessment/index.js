@@ -4,11 +4,8 @@ import store from '@/store/riskAssessment.js'
 import NProgress from 'nprogress'
 import '@/assets/css/nprogress.css'
 import JSBridge from '@fs/jsbridge/dist/lib/jsBridge.js' // 不在自研APP内获取的对象为  undefined
-import { thsI18NJsBridge } from '@fs/jsbridge'
 Vue.use(VueRouter)
 import { i18n } from '@/i18n/riskAssessment'
-import { isTHSApp } from '@/utils'
-import { setPageTitle } from '../../utils/thsJsBridgeTools'
 import { autoTrackSinglePage } from '@/utils/bury'
 NProgress.configure({ showSpinner: false })
 
@@ -72,12 +69,6 @@ router.beforeEach(async (to, from, next) => {
     to.meta.title ? (document.title = to.meta.title || '') : ''
     if (JSBridge) {
         JSBridge.setTitle(to.meta.title)
-    }
-    if (isTHSApp()) {
-        setPageTitle(to.meta.title)
-    }
-    if (thsI18NJsBridge.isTHSI18NApp()) {
-        thsI18NJsBridge.changeWebViewTitle(to.meta.title)
     }
     if (to.query.fhsid) {
         store.commit('user/updateSession', { session: to.query.fhsid })

@@ -20,9 +20,7 @@
 
 <script>
 import { customerService } from '@/utils'
-import MYLINK_JSBRIDGE from '@fs/jsbridge/dist/lib/mylinkJsBridge.js'
 import { isInOutsideH5 } from '@/utils'
-const isCMHK = MYLINK_JSBRIDGE.isInMylink
 export default {
     name: 'CMHKLogout',
     props: {
@@ -42,15 +40,11 @@ export default {
 
             const store = (await import('@/store/commonOutside'))?.default
             store?.dispatch('user/clearUserInfo')
-
-            if (isCMHK()) {
-                MYLINK_JSBRIDGE.backToHomePage()
-            } else if (isInOutsideH5()) {
+            if (isInOutsideH5()) {
                 window.location.href = '/pages/login.html#/'
                 return
-            } else {
-                window.close()
             }
+            window.close()
         },
         // 客服
         handleServiceClick() {

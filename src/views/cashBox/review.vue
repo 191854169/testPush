@@ -7,8 +7,7 @@
     </div>
 </template>
 <script>
-// import JSBridge from '@fs/jsbridge/dist/lib/jsBridge.js'
-import { isTHSApp, getQueryString } from '@/utils/tools.js'
+import { getQueryString } from '@/utils/tools.js'
 import { isInOutsideH5 } from '@/utils'
 export default {
     data() {
@@ -27,12 +26,7 @@ export default {
             const close = getQueryString('close', true)
             const queryUrl = getQueryString('url', true)
             const url = queryUrl ? decodeURIComponent(queryUrl) : ''
-            // 如果是在中移动
-            if (this.$mylinkJsbridge.isInMylink()) {
-                // 中移动返回
-                this.$mylinkJsbridge.onNativeBackClick()
-                return
-            }
+
             if (isInOutsideH5() && url) {
                 window.location.replace(url)
                 return
@@ -41,11 +35,6 @@ export default {
                 // 直接关闭webview
                 if (this.$jsBridge) {
                     this.$jsBridge.close()
-                } else if (isTHSApp()) {
-                    // eslint-disable-next-line no-undef
-                    callNativeHandler('goback', { type: 'component' })
-                } else if (this.$thsI18NJsBridge.isTHSI18NApp()) {
-                    this.$thsI18NJsBridge.goBack()
                 } else {
                     window.close()
                 }

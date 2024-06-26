@@ -38,12 +38,8 @@ import { getRunEnv } from '@/utils/env.js'
 import { Toast } from 'vant'
 import JSBridge from '@fs/jsbridge/dist/lib/jsBridge.js'
 import mixin from './mixin.js'
-import { isTHSApp, isTHSI18NApp } from '@/utils/tools.js'
-import mylinkJsbridge from '@fs/jsbridge/dist/lib/mylinkJsBridge.js'
 import { isInOutsideH5 } from '@/utils'
 import pathnames from '@/config/H5Pathname'
-
-const isInMylink = mylinkJsbridge.isInMylink() // 是否在中移动
 
 export default {
     name: 'riskAssessment',
@@ -59,7 +55,7 @@ export default {
     },
     computed: {
         showComplete() {
-            return this.env === 1 || isTHSApp() || isInMylink || this.isFromStarStock || isInOutsideH5() || isTHSI18NApp()
+            return this.env === 1 || this.isFromStarStock || isInOutsideH5()
         },
         typeText() {
             return this.riskData['riskLevel'][this.resultData?.riskLevel]?.type
@@ -113,17 +109,7 @@ export default {
             url ? this.goPage(url, title) : this.closePage(title)
         },
         closePage() {
-            if (isTHSApp()) {
-                // eslint-disable-next-line no-undef
-                callNativeHandler('goback', { type: 'component' })
-            } else if (this.$thsI18NJsBridge.isTHSI18NApp()) {
-                this.$thsI18NJsBridge.goBack()
-            } else if (isInMylink) {
-                // 中移动返回
-                mylinkJsbridge.onNativeBackClick()
-            } else {
-                JSBridge ? JSBridge.close() : window.close()
-            }
+            JSBridge ? JSBridge.close() : window.close()
         },
         reEvaluate() {
             console.log('8678676767676768')

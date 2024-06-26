@@ -4,19 +4,16 @@
     </div>
 </template>
 <script>
-import { getLangType, isTHSI18NApp } from '../../../utils'
+import { getLangType } from '../../../utils'
 export default {
     methods: {
         goRiskStatement() {
             const fileName = `风险披露&免责声明_${getLangType()}.pdf`
-            let url = `${location.origin}/wealth/static/${fileName}`
+            const url = `${location.origin}/wealth/static/${fileName}`
             const title = this.$t('protocol.publicRisk')
             console.log('pdfUrl:', url)
             if (this.$jsBridge) {
                 this.$jsBridge.openPDF({ url: encodeURIComponent(url), title })
-            } else if (isTHSI18NApp()) {
-                url = `${location.origin}/wealth/static/${encodeURIComponent(fileName)}`
-                this.$thsI18NJsBridge.openPDF({ url, title })
             } else {
                 window.open(url)
             }

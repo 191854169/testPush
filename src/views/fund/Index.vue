@@ -89,7 +89,6 @@
                 <multi-img name="open_account" directory="fund" verifyTheme></multi-img>
             </div>
         </div>
-        <FixedDepositCard v-if="isShowFtd"></FixedDepositCard>
         <!-- 投资组合 -->
         <investmentPortfolioCard />
         <!-- 星财宝 -->
@@ -331,7 +330,7 @@ import { isUndefined, compatIOSLocalStorage } from '@/utils/tools'
 import { getUserDetail } from '@/apis/uc.js'
 import { getRunEnv, setTheme } from '@/utils/env.js'
 import checkPIMixin from '@/mixins/business/checkPIMixin'
-import { isHLApp, isTHSApp, getAppVersion, compareVersion } from '@/utils/tools.js'
+import { isHLApp, getAppVersion, compareVersion } from '@/utils/tools.js'
 import { thousandsFilter, currencyFilter } from '@/config/filters.js'
 import { getUsaBondList } from '@/apis/bond/index.js'
 import investmentPortfolioCard from './follow/components/investmentPortfolioCard.vue'
@@ -339,12 +338,10 @@ import RadarBanner from '@/views/fund/clientRadarMap/radarBanner.vue'
 import pathnames from '@/config/H5Pathname.js'
 import dayjs from 'dayjs'
 import { debounce } from 'lodash'
-import FixedDepositCard from './components/FixedDepositCard.vue'
 
 export default {
     name: 'fund',
     components: {
-        FixedDepositCard,
         [Overlay.name]: Overlay,
         [Swipe.name]: Swipe,
         [SwipeItem.name]: SwipeItem,
@@ -490,11 +487,9 @@ export default {
         // 是否显示app专属顾问
         showAppCounselor() {
             if (this.closeAppCounselor) return false
-            const inTHS = isTHSApp()
             const inHL = isHLApp()
-            const isInMylink = this.$mylinkJsbridge.isInMylink()
-            // 在同花顺 || mylink || 显示新手引导时不显示
-            if (inTHS || isInMylink || this.showNoobGuide) return false
+            // 显示新手引导时不显示
+            if (this.showNoobGuide) return false
             if (inHL) {
                 // app版本号大于2.10不展示
                 const curVersion = getAppVersion()
@@ -510,9 +505,6 @@ export default {
                 return true
             }
             return false
-        },
-        isShowFtd() {
-            return !isTHSApp() && !this.$thsI18NJsBridge.isTHSI18NApp()
         },
     },
     filters: {
@@ -566,7 +558,6 @@ export default {
         this.addFundScroll()
     },
     methods: {
-        isTHSApp,
         init() {
             this.loginStatusWhenMount = this.$root.isLogin
 
@@ -694,8 +685,6 @@ export default {
             if (!/http(s)?\/\//.test(path)) {
                 url = `${location.origin}${location.pathname}#${path}${query}`
             }
-            if (this.$openPageInThs(url)) return
-            if (this.$openPageInI18NThs(url)) return
             if (this.$jsBridge) {
                 return this.$jsBridge.open({ url: encodeURIComponent(url), title: '' })
             }
@@ -840,8 +829,7 @@ export default {
                 }[item.fundMode]
             if (!(type && item.symbol)) return
             const url = `${location.origin}/wealth/fund.html#/detail?type=${type}&symbol=${item.symbol}`
-            if (this.$openPageInThs(url.replace(/http(s)?/, 'https'))) return
-            if (this.$openPageInI18NThs(url)) return
+
             if (this.$jsBridge) {
                 this.$jsBridge.open({ url: encodeURIComponent(url), title: '' })
             } else {
@@ -851,8 +839,7 @@ export default {
         //跳转至研报详情
         gotoNewsDetail(item) {
             const url = `${location.origin}/pages/informationDetail.html#/?id=${item.id}&type=${encodeURIComponent('研报')}`
-            if (this.$openPageInThs(url)) return
-            if (this.$openPageInI18NThs(url)) return
+
             if (isHLApp() && this.$jsBridge) {
                 this.$jsBridge.open({ url: encodeURIComponent(url), title: '' })
             } else {
@@ -876,8 +863,7 @@ export default {
             }
             const url = `${location.origin}${link}`
             console.log(`onFeaturesClick ===> ${url}`)
-            if (this.$openPageInThs(url.replace(/http(s)?/, 'https'))) return
-            if (this.$openPageInI18NThs(url)) return
+
             if (this.$jsBridge) {
                 this.$jsBridge.open({ url: encodeURIComponent(url), title: '' })
             } else {
@@ -894,8 +880,7 @@ export default {
 
         gotoProtocol() {
             const url = `${location.origin}/wealth/fund.html#/protocol?from=home`
-            if (this.$openPageInThs(url)) return
-            if (this.$openPageInI18NThs(url)) return
+
             if (this.$jsBridge) {
                 this.$jsBridge.open({ url: encodeURIComponent(url), title: '' })
             } else {

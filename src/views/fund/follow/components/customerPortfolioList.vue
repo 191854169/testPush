@@ -220,7 +220,6 @@ export default {
         },
         gotoDiscoverList() {
             const url = `${location.origin}${location.pathname}#/portfolio-list`
-            if (this.$openPageInThs(url)) return
             if (this.$jsBridge) {
                 this.$jsBridge.open({ url: encodeURIComponent(url), title: '' })
             } else {

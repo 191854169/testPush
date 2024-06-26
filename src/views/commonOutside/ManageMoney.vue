@@ -359,7 +359,6 @@ export default {
         //跳转至研报详情
         gotoNewsDetail(item) {
             const url = `${location.origin}/pages/informationDetail.html#/?id=${item.id}&type=${encodeURIComponent('研报')}`
-            if (this.$openPageInThs(url)) return
             if (isHLApp() && this.$jsBridge) {
                 this.$jsBridge.open({ url: encodeURIComponent(url), title: '' })
             } else {
@@ -383,7 +382,6 @@ export default {
             }
             const url = `${location.origin}${link}`
             console.log(`onFeaturesClick ===> ${url}`)
-            if (this.$openPageInThs(url.replace(/http(s)?/, 'https'))) return
             if (this.$jsBridge) {
                 this.$jsBridge.open({ url: encodeURIComponent(url), title: '' })
             } else {

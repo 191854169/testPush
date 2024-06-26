@@ -418,7 +418,6 @@ export default {
 
         goFollowInvestmentConcentration() {
             const url = `${location.origin}${location.pathname}#/follow-investment-concentration?portfolioId=${this.portfolioId}`
-            if (this.$openPageInThs(url)) return
             if (this.$jsBridge) {
                 this.isFromInvestionRatioPage = true
                 return this.$jsBridge.open({ url: encodeURIComponent(url), title: '' })
@@ -744,7 +743,6 @@ export default {
                 const H5_KEY = 'PORTFOLIO-ORDER-DISCLAIMER'
                 const { VUE_APP_BUILDER_PAGE } = pathnames
                 const url = `${VUE_APP_BUILDER_PAGE}?key=${H5_KEY}` // 投资组合免责声明
-                if (this.$openPageInThs(url)) return
                 if (this.$jsBridge) return this.$jsBridge.open({ url: encodeURIComponent(url), title: '' })
                 location.href = url
             } else {
@@ -755,7 +753,6 @@ export default {
                 }
                 localStorage.setItem('investmentList', JSON.stringify(list))
                 const url = `${location.origin}${location.pathname}#/follow-rule-list`
-                if (this.$openPageInThs(url)) return
                 if (this.$jsBridge) return this.$jsBridge.open({ url: encodeURIComponent(url), title: '' })
                 this.$router.push({ name: 'followRuleList' })
             }
@@ -763,13 +760,10 @@ export default {
         // 跳转到声明
         goClientStatement() {
             const fileName = `static/客户声明_${getLangType()}.pdf`
-            let url = `${location.origin}/wealth/static/${fileName}`
+            const url = `${location.origin}/wealth/static/${fileName}`
             const title = this.$t('protocol.clientStatement')
             if (isHLApp() && this.$jsBridge) {
                 this.$jsBridge.openPDF({ url: encodeURIComponent(url), title })
-            } else if (this.$thsI18NJsBridge.isTHSI18NApp()) {
-                url = `${location.origin}/wealth/static/${encodeURIComponent(fileName)}`
-                this.$thsI18NJsBridge.openPDF({ url, title })
             } else {
                 window.open(url)
             }

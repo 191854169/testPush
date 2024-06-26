@@ -230,7 +230,6 @@ export default {
         },
         goBondInfo() {
             const url = `${location.origin}/wealth/fund.html#/invest-product/bond`
-            if (this.$openPageInThs(url)) return
             if (this.$jsBridge) {
                 this.$jsBridge.open({ url: encodeURIComponent(url), title: '' })
             } else {
@@ -240,8 +239,7 @@ export default {
         goBondDetail(item) {
             if (this.activeTab === USA_BOND) {
                 const url = `${location.origin}${location.pathname}#/bond-detail?symbol=${item.symbol}`
-                if (this.$openPageInThs(url)) return
-                if (this.$openPageInI18NThs(url)) return
+
                 if (this.$jsBridge) {
                     return this.$jsBridge.open({ url: encodeURIComponent(url), title: '' })
                 }

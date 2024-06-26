@@ -545,8 +545,6 @@ export default {
         onRemind() {
             const { VUE_APP_BUILDER_PAGE } = pathnames
             const url = `${VUE_APP_BUILDER_PAGE}?key=COMMONPROBLEM-ST`
-            if (this.$openPageInThs(url)) return
-            if (this.$openPageInI18NThs(url)) return
             if (this.$jsBridge) return this.$jsBridge.open({ url: encodeURIComponent(url), title: '' })
             location.href = url
         },

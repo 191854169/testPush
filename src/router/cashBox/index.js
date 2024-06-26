@@ -4,14 +4,11 @@ import store from '@/store/demo'
 import NProgress from 'nprogress'
 import '@/assets/css/nprogress.css'
 import JSBridge from '@fs/jsbridge/dist/lib/jsBridge.js' // 不在自研APP内获取的对象为  undefined
-import { thsI18NJsBridge } from '@fs/jsbridge'
 // import {
 //   getOrigin,
 //   isLogin
 // } from '@/utils/tools.js'
 import { i18n } from '@/i18n/cashBox'
-import { isTHSApp } from '@/utils'
-import { setPageTitle } from '../../utils/thsJsBridgeTools'
 import { autoTrackSinglePage } from '@/utils/bury'
 Vue.use(VueRouter)
 
@@ -197,12 +194,7 @@ router.beforeEach((to, from, next) => {
     if (JSBridge) {
         JSBridge.setTitle(to.meta.title)
     }
-    if (isTHSApp()) {
-        setPageTitle(to.meta.title)
-    }
-    if (thsI18NJsBridge.isTHSI18NApp()) {
-        thsI18NJsBridge.changeWebViewTitle(to.meta.title)
-    }
+
     //同花顺登录标识
     if (to.query.fhsid) {
         store.commit('user/updateSession', {

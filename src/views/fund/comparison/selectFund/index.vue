@@ -327,7 +327,6 @@ export default {
             const path = '/comparison-detail'
             const symbols = encodeURIComponent(JSON.stringify(this.selectList.map(item => item.symbol)))
             const url = location.origin + `/wealth/fund.html#${path}?symbols=${symbols}`
-            if (this.$openPageInThs(url)) return
             if (this.$jsBridge) {
                 this.$jsBridge.open({ url: encodeURIComponent(url), title: '' })
             } else {

@@ -1,7 +1,7 @@
 <template>
     <div class="private-detail" ref="privateDetailRef">
         <logo-ad v-if="isNotInHLAndWTAppAndRY"></logo-ad>
-        <ul v-if="isInHLApp || isInRy || isInThsI18NApp" class="tabs" @click="onTabClick" :style="{ maxHeight: showTabs ? '150px' : '0' }">
+        <ul v-if="isInHLApp || isInRy" class="tabs" @click="onTabClick" :style="{ maxHeight: showTabs ? '150px' : '0' }">
             <li class="tab mask" :class="{ selected: activeTab === item.hash }" v-for="(item, idx) in tabs" :key="idx" :data-id="item.hash">
                 <a>{{ item.label }}</a>
             </li>
@@ -97,9 +97,6 @@ export default {
                 ],
             ]
         },
-        isInThsI18NApp() {
-            return this.$thsI18NJsBridge.isTHSI18NApp()
-        },
     },
     watch: {
         tabs: {
@@ -118,8 +115,6 @@ export default {
             }
             if (this.$jsBridge) {
                 this.$jsBridge.setTitle(title)
-            } else if (this.isInThsI18NApp) {
-                this.$thsI18NJsBridge.changeWebViewTitle(title)
             } else {
                 document.title = title
             }
@@ -130,24 +125,11 @@ export default {
         },
     },
     mounted() {
-        if (this.isInHLApp || this.isInRy || this.isInThsI18NApp) {
+        if (this.isInHLApp || this.isInRy) {
             this.onScrollListener()
         }
     },
     methods: {
-        // goRiskStatement() {
-        //     const fileUrl = `static/风险披露&免责声明_${getLangType()}.pdf`
-        //     const url = `${location.origin}/wealth/${fileUrl}`
-        //     console.log('pdfUrl:', url)
-        //     if (this.$jsBridge) {
-        //         this.$jsBridge.openPDF({ url: encodeURIComponent(url), title: this.$t('protocol.publicRisk') })
-        //     } else if (this.$thsI18NJsBridge.isTHSI18NApp()) {
-        //         const newUrl = `${location.origin}/wealth/${encodeURIComponent(fileUrl)}`
-        //         this.$goPage(newUrl)
-        //     } else {
-        //         window.open(fileUrl)
-        //     }
-        // },
         onScrollListener() {
             const self = this
             const fnc = () => {

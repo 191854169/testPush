@@ -4,10 +4,7 @@ import store from '@/store/fund.js'
 import NProgress from 'nprogress'
 import '@/assets/css/nprogress.css'
 import JSBridge from '@fs/jsbridge/dist/lib/jsBridge.js' // 不在自研APP内获取的对象为  undefined
-import { thsI18NJsBridge } from '@fs/jsbridge'
 import { i18n } from '@/i18n/fund'
-import { isTHSApp } from '@/utils'
-import { setPageTitle } from '@/utils/thsJsBridgeTools'
 import { setTheme, removeTheme, getRunEnv } from '@/utils/env'
 import { autoTrackSinglePage } from '@/utils/bury'
 import followRoutes from './follow'
@@ -533,12 +530,6 @@ router.beforeEach((to, from, next) => {
     to.meta.title ? (document.title = to.meta.title || '') : ''
     if (JSBridge) {
         JSBridge.setTitle(to.meta.title)
-    }
-    if (isTHSApp()) {
-        setPageTitle(to.meta.title)
-    }
-    if (thsI18NJsBridge.isTHSI18NApp()) {
-        thsI18NJsBridge.changeWebViewTitle(to.meta.title)
     }
     if (to.query.fhsid) {
         store.commit('user/updateSession', { session: to.query.fhsid })

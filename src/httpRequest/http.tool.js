@@ -5,9 +5,8 @@ import proxyConfig from '../../proxy.json'
 import { getRunEnv } from '@/utils/env.js'
 import { FREEZE_ERROR_CODE, FREEZE_ERROR_CODE_APP } from '@/config/common'
 import freezeService from '@/utils/freezeService/index'
-import mylinkJsbridge from '@fs/jsbridge/dist/lib/mylinkJsBridge.js'
 import { X_SOURCES_MAP } from './constants'
-import { isDeviceMobile, isTHSApp, isTHSI18NApp } from '@/utils/tools'
+import { isDeviceMobile } from '@/utils/tools'
 
 // 从本地代理文件获取请求路由
 const getLocalProxyHost = (config = {}, _proxyConfig) => {
@@ -201,23 +200,14 @@ export const checkFreeze = response => {
     }
 }
 
-const inMylink = mylinkJsbridge.isInMylink()
 /**
  * 根据环境来区分x-source值
  */
 export function getXSource() {
     let ret = isDeviceMobile() ? X_SOURCES_MAP.HLAPP_MOBILE : X_SOURCES_MAP.HLAPP_WEB
     const runenv = getRunEnv()
-    if (inMylink) {
-        ret = X_SOURCES_MAP.MYLINK_APP
-    } else if (runenv === 1) {
+    if (runenv === 1) {
         ret = X_SOURCES_MAP.HLAPP
-    } else if (isTHSApp()) {
-        ret = X_SOURCES_MAP.THS_APP
-    } else if (runenv === 2) {
-        ret = X_SOURCES_MAP.WANG_TING
-    } else if (isTHSI18NApp()) {
-        ret = X_SOURCES_MAP.THS_I18N_APP
     }
 
     return ret

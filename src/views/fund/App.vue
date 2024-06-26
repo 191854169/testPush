@@ -1,26 +1,19 @@
 <template>
-    <div class="index" ref="indexRef" :class="{ 'in-wt': inWtNotInTHS }">
+    <div class="index" ref="indexRef">
         <router-view></router-view>
         <loading />
     </div>
 </template>
 
 <script>
-import { getPriceColorType, getRunEnv } from '@/utils/env.js'
+import { getPriceColorType } from '@/utils/env.js'
 import smoothscroll from '@/utils/smoothScroll.js'
-import { isTHSApp } from '../../utils'
 export default {
     name: 'index',
-    computed: {
-        inWtNotInTHS() {
-            return getRunEnv() === 2 && !isTHSApp()
-        },
-    },
+    computed: {},
     mounted() {
-        let colorType = getPriceColorType()
-        if (getRunEnv() === 2) {
-            colorType = 3 // 默认红涨绿跌
-        }
+        const colorType = getPriceColorType()
+
         this.$refs.indexRef.classList.add(`price-color-${colorType}`)
         smoothscroll.polyfill()
     },

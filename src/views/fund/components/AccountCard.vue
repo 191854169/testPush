@@ -635,8 +635,7 @@ export default {
                 return
             }
             const url = `${location.origin}${location.pathname}#/account-hold?accountType=${this.accountType}&currency=${this.currency}`
-            if (this.$openPageInThs(url)) return
-            if (this.$openPageInI18NThs(url)) return
+
             if (this.$jsBridge) {
                 this.$jsBridge.open({ url: encodeURIComponent(url), title: '' })
             } else {

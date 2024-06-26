@@ -56,7 +56,6 @@ export default {
     methods: {
         goPage() {
             const url = `${location.origin}/wealth/fund.html#/client-radar`
-            if (this.$openPageInThs(url)) return
             if (this.$jsBridge) {
                 return this.$jsBridge.open({ url: encodeURIComponent(url), title: '' })
             }

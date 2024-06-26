@@ -84,11 +84,10 @@
 import ResultDetailTable from './components/resultDetailTable.vue'
 import NP from 'number-precision'
 import { CURRENCY_MAP, PORTFOLIO_TYPE_MAP } from '../config/common'
-import { isHLApp, keepDecimals, addCurParamsForUrl, isTHSI18NApp } from '@/utils'
+import { isHLApp, keepDecimals } from '@/utils'
 import { thousandsFilter } from '@/config/filters.js'
 import NavigationBar from '@/components/NavigationBar.vue'
 import { AutoFxSetting } from '@/apis/cash'
-import { getRunEnv } from '@/utils/env'
 import { mapState } from 'vuex'
 import { accountTypeMap } from '@/config/common'
 
@@ -200,8 +199,6 @@ export default {
                 const url = `${location.origin}${location.pathname}#/order-list?haveDoing=1`
                 if (this.isInHlApp) {
                     this.$jsBridge.open({ url: encodeURIComponent(url), title: '' })
-                } else if (isTHSI18NApp()) {
-                    this.$openPageInI18NThs(url)
                 } else {
                     this.$router.push('/order-list?haveDoing=1')
                 }
@@ -236,8 +233,6 @@ export default {
         onGoBack() {
             if (this.$jsBridge) {
                 this.$jsBridge.close()
-            } else if (isTHSI18NApp()) {
-                this.$thsI18NJsBridge.goBack()
             } else {
                 this.$router.push(`follow-details?portfolioId=${this.$route.query.portfolioId}`)
             }
@@ -280,10 +275,8 @@ export default {
         },
 
         goAutoExchange() {
-            let url = `${location.origin}/pages/autoExchange.html#/?sub=${this.$store.state.user.subAccountId}`
-            if (getRunEnv() === 2) {
-                url = addCurParamsForUrl(url)
-            }
+            const url = `${location.origin}/pages/autoExchange.html#/?sub=${this.$store.state.user.subAccountId}`
+
             location.href = url
         },
     },

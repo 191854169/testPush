@@ -417,11 +417,8 @@ export default {
             const { assetType } = this.$route.query
             const prefixTitle = this.$t(assetType)
             const title = prefixTitle + this.$t('assets')
-            if (isTHSApp()) {
-                setPageTitle(title)
-            } else {
-                document.title = title
-            }
+
+            document.title = title
         },
 
         goNoHoldProductPage() {

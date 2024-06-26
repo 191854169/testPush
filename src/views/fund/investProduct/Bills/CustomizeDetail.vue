@@ -227,7 +227,6 @@ import { thousandsFilter } from '@/config/filters'
 import { CURRENCY_MAP, BILL_CUSTOMIZE_STATUS_MAP, RISK_RATING_MAP, BILL_COMPLEX_MAP, BILL_UNIT_MAP } from '@/views/fund/config/common'
 import { Toast } from 'vant'
 import JSBridge from '@fs/jsbridge/dist/lib/jsBridge.js'
-import { isTHSApp } from '@/utils/tools.js'
 
 const tradeStatusKeyValueMap = BILL_CUSTOMIZE_STATUS_MAP.keyValueMap
 
@@ -453,14 +452,7 @@ export default {
         },
 
         closePage() {
-            if (isTHSApp()) {
-                // eslint-disable-next-line no-undef
-                callNativeHandler('goback', { type: 'component' })
-            } else if (this.$thsI18NJsBridge.isTHSI18NApp()) {
-                this.$thsI18NJsBridge.goBack()
-            } else {
-                JSBridge ? JSBridge.close() : this.$router.go(-1)
-            }
+            JSBridge ? JSBridge.close() : this.$router.go(-1)
         },
 
         handleProductClick(symbol) {

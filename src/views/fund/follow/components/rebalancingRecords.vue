@@ -79,7 +79,6 @@ export default {
     methods: {
         toMorePage() {
             const url = `${location.origin}${location.pathname}#/follow-rebalancing-records?portfolioId=${this.$route.query.portfolioId}`
-            if (this.$openPageInThs(url)) return
             if (this.$jsBridge) {
                 this.$jsBridge.open({ url: encodeURIComponent(url), title: '' })
             } else {

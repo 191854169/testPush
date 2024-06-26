@@ -66,7 +66,7 @@
 import { floatToRatio } from '@/utils'
 import { getFundQuote, getBrief } from '@/apis/fund/fund'
 import { Overlay } from 'vant'
-import { isNull, isUndefined, isTHSApp, isAndroid } from '@/utils/tools'
+import { isNull, isUndefined } from '@/utils/tools'
 import { thousandsFilter } from '@/config/filters.js'
 import { CURRENCY_MAP } from '../../config/common'
 
@@ -225,20 +225,13 @@ export default {
             if (symbol && symbol !== this.symbol) {
                 this.showPopup = false
 
-                if (isTHSApp() && isAndroid()) {
-                    location.href = `${location.origin}${location.pathname}?t=${Date.now()}${location.hash.replace(
-                        /symbol=([^&]+)/,
-                        `symbol=${symbol}`
-                    )}`
-                } else {
-                    this.$router.push({
-                        path: this.$route.path,
-                        query: {
-                            ...this.$route.query,
-                            symbol,
-                        },
-                    })
-                }
+                this.$router.push({
+                    path: this.$route.path,
+                    query: {
+                        ...this.$route.query,
+                        symbol,
+                    },
+                })
             }
         },
         showMore() {

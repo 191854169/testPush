@@ -270,7 +270,6 @@ export default {
             })
 
             const url = `${location.origin}/wealth/fund.html#/invest-advisory/order-detail?id=${id}`
-            if (this.$openPageInThs(url)) return
             if (this.$jsBridge) {
                 this.$jsBridge.open({ url: encodeURIComponent(url), title: '' })
             } else {

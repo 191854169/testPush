@@ -9,7 +9,6 @@ import { UniversalTransition } from 'echarts/features'
 import { CanvasRenderer } from 'echarts/renderers'
 import { CLIENT_RADAR_MAP } from '@/views/fund/config/common'
 import { colorToRGB } from '@/utils/tools.js'
-import { isTHSApp } from '@/utils'
 import { accMul, accDiv } from '@/utils/accurate'
 import { getThemeType } from '@/utils/env'
 
@@ -202,9 +201,7 @@ export default {
             var uiWidth = 375 // 设计稿宽度
             var maxClientWidth = 750 // 手机设备最大宽度
             var clientWidth = docEl.clientWidth
-            if (isTHSApp()) {
-                clientWidth = window.screen.width
-            }
+
             if (!clientWidth) {
                 return
             }

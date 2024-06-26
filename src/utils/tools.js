@@ -5,9 +5,6 @@ export * from '@/utils/calc.js'
 export * from '@fs/utils'
 import { isObj, isIos, getAppVersion, compareVersion, getValueForGlobalKey } from '@fs/utils'
 
-import MYLINK_JSBRIDGE from '@fs/jsbridge/dist/lib/mylinkJsBridge.js'
-const isCMHK = MYLINK_JSBRIDGE.isInMylink
-
 /*
  * 获取语言类型
  * zhCn - 简体
@@ -30,10 +27,6 @@ export const getLangType = () => {
         return map[lang]
     }
     let langType = getValueForGlobalKey(KEY, '') || getFormNavigator() || localStorage.getItem('lang') || DEFAULT_LANG_TYPE
-    // fix mylink中IOS获取的UA 不对
-    if (isCMHK()) {
-        langType = getValueForGlobalKey(KEY, '') || localStorage.getItem('lang') || DEFAULT_LANG_TYPE
-    }
 
     if (langType === 'enUs') {
         langType = 'zhTc'

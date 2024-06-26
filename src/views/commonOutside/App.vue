@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import { getPriceColorType, getRunEnv } from '@/utils/env.js'
+import { getPriceColorType } from '@/utils/env.js'
 import { isInRyH5 } from '@fs/utils'
 export default {
     name: 'App',
@@ -16,10 +16,8 @@ export default {
         }
     },
     mounted() {
-        let colorType = getPriceColorType()
-        if (getRunEnv() === 2) {
-            colorType = 3 // 默认红涨绿跌
-        }
+        const colorType = getPriceColorType()
+
         this.colorType = colorType
         sessionStorage.setItem('outsideSource', isInRyH5() ? 'ry' : 'common') // 暂时只有睿银和通用
     },

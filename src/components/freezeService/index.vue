@@ -63,8 +63,6 @@ export default {
                     .catch(() => {
                         this.$jsBridge.open({ url: encodeURIComponent(link), title: '' })
                     })
-            } else if (this.$mylinkJsbridge.isInMylink()) {
-                this.$mylinkJsbridge.openH5InWebview(link)
             } else {
                 window.open(link)
             }

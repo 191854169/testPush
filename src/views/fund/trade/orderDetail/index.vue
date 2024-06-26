@@ -650,7 +650,7 @@ export default {
             try {
                 if (this.$jsBridge) {
                     await this.$jsBridge.tradeLogin()
-                } else if (this.$mylinkJsbridge.isInMylink() || isInOutsideH5()) {
+                } else if (isInOutsideH5()) {
                     if (!this.myLinkTradeLogin) {
                         this.myLinkTradeLogin = new TradeLogin({
                             propsData: {

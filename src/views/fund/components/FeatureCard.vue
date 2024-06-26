@@ -62,8 +62,6 @@ export default {
     methods: {
         goPageWithH5(url, title = '') {
             url = this.$addCurParamsForUrl(url)
-            if (this.$openPageInThs(url)) return
-            if (this.$openPageInI18NThs(url)) return
             if (this.$jsBridge) {
                 this.$jsBridge.open({ url: encodeURIComponent(url), title })
             } else {

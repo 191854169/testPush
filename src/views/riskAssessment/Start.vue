@@ -50,7 +50,6 @@ import { sum, max, isObj } from '@/utils/tools.js'
 import { riskData } from './utils.js'
 import { getQueryString } from '@/utils'
 import mixin from './mixin.js'
-import { isTHSApp } from '../../utils/tools.js'
 
 export default {
     name: 'riskAssessment',
@@ -299,22 +298,11 @@ export default {
                 .then(res => {
                     if (res?.result?.id) {
                         this.$store.commit('app/updateShowLoading', false)
-                        let { title, origin = '' } = this.$route.query
+                        const { title, origin = '' } = this.$route.query
                         // fix 同花顺里面被encode两次
                         const url = getQueryString('url', true)
-                        if (isTHSApp()) {
-                            // url && (url = encodeURIComponent(url))
-                            title && (title = encodeURIComponent(title))
-                            origin && (origin = encodeURIComponent(origin))
-                        }
-                        const wtToken = getQueryString('wtToken') || getQueryString('wtToken', true)
-                        if (wtToken) {
-                            url
-                                ? this.$router.replace({ name: 'result', query: { sub: this.subAcctId, wtToken, url, title, origin } })
-                                : this.$router.replace({ name: 'result', query: { sub: this.subAcctId, wtToken } })
-                        } else {
-                            url ? this.$router.replace({ name: 'result', query: { url, title, origin } }) : this.$router.replace({ name: 'result' })
-                        }
+
+                        url ? this.$router.replace({ name: 'result', query: { url, title, origin } }) : this.$router.replace({ name: 'result' })
                     }
                 })
                 .catch(res => {

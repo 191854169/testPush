@@ -90,8 +90,6 @@ export default {
     },
     methods: {
         gotoStarSelection() {
-            const url = `${location.origin}${location.pathname}#/star-selection`
-            if (this.$openPageInI18NThs(url)) return
             this.$router.push('/star-selection')
         },
 

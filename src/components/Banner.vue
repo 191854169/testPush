@@ -79,8 +79,6 @@ export default {
             let { jumpType, jumpURL } = item || {}
             switch (jumpType) {
                 case H5:
-                    if (this.$openPageInThs(jumpURL)) return
-                    if (this.$openPageInI18NThs(jumpURL)) return
                     this.$jsBridge ? this.$jsBridge.open({ url: encodeURIComponent(jumpURL), title: '' }) : window.open(jumpURL, '_blank')
                     break
                 case Native:

@@ -1163,11 +1163,8 @@ export class Merge {
      * @param {Object} params 参数对象
      */
     setEncryptType(params = {}) {
-        let defaultEncrypt = this.defaultEncrypt
-        // 同花顺|网厅 不需要加密
-        if (getRunEnv() === 2) {
-            defaultEncrypt = ENCRYPT_TYPES.NO_ENCRYPT
-        }
+        const defaultEncrypt = this.defaultEncrypt
+
         const isHasEncryptInOption = Object.prototype.hasOwnProperty.call(params, 'encrypt')
         if (!isHasEncryptInOption) {
             params.encrypt = defaultEncrypt

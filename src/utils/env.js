@@ -2,29 +2,9 @@
 // 2022-04-14
 
 import JSBridge from '@fs/jsbridge/dist/lib/jsBridge.js'
-import { getQueryString, isTHSApp, isDeviceMobile, getRunEnv as _getRunEnv } from '@/utils/tools'
+import { getQueryString, isDeviceMobile, getRunEnv as _getRunEnv } from '@/utils/tools'
 
 export const getRunEnv = _getRunEnv
-
-/**
- * 获取运行环境
- * @returns // 1.自研App 2.网厅 3.站外H5
- */
-// export const getRunEnv = () => {
-//     if (JSBridge) {
-//         // 自研App中一定共有JSBridge对象
-//         return 1
-//     } else if (
-//         getQueryString('wtToken', true) ||
-//         (location.ancestorOrigins && (location.ancestorOrigins[0] || '').includes('hallweb.xingyunplan.com')) ||
-//         isTHSApp()
-//     ) {
-//         // 网厅中query参数带WTtoken
-//         return 2
-//     }
-//     // 否则为站外H5
-//     return 3
-// }
 
 /**
  * 获取当前接口版本
@@ -44,9 +24,6 @@ export const getOrigin = () => {
     if (JSBridge) {
         // app
         return 6
-    } else if (isTHSApp()) {
-        //同花顺
-        return 1
     }
     //网厅
     const isMobile = isDeviceMobile()
@@ -77,17 +54,7 @@ export const getPriceColorType = () => {
  */
 export const getThemeType = () => {
     const DEFAULT_SKIN_TYPE = 'white'
-    if (isTHSApp()) {
-        const userAgent = navigator.userAgent,
-            index = userAgent.indexOf('hxtheme')
-        let theme = 'white'
 
-        if (index > -1) {
-            const match = userAgent.substr(index + 8, 1)
-            0 == match ? (theme = 'white') : 1 == match && (theme = 'black')
-        }
-        return theme
-    }
     const KEY = 'skinType'
     const reg = new RegExp(`(?:${KEY})/([^\\s]+)`)
     return (

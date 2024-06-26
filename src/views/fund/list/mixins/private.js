@@ -42,7 +42,6 @@ export default {
         },
         goPrivateDetail(item) {
             const url = `${location.origin}/wealth/fund.html#/detail?type=private&symbol=${item.symbol}`
-            if (this.$openPageInI18NThs(url)) return
             if (this.$jsBridge) {
                 this.$jsBridge.open({ url: encodeURIComponent(url), title: '' })
             } else {
@@ -57,7 +56,6 @@ export default {
         },
         goBondDetailHandler(item) {
             const url = `${location.origin}/wealth/fund.html#/bond-detail?symbol=${item.symbol}`
-            if (this.$openPageInI18NThs(url)) return
             if (this.$jsBridge) {
                 this.$jsBridge.open({ url: encodeURIComponent(url), title: '' })
             } else {
@@ -169,8 +167,7 @@ export default {
         },
         gotoMechanism() {
             const url = `${location.origin}/wealth/fund.html#/mechanism`
-            if (this.$openPageInThs(url)) return
-            if (this.$openPageInI18NThs(url)) return
+
             this.$jsBridge ? this.$jsBridge.open({ url: encodeURIComponent(url), title: '' }) : this.$router.push('mechanism')
         },
 

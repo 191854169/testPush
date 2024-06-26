@@ -16,7 +16,6 @@ import { thousandsFilter, amountFilter } from '@/config/filters.js'
 import SvgIcon from '@/components/SvgIcon.vue'
 import { isHLApp, isInRyH5 } from '@/utils/tools.js'
 import { i18n } from '@/i18n/commonOutside/index.js'
-import { getRunEnv } from '@/utils/env.js'
 import { getAccountStatus, nextAfterJudgeAccountStatus } from './init'
 
 export { FINANCE_ACCOUNT, FUND_ACCOUNT } from './init'
@@ -54,7 +53,6 @@ if (isTestin && process.env.VUE_APP_ENV === 'sit') {
 if (needDebug) {
     toggleDebug(true)
 }
-const isWT = getRunEnv() === 2 // 是否在网厅
 const app = new Vue({
     data() {
         return {
@@ -103,22 +101,6 @@ const app = new Vue({
     render: h => h(CommonOutsideApp),
 }).$mount('#app')
 
-// app.$watch(
-//     'isLogin',
-//     v => {
-//         if (!isWT) {
-//             app.$mount('#app')
-//         } else {
-//             if (v) {
-//                 app.$mount('#app')
-//             }
-//         }
-//     },
-//     {
-//         immediate: true,
-//     }
-// )
-
 // 页面初始化登录态
 store
     .dispatch('user/getUserInfo', false)
@@ -147,10 +129,7 @@ function login() {
         })
         return false
     }
-    // 同花顺 - 进入页面一定是登录态
-    if (isWT) {
-        return false
-    }
+
     // 站外
     const session = localStorage.getItem('session')
     if (!session) {

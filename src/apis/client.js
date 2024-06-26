@@ -1,6 +1,5 @@
 import { get, path_version, ENCRYPT_TYPES } from '@/httpRequest/http.js'
 import { isHLApp } from '@/utils'
-import { getRunEnv } from '@/utils/env.js'
 const { VUE_APP_UC = '', NODE_ENV } = process.env
 
 let domain = ''
@@ -23,7 +22,7 @@ const mergeOptions = (options, isInWt = path_version === 'v0') => {
         data[key] = data[key] || defaultV
     })
     if (!options.encrypt) {
-        options.encrypt = getRunEnv() === 2 ? ENCRYPT_TYPES.NO_ENCRYPT : ENCRYPT_TYPES.LOGIN
+        options.encrypt = ENCRYPT_TYPES.LOGIN
     }
     return options
 }

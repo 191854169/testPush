@@ -13,11 +13,8 @@
 <script>
 import { i18n } from '@/i18n/fund/index.js'
 import { isIos } from '@/utils/tools'
-import { isTHSApp, isTHSI18NApp } from '../../../utils'
-import { setPageTitle } from '@/utils/thsJsBridgeTools'
 import { isInOutsideH5 } from '@/utils'
 const BILL_ACTIVE_TAB = 'billListActiveTab'
-import { thsI18NJsBridge } from '@fs/jsbridge'
 
 // 产品名称
 const titleMap = {
@@ -61,14 +58,9 @@ export default {
         const { type } = to.params || {}
         const title = titleMap._getTitle(type)
         document.title = title
-        if (isTHSApp()) {
-            setPageTitle(title)
-        }
+
         if (isInOutsideH5() && !from.name) {
             sessionStorage.removeItem(BILL_ACTIVE_TAB)
-        }
-        if (isTHSI18NApp()) {
-            thsI18NJsBridge.changeWebViewTitle(title)
         }
         next()
     },

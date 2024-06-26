@@ -1,4 +1,4 @@
-import { base64_to_bytes, AES_GCM, bytes_to_base64, string_to_bytes, bytes_to_string, hex_to_bytes } from 'asmcrypto.js'
+import { base64_to_bytes, AES_GCM, bytes_to_base64, string_to_bytes, bytes_to_string } from 'asmcrypto.js'
 // import { ec as EC } from 'elliptic'
 import { compute } from 'js-crypto-hkdf'
 import { isString } from './http.tool.js'

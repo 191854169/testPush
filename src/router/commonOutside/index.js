@@ -5,8 +5,6 @@ import NProgress from 'nprogress'
 import '@/assets/css/nprogress.css'
 import JSBridge from 'jsbridge' // 不在自研APP内获取的对象为  undefined
 Vue.use(VueRouter)
-import { isTHSApp } from '@/utils/tools'
-import { setPageTitle } from '@/utils/thsJsBridgeTools'
 import { autoTrackSinglePage } from '@/utils/bury'
 import { i18n } from '@/i18n/commonOutside'
 NProgress.configure({ showSpinner: false })
@@ -74,9 +72,7 @@ router.beforeEach(async (to, from, next) => {
     if (JSBridge) {
         JSBridge.setTitle(to.meta.title)
     }
-    if (isTHSApp()) {
-        setPageTitle(to.meta.title)
-    }
+
     if (to.query.fhsid) {
         store.commit('user/updateSession', { session: to.query.fhsid })
     }

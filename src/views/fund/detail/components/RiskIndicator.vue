@@ -138,8 +138,6 @@ export default {
             console.log('url:', url)
             if (this.$jsBridge) {
                 this.$jsBridge.open({ url: encodeURIComponent(url), title: '' })
-            } else if (this.$thsI18NJsBridge.isTHSI18NApp()) {
-                this.$goPage(url)
             } else {
                 window.open(decodeURIComponent(url), '_blank')
             }

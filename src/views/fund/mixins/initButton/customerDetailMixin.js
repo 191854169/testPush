@@ -18,7 +18,6 @@ export default {
         pushToCustomerDetail(uin) {
             if (uin || uin == 0) {
                 const url = `${location.origin}${location.pathname}#/customer-detail?otherUin=${uin}`
-                if (this.$openPageInThs(url)) return
                 if (this.$jsBridge) {
                     this.$jsBridge.open({ url: encodeURIComponent(url), title: '', mode: 'immersive', inapp: isHLApp() })
                 } else {

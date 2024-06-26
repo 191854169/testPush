@@ -189,7 +189,6 @@ export default {
             const id = this.info.tradeOrderId
             if (!id) return
             const url = `${location.origin}/wealth/fund.html#/order-detail?orderNumber=${id}`
-            if (this.$openPageInThs(url)) return
             if (this.$jsBridge) {
                 this.$jsBridge.open({ url: encodeURIComponent(url), title: '' })
             } else {

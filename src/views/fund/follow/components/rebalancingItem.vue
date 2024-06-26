@@ -101,7 +101,6 @@ export default {
             console.log('rebalance ==>', this.rebalance)
             if (this.rebalance.productType === 3) {
                 const url = `${location.origin}/wealth/fund.html#/detail?symbol=${this.rebalance.fundID}&type=public`
-                if (this.$openPageInThs(url)) return
                 if (this.$jsBridge) {
                     this.$jsBridge.open({ url: encodeURIComponent(`${url}`), title: '' })
                 } else {

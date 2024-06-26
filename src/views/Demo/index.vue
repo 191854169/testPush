@@ -36,8 +36,6 @@
                 <div class="content">文字h1,背景为背景色{{ theme }}</div>
             </div> -->
             <div>当前页面域名：{{ origin }}</div>
-            <van-button type="info" @click="getThsI18NAppInfo">测试同花顺jsbridge页面跳转</van-button>
-            <van-button type="info" @click="openNewPage">打开新的webview</van-button>
             <van-button type="primary" @click="handleRouteTest">测试Vue路由跳转B</van-button>
             <van-button type="primary" @click="handleRouteTestA">测试Vue路由跳转A</van-button>
             <van-button type="primary" @click="handleRouteTestC">测试Vue路由跳转C</van-button>
@@ -55,7 +53,6 @@ import { getThemeType } from '@/utils/env.js'
 const { variable } = require('@/assets/css/variable')
 
 import variables from '@/assets/css/variable.less'
-import thsI18NJsBridge from '@fs/jsbridge/dist/lib/thsI18NJsBridge'
 
 export default {
     name: 'DemoHome',
@@ -169,38 +166,9 @@ export default {
         handleRouteTestC() {
             this.$router.push('/chart')
         },
-        handleCloseWebView() {
-            thsI18NJsBridge.goBack()
-        },
+        handleCloseWebView() {},
         handleRouteTest() {
             this.$router.push('/BPage')
-        },
-        getThsI18NAppInfo() {
-            const jumpUrl = 'http://10.36.15.121:8080/wealth/fund.html#/detail?type=public&symbol=mf0P0001P7E3&fundType=4'
-            // window.callI18NNativeHandler('route', {
-            //     url: 'hexin.curve/webContainer',
-            //     params: {
-            //         url: jumpUrl,
-            //         // fullscreen: true, //全屏跳转
-            //     },
-            // })
-            // window.callI18NNativeHandler('changeStatusModel', { isDark: '1' })
-            // const info1 = window._commonBrigde.callWebNativeHandlerSync('getAppBaseInfo', [])
-            // this.thsI18NAppInfo = info1.data
-            // window.callI18NNativeHandler('changeWebViewTitle', { title }) //ok
-            // const title = Math.random().toFixed(5) * 100000 + ''
-            // thsI18NJsBridge.changeWebViewTitle(title)
-            // thsI18NJsBridge.gotoLoginPage()
-            // thsI18NJsBridge.showCloseBarItem()
-            this.thsI18NAppInfo = thsI18NJsBridge.getAppBaseInfo()
-            console.log('999999999999999:', this.thsI18NAppInfo)
-            // thsI18NJsBridge.gotoCommonPage({ url: jumpUrl })
-            this.$thsI18NJsBridge.goBack()
-        },
-        openNewPage() {
-            const fileName = `使用条款及免责声明_zhCn.pdf`
-            const jumpUrl = `http://10.36.15.121:8080/wealth/static/${encodeURIComponent(fileName)}`
-            this.$thsI18NJsBridge.gotoCommonPage({ url: jumpUrl, title: '666666' })
         },
         // const info = window.callI18NNativeSync('getAppBaseInfo', [])
         // console.log('info:', info)

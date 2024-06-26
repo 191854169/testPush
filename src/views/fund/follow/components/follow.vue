@@ -350,7 +350,6 @@ export default {
         toMorePage() {
             const link = '/wealth/fund.html#/follow'
             const url = `${location.origin}${link}`
-            if (this.$openPageInThs(url.replace(/http(s)?/, 'https'))) return
             if (this.$jsBridge) {
                 this.$jsBridge.open({ url: encodeURIComponent(url), title: '' })
             } else {
