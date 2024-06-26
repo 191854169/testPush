@@ -13,7 +13,7 @@
 <script>
 import { SwipeItem, Swipe } from 'vant'
 import { getBannerList } from '@/apis/ad.js'
-import { getLangType, isTHSApp } from '@/utils'
+import { getLangType } from '@/utils'
 import { ENCRYPT_TYPES } from '@/httpRequest/http'
 
 // banner跳转方式
@@ -58,15 +58,8 @@ export default {
                 const { result = {} } = await getBannerList({ position: this.position, start: 0, count: 3 }, { encrypt: ENCRYPT_TYPES.NO_ENCRYPT })
                 const bannerList = result.records || []
                 console.log(`Feng.chen:: 13:58:13 result ===> `, this.position, bannerList)
-                // NOTE: 星财宝专户 不在同花顺banner展示
-                if (isTHSApp() && this.position === 7) {
-                    this.bannerList = bannerList.filter(item => {
-                        const jumpURL = item.jumpURL || ''
-                        return jumpURL.includes('starTreasureAccount') === false
-                    })
-                } else {
-                    this.bannerList = bannerList
-                }
+
+                this.bannerList = bannerList
             } catch (e) {
                 console.error(e)
             } finally {

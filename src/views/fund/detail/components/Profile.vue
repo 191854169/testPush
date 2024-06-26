@@ -49,7 +49,7 @@ import Empty from '@/components/Empty.vue'
 import FosunTabs from '@/components/FosunTabs.vue'
 import { Tab } from 'vant'
 import { getBrief, getManager, getFile } from '@/apis/fund/fund'
-import { isHLApp, isTHSI18NApp } from '@/utils/tools.js'
+import { isHLApp } from '@/utils/tools.js'
 import { milliFormat } from '../../../../utils'
 
 export default {

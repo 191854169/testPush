@@ -444,7 +444,7 @@ import verifyMixin from '@/mixins/business/verifyMixins.js'
 
 import BillTags from './BillTags.vue'
 
-import { isHLApp, humanNum, floatToRatio, toFixed, isTHSApp, isInRyH5, isInOutsideH5, isUndefined, isNull } from '@/utils'
+import { isHLApp, humanNum, floatToRatio, toFixed, isInRyH5, isInOutsideH5, isUndefined, isNull } from '@/utils'
 import { accAdd, accMul, accSub } from '@/utils/accurate'
 
 import { getBillsDetail, getBillsFiles, getBillsQuoteInfo, getBillsProductList } from '@/apis/fund/note'

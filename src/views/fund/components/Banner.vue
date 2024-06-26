@@ -13,7 +13,7 @@
 <script>
 import { SwipeItem, Swipe } from 'vant'
 import { getBannerList } from '@/apis/ad.js'
-import { getLangType, isTHSApp } from '@/utils'
+import { getLangType } from '@/utils'
 import { ENCRYPT_TYPES } from '@/httpRequest/http'
 
 // banner跳转方式

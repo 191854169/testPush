@@ -23,7 +23,7 @@ import masterSwipe from './components/masterSwipe.vue'
 import followStarSelection from './components/followStarSelection.vue'
 import Banner from '../../fund/components/Banner.vue'
 import customerDetailMixin from './mixins/customerDetailMixin'
-import { isHLApp, isTHSApp, getAppVersion, compareVersion } from '@/utils/tools.js'
+import { isHLApp, getAppVersion, compareVersion } from '@/utils/tools.js'
 
 function generateWatch() {
     return function fn(context) {

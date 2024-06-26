@@ -1,5 +1,5 @@
 <template>
-    <div class="advisor-container" v-if="isShowAdvisorContainer">
+    <div class="advisor-container">
         <div class="advisor" @click="goAdvisor">
             <multi-img name="icon_service2" directory="common"></multi-img>
             {{ $t('dedicatedAdvisors') }}
@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import { isHLApp, isTHSApp, isTHSI18NApp } from '@/utils'
+import { isHLApp } from '@/utils'
 import pathnames from '@/config/H5Pathname'
 
 export default {
@@ -19,11 +19,7 @@ export default {
     data() {
         return {}
     },
-    computed: {
-        isShowAdvisorContainer() {
-            return !isTHSApp() && !isTHSI18NApp()
-        },
-    },
+    computed: {},
     watch: {},
     created() {},
     mounted() {},

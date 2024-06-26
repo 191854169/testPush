@@ -33,7 +33,7 @@
 import { Collapse, CollapseItem } from 'vant'
 import { getFile, getPriDocument } from '@/apis/fund/fund'
 import { getFile as getBondFile } from '@/apis/bond/index'
-import { isHLApp, isTHSI18NApp } from '@/utils/tools.js'
+import { isHLApp } from '@/utils/tools.js'
 import { getLangType } from '../../utils'
 import { getBillsFiles } from '@/apis/fund/note'
 import pathnames from '@/config/H5Pathname.js'
@@ -399,7 +399,6 @@ export default {
 
             if (item.local) {
                 url = `${location.origin}/wealth/static/${item.fileUrl}`
-                if (isTHSI18NApp()) url = `${location.origin}/wealth/static/${encodeURIComponent(item.fileUrl)}`
             }
             console.log('pdfUrl:', url)
             if (isHLApp() && this.$jsBridge) {

@@ -112,14 +112,14 @@ import { thousandsFilter } from '@/config/filters.js'
 import OrderTable from './order-table.vue'
 import AssetTypes from '@/components/AssetTypes.vue'
 import AccountChoose from '@/components/AccountChoose'
-import { getNearWeek, getNearMonth, getNearThreeMonth, getPageVisibleSupportProperty } from '@/utils/utils.js'
+import { getNearWeek, getNearMonth, getNearThreeMonth } from '@/utils/utils.js'
 import { getQueryString } from '@/utils/tools.js'
 import { orderList, orderDetail } from '@/apis/wealth/index.js'
 import { ORDER_STATUS_MAP } from '@/views/fund/config/common'
 import { accountMap, productTypeMap } from '@/config/common'
 import { i18n } from '@/i18n/fund/index.js'
 import dayjs from 'dayjs'
-import { isInRyH5, isInOutsideH5 } from '@/utils'
+import { isInRyH5 } from '@/utils'
 
 const dateFormat = date => dayjs(date).format('YYYY/MM/DD')
 
