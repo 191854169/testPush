@@ -5,7 +5,7 @@
             <!-- 即刻开始您的财富乘长之旅 -->
             <div class="flex-c">
                 <multi-img name="icon_welcome" directory="commonOutside" class="icon"></multi-img>
-                <div class="f14 c-main">即刻开始您的财富乘长之旅</div>
+                <div class="f14 c-main">{{ $t('guideDeposit') }}</div>
             </div>
 
             <!-- 存入资金 -->
@@ -17,11 +17,11 @@
             <!-- 精选全球理财产品 助您省心投资 -->
             <div class="flex-c">
                 <multi-img name="icon_wealth" directory="commonOutside" class="icon"></multi-img>
-                <div class="f14 c-main">精选全球理财产品 助您省心投资</div>
+                <div class="f14 c-main">{{ $t('guideNotBuyProduct') }}</div>
             </div>
 
             <!-- 去看看 -->
-            <div class="btn flex-c" @click="goWealth">去看看</div>
+            <div class="btn flex-c" @click="goWealth">{{ $t('gotoSee') }}</div>
         </div>
     </div>
 </template>

@@ -1,11 +1,11 @@
 <template>
     <!-- 理财收益说明 -->
     <div class="statement-card">
-        <div class="btn" @click="openPage">理财收益说明</div>
+        <div class="btn" @click="openPage">{{ $t('profitDesc') }}</div>
         <div class="msg">
-            证券相关服务由
+            {{ $t('serviceBy1') }}
             <span class="primary">复星国际证券</span>
-            提供
+            {{ $t('serviceBy2') }}
         </div>
     </div>
 </template>

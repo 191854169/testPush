@@ -7,7 +7,7 @@
             <!-- 星财宝显示自动买入设置按钮 -->
             <div class="flex-c lh-16 f12" @click="openPage">
                 <multi-img name="icon_set" directory="commonOutside" class="icon-set"></multi-img>
-                <div class="h2-white">自动买入设置</div>
+                <div class="h2-white">{{ $t('autoTradeSetting') }}</div>
             </div>
         </div>
 
@@ -135,25 +135,25 @@ export default {
             },
             columns: [
                 {
-                    title: '名称/代码',
+                    title: this.$t('nameAndCode'),
                     key: 'name',
                     fixed: true,
                     slot: true,
                 },
                 {
-                    title: '持有金额',
+                    title: this.$t('holdingAmount'),
                     key: 'assets',
                     sort: true,
                     slot: true,
                 },
                 {
-                    title: '昨日收益',
+                    title: this.$t('yesterdaysEarnings'),
                     key: 'yesterdayProfitLoss',
                     sort: true,
                     slot: true,
                 },
                 {
-                    title: '持有收益',
+                    title: this.$t('holdingProfit'),
                     key: 'profitLoss',
                     sort: true,
                     slot: true,

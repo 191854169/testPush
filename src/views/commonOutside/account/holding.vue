@@ -3,7 +3,7 @@
     <div class="holding-container">
         <van-sticky class="sticky-container" :container="stickyContainer">
             <div class="flex-s mar-b16" @click="showMore = !showMore">
-                <span class="f16 bold">理财持仓 ({{ holdingsNum }})</span>
+                <span class="f16 bold">{{ $t('wealthHolding') }} ({{ holdingsNum }})</span>
                 <multi-img name="icon_arrow_up" directory="commonOutside" class="icon-arrow" :class="{ hide: !showMore }"></multi-img>
             </div>
 
@@ -19,17 +19,17 @@
                 <div class="block" :class="{ USD: item.currency === 'USD' }">
                     <div class="flex-c">
                         <multi-img :name="`icon_${item.currency}`" directory="commonOutside" class="icon-currency"></multi-img>
-                        <span class="f16 bold">{{ CURRENCY_MAP[item.currency] }}理财</span>
+                        <span class="f16 bold">{{ CURRENCY_MAP[item.currency] }}{{ $t('wealthManage') }}</span>
                     </div>
 
                     <!-- 资产净值、昨日收益label -->
                     <div class="flex-s mar-t12 f12 h2-white">
                         <div class="flex-c">
-                            资产净值
+                            {{ $t('assetValue') }}
                             <div class="icon-circle"></div>
                             {{ CURRENCY_MAP[item.currency] }}
                         </div>
-                        <div>昨日收益({{ formatDate(item.yesterdayPLDate) }})</div>
+                        <div>{{ $t('yesterdayProfit') }}({{ formatDate(item.yesterdayPLDate) }})</div>
                     </div>
 
                     <!-- 资产净值 -->
@@ -68,7 +68,7 @@
                     >
                         <!-- 持有收益 -->
                         <div class="flex1">
-                            <div class="f12 h2-white mar-b4">持有收益</div>
+                            <div class="f12 h2-white mar-b4">{{ $t('holdingProfit') }}</div>
                             <div
                                 class="f14 lh-20 c-main"
                                 v-riseFall="{
@@ -82,7 +82,7 @@
 
                         <!-- 持有收益率 -->
                         <div class="align-c flex1">
-                            <div class="f12 h2-white mar-b4">持有收益率</div>
+                            <div class="f12 h2-white mar-b4">{{ $t('holdingProfitRate') }}</div>
                             <div
                                 class="f14 lh-20 c-main"
                                 v-riseFall="{
@@ -95,7 +95,7 @@
 
                         <!-- 累计收益 -->
                         <div class="align-r flex1">
-                            <div class="f12 h2-white mar-b4">累计收益</div>
+                            <div class="f12 h2-white mar-b4">{{ $t('cumulativeEarnings') }}</div>
                             <div
                                 class="f14 lh-20 c-main"
                                 v-riseFall="{
@@ -117,7 +117,7 @@
                     >
                         <!-- 买入待确认 -->
                         <div class="flex-c" v-if="item.buyOnWayAmount">
-                            <div class="c-gray mar-r8">买入待确认</div>
+                            <div class="c-gray mar-r8">{{ $t('buyWait') }}</div>
                             <div
                                 class="c-main"
                                 v-riseFall="{
@@ -133,7 +133,7 @@
 
                         <!-- 卖出将到账 -->
                         <div class="flex-c" v-if="item.sellOnWayAmount">
-                            <div class="c-gray mar-r8">卖出将到账</div>
+                            <div class="c-gray mar-r8">{{ $t('sellWait') }}</div>
                             <div
                                 class="c-main"
                                 v-riseFall="{

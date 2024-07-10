@@ -3,7 +3,7 @@
     <div class="common-card">
         <div class="common-head flex-s">
             <div class="flex-c" @click="openPage">
-                <div class="f16 c-main bold mar-r6">风险水平</div>
+                <div class="f16 c-main bold mar-r6">{{ $t('riskLevel') }}</div>
                 <!-- <multi-img name="icon_about" directory="commonOutside" class="icon-about"></multi-img> -->
             </div>
             <!-- <div class="f12 c-gray">{{ CURRENCY_MAP[currency] }}</div> -->
@@ -12,7 +12,7 @@
         <div class="common-content">
             <!-- 风险状态 -->
             <div class="item">
-                <div>风险状态</div>
+                <div>{{ $t('riskStatus') }}</div>
                 <div :style="{ color: showAsset ? RISK_COLOR[assetsSummary.riskStatus] : '#2f2f2f' }">
                     {{ showAsset ? RISK_LEVEL[assetsSummary.riskStatus] || '--' : '****' }}
                 </div>

@@ -4,18 +4,18 @@
         <div>
             <div class="btn" @click="showDialog = true">
                 <multi-img name="icon_service" directory="commonOutside" class="icon"></multi-img>
-                <div class="f14">联系客服</div>
+                <div class="f14">{{ $t('concatUs') }}</div>
             </div>
         </div>
-        <van-dialog v-model="showDialog" width="2.8rem" title="联系我们" confirm-button-text="已了解" @confirm="onConfirm">
+        <van-dialog v-model="showDialog" width="2.8rem" :title="$t('callMe')" :confirm-button-text="$t('iKnow')" @confirm="onConfirm">
             <div class="block">
                 <div class="row">
-                    <span class="label">内地客服：</span>
+                    <span class="label">{{ $t('mainlandService') }}：</span>
                     <a href="tel:400 812 0922">400 812 0922</a>
                 </div>
 
                 <div class="row mar-t12">
-                    <span class="label">香港客服：</span>
+                    <span class="label">{{ $t('hkService') }}：</span>
                     <a href="tel:+852 2979 6988">+852 2979 6988</a>
                 </div>
             </div>
