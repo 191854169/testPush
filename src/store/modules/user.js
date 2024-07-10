@@ -46,7 +46,7 @@ const state = () => ({
     tzymAccountInfo: undefined, // 投资移居专户信息； undefined - 未获取接口 null - 表示未开通 {} - 表示已开通
 
     // 资产相关字段
-    currency: localStorage.getItem('currency') || 'HKD', // 资产净值默认为港币
+    currency: localStorage.getItem('currency') || 'USD', // 资产净值默认为美元
     showAsset: JSON.parse(localStorage.getItem('showAsset') || 'true'), // 显示与隐藏资产
 
     // 虚拟资产ETF IPO问卷评估状态

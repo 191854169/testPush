@@ -167,6 +167,11 @@ import { CURRENCY_MAP, WEALTH_MAP } from '../config/common.js'
 import { mapState } from 'vuex'
 import { getHolding } from '@/apis/portfolio/index.js'
 
+const holdingsGroupSortMap = {
+    'Wealth-USD': 10,
+    'Wealth-HKD': 9,
+}
+
 export default {
     components: {
         StarList,
@@ -210,6 +215,9 @@ export default {
                         return item
                     }
                 })
+
+                // 美元优先显示
+                this.holdingsGroup.sort((a, b) => (holdingsGroupSortMap[b.marketGroup] || 0) - (holdingsGroupSortMap[a.marketGroup] || 0))
             } catch (err) {
                 err?.error?.message && this.$toast(err?.error?.message)
             } finally {

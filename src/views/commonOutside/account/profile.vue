@@ -4,7 +4,7 @@
         <div class="head flex-s">
             <!-- 保证金账户 -->
             <div class="flex-c">
-                <span class="mar-r12">{{ ACCOUNT_MAP[accts.type] }}</span>
+                <span class="mar-r12">{{ $t('wealthAccount') }}</span>
                 <span class="mar-r6">{{ showAsset ? accts.subAcctId : maskSubAccountId }}</span>
                 <multi-img
                     name="icon_copy"
@@ -17,7 +17,7 @@
 
             <!-- 查看明细 -->
             <div class="flex-c f-12 c-gray" @click="goDetail">
-                <span>查看明细</span>
+                <span>{{ $t('seeDetail') }}</span>
                 <multi-img name="icon-right-arrow" directory="common" class="icon-right"></multi-img>
             </div>
         </div>
@@ -40,7 +40,7 @@
                     <template #reference>
                         <div class="flex-c">
                             <div class="flex-c f12 h2-white">
-                                资产净值
+                                {{ $t('assetValue') }}
                                 <div class="icon-circle"></div>
                                 {{ CURRENCY_MAP[currency] }}
                             </div>
@@ -59,7 +59,7 @@
 
             <!-- 昨日收益 label -->
             <div class="flex-c align-r f12 h2-white" @click="openPage">
-                <span>昨日收益({{ formatDate(assetsSummary.yesterdayPLDate) }})</span>
+                <span>{{ $t('yesterdayProfit') }}({{ formatDate(assetsSummary.yesterdayPLDate) }})</span>
                 <multi-img name="icon_about" directory="commonOutside" class="icon-about"></multi-img>
             </div>
         </div>
@@ -94,7 +94,7 @@
         <div class="flex-s mar-t16">
             <!-- 现金 -->
             <div class="flex1">
-                <div class="f12 h2-white mar-b4">现金</div>
+                <div class="f12 h2-white mar-b4">{{ $t('cash') }}</div>
                 <div
                     class="f14 lh-20 c-main"
                     v-riseFall="{
@@ -110,7 +110,7 @@
 
             <!-- 最大购买力 -->
             <div class="align-c flex1">
-                <div class="f12 h2-white mar-b4">最大购买力</div>
+                <!-- <div class="f12 h2-white mar-b4">最大购买力</div>
                 <div
                     class="f14 lh-20 c-main"
                     v-riseFall="{
@@ -121,12 +121,12 @@
                         riseFall: false,
                         rate: false,
                     }"
-                ></div>
+                ></div> -->
             </div>
 
             <!-- 风险状态 -->
             <div class="align-r flex1">
-                <div class="f12 h2-white mar-b4">风险状态</div>
+                <div class="f12 h2-white mar-b4">{{ $t('riskStatus') }}</div>
                 <div class="f14 lh-20" :style="{ color: showAsset ? RISK_COLOR[assetsSummary.riskStatus] : '#666' }">
                     {{ showAsset ? RISK_LEVEL[assetsSummary.riskStatus] || '--' : '****' }}
                 </div>
@@ -138,9 +138,9 @@
             <div class="flex-c">
                 <multi-img name="icon_volume" directory="commonOutside" class="icon-volume"></multi-img>
                 <div class="f12 lh-16 h2-white">
-                    您有
+                    {{ $t('orderingTips1') }}
                     <span :class="{ primary: showAsset }">{{ showAsset ? orderNum : '*' }}</span>
-                    笔交易订单进行中
+                    {{ $t('orderingTips2') }}
                 </div>
             </div>
             <multi-img name="icon-right-arrow" directory="common" class="icon-right"></multi-img>

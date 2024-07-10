@@ -1,32 +1,33 @@
 <template>
     <div class="page">
         <!-- 资产总览 -->
-        <Profile :assetsSummary="assetsSummary" />
+        <div>
+            <Profile :assetsSummary="assetsSummary" />
 
-        <!-- 资产 -->
-        <Asset :assetsBreakdown="assetsBreakdown" :filterDataList="filterDataList" />
+            <!-- 资产 -->
+            <Asset :assetsBreakdown="assetsBreakdown" :filterDataList="filterDataList" />
 
-        <!-- 购买力 -->
-        <Purchase :assetsSummary="assetsSummary" />
+            <!-- 购买力 -->
+            <!-- <Purchase :assetsSummary="assetsSummary" /> -->
 
-        <!-- 融资 -->
-        <Finance :assetsSummary="assetsSummary" />
+            <!-- 融资 -->
+            <!-- <Finance :assetsSummary="assetsSummary" /> -->
 
-        <!-- 风险水平 -->
-        <Risk :assetsSummary="assetsSummary" />
-
+            <!-- 风险水平 -->
+            <Risk :assetsSummary="assetsSummary" />
+        </div>
         <!-- 联系客服 -->
-        <Contact />
+        <TelContact />
     </div>
 </template>
 
 <script>
+import TelContact from '../components/TelContact.vue'
 import Profile from './profile.vue'
 import Asset from './asset.vue'
 import Purchase from './purchase.vue'
 import Finance from './finance.vue'
 import Risk from './risk.vue'
-import Contact from '../components/contact.vue'
 import { getAssetSummary } from '@/apis/portfolio/index.js'
 import NP from 'number-precision'
 
@@ -37,7 +38,7 @@ export default {
         Purchase,
         Finance,
         Risk,
-        Contact,
+        TelContact,
     },
     data() {
         return {
@@ -109,6 +110,9 @@ export default {
 
 <style lang="less">
 .page {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     height: 100vh;
     padding: 0 12px;
     overflow-y: auto;

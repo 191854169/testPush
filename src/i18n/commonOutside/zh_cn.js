@@ -145,4 +145,13 @@ export default {
     cashBoxSlogan: '全面提升账户内闲置资金的使用率',
     updateFundAccount: '升级理财账户',
     updateManagerAssets: '升级后，享有更多权限',
+    wealthAccount: '理财账户',
+    accountProfile: '账户资料',
+    myStatement: '我的结单',
+    seeDetail: '查看明细',
+    assetValue: '资产净值',
+    yesterdayProfit: '昨日收益',
+    riskStatus: '风险状态',
+    orderingTips1: '您有',
+    orderingTips2: '交易订单进行中',
 }

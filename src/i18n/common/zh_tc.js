@@ -107,7 +107,7 @@ export default {
     privateFund: '私募',
     bond: '債券',
     alterInvestment: '票據',
-    cashBox: '星財寶',
+    cashBox: '現金寶',
 
     ji: '及',
     auto: '自動',

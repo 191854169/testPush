@@ -3,7 +3,7 @@
         <!-- 标题 -->
         <div class="flex-s pad-t16 pad-b8">
             <!-- 基金类型 -->
-            <div class="f16 font-bold">星财宝</div>
+            <div class="f16 font-bold">{{ $t('cashBox') }}</div>
             <!-- 星财宝显示自动买入设置按钮 -->
             <div class="flex-c lh-16 f12" @click="openPage">
                 <multi-img name="icon_set" directory="commonOutside" class="icon-set"></multi-img>

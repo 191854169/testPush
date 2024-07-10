@@ -13,19 +13,19 @@
         </div>
 
         <!-- 联系客服 -->
-        <Contact />
+        <TelContact />
     </div>
 </template>
 
 <script>
-import Contact from './components/contact.vue'
+import TelContact from './components/TelContact.vue'
 import { mapGetters, mapState } from 'vuex'
 import { getLangType } from '@/utils/tools'
 import pathnames from '@/config/H5Pathname.js'
 
 export default {
     components: {
-        Contact,
+        TelContact,
     },
     data() {
         return {
@@ -105,6 +105,19 @@ export default {
                             name: 'icon_derivative',
                             link: '/pages/derivative.html#/',
                         },
+
+                        {
+                            key: 'userInformation',
+                            label: this.$t('accountProfile'),
+                            name: 'icon_trade_all_accountData',
+                            link: '/pages/userInformation.html#/',
+                        },
+                        {
+                            key: 'myStatement',
+                            label: this.$t('myStatement'),
+                            name: 'icon_trade_all_funds',
+                            link: '/pages/tradeStatement.html#/', // todo 待开发
+                        },
                     ],
                 },
                 {
@@ -131,7 +144,8 @@ export default {
             data.map((service, index) => {
                 // 已开通衍生品才显示按钮
                 if (index === 1 && this.accts.openDerivative === 1) {
-                    service.list.pop()
+                    const derivativeIndex = service.list.findIndex(item => item.key === 'derivative')
+                    service.list.splice(derivativeIndex, 1)
                 }
             })
             return data

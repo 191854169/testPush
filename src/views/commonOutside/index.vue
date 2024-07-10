@@ -1,6 +1,6 @@
 <template>
     <div class="ry-index" ref="stickyContainer" :class="{ clip: tradeLoginDialog && tradeLoginDialog.show }">
-        <van-sticky class="sticky-container">
+        <!-- <van-sticky class="sticky-container">
             <div class="nav-wrapper">
                 <div class="nav-left">
                     <span
@@ -17,8 +17,7 @@
                     <multi-img name="kefu" class="icon" directory="commonOutside" @click="toCustomerServicePage"></multi-img>
                 </div>
             </div>
-        </van-sticky>
-        <div class="zhanwei-container"></div>
+        </van-sticky> -->
         <div class="content-wrapper">
             <Account @onChange="changeActive" @getAssetSummarySuccess="initTradePwd" v-if="active === '1'"></Account>
             <ManageMoney v-if="active === '2'"></ManageMoney>
@@ -229,11 +228,6 @@ export default {
     // overflow-y: scroll;
     background: #f6f6f6;
 
-    &.clip {
-        height: calc(100% - 46px);
-        overflow: hidden;
-    }
-
     .nav-wrapper {
         position: absolute;
         // fill: linear-gradient(182deg, #FFF0E6 1.66%, rgba(255, 237, 225, 0.00) 65.39%);
@@ -277,7 +271,7 @@ export default {
 
     .content-wrapper {
         height: calc(100% - 52px);
-        margin-top: 8px;
+        padding-top: 8px;
     }
 
     .tab-main {
