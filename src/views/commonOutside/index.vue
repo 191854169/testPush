@@ -19,9 +19,9 @@
             </div>
         </van-sticky> -->
         <div class="content-wrapper">
-            <Account @onChange="changeActive" @getAssetSummarySuccess="initTradePwd" v-if="active === '1'"></Account>
-            <ManageMoney v-if="active === '2'"></ManageMoney>
-            <Mine v-if="active === '3'"></Mine>
+            <Account @onChange="changeActive" @getAssetSummarySuccess="initTradePwd" v-if="active === 'account'"></Account>
+            <ManageMoney v-if="active === 'wealth'"></ManageMoney>
+            <Mine v-if="active === 'mine'"></Mine>
         </div>
 
         <!-- 退出登录 -->
@@ -36,7 +36,7 @@ import { TRADE_PWD_STATUS, FUND_ACCOUNT_STATUS } from '@/utils/user'
 import TradeLogin from '@/config/globalProterties/tradeLogin'
 import { getPageVisibleSupportProperty, customerService } from '@/utils/utils'
 import { getLangType } from '@/utils/tools'
-import { FROM_RUI_YIN_STR, isInRyH5 } from '@/utils'
+// import { FROM_RUI_YIN_STR, isInRyH5 } from '@/utils'
 import Account from './account/index.vue'
 import ManageMoney from './ManageMoney.vue'
 import Mine from './mine/index.vue'
@@ -57,10 +57,8 @@ export default {
         return {
             tradeLoginDialog: null,
             isUnsetTradePwd: true, // 未设置交易密码
-            openFundTrade: false, // 是否开通理财产品标记
-            openDepositoryTreasure: false, // 是否开通定存宝
             propertyData: {},
-            active: '1',
+            active: 'account',
             tabs: [
                 { key: '1', name: '资产' },
                 { key: '2', name: '理财' },
@@ -70,22 +68,24 @@ export default {
         }
     },
     computed: {
-        ...mapState('user', ['accts']),
+        ...mapState('user', ['accts', 'userInfo']),
         ...mapGetters({ getSubAccountId: 'user/getSubAccountId' }),
     },
-    created() {
-        this.init()
+    watch: {
+        userInfo: {
+            handler(val) {
+                if (val) {
+                    this.init()
+                }
+            },
+            immediate: true,
+        },
     },
     mounted() {
-        console.log('this.$root:', this.$root)
-        // if (!this.$root.isLogin) {
-        //     this.$root.login()
-        // }
-
-        this.active = sessionStorage.getItem(ACTIVE_TAB_STR) || '1'
+        this.active = 'account'
         const queryActiveTab = this.$route.query[ACTIVE_TAB_STR]
         if (queryActiveTab) {
-            this.$router.replace({ path: '/', query: {} })
+            // this.$router.replace({ path: '/', query: {} })
             this.active = queryActiveTab
             sessionStorage.setItem(ACTIVE_TAB_STR, queryActiveTab)
         }
@@ -102,17 +102,21 @@ export default {
     },
     methods: {
         async init() {
-            try {
-                // 睿银站外标志位
-                // const isFromCommonOutsideFlag = isInRyH5()
-                // if (!isFromCommonOutsideFlag) sessionStorage.setItem(FROM_RUI_YIN_STR, 1)
-                await this.getUserDetail()
-            } catch (e) {
-                console.log('commonOutside-index', e)
+            this.isUnsetTradePwd = this.userInfo?.clientInfo?.pwdStatus === TRADE_PWD_STATUS.PWD_UNSET
+            if (this.isUnsetTradePwd) {
+                this.goSetPasswordPage()
             }
         },
 
         initTradePwd() {
+            // 若无用户信息则延迟3秒处理
+            if (!this.userInfo) {
+                setTimeout(() => {
+                    this.initTradePwd()
+                }, 3000)
+                return
+            }
+
             if (!this.isUnsetTradePwd) {
                 this.validateIsFirstTime()
             }
@@ -138,23 +142,6 @@ export default {
                 this.tradeLoginDialog.show = true
                 // 在资产页未输入交易密码时页面所有资产数据应该隐藏
                 this.$store.commit('user/updateShowAsset', false)
-            }
-        },
-
-        // 获取用户信息
-        async getUserDetail() {
-            try {
-                const res = await this.$store.dispatch('user/getUserInfo', false)
-                console.warn('userInfo:', res)
-                this.isUnsetTradePwd = res?.clientInfo?.pwdStatus === TRADE_PWD_STATUS.PWD_UNSET
-                this.openFundTrade = res?.clientInfo?.accts?.[0]?.openFundTrade === FUND_ACCOUNT_STATUS.FUND_ACCOUNT_OPENED
-                this.openDepositoryTreasure = !!res?.clientInfo?.accts?.[0]?.ftdInfo
-                console.log('*****this.openDepositoryTreasure*****', this.openDepositoryTreasure)
-                if (this.isUnsetTradePwd) {
-                    this.goSetPasswordPage()
-                }
-            } catch (e) {
-                console.log('*********user/getUserInfo**********===>error:', e)
             }
         },
         // 去设置交易密码页

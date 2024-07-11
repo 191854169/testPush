@@ -77,4 +77,4 @@ export const flowType2Icon = {
     23 /* 迎新宝 */: 'xingcaibaozh',
 }
 
-export const ACTIVE_TAB_STR = 'activeTab'
+export const ACTIVE_TAB_STR = 'module'

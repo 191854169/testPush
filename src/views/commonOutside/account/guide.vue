@@ -1,7 +1,7 @@
 <template>
     <div class="guide-container">
         <!-- 是否入金过 0-未标记 1-已标记 -->
-        <div class="guide-card flex-s" v-if="user.cashInStatus === 0">
+        <div class="guide-card flex-s" v-if="accts.cashInStatus === 0">
             <!-- 即刻开始您的财富乘长之旅 -->
             <div class="flex-c">
                 <multi-img name="icon_welcome" directory="commonOutside" class="icon"></multi-img>
@@ -13,7 +13,7 @@
         </div>
 
         <!-- 引导只显示一个，优先级：存入资金 > 理财引导; 是否认购过理财产品 0-未购买 1-购买过 -->
-        <div class="guide-card flex-s" v-else-if="user.wealthProductSubStatus === 0">
+        <div class="guide-card flex-s" v-else-if="accts.wealthProductSubStatus === 0">
             <!-- 精选全球理财产品 助您省心投资 -->
             <div class="flex-c">
                 <multi-img name="icon_wealth" directory="commonOutside" class="icon"></multi-img>
@@ -27,14 +27,12 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import { getLangType } from '@/utils/tools'
 
 export default {
-    props: {
-        user: {
-            type: Object,
-            default: () => {},
-        },
+    computed: {
+        ...mapState('user', ['accts']),
     },
     methods: {
         goDeposit() {

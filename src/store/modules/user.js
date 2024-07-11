@@ -26,6 +26,9 @@ const SUB = 'sub'
 const userInfo = JSON.parse(localStorage.getItem(USERINFO_KEY) || '{}')
 const lastLogin = JSON.parse(localStorage.getItem(LASTLOGIN_KEY) || '{}')
 
+let getUserInfoPromise = null // promise存在说明正在请求获取用户信息
+let hasGotUserInfo = false // 是否请求过用户信息
+
 const state = () => ({
     session: localStorage.getItem(SESSION) || '',
     session2: localStorage.getItem(SESSION_2) || '',
@@ -201,10 +204,28 @@ const actions = {
      * @param {*} toLogin 默认是Boolean值，支持传入对象{toLogin: Boolean, isRefresh: Boolean}
      * @returns { Object | false | undefined } Object说明登录态拿到了信息、false代表未登录、undefined说明不在App内部
      */
-    async getUserInfo({ dispatch, commit }, toLogin = true) {
-        const isToLogin = typeof toLogin === 'boolean' ? toLogin : toLogin.toLogin
-        const isRefresh = typeof toLogin === 'object' ? toLogin.isRefresh : false
-        return new Promise((resolve, reject) => {
+    async getUserInfo(
+        { dispatch, commit, state },
+        params = {
+            toLogin: true,
+            isRefresh: false,
+        }
+    ) {
+        const isToLogin = typeof params === 'boolean' ? params : params.toLogin
+        const isRefresh = typeof params === 'object' ? params.isRefresh : false
+
+        if (!isRefresh) {
+            if (hasGotUserInfo) {
+                return state.userInfo
+            }
+
+            if (getUserInfoPromise) {
+                return getUserInfoPromise
+            }
+        }
+        hasGotUserInfo = false
+
+        getUserInfoPromise = new Promise((resolve, reject) => {
             if (JSBridge) {
                 JSBridge.getUserinfo({ refresh: isRefresh })
                     .then(res => {
@@ -235,13 +256,14 @@ const actions = {
                         if (res.clientInfo?.accts[0]?.tzymInfo) {
                             commit('updateTzymAccountInfo', res.clientInfo?.accts[0]?.tzymInfo)
                         }
-
+                        hasGotUserInfo = true
                         dispatch('setUserInfo', res)
                         resolve(res)
                     })
                     .catch(() => {
                         if (isToLogin) {
                             dispatch('login').then(res => {
+                                hasGotUserInfo = true
                                 resolve(res)
                             })
                         } else {
@@ -251,6 +273,9 @@ const actions = {
                                 localStorage.removeItem(k)
                             })
                         }
+                    })
+                    .finally(() => {
+                        getUserInfoPromise = null
                     })
             } else {
                 // 3站外、4中移动、5同花顺国际版
@@ -267,41 +292,20 @@ const actions = {
                             commit('updateStarSpecialAccountInfo', res.clientInfo?.accts[0]?.xjbInfo)
                             commit('updateInvestmentAccountInfo', res.clientInfo?.accts[0]?.tgInfo)
                             commit('updateTzymAccountInfo', res.clientInfo?.accts[0]?.tzymInfo)
+                            hasGotUserInfo = true
                             resolve(res)
                         })
                         .catch(() => {
                             dispatch('clearUserInfo')
                             reject(false)
                         })
-                } else if (env === 2) {
-                    const subAccountId = getQueryString('sub', true) || localStorage.getItem('sub')
-                    getSubAcctDetail({ params: { subAccountId } })
-                        .then(data => {
-                            // eslint-disable-next-line prefer-const
-                            let { userInfo = {}, clientInfo = {} } = data.result || {}
-                            commit('updateWTuserName', clientInfo?.chineseName || '')
-                            commit('updateSubAccountId', clientInfo.subAcctId || '')
-                            commit('updateHlId', userInfo.hlId || '')
-                            commit('updateAccts', clientInfo || {})
-                            commit('updateSession', {
-                                uin: userInfo.uin ? userInfo.uin + '' : '',
-                            })
-                            userInfo = { ...userInfo, clientStatus: 31 /* 证券账户已经开通 */, clientInfo: { accts: [clientInfo] } }
-                            dispatch('setUserInfo', userInfo)
-                            commit('updateFtdAccountInfo', clientInfo?.ftdInfo)
-                            commit('updateStarSpecialAccountInfo', clientInfo?.xjbInfo)
-                            commit('updateInvestmentAccountInfo', clientInfo?.tgInfo)
-                            commit('updateTzymAccountInfo', clientInfo?.tzymInfo)
-                            resolve(data.result)
+                        .finally(() => {
+                            getUserInfoPromise = null
                         })
-                        .catch(() => {
-                            reject(false)
-                        })
-                } else {
-                    resolve()
                 }
             }
         })
+        return getUserInfoPromise
     },
 
     // 清空用户数据

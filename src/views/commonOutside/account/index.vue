@@ -10,7 +10,7 @@
         <Service />
 
         <!-- 已开通理财账户 持仓 -->
-        <Holding v-if="user.openFundTrade === 1" />
+        <Holding v-if="accts.openFundTrade === 1" />
 
         <!-- 未开通理财账户 -->
         <OpenFundAccount v-else />
@@ -21,6 +21,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import Profile from './profile.vue'
 import Guide from './guide.vue'
 import Service from './service.vue'
@@ -38,33 +39,16 @@ export default {
         OpenFundAccount,
     },
     data() {
-        return {
-            user: {
-                cashInStatus: '', // 是否入金过 0-未标记 1-已标记
-                openFundTrade: '', // 是否开通理财产品 0-未开通 1-已开通
-                wealthProductSubStatus: '', // 是否认购过理财产品 0-未购买 1-购买过
-            },
-        }
+        return {}
+    },
+    computed: {
+        ...mapState('user', ['accts']),
     },
     methods: {
-        // 获取用户信息
-        async getUserDetail() {
-            try {
-                const res = await this.$store.dispatch('user/getUserInfo', false)
-                const userInfo = res?.clientInfo?.accts?.[0] || {}
-                this.user = { ...userInfo }
-            } catch (err) {
-                err?.error?.data?.tips && this.$toast(err?.error?.data?.tips)
-            }
-        },
-
         // 切换至理财tab
         changeTab(val) {
             this.$emit('onChange', val)
         },
-    },
-    created() {
-        this.getUserDetail()
     },
 }
 </script>

@@ -576,13 +576,9 @@ export default {
 
         async judgeFundAccountUpdateStatus() {
             try {
-                let openWealthMarketAction
-                if (getRunEnv() !== 2) {
-                    const { result = {} } = await getUserDetail()
-                    openWealthMarketAction = result?.clientInfo?.accts?.[0]?.openWealthMarketAction
-                    this.openFundTrade = this.openFundTrade =
-                        result?.clientInfo?.accts?.[0]?.openFundTrade === FUND_ACCOUNT_STATUS.FUND_ACCOUNT_OPENED
-                }
+                const result = await this.$store.dispatch('user/getUserInfo')
+                const openWealthMarketAction = result?.clientInfo?.accts?.[0]?.openWealthMarketAction
+                this.openFundTrade = this.openFundTrade = result?.clientInfo?.accts?.[0]?.openFundTrade === FUND_ACCOUNT_STATUS.FUND_ACCOUNT_OPENED
                 // 开通理财产品操作类型： 1：需开通； 2：升级 3：已开通
                 const NEED_TO_UPDATE = 2
                 this.isToUpdateFundAccount = openWealthMarketAction === NEED_TO_UPDATE
