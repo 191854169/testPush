@@ -93,7 +93,7 @@ export default {
         this.pageShow()
 
         // 监听浏览器回退
-        this.handleListener()
+        // this.handleListener()
     },
     beforeDestroy() {
         // 移除浏览器回退监听
@@ -213,7 +213,7 @@ export default {
     // height: 100vh;
     // overflow: hidden;
     // overflow-y: scroll;
-    background: #f6f6f6;
+    background: @bgGreyColor;
 
     .nav-wrapper {
         position: absolute;

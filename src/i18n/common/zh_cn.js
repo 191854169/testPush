@@ -239,4 +239,8 @@ export default {
     seeOrderDetail: '查看订单详情',
     freezeTips: '账户已冻结，无法进行交易，请联系客服',
     onlineService: '在线客服',
+    // 租户相关信息
+    tenant: {
+        company: '陆浦香港',
+    },
 }

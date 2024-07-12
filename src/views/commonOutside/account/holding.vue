@@ -217,7 +217,7 @@ export default {
                 })
 
                 // 美元优先显示
-                this.holdingsGroup.sort((a, b) => (holdingsGroupSortMap[b.marketGroup] || 0) - (holdingsGroupSortMap[a.marketGroup] || 0))
+                // this.holdingsGroup.sort((a, b) => (holdingsGroupSortMap[b.marketGroup] || 0) - (holdingsGroupSortMap[a.marketGroup] || 0))
             } catch (err) {
                 err?.error?.message && this.$toast(err?.error?.message)
             } finally {
@@ -305,7 +305,7 @@ export default {
 
     :deep(.van-tabs) {
         .van-tabs__nav {
-            background: #f6f6f6;
+            background: @bgGreyColor;
         }
 
         .van-tabs__line {
@@ -326,7 +326,7 @@ export default {
             &.van-tab--active {
                 color: #2f2f2f;
                 font-weight: bold;
-                background: rgba(255, 105, 7, 0.1);
+                background: rgba(218, 184, 102, 0.2);
             }
         }
     }

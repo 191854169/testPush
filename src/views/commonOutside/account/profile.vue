@@ -392,7 +392,7 @@ export default {
         border-radius: 4px;
 
         .primary {
-            color: #ff6907;
+            color: @theme;
         }
     }
 
@@ -418,7 +418,7 @@ export default {
         #box_shadow_2();
 
         &.selected {
-            color: #ff6307;
+            color: @theme;
         }
     }
 }

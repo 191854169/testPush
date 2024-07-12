@@ -4,7 +4,7 @@
         <div class="btn" @click="openPage">{{ $t('profitDesc') }}</div>
         <div class="msg">
             {{ $t('serviceBy1') }}
-            <span class="primary">复星国际证券</span>
+            <span class="primary">{{ $t('tenant.company') }}</span>
             {{ $t('serviceBy2') }}
         </div>
     </div>
@@ -44,7 +44,7 @@ export default {
         font-size: 12px;
 
         span {
-            color: #ff6907;
+            color: @theme;
         }
     }
 }

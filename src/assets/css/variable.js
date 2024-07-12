@@ -2,9 +2,9 @@ const theme = 'white' // TODO: 主题字段修改
 
 const variable = {
     // 主题色
-    theme: '#FF6907',
+    theme: '#DAB866',
     // 涨跌色 - 橙涨绿跌
-    riseColor1: '#FF6907',
+    riseColor1: '#FF3C3C',
     fallColor1: '#29C277',
     flatColor1: '#9C9C9C',
     // 涨跌色 - 绿涨橙跌
