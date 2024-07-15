@@ -29,7 +29,7 @@ export default {
     alterInvestment: '票据',
     starTreasureSpecial: '星财宝专户',
     fundRelationCompanyTip: '理财相关服务由',
-    fundRelationCompany: '复星国际证券',
+    fundRelationCompany: '陆浦香港',
     provide: '提供',
     // 持仓首页
     accountHoldTitle: '账户持仓',

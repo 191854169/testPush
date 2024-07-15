@@ -1,26 +1,8 @@
 <template>
     <div class="ry-index" ref="stickyContainer" :class="{ clip: tradeLoginDialog && tradeLoginDialog.show }">
-        <!-- <van-sticky class="sticky-container">
-            <div class="nav-wrapper">
-                <div class="nav-left">
-                    <span
-                        v-for="item in tabs"
-                        class="tabs-item"
-                        :class="{ 'is-active': active === item.key }"
-                        :key="item.key"
-                        @click="changeTab(item)"
-                    >
-                        {{ item.name }}
-                    </span>
-                </div>
-                <div class="nav-right">
-                    <multi-img name="kefu" class="icon" directory="commonOutside" @click="toCustomerServicePage"></multi-img>
-                </div>
-            </div>
-        </van-sticky> -->
         <div class="content-wrapper">
             <Account @onChange="changeActive" @getAssetSummarySuccess="initTradePwd" v-if="active === 'account'"></Account>
-            <ManageMoney v-if="active === 'wealth'"></ManageMoney>
+            <Wealth v-if="active === 'wealth'"></Wealth>
             <Mine v-if="active === 'mine'"></Mine>
         </div>
 
@@ -38,7 +20,7 @@ import { getPageVisibleSupportProperty, customerService } from '@/utils/utils'
 import { getLangType } from '@/utils/tools'
 // import { FROM_RUI_YIN_STR, isInRyH5 } from '@/utils'
 import Account from './account/index.vue'
-import ManageMoney from './ManageMoney.vue'
+import Wealth from './wealth/index.vue'
 import Mine from './mine/index.vue'
 import { ACTIVE_TAB_STR } from './config/common'
 import Logout from './mine/logout'
@@ -49,7 +31,7 @@ export default {
     components: {
         [Sticky.name]: Sticky,
         Account,
-        ManageMoney,
+        Wealth,
         Mine,
         Logout,
     },
@@ -58,7 +40,7 @@ export default {
             tradeLoginDialog: null,
             isUnsetTradePwd: true, // 未设置交易密码
             propertyData: {},
-            active: 'account',
+            active: '',
             tabs: [
                 { key: '1', name: '资产' },
                 { key: '2', name: '理财' },
@@ -328,25 +310,6 @@ export default {
                 color: @fontBlackColor;
                 font-size: 12px;
                 line-height: 16px;
-            }
-        }
-    }
-
-    :deep(.van-swipe__indicators) {
-        .van-swipe__indicator {
-            width: 8px;
-            height: 2px;
-            background: #9c9c9c;
-            border-radius: 0;
-            opacity: 0.4;
-
-            &:not(:last-child) {
-                margin-right: 4px;
-            }
-
-            &.van-swipe__indicator--active {
-                background: #ff6907;
-                opacity: 1;
             }
         }
     }

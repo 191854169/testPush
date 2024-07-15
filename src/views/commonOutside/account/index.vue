@@ -4,11 +4,10 @@
         <Profile @success="$emit('getAssetSummarySuccess')" />
 
         <!-- 引导栏 -->
-        <Guide :user="user" @onChange="changeTab" />
+        <Guide @onChange="changeTab" />
 
         <!-- 功能栏 -->
         <Service />
-
         <!-- 已开通理财账户 持仓 -->
         <Holding v-if="accts.openFundTrade === 1" />
 

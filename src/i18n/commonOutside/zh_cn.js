@@ -101,6 +101,7 @@ export default {
     wfIncome: '日均万元收益',
     xxlc: '星选理财',
     mr: '买入',
+    fundText16: '基金榜单',
     fundText19: '研究报告',
     fundText20: '暂无研报',
     fundText21: '高收益风险比榜',
@@ -114,7 +115,7 @@ export default {
     fundText29: '闲钱管家，自动申赎',
     importantInfo: '重要信息及声明',
     fundRelationCompanyTip: '理财相关服务由',
-    fundRelationCompany: '复星国际证券',
+    fundRelationCompany: '陆浦香港',
     provide: '提供',
     stockType: '股票型',
     bondType: '债券型',
@@ -176,4 +177,6 @@ export default {
     businessType: '业务类型',
     remark: '备注',
     flow: '流水',
+    aggressiveInvest: '进取投资',
+    publicFundFullName: '公募基金',
 }

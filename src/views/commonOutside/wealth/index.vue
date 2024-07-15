@@ -1,56 +1,37 @@
-// 基金首页
 <template>
-    <div ref="fund" class="ry-manage-money-wrapper">
+    <div ref="fund" class="wealth-wrapper">
         <div class="bs-wrapper">
-            <!-- 星选理财(货币基金精选) -->
-            <div class="card cash-fund reset-mgt">
-                <multi-img name="xingxuan_bg" class="xingxuan_bg" directory="commonOutside"></multi-img>
-
-                <template v-if="isInRyH5()">
-                    <h2>{{ $t('xxlc') }}</h2>
-                    <div class="cash-fund-list">
-                        <div
-                            class="cash-fund-list-item"
-                            v-for="item in loading ? getTempList(2) : cashFundList"
-                            :key="item.symbol"
-                            @click="gotoFundDetail(item, 'public')"
-                        >
+            <!-- 星选理财 -->
+            <div class="card hot-fund" v-if="hotFundList.length">
+                <van-swipe :autoplay="0" @change="onSwipeChange">
+                    <van-swipe-item v-for="item in loading ? getTempList(1) : hotFundList" :key="item.symbol" @click="gotoFundDetail(item)">
+                        <div class="item">
                             <van-skeleton row="4" :loading="loading">
-                                <div class="cash-fund-list-item-header">
+                                <div class="item__type">
+                                    <multi-img name="xingxuan_bg" class="xingxuan-bg" directory="commonOutside"></multi-img>
+                                    <h2>{{ $t('xxlc') }}</h2>
+                                </div>
+
+                                <div class="item__header">
                                     <h3 class="title">
                                         <span class="line-elipsis">{{ item.name }}</span>
                                         <div class="is-in-ry" :class="`currency-${item.currency}`"></div>
                                     </h3>
                                 </div>
-                                <div class="cash-fund-list-item-body">
-                                    <div class="list-item-body-left">
-                                        <p class="rate" v-riseFall="{ value: item.returnD7ToY1, base: 4 }"></p>
-                                        <p class="cash-fund-list-item-type">{{ $t('jqrnh') }}</p>
+                                <div class="item__body">
+                                    <div class="item__body-left">
+                                        <span class="rate" v-riseFall="{ value: item.returnY3, base: 2 }"></span>
+                                        <p class="type">{{ $t('jqrnh') }}</p>
                                     </div>
-                                    <PerformanceTrend class="list-item-body-right" :symbol="item.symbol"></PerformanceTrend>
+                                    <PerformanceTrend class="item__body-right" :symbol="item.symbol"></PerformanceTrend>
                                 </div>
-                                <div class="cash-fund-list-item-footer">
-                                    <button class="btn">{{ $t('mr') }}</button>
+                                <div class="item__footer">
+                                    <Button>{{ $t('mr') }}</Button>
                                 </div>
                             </van-skeleton>
                         </div>
-                    </div>
-                </template>
-
-                <div v-else @click="onFeaturesClick(null, { link: '/wealth/cashBox.html#/', key: 'cash', label: $t('cashBox') })">
-                    <h2>{{ $t('cashBox') }}</h2>
-                    <div class="cashbox-recommend">
-                        <div class="left">
-                            <p class="rate" v-riseFall="{ value: cashBoxData.returnD7ToY1, base: 4 }"></p>
-                            <p class="desc">{{ $t('jqrnh') }}</p>
-                        </div>
-
-                        <div>
-                            <p class="title">{{ $t('adjustAutoManage') }}</p>
-                            <p class="desc">{{ $t('cashBoxSlogan') }}</p>
-                        </div>
-                    </div>
-                </div>
+                    </van-swipe-item>
+                </van-swipe>
             </div>
 
             <!-- 功能排列卡片 -->
@@ -82,38 +63,93 @@
                 </div>
             </div>
 
-            <!-- 客户雷达图入口 -->
-            <radar-banner
-                class="card"
-                v-if="userRadar.permission === 1"
-                :userData="userRadar.userData"
-                :platformData="userRadar.platformData"
-            ></radar-banner>
-            <!-- banner -->
-            <banner ref="bannerRef" :position="13"></banner>
-
-            <!-- 研究报告 -->
-            <div class="card invest yjbg">
-                <h2>{{ $t('fundText19') }}</h2>
-                <div class="fund-list" v-if="newsList.length">
-                    <div class="fund-item" style="width: 100%" v-for="(item, idx) in newsList" :key="idx" @click="gotoNewsDetail(item)">
-                        <van-skeleton row="3" :loading="loading">
-                            <div class="fund-item-header">
-                                <h3 class="title">{{ item.title }}</h3>
+            <!-- 进取投资 -->
+            <div class="card advanced-invest" v-if="advancedInvestList.length">
+                <div class="title">
+                    <div>{{ $t('aggressiveInvest') }}</div>
+                    <div class="right" @click="toMorePage()">
+                        <span class="txt">{{ $t('loadingMore') }}</span>
+                        <multi-img class="arrowicon" name="icon_arrow_left" directory="fund" alt="icon_arrow_left" verifyTheme></multi-img>
+                    </div>
+                </div>
+                <div class="fund-item" v-for="item in loading ? getTempList(3) : advancedInvestList" :key="item.symbol" @click="gotoFundDetail(item)">
+                    <van-skeleton row="4" :loading="loading">
+                        <div class="fund-item-left">
+                            <fund-chart :symbol="item.symbol" period="y3" :chgRate="item.returnY3"></fund-chart>
+                        </div>
+                        <div class="fund-item-right">
+                            <h3 class="title_">{{ item.name }}</h3>
+                            <div class="descript">
+                                <span>{{ item.currency }}</span>
+                                <span>{{ fundObj[item.fundType] }}</span>
+                                <span>{{ riskRatingObj[item.riskRating] }}</span>
+                                <span>{{ item.minInitial | thousandsFilter }}{{ item.currency | currencyFilter }}起投</span>
                             </div>
-                            <div class="fund-item-body">
-                                <div class="left">
-                                    <span class="type right10" v-if="item.source">{{ item.source }}</span>
-                                    <span class="type">{{ getHMS(item.publish) }}</span>
-                                </div>
+                            <div class="disbot">
+                                <p class="rate" v-riseFall="item.returnY3"></p>
+                                <p class="type">近3年{{ $t('priceChange') }}</p>
+                            </div>
+                        </div>
+                    </van-skeleton>
+                </div>
+            </div>
+            <!-- 星选理财(货币基金精选) -->
+            <div class="card cash-fund" v-if="!(cashFundListRequested && cashFundList.length === 0)">
+                <h2>{{ $t('xxlc') }}</h2>
+                <div class="cash-fund-list">
+                    <div
+                        class="cash-fund-list-item"
+                        v-for="item in loading ? getTempList(2) : cashFundList"
+                        :key="item.symbol"
+                        @click="gotoFundDetail(item, 'public')"
+                    >
+                        <van-skeleton row="4" :loading="loading">
+                            <div class="cash-fund-list-item-header">
+                                <h3 class="title">
+                                    <span class="line-elipsis">{{ item.name }}</span>
+                                    <div :class="`currency-${item.currency}`"></div>
+                                </h3>
+                            </div>
+                            <div class="cash-fund-list-item-body">
+                                <p class="rate" v-riseFall="{ value: item.returnD7ToY1, base: 4, rate: true }"></p>
+                                <p class="type">{{ $t('jqrnh') }}</p>
+                            </div>
+                            <div class="cash-fund-list-item-footer">
+                                <button class="btn">{{ $t('mr') }}</button>
                             </div>
                         </van-skeleton>
                     </div>
-                    <div class="moreBtn" @click="moreBtn" v-if="newsPage - 1 < newLength">{{ $t('loadingMore') }}</div>
                 </div>
-                <div class="no-data" v-else>
-                    <multi-img name="noData" directory="common" verifyTheme></multi-img>
-                    <p>{{ $t('fundText20') }}</p>
+            </div>
+            <!-- 基金榜单 -->
+            <div class="card tjlist">
+                <div class="title">
+                    <div>{{ $t('fundText16') }}</div>
+                    <div class="right" @click="toMorePage(5, 1)">
+                        <span class="txt">{{ $t('loadingMore') }}</span>
+                        <multi-img class="arrowicon" name="icon_arrow_left" directory="fund" alt="icon_arrow_left" verifyTheme></multi-img>
+                    </div>
+                </div>
+                <div
+                    class="fund-item"
+                    v-for="(item, idx) in loading ? getTempList(4) : bangdanList"
+                    :key="item.symbol"
+                    @click="toMorePage(5, item.id)"
+                >
+                    <van-skeleton row="4" :loading="loading">
+                        <div class="bdicon">
+                            <multi-img v-if="idx == 0" name="sl" directory="fund" verifyTheme />
+                            <multi-img v-if="idx == 1" name="gsy" directory="fund" verifyTheme />
+                            <multi-img v-if="idx == 2" name="jylj" directory="fund" verifyTheme />
+                            <multi-img v-if="idx == 3" name="pxjj" directory="fund" verifyTheme />
+                        </div>
+                        <div class="fund-item-right">
+                            <h3 class="title_">{{ item.name }}</h3>
+                            <div class="bddescript">
+                                <span>{{ item.tips }}</span>
+                            </div>
+                        </div>
+                    </van-skeleton>
                 </div>
             </div>
 
@@ -137,20 +173,21 @@ import { userRadar } from '@/apis/wealth'
 import riskAssessmentMixin from '@/mixins/business/riskAssessmentMixin.js'
 import { isNeedToSetTrade } from '@/mixins/initTradePwd'
 import { isUndefined, compatIOSLocalStorage } from '@/utils/tools'
-import { getUserDetail } from '@/apis/uc.js'
-import { getRunEnv } from '@/utils/env.js'
+// import { getUserDetail } from '@/apis/uc.js'
+// import { getRunEnv } from '@/utils/env.js'
 import checkPIMixin from '@/mixins/business/checkPIMixin'
 import { isHLApp } from '@/utils/tools.js'
 import RadarBanner from '@/views/commonOutside/components/radarBanner.vue'
 import FundChart from '@/views/fund/components/FundChart.vue'
 import pathnames from '@/config/H5Pathname.js'
 import { FUND_ACCOUNT_STATUS } from '@/utils/user'
-import PerformanceTrend from './components/PerformanceTrendRy.vue'
+import PerformanceTrend from '../components/PerformanceTrendRy.vue'
 // import BScroll from '@better-scroll/core'
 import { isInRyH5 } from '@/utils'
 import { PUB_LIST_FILTER_MAP } from '@/config/common'
 import Banner from '@/views/fund/components/Banner.vue'
 import { getRecommendList } from '@/apis/fund/fund.js'
+import { thousandsFilter, currencyFilter } from '@/config/filters.js'
 
 const FINANCE_ACCOUNT = 1 // 资金账户
 const FUND_ACCOUNT = 2 // 基金账户
@@ -184,7 +221,7 @@ export default {
             isProfessional: false, // 是否专业投资者
             isInitedTradePwd: false,
             isToUpdateFundAccount: false, // 是否是需要升级理财账户的用户
-            cashFundList: [], // 货币基金列表
+
             userRadar: {
                 permission: 0, // 看雷达图权限 0：没有权限 1：有权限
                 userData: {},
@@ -202,7 +239,57 @@ export default {
             Personcounter: 0,
             openFundTrade: false,
             cashBoxData: {}, // 非睿银展示星财宝数据
+
+            hotFundList: [], // 明星精选
+            advancedInvestList: [],
+            steadyFundList: [],
+            spareFundList: [],
+            cashFundListRequested: false,
+            cashFundList: [], // 货币基金列表
+            // cashFundList: [],
+
+            bangdanList: [
+                {
+                    id: 1,
+                    name: this.$t('fundText27'),
+                    tips: this.$t('fundText26'),
+                },
+                {
+                    id: 2,
+                    name: this.$t('fundText21'),
+                    tips: this.$t('fundText28'),
+                },
+                {
+                    id: 3,
+                    name: this.$t('fundText24'),
+                    tips: this.$t('fundText25'),
+                },
+                {
+                    id: 4,
+                    name: this.$t('fundText22'),
+                    tips: this.$t('fundText23'),
+                },
+            ],
+            fundObj: {
+                1: this.$t('stockType'),
+                2: this.$t('bondType'),
+                3: this.$t('mixedType'),
+                4: this.$t('currencyType'),
+            },
+            riskRatingObj: {
+                1: this.$t('lowRisk'),
+                2: this.$t('middleLowRisk'),
+                3: this.$t('middleRisk'),
+                4: this.$t('middleHighRisk'),
+                5: this.$t('highRisk'),
+            },
         }
+    },
+    filters: {
+        currencyFilter,
+        minInitialFilter(v, currency, $t) {
+            return $t('startAmountForBond', { amount: thousandsFilter(v), currency: currencyFilter(currency) })
+        },
     },
     computed: {
         // 是否显示新手引导
@@ -227,20 +314,14 @@ export default {
                 {
                     key: 'cash',
                     label: this.$t('cashBox'),
-                    name: 'cash',
+                    name: 'cashManage',
                     link: '/wealth/cashBox.html#/',
                 },
                 {
-                    key: 'cashManage',
-                    label: this.$t('cashManage'),
-                    name: 'cashManage',
-                    link: '/wealth/fund.html#/list?activeTab=mmf&pageType=manageMoney',
-                },
-                {
-                    key: 'ryNote',
-                    label: this.$t('ryNote'),
-                    name: 'ryNote',
-                    link: '/wealth/fund.html#/invest-product/alter-investments',
+                    key: 'publicFund',
+                    label: this.$t('publicFundFullName'),
+                    name: 'publicFund',
+                    link: '/wealth/fund.html#/list',
                 },
             ]
         },
@@ -287,14 +368,14 @@ export default {
             this.initAccountWatch()
             this.getPersonType()
             this.getPersonType.watch()
-            this.getUserRadar()
+            this.getRecommendList()
+            // this.getUserRadar()
             // this.$refs.bannerRef?.getLang()
-            if (isInRyH5()) {
-                await this.getCashFundList()
-            } else {
-                await this.getCashboxRecommend()
-            }
-            await this.getNews(this.newsPage)
+            // await this.getCashFundList()
+            // } else {
+            // await this.getCashboxRecommend()
+            // }
+            // await this.getNews(this.newsPage)
         },
         // 获取用户查看雷达图权限
         async getUserRadar() {
@@ -648,26 +729,133 @@ export default {
         transform() {
             return this.$t.call(this, ...arguments)
         },
+
+        async getRecommendList() {
+            try {
+                const HOT_FUND = 1 // 热门基金
+                const ADVANCED_FUND = 2 // 进取型基金
+                const STEADY_FUND = 3 // 稳健型基金
+                const SPARE_FUND = 4 // 闲钱理财
+                const SREENGTH_FUND = 5 // 业绩实力榜
+                const HIGH_FUND = 6 // 高收益风险比榜
+                const OLD_FUND = 7 // 绩优老基榜
+                const PAYOUT_FUND = 8 // 派息基金榜
+                const USA_BOND = 9 // 美国国债
+                const START_SELECTED_FUND = 12 // 星选理财
+                const types = [
+                    HOT_FUND,
+                    ADVANCED_FUND,
+                    STEADY_FUND,
+                    SPARE_FUND,
+                    SREENGTH_FUND,
+                    HIGH_FUND,
+                    OLD_FUND,
+                    PAYOUT_FUND,
+                    USA_BOND,
+                    START_SELECTED_FUND,
+                ]
+                let { result } = (await getRecommendList({ type: types.join(',') })) || {}
+                result = result || {}
+                const list = result.list || []
+                let advancedList = []
+                console.log(`getRecommendList`, list)
+                list.forEach(i => {
+                    switch (i.type) {
+                        case HOT_FUND:
+                            this.hotFundList.push(...i.info)
+                            break
+                        case ADVANCED_FUND:
+                            advancedList = i.info.slice(0, 3)
+                            this.advancedInvestList.push(...advancedList)
+                            break
+                        case STEADY_FUND:
+                            this.steadyFundList.push(...i.info)
+                            break
+                        case SPARE_FUND:
+                            advancedList = i.info.slice(0, 1)
+                            this.spareFundList.push(...advancedList)
+                            break
+                        case START_SELECTED_FUND:
+                            advancedList = i.info
+                            this.cashFundList.push(...advancedList)
+                            break
+                        default:
+                            break
+                    }
+                })
+            } catch (e) {
+                console.error('getRecommendList', e)
+            } finally {
+                this.loading = false
+            }
+        },
+
+        onSwipeChange() {},
+
+        toMorePage(v, id) {
+            if (v === 'bond') {
+                const path = '/bond'
+                const params = {}
+                this.goPageLocal(path, params)
+                return
+            }
+            if (v == 5) {
+                //基金榜单
+                this.$goPage(
+                    '/strength-page',
+                    {
+                        isMore: v,
+                        id,
+                    },
+                    {
+                        pathname: '/wealth/fund.html',
+                    }
+                )
+            } else {
+                this.$goPage(
+                    '/more-page',
+                    {
+                        isMore: 0,
+                    },
+                    {
+                        pathname: '/wealth/fund.html',
+                    }
+                )
+            }
+        },
     },
 }
 </script>
 
-<style scoped lang="less">
-[data-theme='black'] .van-skeleton__row {
-    background-color: #262626;
-}
-
-@black: #1f1f1f;
-@white: #fff;
-@fixedIndex: 1999; // 浮动高度 1990 比 vant 蒙层2000低
-.price-color-1 .rise {
-    #font_theme() !important;
-}
-
-.ry-manage-money-wrapper {
+<!-- 新写的 -->
+<style lang="less" scoped>
+.wealth-wrapper {
     height: 100%;
     padding: 0 12px;
     #background();
+
+    [data-theme='black'] .van-skeleton__row {
+        background-color: #262626;
+    }
+
+    #pi-tool-tip {
+        color: #af7213;
+        background-color: #fff6e8;
+
+        &::before,
+        &::after {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 12px;
+            background-color: #fff6e8;
+            content: '';
+        }
+
+        .go-risk {
+            color: #ff6907;
+        }
+    }
 
     .risk-tool-tip {
         position: relative;
@@ -706,25 +894,6 @@ export default {
         }
     }
 
-    #pi-tool-tip {
-        color: #af7213;
-        background-color: #fff6e8;
-
-        &::before,
-        &::after {
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            width: 12px;
-            background-color: #fff6e8;
-            content: '';
-        }
-
-        .go-risk {
-            color: #ff6907;
-        }
-    }
-
     .card {
         #foreground();
 
@@ -737,51 +906,158 @@ export default {
             backdrop-filter: blur(27px);
         }
     }
+}
 
-    .account-info {
-        #foreground();
+// 星选理财
+.hot-fund {
+    position: relative;
+    margin-top: 0;
+    margin-bottom: 12px;
+    overflow: hidden;
+    background: linear-gradient(181.61deg, #fff8e7 1.37%, #fff 95.92%);
+    border: 1px solid #fff;
 
-        margin-bottom: 12px;
-    }
+    .item {
+        box-sizing: border-box;
+        width: 100%;
+        padding: 15px 12px;
+        overflow: hidden;
 
-    .important-info {
-        display: inline-block;
-        margin: 32px 0 16px 50%;
-        padding: 8px 20px;
-        color: #2f2f2f;
-        font-size: 14px;
-        line-height: 16px;
-        border-radius: 19.5px;
-        transform: translateX(-50%);
-        #dialog_background();
-    }
+        &__type {
+            .xingxuan-bg {
+                position: absolute;
+                top: 0;
+                right: 0;
+                width: 65px;
+                height: 65px;
+            }
 
-    .fund-relation-compayn-tip {
-        padding-bottom: 58px;
-        font-size: 11px;
-        line-height: 16px;
-        text-align: center;
-        #font_h3();
+            h2 {
+                margin-top: 0;
+                margin-bottom: 17px;
+                overflow: hidden;
+                font-weight: 600;
+                font-size: 16px;
+                line-height: 22px;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                #font_h1();
+            }
+        }
 
-        .company {
-            #font_theme();
+        &__header {
+            overflow: hidden;
+
+            .title {
+                display: flex;
+                align-items: center;
+                font-weight: 600;
+                font-size: 15px;
+                line-height: 20px;
+                #font_h1();
+
+                span {
+                    margin-right: 8px;
+                }
+
+                & > div {
+                    flex: 0 0 auto;
+                }
+
+                .right-arrow {
+                    width: 8px;
+                    margin-left: 2px;
+                }
+            }
+        }
+
+        &__body {
+            display: flex;
+            justify-content: space-between;
+            height: 40px;
+            margin-top: 8px;
+
+            &-left {
+                display: flex;
+                align-items: flex-end;
+
+                .rate {
+                    margin-right: 6px;
+                    font-weight: 700;
+                    font-size: 28px;
+                    line-height: 28px;
+                }
+
+                .type {
+                    color: #9c9c9c;
+                    font-size: 12px;
+                    line-height: 16px;
+                }
+            }
+
+            &-right {
+                width: 108px;
+                height: 40px;
+            }
+        }
+
+        &__footer {
+            margin: 20px 0 16px;
+            text-align: center;
+
+            button {
+                width: 227px;
+                height: 44px;
+                font-weight: 700;
+                font-size: 16px;
+                line-height: 44px;
+                text-align: center;
+                border: none;
+                border-radius: 31px;
+                outline: none;
+                box-shadow: none;
+                #bg_theme();
+                #button_font();
+            }
         }
     }
 
-    .ios-scroll-zhanwei {
-        height: 30px;
-        margin-bottom: 58px;
-        padding-bottom: 30px;
-        visibility: hidden;
+    /deep/ .van-swipe {
+        .van-swipe-item {
+            overflow: hidden;
+        }
+
+        &__indicators {
+            bottom: 16px;
+        }
+
+        &__indicator {
+            width: 4px;
+            height: 4px;
+            border-radius: 0;
+            #swipe_background();
+
+            &:not(:last-child) {
+                margin-right: 5px;
+            }
+        }
+
+        &__indicator--active {
+            #swipe_active_background();
+
+            width: 8px;
+        }
     }
 }
-</style>
 
-/* 功能卡片 */
-<style lang="less" scoped>
+// 功能卡片
 .features {
     position: relative;
     padding: 8px 0;
+
+    &.z-index-highest {
+        z-index: 9999 !important;
+    }
 
     &.card {
         margin-top: 0;
@@ -860,97 +1136,8 @@ export default {
         margin-top: 12px;
     }
 }
-</style>
 
-<style lang="less" scoped>
-// 新手引导
-
-.z-index-highest {
-    z-index: 9999 !important;
-}
-
-.features {
-    .card-overlay {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        overflow: hidden;
-        border-radius: 10px;
-    }
-
-    .cash-box-noob {
-        img {
-            position: absolute;
-            top: 60px;
-            left: 38px;
-            width: 307px;
-            height: 66px;
-        }
-
-        span {
-            position: absolute;
-            top: 92px;
-            left: 94px;
-            font-weight: 400;
-            font-size: 14px;
-            line-height: 22px;
-            #font_theme();
-        }
-
-        &::before {
-            position: absolute;
-            top: calc(-100vw + 6px);
-            left: calc(-100vw + 6px);
-            box-sizing: content-box;
-            width: 75px;
-            height: 75px;
-            border-style: solid;
-            border-width: 100vw;
-            border-radius: 50%;
-            content: '';
-            #noob_border_color();
-        }
-    }
-
-    .follow-noob {
-        img {
-            position: absolute;
-            top: 36px;
-            left: 31px;
-            width: 283px;
-            height: 99px;
-        }
-
-        span {
-            position: absolute;
-            top: 101px;
-            left: 55px;
-            font-weight: 400;
-            font-size: 14px;
-            line-height: 22px;
-            #font_theme();
-        }
-
-        &::before {
-            position: absolute;
-            top: calc(-100vw + 6px);
-            left: calc(-100vw + 94px);
-            box-sizing: content-box;
-            width: 75px;
-            height: 75px;
-            border-style: solid;
-            border-width: 100vw;
-            border-radius: 50%;
-            content: '';
-            #noob_border_color();
-        }
-    }
-}
-</style>
-
-<style lang="less" scoped>
+// 开户提醒
 .open-account-guide {
     display: flex;
     justify-content: space-between;
@@ -998,36 +1185,129 @@ export default {
     }
 }
 
-.cash-fund {
-    position: relative;
-    padding-bottom: 23px;
+// 进取投资
+.advanced-invest {
+    padding: 8px 0 12px;
     overflow: hidden;
-    background: linear-gradient(#fff0e6, rgba(255, 237, 225, 0));
 
-    .xingxuan_bg {
-        position: absolute;
-        top: -8px;
-        right: -8px;
-        width: 65px;
-        height: 65px;
-    }
-
-    &.reset-mgt {
-        margin-top: 0;
+    .title {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
         margin-bottom: 12px;
-        border: 1px solid #fff;
-    }
-
-    h2 {
-        margin-top: 0;
-        margin-bottom: 14px;
-        padding: 14px 12px 0;
+        padding: 12px 12px 0;
         overflow: hidden;
-        font-weight: 600;
+        font-weight: 700;
         font-size: 16px;
         line-height: 22px;
         white-space: nowrap;
         text-overflow: ellipsis;
+        #font_h1();
+
+        .right {
+            display: flex;
+            align-items: center;
+            font-weight: 400;
+            font-size: 12px;
+            font-family: 'PingFang SC';
+            line-height: 22px;
+            #font_h2();
+
+            .arrowicon {
+                width: 12px;
+                height: 12px;
+                vertical-align: middle;
+            }
+
+            .txt {
+                margin-right: 3px;
+                vertical-align: middle;
+            }
+        }
+    }
+
+    .fund-item {
+        display: flex;
+        flex-direction: row;
+        padding: 12px;
+
+        &-left {
+            min-width: 80px;
+            margin-right: 8px;
+        }
+
+        &-right {
+            .title_ {
+                // padding-left: 5px;
+                font-weight: 500;
+                font-size: 14px;
+                line-height: 20px;
+                #font_h1();
+            }
+
+            .descript {
+                display: flex;
+                margin-top: 7px;
+
+                span {
+                    display: inline-block;
+                    flex-shrink: 0;
+                    height: 11px;
+                    padding: 0 4px;
+                    font-weight: 400;
+                    font-size: 12px;
+                    line-height: 12px;
+                    border-right: 0.5px solid #b6b6b6;
+                    #font_h2();
+                }
+
+                span:last-child {
+                    flex: 1;
+                    height: 12px;
+                    padding: 0 0 0 5px;
+                    line-height: 12px;
+                    white-space: nowrap;
+                    text-overflow: ellipsis;
+                    border-right: none;
+                }
+            }
+
+            .disbot {
+                display: flex;
+                flex-direction: row;
+                margin-top: 6px;
+
+                .rate {
+                    margin: 4px 8px 0 5px;
+                    font-weight: 600;
+                    font-size: 14px;
+                    line-height: 16px;
+                }
+
+                .type {
+                    margin-top: 4px;
+                    font-weight: 400;
+                    font-size: 12px;
+                    line-height: 16px;
+                    #font_h3();
+                }
+            }
+        }
+    }
+}
+
+// 星选理财(非卡片)
+.cash-fund {
+    h2 {
+        margin-bottom: 23px;
+        padding: 14px 12px 0;
+        overflow: hidden;
+        font-weight: 700;
+        font-size: 16px;
+        line-height: 22px;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+
         #font_h1();
     }
 
@@ -1035,10 +1315,10 @@ export default {
         position: relative;
         display: flex;
         justify-content: space-between;
-        padding: 12px 12px 0;
+        padding: 0 12px 24px;
 
         &-item {
-            width: 100%;
+            width: 153px;
             text-align: center;
 
             &-header {
@@ -1047,13 +1327,12 @@ export default {
                 .title {
                     display: flex;
                     align-items: center;
-                    font-weight: 600;
-                    font-size: 15px;
+                    font-size: 14px;
                     line-height: 20px;
                     #font_h1();
 
                     span {
-                        margin-right: 8px;
+                        margin-right: 3px;
                     }
 
                     & > div {
@@ -1068,49 +1347,30 @@ export default {
             }
 
             &-body {
-                display: flex;
-                justify-content: space-between;
-                height: 40px;
                 margin-top: 8px;
 
-                .list-item-body-left {
-                    display: flex;
-                    align-items: flex-end;
-                }
-
-                .list-item-body-right {
-                    width: 108px;
-                    height: 40px;
-
-                    div {
-                        width: 100%;
-                    }
-                }
-
-                .cash-fund-list-item-type {
-                    // #font_h2();
-                    color: #9c9c9c;
+                .type {
+                    margin-top: 2px;
                     font-size: 12px;
                     line-height: 16px;
+                    #font_h2();
                 }
 
                 .rate {
-                    margin-right: 6px;
                     font-weight: 700;
-                    font-size: 28px;
+                    font-size: 20px;
                     line-height: 28px;
                 }
             }
 
             &-footer {
-                margin-top: 20px;
+                margin-top: 8px;
 
                 .btn {
-                    width: 227px;
-                    height: 44px;
+                    width: 64px;
                     font-weight: 700;
-                    font-size: 16px;
-                    line-height: 44px;
+                    font-size: 14px;
+                    line-height: 28px;
                     text-align: center;
                     border: none;
                     border-radius: 31px;
@@ -1121,204 +1381,20 @@ export default {
                 }
             }
         }
-        // &::before {
-        //     position: absolute;
-        //     content: '';
-        //     width: 1px;
-        //     height: 110px;
-        //     #divider_back_gound();
-        //     left: 50%;
-        //     transform: translateX(-50%) scaleX(0.5);
-        // }
-    }
 
-    .cashbox-recommend {
-        display: flex;
-        padding: 0 12px;
-
-        .left {
-            margin-right: 21px;
-        }
-
-        .rate {
-            font-weight: 600;
-            font-size: 16px;
-        }
-
-        .title {
-            font-weight: 500;
-            font-size: 14px;
-        }
-
-        .desc {
-            margin-top: 6px;
-            color: #9c9c9c;
-            font-size: 12px;
-        }
-    }
-}
-</style>
-
-/* 热门基金 */
-<style lang="less" scoped>
-[data-theme='black'] .mask-overlay {
-    z-index: 8999;
-    background: rgba(0, 0, 0, 0.65);
-}
-
-.mask-overlay {
-    z-index: 8999;
-    background: rgba(0, 0, 0, 0);
-}
-
-[data-theme='black'] .hot-fund {
-    background: linear-gradient(359.39deg, #181818 77.12%, #27241f 101.12%);
-    box-shadow: 0 0.5px 8px rgba(0, 0, 0, 0.04), inset 0 0.5px 0 #424242;
-
-    .fund-item-header {
-        .company {
-            color: #a36f33;
+        &::before {
+            position: absolute;
+            left: 50%;
+            width: 1px;
+            height: 110px;
+            transform: translateX(-50%) scaleX(0.5);
+            content: '';
+            #divider_back_gound();
         }
     }
 }
 
-.hot-fund {
-    background: linear-gradient(359.39deg, #fff 77.12%, #fff5ea 101.12%);
-    box-shadow: 0 0.5px 8px rgba(0, 0, 0, 0.04), inset 0.5px -0.5px 0 #fff, inset -0.5px 0.5px 0 #fff;
-
-    .fund-item {
-        padding: 16px;
-
-        &-header {
-            display: flex;
-            align-items: center;
-
-            .tag {
-                display: flex;
-                flex: 0 0 auto;
-                align-items: center;
-                height: 16px;
-                padding: 0 4px;
-                background: linear-gradient(90deg, #ffab07 0%, #ff6b00 104.92%), linear-gradient(86.7deg, #44d2ff -19.89%, #278aff 101.62%),
-                    linear-gradient(90deg, #ffab07 0%, #ff6b00 104.92%);
-                border-radius: 2px;
-
-                img {
-                    width: 7px;
-                }
-
-                span {
-                    margin-left: 2px;
-                    font-weight: 600;
-                    font-size: 9px;
-                    #button_font();
-                }
-            }
-
-            .company {
-                margin-left: 8px;
-                overflow: hidden;
-                color: #ff9211;
-                font-size: 12px;
-                line-height: 16px;
-                white-space: nowrap;
-                text-overflow: ellipsis;
-            }
-        }
-
-        &-body {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 24px;
-
-            .top {
-                margin-bottom: 4px;
-                font-size: 0;
-            }
-
-            .rate {
-                display: inline-block;
-                color: #1f1f1f;
-                font-weight: 700;
-                font-size: 26px;
-                line-height: 32px;
-                vertical-align: bottom;
-            }
-
-            .type {
-                display: inline-block;
-                margin-left: 6px;
-                font-size: 12px;
-                line-height: 28px;
-                vertical-align: bottom;
-                #font_h3();
-            }
-
-            .fund-title {
-                overflow: hidden;
-                font-weight: 700;
-                font-size: 16px;
-                line-height: 22px;
-                white-space: nowrap;
-                text-overflow: ellipsis;
-                #font_h1();
-            }
-
-            .left {
-                overflow: hidden;
-            }
-
-            .right {
-                flex: 0 0 auto;
-                width: 124px;
-                height: 60px;
-                margin-left: 12px;
-            }
-        }
-
-        &-footer {
-            display: block;
-            width: 100%;
-            margin: 30px 0 16px;
-            font-weight: 700;
-            font-size: 16px;
-            line-height: 44px;
-            text-align: center;
-            border: none;
-            border-radius: 28px;
-            outline: none;
-            #bg_theme();
-            #button_font();
-        }
-    }
-
-    /deep/ .van-swipe {
-        &__indicators {
-            bottom: 16px;
-        }
-
-        &__indicator {
-            width: 4px;
-            height: 4px;
-            border-radius: 0;
-            #swipe_background();
-
-            &:not(:last-child) {
-                margin-right: 5px;
-            }
-        }
-
-        &__indicator--active {
-            #swipe_active_background();
-
-            width: 8px;
-        }
-    }
-}
-</style>
-
-/* 智能推荐 */
-<style lang="less" scoped>
+// 基金榜单
 [data-theme='white'] .comment {
     background: linear-gradient(90.05deg, #f7f7f7 20.72%, rgba(246, 246, 246, 0) 98.91%);
 }
@@ -1368,8 +1444,7 @@ export default {
 
     .fund-item {
         display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
+        flex-flow: row wrap;
         padding: 12px 8px 12px 12px;
 
         &.bond-type {
@@ -1479,215 +1554,34 @@ export default {
         }
     }
 }
-</style>
 
-/* 投资进取 */
-<style lang="less" scoped>
-.advanced-invest {
-    padding: 8px 0 12px;
-    overflow: hidden;
+// 重要信息
+.important-info {
+    display: inline-block;
+    margin: 32px 0 16px 50%;
+    padding: 8px 20px;
+    color: #2f2f2f;
+    font-size: 14px;
+    line-height: 16px;
+    border-radius: 19.5px;
+    transform: translateX(-50%);
+    #dialog_background();
+}
 
-    .title {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        margin-bottom: 12px;
-        padding: 12px 12px 0;
-        overflow: hidden;
-        font-weight: 700;
-        font-size: 16px;
-        line-height: 22px;
-        white-space: nowrap;
-        text-overflow: ellipsis;
-        #font_h1();
+// 底部声明
+.fund-relation-compayn-tip {
+    padding-bottom: 58px;
+    font-size: 11px;
+    line-height: 16px;
+    text-align: center;
+    #font_h3();
 
-        .right {
-            display: flex;
-            align-items: center;
-            font-weight: 400;
-            font-size: 12px;
-            font-family: 'PingFang SC';
-            line-height: 22px;
-            #font_h2();
-
-            .arrowicon {
-                width: 12px;
-                height: 12px;
-                vertical-align: middle;
-            }
-
-            .txt {
-                margin-right: 3px;
-                vertical-align: middle;
-            }
-        }
-    }
-
-    .fund-item {
-        display: flex;
-        flex-direction: row;
-        padding: 12px;
-
-        &-left {
-            min-width: 80px;
-            margin-right: 8px;
-        }
-
-        &-right {
-            .title_ {
-                padding-left: 5px;
-                font-weight: 500;
-                font-size: 14px;
-                line-height: 20px;
-                #font_h1();
-            }
-
-            .descript {
-                display: flex;
-                margin-top: 7px;
-
-                span {
-                    display: inline-block;
-                    flex-shrink: 0;
-                    height: 11px;
-                    padding: 0 4px;
-                    font-weight: 400;
-                    font-size: 12px;
-                    line-height: 12px;
-                    border-right: 0.5px solid #b6b6b6;
-                    #font_h2();
-                }
-
-                span:last-child {
-                    flex: 1;
-                    height: 12px;
-                    padding: 0 0 0 5px;
-                    line-height: 12px;
-                    white-space: nowrap;
-                    text-overflow: ellipsis;
-                    border-right: none;
-                }
-            }
-
-            .disbot {
-                display: flex;
-                flex-direction: row;
-                margin-top: 6px;
-
-                .rate {
-                    margin: 4px 8px 0 5px;
-                    font-weight: 600;
-                    font-size: 14px;
-                    line-height: 16px;
-                }
-
-                .type {
-                    margin-top: 4px;
-                    font-weight: 400;
-                    font-size: 12px;
-                    line-height: 16px;
-                    #font_h3();
-                }
-            }
-        }
+    .company {
+        #font_theme();
     }
 }
 </style>
 
-/* 稳健收益 */
-<style lang="less" scoped>
-.invest {
-    padding: 8px 0 10px;
-
-    h2 {
-        margin-bottom: 12px;
-        padding: 14px 12px 0;
-        overflow: hidden;
-        font-weight: 700;
-        font-size: 16px;
-        line-height: 22px;
-
-        #font_h1();
-    }
-
-    .fund-item {
-        display: inline-block;
-        width: 50%;
-        padding: 12px;
-
-        &-header {
-            .title {
-                overflow: hidden;
-                font-weight: 600;
-                font-size: 15px;
-                line-height: 21px;
-                white-space: nowrap;
-                text-overflow: ellipsis;
-                #font_h1();
-            }
-        }
-
-        &-body {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 8px;
-
-            .rate {
-                color: #1f1f1f;
-                font-weight: 700;
-                font-size: 16px;
-                line-height: 22px;
-            }
-
-            .type {
-                margin-top: 4px;
-                color: #9c9c9c;
-                font-size: 12px;
-                line-height: 16px;
-            }
-
-            .left {
-                flex: 1 0 auto;
-            }
-
-            .right {
-                flex: 0 0 auto;
-                width: 66px;
-                height: 36px;
-                margin-left: 6px;
-            }
-        }
-    }
-}
-
-.yjbg {
-    .no-data {
-        padding: 20px;
-        text-align: center;
-        #font_h3();
-
-        img {
-            width: 103px;
-            height: 103px;
-        }
-
-        p {
-            margin-top: 12px;
-        }
-    }
-
-    .right10 {
-        margin-right: 8px;
-    }
-
-    .moreBtn {
-        font-size: 12px;
-        line-height: 16px;
-        text-align: center;
-        #font_h2();
-    }
-}
-</style>
 /* PI年审 */
 <style lang="less" scoped>
 .pi-dialog {

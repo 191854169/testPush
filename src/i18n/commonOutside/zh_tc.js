@@ -101,6 +101,7 @@ export default {
     wfIncome: '日均萬元收益',
     xxlc: '星選理財',
     mr: '買入',
+    fundText16: '基金榜單',
     fundText19: '研究報告',
     fundText20: '暫無研報',
     fundText21: '高收益風險比榜',
@@ -114,7 +115,7 @@ export default {
     fundText29: '閑錢管家，自動申贖',
     importantInfo: '重要信息及聲明',
     fundRelationCompanyTip: '理財相關服務由',
-    fundRelationCompany: '復星國際證券',
+    fundRelationCompany: '陸浦香港',
     provide: '提供',
     stockType: '股票型',
     bondType: '債券型',
@@ -176,4 +177,6 @@ export default {
     businessType: '業務類型',
     remark: '備註',
     flow: '流水',
+    aggressiveInvest: '進取投資',
+    publicFundFullName: '公募基金',
 }
