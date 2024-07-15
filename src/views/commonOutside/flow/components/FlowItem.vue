@@ -1,5 +1,5 @@
 <template>
-    <div class="flow-item">
+    <div class="flow-item" @click="goDetail">
         <div class="left">
             <multi-img :name="`icon_liushui_${flowType2Icon[options.flowType] ?? 'qt'}`" directory="ruiyin" class="icon" />
             <div class="type-stock">
@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import { flowType2Icon } from '../config/common'
+import { flowType2Icon } from '../../config/common'
 export default {
     name: 'FlowItem',
     props: {
@@ -40,6 +40,15 @@ export default {
         },
         tradeDateFormatter(date) {
             return date.replace(/-/g, '/')
+        },
+        goDetail() {
+            this.$router.push({
+                // path: `/flow/detail?id=${this.options.flowId}`,
+                name: 'FlowDetail',
+                params: {
+                    flowDetail: this.options,
+                },
+            })
         },
     },
 }

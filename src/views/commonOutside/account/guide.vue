@@ -54,7 +54,7 @@ export default {
     height: 56px;
     margin-top: 12px;
     padding: 0 12px;
-    background: linear-gradient(90deg, #fff5ea 0.11%, #fffefd 61.07%, #fff 99.9%);
+    background: linear-gradient(90.12deg, #fff6e0 0.11%, #fffefd 61.07%, #fff 99.9%);
     border-radius: 8px;
     box-shadow: 0.5px 0.5px 0 0 #fff inset, 0.5px -0.5px 0 0 #fff inset;
 
@@ -68,7 +68,7 @@ export default {
         padding: 4px 12px;
         color: #fff;
         font-size: 14px;
-        background: #ff6907;
+        background: @theme;
         border-radius: 31px;
     }
 }

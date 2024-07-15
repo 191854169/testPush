@@ -334,7 +334,7 @@ export default {
 
 .sticky-container {
     /deep/ .van-sticky--fixed {
-        top: 44px;
+        top: 0;
         z-index: 1000;
         // prettier-ignore
         max-width: 750PX;

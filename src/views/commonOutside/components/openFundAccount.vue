@@ -7,7 +7,7 @@
             <button class="btn">{{ $t('openBtn') }}</button>
         </div>
         <div class="right">
-            <multi-img name="img_fund_account" directory="cmhk"></multi-img>
+            <multi-img name="img_fund_account" directory="commonOutside"></multi-img>
         </div>
     </div>
 </template>

@@ -171,4 +171,9 @@ export default {
     onWayMoney: '在途资金',
     canUseCash: '现金可提',
     freezeCash: '冻结资金',
+    createTime: '创建时间',
+    nameAndCode2: '名称代码',
+    businessType: '业务类型',
+    remark: '备注',
+    flow: '流水',
 }

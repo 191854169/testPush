@@ -171,4 +171,9 @@ export default {
     onWayMoney: '在途資金',
     canUseCash: '現金可提',
     freezeCash: '凍結資金',
+    createTime: '創建時間',
+    nameAndCode2: '名稱代碼',
+    businessType: '業務類型',
+    remark: '備註',
+    flow: '流水',
 }
