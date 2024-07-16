@@ -739,8 +739,8 @@ export default {
                     }
 
                     .open {
-                        color: #ff6907;
-                        border-color: #ff6907;
+                        color: @theme;
+                        border-color: @theme;
                     }
 
                     .pause {
@@ -775,8 +775,8 @@ export default {
                 }
 
                 &.van-switch--on {
-                    background-color: #ff6907;
-                    border: 1px solid #ff6907;
+                    background-color: @theme;
+                    border: 1px solid @theme;
 
                     /deep/ .van-switch__node {
                         transform: translateX(16px);
@@ -893,7 +893,7 @@ export default {
                 flex-direction: column;
 
                 .title {
-                    color: #ff6907;
+                    color: @theme;
                 }
             }
         }
@@ -963,7 +963,7 @@ export default {
             right: 0;
             padding-top: 12px;
             padding-right: 16px;
-            color: #ff6907;
+            color: @theme;
             font-size: 14px;
             line-height: 20px;
         }
@@ -984,12 +984,12 @@ export default {
             font-weight: 700;
             line-height: 44px;
             text-align: center;
-            background: #ff6907;
+            background: @theme;
             border-radius: 41px;
         }
 
         .forget {
-            color: #ff6907;
+            color: @theme;
             font-size: 16px;
             line-height: 22px;
         }
@@ -1014,7 +1014,7 @@ export default {
         }
 
         /deep/.van-picker__confirm {
-            color: #ff6907;
+            color: @theme;
         }
     }
 

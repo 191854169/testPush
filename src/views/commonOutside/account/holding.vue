@@ -153,7 +153,7 @@
                 <StarList :holdDataList="item.starHolding" v-if="showMore" />
 
                 <!-- 票据 -->
-                <BillList :holdDataList="item.billHolding" v-if="showMore" />
+                <!-- <BillList :holdDataList="item.billHolding" v-if="showMore" /> -->
             </div>
         </div>
     </div>

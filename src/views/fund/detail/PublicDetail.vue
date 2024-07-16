@@ -1,7 +1,7 @@
 // 公募
 <template>
     <div class="public-detail" ref="publicDetailRef">
-        <logo-ad v-if="isNotInHLAndWTAppAndRY"></logo-ad>
+        <!-- <logo-ad v-if="isNotInHLAndWTAppAndRY"></logo-ad> -->
         <ul v-if="isInHLApp || isInRy" class="tabs" @click="onTabClick" :style="{ maxHeight: showTabs ? '150px' : '0' }">
             <li
                 class="tab mask"
@@ -25,7 +25,6 @@
         <holding></holding>
         <invest-compose></invest-compose>
         <assets-chart></assets-chart>
-        <invest-style-box></invest-style-box>
         <risk-indicator></risk-indicator>
         <profile></profile>
         <trade-rule :fundType="fundType"></trade-rule>
@@ -280,7 +279,7 @@ export default {
                         bottom: -4px;
                         left: 0;
                         height: 2px;
-                        background: #ff6907;
+                        background: @theme;
                         border-radius: 16px;
                         content: '';
                     }

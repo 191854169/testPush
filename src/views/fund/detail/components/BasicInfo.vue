@@ -49,7 +49,7 @@
                     </p>
                 </div>
             </div>
-            <div class="footer" v-if="isPublic && fundInfo.morningStarRating > 0">
+            <!-- <div class="footer" v-if="isPublic && fundInfo.morningStarRating > 0">
                 <div class="stars">
                     <label for="" class="label">{{ fundInfo.morningStarRating == 0 ? $t('noStar') : $t('starRating') }}</label>
                     <multi-img name="star" directory="fund" alt="star" class="star" v-for="i in fundInfo.morningStarRating" :key="i"></multi-img>
@@ -62,7 +62,7 @@
                         :key="i + 5"
                     ></multi-img>
                 </div>
-            </div>
+            </div> -->
         </template>
     </div>
 </template>

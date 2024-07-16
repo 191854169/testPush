@@ -108,10 +108,10 @@
                     <span>{{ $t('seeSmsxcb') }}？</span>
                     <multi-img class="next" name="icon-right-arrow" directory="common"></multi-img>
                 </div>
-                <div class="des" @click="goPurchasing">
+                <!-- <div class="des" @click="goPurchasing">
                     <span>{{ $t('promotePurchasing') }}</span>
                     <multi-img class="next" name="icon-right-arrow" directory="common"></multi-img>
-                </div>
+                </div> -->
             </div>
             <div class="tips-ontent">
                 <p>{{ $t('riskWarning') }}</p>

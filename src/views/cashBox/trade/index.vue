@@ -99,7 +99,7 @@
             :title="`${this.orientText}${$t('queren')}`"
             :show-cancel-button="true"
             cancel-button-color="#2F2F2F"
-            confirm-button-color="#FF6307"
+            :confirm-button-color="variable.theme"
             :confirm-button-text="$t('queding')"
             @confirm="confirmTrade"
         >
@@ -145,6 +145,7 @@ import TradeLogin from '@/config/globalProterties/tradeLogin'
 import verifyMixin from '@/mixins/business/verifyMixins.js'
 import wealthOrderInstructionMixin from '@/mixins/wealthOrderInstructionMixin.js'
 import { isInOutsideH5 } from '@/utils'
+import { variable } from '@/assets/css/variable'
 const accountKeyMap = accountMap.keyValueMap
 
 const textMap = {
@@ -189,6 +190,7 @@ export default {
     },
     data() {
         return {
+            variable,
             orient: this.$route.params.orient, // rollIn:买入 rollOut: 卖出
             currency: [accountKeyMap.HKD, accountKeyMap.USD].includes(this.$route.query.accountType)
                 ? this.$route.query.accountType
@@ -946,7 +948,7 @@ export default {
         font-size: 16px;
         line-height: 44px;
         text-align: center;
-        background-color: #ff6307;
+        background-color: @theme;
         border-width: 0;
         border-radius: 22px;
         opacity: 0.3;

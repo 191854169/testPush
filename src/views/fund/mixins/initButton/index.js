@@ -324,9 +324,9 @@ export default {
                             footerChildren.push(getFooterChild(h))
                         }
 
-                        if (this.isInHlApp && this.isPublic) {
-                            footerChildren.push(selfCheckChild(h), comparisonChild(h), shareChild(h))
-                        }
+                        // if (this.isInHlApp && this.isPublic) {
+                        //     footerChildren.push(selfCheckChild(h), comparisonChild(h), shareChild(h))
+                        // }
                     }
                     return footerChildren
                 }

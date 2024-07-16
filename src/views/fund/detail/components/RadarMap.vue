@@ -471,7 +471,7 @@ export default {
                 }
 
                 .value {
-                    color: #ff6907;
+                    color: @theme;
                     font-weight: 700;
                     font-size: 12px;
                     line-height: 16px;
@@ -531,7 +531,7 @@ export default {
             border-radius: 18px;
 
             &.selected {
-                color: #ff6907;
+                color: @theme;
                 font-weight: 500;
                 background: rgba(255, 99, 7, 0.1);
             }

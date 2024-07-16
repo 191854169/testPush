@@ -193,7 +193,7 @@ export default {
         box-shadow: inset 0 -0.5px 0 #efefef;
 
         &.selected {
-            color: #ff6307;
+            color: @theme;
         }
     }
 }
