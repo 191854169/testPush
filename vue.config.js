@@ -3,7 +3,7 @@ const path = require('path')
 const { variable } = require('./src/assets/css/variable')
 const fs = require('fs')
 // 打包分析插件
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const LodashModuleReplacementPlugin = require('lodash-webpack-plugin')
 const terserWebpackPlugin = require('terser-webpack-plugin')
 const vConsolePlugin = require('vconsole-webpack-plugin');  // 动态插入vconsole
@@ -65,9 +65,9 @@ module.exports = {
         new webpack.DefinePlugin({
           ISDEVELOPMENT: process.env.NODE_ENV !== 'production'
         }),
-        new BundleAnalyzerPlugin({
-          analyzerPort: 8900
-        }),
+        // new BundleAnalyzerPlugin({
+        //   analyzerPort: 8900
+        // }),
         new vConsolePlugin({ enable: process.env.VUE_APP_ENV !== 'prod' }),
         new LodashModuleReplacementPlugin()
       ],
