@@ -1,28 +1,9 @@
 <template>
     <div class="ry-index" ref="stickyContainer" :class="{ clip: tradeLoginDialog && tradeLoginDialog.show }">
-        <van-sticky class="sticky-container">
-            <div class="nav-wrapper">
-                <div class="nav-left">
-                    <span
-                        v-for="item in tabs"
-                        class="tabs-item"
-                        :class="{ 'is-active': active === item.key }"
-                        :key="item.key"
-                        @click="changeTab(item)"
-                    >
-                        {{ item.name }}
-                    </span>
-                </div>
-                <div class="nav-right">
-                    <multi-img name="kefu" class="icon" directory="commonOutside" @click="toCustomerServicePage"></multi-img>
-                </div>
-            </div>
-        </van-sticky>
-        <div class="zhanwei-container"></div>
         <div class="content-wrapper">
-            <Account @onChange="changeActive" @getAssetSummarySuccess="initTradePwd" v-if="active === '1'"></Account>
-            <ManageMoney v-if="active === '2'"></ManageMoney>
-            <Mine v-if="active === '3'"></Mine>
+            <Account @onChange="changeActive" @getAssetSummarySuccess="initTradePwd" v-if="active === 'account'"></Account>
+            <Wealth v-if="active === 'wealth'"></Wealth>
+            <Mine v-if="active === 'mine'"></Mine>
         </div>
 
         <!-- 退出登录 -->
@@ -37,9 +18,9 @@ import { TRADE_PWD_STATUS, FUND_ACCOUNT_STATUS } from '@/utils/user'
 import TradeLogin from '@/config/globalProterties/tradeLogin'
 import { getPageVisibleSupportProperty, customerService } from '@/utils/utils'
 import { getLangType } from '@/utils/tools'
-import { FROM_RUI_YIN_STR, isInRyH5 } from '@/utils'
+// import { FROM_RUI_YIN_STR, isInRyH5 } from '@/utils'
 import Account from './account/index.vue'
-import ManageMoney from './ManageMoney.vue'
+import Wealth from './wealth/index.vue'
 import Mine from './mine/index.vue'
 import { ACTIVE_TAB_STR } from './config/common'
 import Logout from './mine/logout'
@@ -50,7 +31,7 @@ export default {
     components: {
         [Sticky.name]: Sticky,
         Account,
-        ManageMoney,
+        Wealth,
         Mine,
         Logout,
     },
@@ -58,10 +39,8 @@ export default {
         return {
             tradeLoginDialog: null,
             isUnsetTradePwd: true, // 未设置交易密码
-            openFundTrade: false, // 是否开通理财产品标记
-            openDepositoryTreasure: false, // 是否开通定存宝
             propertyData: {},
-            active: '1',
+            active: '',
             tabs: [
                 { key: '1', name: '资产' },
                 { key: '2', name: '理财' },
@@ -71,22 +50,24 @@ export default {
         }
     },
     computed: {
-        ...mapState('user', ['accts']),
+        ...mapState('user', ['accts', 'userInfo']),
         ...mapGetters({ getSubAccountId: 'user/getSubAccountId' }),
     },
-    created() {
-        this.init()
+    watch: {
+        userInfo: {
+            handler(val) {
+                if (val) {
+                    this.init()
+                }
+            },
+            immediate: true,
+        },
     },
     mounted() {
-        console.log('this.$root:', this.$root)
-        // if (!this.$root.isLogin) {
-        //     this.$root.login()
-        // }
-
-        this.active = sessionStorage.getItem(ACTIVE_TAB_STR) || '1'
+        this.active = 'account'
         const queryActiveTab = this.$route.query[ACTIVE_TAB_STR]
         if (queryActiveTab) {
-            this.$router.replace({ path: '/', query: {} })
+            // this.$router.replace({ path: '/', query: {} })
             this.active = queryActiveTab
             sessionStorage.setItem(ACTIVE_TAB_STR, queryActiveTab)
         }
@@ -94,7 +75,7 @@ export default {
         this.pageShow()
 
         // 监听浏览器回退
-        this.handleListener()
+        // this.handleListener()
     },
     beforeDestroy() {
         // 移除浏览器回退监听
@@ -103,17 +84,21 @@ export default {
     },
     methods: {
         async init() {
-            try {
-                // 睿银站外标志位
-                // const isFromCommonOutsideFlag = isInRyH5()
-                // if (!isFromCommonOutsideFlag) sessionStorage.setItem(FROM_RUI_YIN_STR, 1)
-                await this.getUserDetail()
-            } catch (e) {
-                console.log('commonOutside-index', e)
+            this.isUnsetTradePwd = this.userInfo?.clientInfo?.pwdStatus === TRADE_PWD_STATUS.PWD_UNSET
+            if (this.isUnsetTradePwd) {
+                this.goSetPasswordPage()
             }
         },
 
         initTradePwd() {
+            // 若无用户信息则延迟3秒处理
+            if (!this.userInfo) {
+                setTimeout(() => {
+                    this.initTradePwd()
+                }, 3000)
+                return
+            }
+
             if (!this.isUnsetTradePwd) {
                 this.validateIsFirstTime()
             }
@@ -139,23 +124,6 @@ export default {
                 this.tradeLoginDialog.show = true
                 // 在资产页未输入交易密码时页面所有资产数据应该隐藏
                 this.$store.commit('user/updateShowAsset', false)
-            }
-        },
-
-        // 获取用户信息
-        async getUserDetail() {
-            try {
-                const res = await this.$store.dispatch('user/getUserInfo', false)
-                console.warn('userInfo:', res)
-                this.isUnsetTradePwd = res?.clientInfo?.pwdStatus === TRADE_PWD_STATUS.PWD_UNSET
-                this.openFundTrade = res?.clientInfo?.accts?.[0]?.openFundTrade === FUND_ACCOUNT_STATUS.FUND_ACCOUNT_OPENED
-                this.openDepositoryTreasure = !!res?.clientInfo?.accts?.[0]?.ftdInfo
-                console.log('*****this.openDepositoryTreasure*****', this.openDepositoryTreasure)
-                if (this.isUnsetTradePwd) {
-                    this.goSetPasswordPage()
-                }
-            } catch (e) {
-                console.log('*********user/getUserInfo**********===>error:', e)
             }
         },
         // 去设置交易密码页
@@ -227,12 +195,7 @@ export default {
     // height: 100vh;
     // overflow: hidden;
     // overflow-y: scroll;
-    background: #f6f6f6;
-
-    &.clip {
-        height: calc(100% - 46px);
-        overflow: hidden;
-    }
+    background: @bgGreyColor;
 
     .nav-wrapper {
         position: absolute;
@@ -277,7 +240,7 @@ export default {
 
     .content-wrapper {
         height: calc(100% - 52px);
-        margin-top: 8px;
+        padding-top: 8px;
     }
 
     .tab-main {
@@ -347,25 +310,6 @@ export default {
                 color: @fontBlackColor;
                 font-size: 12px;
                 line-height: 16px;
-            }
-        }
-    }
-
-    :deep(.van-swipe__indicators) {
-        .van-swipe__indicator {
-            width: 8px;
-            height: 2px;
-            background: #9c9c9c;
-            border-radius: 0;
-            opacity: 0.4;
-
-            &:not(:last-child) {
-                margin-right: 4px;
-            }
-
-            &.van-swipe__indicator--active {
-                background: #ff6907;
-                opacity: 1;
             }
         }
     }

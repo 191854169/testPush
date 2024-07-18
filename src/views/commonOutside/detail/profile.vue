@@ -32,7 +32,7 @@
                     <template #reference>
                         <div class="flex-c">
                             <div class="flex-c f12 h2-white">
-                                资产净值
+                                {{ $t('netAssetValue') }}
                                 <div class="icon-circle"></div>
                                 {{ CURRENCY_MAP[currency] }}
                             </div>

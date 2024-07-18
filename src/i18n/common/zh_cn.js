@@ -107,7 +107,7 @@ export default {
     privateFund: '私募',
     bond: '债券',
     alterInvestment: '票据',
-    cashBox: '星财宝',
+    cashBox: '现金宝',
 
     ji: '及',
     auto: '自动',
@@ -239,4 +239,8 @@ export default {
     seeOrderDetail: '查看订单详情',
     freezeTips: '账户已冻结，无法进行交易，请联系客服',
     onlineService: '在线客服',
+    // 租户相关信息
+    tenant: {
+        company: '陆浦香港',
+    },
 }

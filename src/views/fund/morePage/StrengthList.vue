@@ -103,10 +103,10 @@
                             <p class="rate" v-riseFall="item.avgYieldY10"></p>
                             <div class="type" v-if="activeTab == 3">{{ $t('fundText4') }}</div>
                         </div>
-                        <div class="zxicon" v-if="isApp" @click.stop="selfHandler(item)">
+                        <!-- <div class="zxicon" v-if="isApp" @click.stop="selfHandler(item)">
                             <multi-img v-if="item.zxflag" name="active-taoxin" directory="fund" alt="active-taoxin"></multi-img>
                             <multi-img v-else name="taoxin" directory="fund" alt="taoxin"></multi-img>
-                        </div>
+                        </div> -->
                     </div>
                     <div class="fund-item-bottom" v-else>
                         <div class="left">
@@ -152,10 +152,10 @@
                             <div class="type" v-if="activeTab == 1">{{ $t('fundText2') }}</div>
                             <div class="type" v-if="activeTab == 2">{{ $t('fundList.sharpeRatioY1') }}</div>
                         </div>
-                        <div class="zxicon" v-if="isApp" @click.stop="selfHandler(item)">
+                        <!-- <div class="zxicon" v-if="isApp" @click.stop="selfHandler(item)">
                             <multi-img v-if="item.zxflag" name="active-taoxin" directory="fund" alt="active-taoxin"></multi-img>
                             <multi-img v-else name="taoxin" directory="fund" alt="taoxin"></multi-img>
-                        </div>
+                        </div> -->
                     </div>
                     <!-- </van-skeleton> -->
                 </div>

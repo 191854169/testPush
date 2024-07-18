@@ -3,7 +3,7 @@
     <div class="asset-container common-card">
         <div class="common-head flex-s">
             <div class="flex-c" @click="openPage">
-                <div class="f16 c-main bold mar-r6">资产</div>
+                <div class="f16 c-main bold mar-r6">{{ $t('assets') }}</div>
                 <multi-img name="icon_about" directory="commonOutside" class="icon-about"></multi-img>
             </div>
         </div>
@@ -18,14 +18,14 @@
                             <div class="flex-s pad-t4">
                                 <div class="flex-c">
                                     <multi-img :name="`icon_${item.currency}`" directory="commonOutside" class="icon"></multi-img>
-                                    <div class="f14 c-main bold">{{ CURRENCY_MAP[item.currency] }}资产</div>
+                                    <div class="f14 c-main bold">{{ CURRENCY_MAP[item.currency] }}{{ $t('assets') }}</div>
                                 </div>
                                 <div class="f12 c-gray">{{ CURRENCY_MAP[item.currency] }}</div>
                             </div>
 
                             <!-- 理财持仓 -->
                             <div class="item">
-                                <div>理财持仓</div>
+                                <div>{{ $t('wealthHolding') }}</div>
                                 <div
                                     v-riseFall="{
                                         value: item.wealthMarketValue,
@@ -40,7 +40,7 @@
 
                             <!-- 现金 -->
                             <div class="item">
-                                <div>现金</div>
+                                <div>{{ $t('cash') }}</div>
                                 <div
                                     v-riseFall="{
                                         value: item.availableBalance,
@@ -55,7 +55,7 @@
 
                             <!-- 在途资金 -->
                             <div class="item">
-                                <div class="c-gray">在途资金</div>
+                                <div class="c-gray">{{ $t('onWayMoney') }}</div>
                                 <div
                                     class="c-gray"
                                     v-riseFall="{
@@ -71,7 +71,7 @@
 
                             <!-- 现金可提 -->
                             <div class="item">
-                                <div class="c-gray">现金可提</div>
+                                <div class="c-gray">{{ $t('canUseCash') }}</div>
                                 <div
                                     class="c-gray"
                                     v-riseFall="{
@@ -87,7 +87,7 @@
 
                             <!-- 冻结资金 -->
                             <div class="item">
-                                <div class="c-gray">冻结资金</div>
+                                <div class="c-gray">{{ $t('freezeCash') }}</div>
                                 <div
                                     class="c-gray"
                                     v-riseFall="{
@@ -115,14 +115,14 @@
                             <div class="flex-s pad-t4">
                                 <div class="flex-c">
                                     <multi-img :name="`icon_${item.currency}`" directory="commonOutside" class="icon"></multi-img>
-                                    <div class="f14 c-main bold">{{ CURRENCY_MAP[item.currency] }}资产</div>
+                                    <div class="f14 c-main bold">{{ CURRENCY_MAP[item.currency] }}{{ $t('assets') }}</div>
                                 </div>
                                 <div class="f12 c-gray">{{ CURRENCY_MAP[item.currency] }}</div>
                             </div>
 
                             <!-- 理财持仓 -->
                             <div class="item">
-                                <div>理财持仓</div>
+                                <div>{{ $t('wealthHolding') }}</div>
                                 <div
                                     v-riseFall="{
                                         value: item.wealthMarketValue,
@@ -137,7 +137,7 @@
 
                             <!-- 现金 -->
                             <div class="item">
-                                <div>现金</div>
+                                <div>{{ $t('cash') }}</div>
                                 <div
                                     v-riseFall="{
                                         value: item.availableBalance,
@@ -168,7 +168,7 @@
 
                     <!-- 理财持仓 -->
                     <div class="item">
-                        <div>理财持仓</div>
+                        <div>{{ $t('wealthHolding') }}</div>
                         <div
                             v-riseFall="{
                                 value: assetsBreakdown[item.value].wealthMarketValue,
@@ -183,7 +183,7 @@
 
                     <!-- 现金 -->
                     <div class="item">
-                        <div>现金</div>
+                        <div>{{ $t('cash') }}</div>
                         <div
                             v-riseFall="{
                                 value: assetsBreakdown[item.value].availableBalance,
@@ -198,7 +198,7 @@
 
                     <!-- 在途资金 -->
                     <div class="item">
-                        <div class="c-gray">在途资金</div>
+                        <div class="c-gray">{{ $t('onWayMoney') }}</div>
                         <div
                             class="c-gray"
                             v-riseFall="{
@@ -214,7 +214,7 @@
 
                     <!-- 现金可提 -->
                     <div class="item">
-                        <div class="c-gray">现金可提</div>
+                        <div class="c-gray">{{ $t('canUseCash') }}</div>
                         <div
                             class="c-gray"
                             v-riseFall="{
@@ -230,7 +230,7 @@
 
                     <!-- 冻结资金 -->
                     <div class="item">
-                        <div class="c-gray">冻结资金</div>
+                        <div class="c-gray">{{ $t('freezeCash') }}</div>
                         <div
                             class="c-gray"
                             v-riseFall="{

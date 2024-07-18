@@ -29,7 +29,7 @@ export default {
     alterInvestment: '票據',
     starTreasureSpecial: '星財寶專戶',
     fundRelationCompanyTip: '理財相關服務由',
-    fundRelationCompany: '復星國際證券',
+    fundRelationCompany: '陸浦香港',
     provide: '提供',
     // 持仓首页
     accountHoldTitle: '賬戶持倉',

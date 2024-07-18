@@ -34,8 +34,8 @@ export const RISK_COLOR = {
 
 // 币种
 export const CURRENCY_LIST = [
-    { value: 'HKD', text: i18n.t('HKD') },
     { value: 'USD', text: i18n.t('USD') },
+    { value: 'HKD', text: i18n.t('HKD') },
     { value: 'CNH', text: i18n.t('CNH') },
 ]
 
@@ -56,8 +56,8 @@ export const SWIPE_MAP = {
 //  理财类型
 export const WEALTH_MAP = generateMap([
     ['Wealth-ALL', '全部', ''],
-    ['Wealth-HKD', '港元理财', 'HKD'],
     ['Wealth-USD', '美元理财', 'USD'],
+    ['Wealth-HKD', '港元理财', 'HKD'],
 ])
 
 /**
@@ -77,4 +77,4 @@ export const flowType2Icon = {
     23 /* 迎新宝 */: 'xingcaibaozh',
 }
 
-export const ACTIVE_TAB_STR = 'activeTab'
+export const ACTIVE_TAB_STR = 'module'

@@ -42,7 +42,15 @@ const router = new VueRouter({
             meta: {
                 title: '资金流水',
             },
-            component: () => import(/* webpackChunkName: "commonOutsideRouter" */ '@/views/commonOutside/Flow.vue'),
+            component: () => import(/* webpackChunkName: "commonOutsideRouter" */ '@/views/commonOutside/flow/index.vue'),
+        },
+        {
+            path: '/flow/detail',
+            name: 'FlowDetail',
+            meta: {
+                title: '记录详情',
+            },
+            component: () => import(/* webpackChunkName: "commonOutsideRouter" */ '@/views/commonOutside/flow/detail.vue'),
         },
     ],
     // 跳转新页面置顶

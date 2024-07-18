@@ -4,6 +4,61 @@
             <div class="account-title">
                 <div class="account-title__left">
                     <div class="account-info">
+                        <multi-img :name="`account-type__USD`" directory="common" />
+                        <span class="account-type">{{ $t('USDMarket') }}{{ accountType }}</span>
+                        <p class="status" :class="[mgShiftTo ? 'open' : 'pause']">{{ $t('had') }}{{ mgShiftTo ? $t('open') : $t('pause') }}</p>
+                    </div>
+                    <div class="amount-info">
+                        <span>
+                            {{ $t('canUseCash') }}
+                            <span class="bold">{{ singleWithdrawMap.USD | amountFilter }}</span>
+                            {{ $t('USD') }}
+                        </span>
+                    </div>
+                </div>
+                <van-switch class="account-title__right" :value="mgShiftTo" @input="shiftTotChange('usd')"></van-switch>
+            </div>
+            <div class="row">
+                <div class="row-content" @click="chooseProductAction(2)">
+                    <div class="row-content__top">
+                        <div class="left">{{ $t('autoRollIn') }}{{ $t('product') }}</div>
+                        <div class="right">
+                            <span>{{ mgproductName }}</span>
+                            <multi-img class="next" name="icon-right-arrow" directory="common"></multi-img>
+                        </div>
+                    </div>
+                    <div class="row-content__bottom">{{ $t('idleCashRecommandUS') }}</div>
+                </div>
+            </div>
+            <div class="row" @click="checkTime(2)">
+                <div class="row-content">
+                    <div class="row-content__top">
+                        <div class="left">{{ $t('autoRollIn') }}{{ $t('date') }}</div>
+                        <div class="right">
+                            <span>{{ mgToTheTime }}</span>
+                            <multi-img class="next" name="icon-right-arrow" directory="common"></multi-img>
+                        </div>
+                    </div>
+                    <div class="row-content__bottom">{{ $t('deferredRemind') }}</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="row-content no-shadow" @click="reservedAmount(2)">
+                    <div class="row-content__top">
+                        <div class="left">{{ $t('reserveCash') }}</div>
+                        <div class="right">
+                            <span>{{ mgKeepAmount | thousandsFilter }} {{ $t('USD') }}</span>
+                            <multi-img class="next" name="icon-right-arrow" directory="common"></multi-img>
+                        </div>
+                    </div>
+                    <div class="row-content__bottom">{{ $t('ecashKeepAmountAuto') }}</div>
+                </div>
+            </div>
+        </div>
+        <div class="deal-box">
+            <div class="account-title">
+                <div class="account-title__left">
+                    <div class="account-info">
                         <multi-img :name="`account-type__HKD`" directory="common" />
                         <span class="account-type">{{ $t('HKDMarket') }}{{ accountType }}</span>
                         <p class="status" :class="[ggShiftTo ? 'open' : 'pause']">{{ $t('had') }}{{ ggShiftTo ? $t('open') : $t('pause') }}</p>
@@ -72,61 +127,7 @@
                 </div>
             </div>
         </div>
-        <div class="deal-box">
-            <div class="account-title">
-                <div class="account-title__left">
-                    <div class="account-info">
-                        <multi-img :name="`account-type__USD`" directory="common" />
-                        <span class="account-type">{{ $t('USDMarket') }}{{ accountType }}</span>
-                        <p class="status" :class="[mgShiftTo ? 'open' : 'pause']">{{ $t('had') }}{{ mgShiftTo ? $t('open') : $t('pause') }}</p>
-                    </div>
-                    <div class="amount-info">
-                        <span>
-                            {{ $t('canUseCash') }}
-                            <span class="bold">{{ singleWithdrawMap.USD | amountFilter }}</span>
-                            {{ $t('USD') }}
-                        </span>
-                    </div>
-                </div>
-                <van-switch class="account-title__right" :value="mgShiftTo" @input="shiftTotChange('usd')"></van-switch>
-            </div>
-            <div class="row">
-                <div class="row-content" @click="chooseProductAction(2)">
-                    <div class="row-content__top">
-                        <div class="left">{{ $t('autoRollIn') }}{{ $t('product') }}</div>
-                        <div class="right">
-                            <span>{{ mgproductName }}</span>
-                            <multi-img class="next" name="icon-right-arrow" directory="common"></multi-img>
-                        </div>
-                    </div>
-                    <div class="row-content__bottom">{{ $t('idleCashRecommandUS') }}</div>
-                </div>
-            </div>
-            <div class="row" @click="checkTime(2)">
-                <div class="row-content">
-                    <div class="row-content__top">
-                        <div class="left">{{ $t('autoRollIn') }}{{ $t('date') }}</div>
-                        <div class="right">
-                            <span>{{ mgToTheTime }}</span>
-                            <multi-img class="next" name="icon-right-arrow" directory="common"></multi-img>
-                        </div>
-                    </div>
-                    <div class="row-content__bottom">{{ $t('deferredRemind') }}</div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="row-content no-shadow" @click="reservedAmount(2)">
-                    <div class="row-content__top">
-                        <div class="left">{{ $t('reserveCash') }}</div>
-                        <div class="right">
-                            <span>{{ mgKeepAmount | thousandsFilter }} {{ $t('USD') }}</span>
-                            <multi-img class="next" name="icon-right-arrow" directory="common"></multi-img>
-                        </div>
-                    </div>
-                    <div class="row-content__bottom">{{ $t('ecashKeepAmountAuto') }}</div>
-                </div>
-            </div>
-        </div>
+
         <div class="desc">
             <p class="desc-title">{{ $t('cashServeDeclare') }}</p>
             <div class="desc-content">

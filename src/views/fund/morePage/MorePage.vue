@@ -5,7 +5,6 @@
             <div v-else>
                 {{ $t('fundText13') }}
                 <p>・{{ $t('fundText14') }}</p>
-                <p>・{{ $t('fundText15') }}</p>
             </div>
         </div>
         <div class="card tjlist">

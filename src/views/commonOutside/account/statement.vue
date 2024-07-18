@@ -1,11 +1,11 @@
 <template>
     <!-- 理财收益说明 -->
     <div class="statement-card">
-        <div class="btn" @click="openPage">理财收益说明</div>
+        <div class="btn" @click="openPage">{{ $t('profitDesc') }}</div>
         <div class="msg">
-            证券相关服务由
-            <span class="primary">复星国际证券</span>
-            提供
+            {{ $t('serviceBy1') }}
+            <span class="primary">{{ $t('tenant.company') }}</span>
+            {{ $t('serviceBy2') }}
         </div>
     </div>
 </template>
@@ -44,7 +44,7 @@ export default {
         font-size: 12px;
 
         span {
-            color: #ff6907;
+            color: @theme;
         }
     }
 }
