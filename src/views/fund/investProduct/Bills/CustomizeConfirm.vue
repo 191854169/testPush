@@ -290,7 +290,7 @@ import { noteTradeInfo, noteOrderModify } from '@/apis/wealth/index'
 import dayjs from 'dayjs'
 import { thousandsFilter } from '@/config/filters'
 import { CURRENCY_MAP, RISK_RATING_MAP, BILL_COMPLEX_MAP, BILL_CHECKED } from '@/views/fund/config/common'
-import JSBridge from '@fs/jsbridge/dist/lib/jsBridge.js'
+import { lupuJsbridge as JSBridge } from '@fs/jsbridge/dist/lib/lupu/jsBridge.js'
 import { customerService } from '@/utils'
 import { Toast } from 'vant'
 

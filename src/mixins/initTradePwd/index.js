@@ -1,5 +1,5 @@
 import { TRADE_PWD_STATUS } from '@/utils/user'
-import JSBridge from '@fs/jsbridge/dist/lib/jsBridge.js'
+import { lupuJsbridge as JSBridge } from '@fs/jsbridge/dist/lib/lupu/jsBridge.js'
 import { getAppVersion, compareVersion } from '@/utils/tools'
 import { getRunEnv } from '../../utils/env'
 

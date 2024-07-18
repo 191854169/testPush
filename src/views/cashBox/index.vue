@@ -131,7 +131,7 @@
 <script>
 import { isInRyH5, isInOutsideH5 } from '@/utils'
 import { Overlay, Toast } from 'vant'
-import JSBridge from '@fs/jsbridge/dist/lib/jsBridge.js'
+import { lupuJsbridge as JSBridge } from '@fs/jsbridge/dist/lib/lupu/jsBridge.js'
 import { thousandsFilter } from '@/config/filters.js'
 import { ecashAssetsDetailInfo, ecashUserSetting } from '@/apis/wealth/index.js'
 import isOlderAge65 from '@/mixins/AgeLimit/index.js'

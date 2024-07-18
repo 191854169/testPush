@@ -1,4 +1,4 @@
-import JSBridge from '@fs/jsbridge/dist/lib/jsBridge.js'
+import { lupuJsbridge as JSBridge } from '@fs/jsbridge/dist/lib/lupu/jsBridge.js'
 
 export default {
     mounted() {
