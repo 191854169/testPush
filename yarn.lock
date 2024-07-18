@@ -1165,10 +1165,10 @@
   resolved "http://ops-nexus.fotechwealth.com.local/repository/npm-group/@fs/jsbridge/-/jsbridge-1.3.10.tgz#398a1fff3d7cef0006b08fb8a9b112ad208bd33f"
   integrity sha512-2/dQJrwRhcLBjlGvQmyYF7cUV8iS3d+lv5za8suiUyh1MGqVvQbmPoW0lD3rIRqBibdcbbLzL86hpHdhL+Yxrg==
 
-"@fs/jsbridge@^1.3.11-beta":
-  version "1.3.11-beta"
-  resolved "http://ops-nexus.fotechwealth.com.local/repository/npm-group/@fs/jsbridge/-/jsbridge-1.3.11-beta.tgz#6cd988c6c49ca146a1f7cc77ef3f783008d3c92c"
-  integrity sha512-ebkZdETiqXzvITDK6aFsP9sBliZZOnfFnasdrAOJTICRb2iY6ihenkhbGwX9C3i4YLoMUQndp5+6E+fifOiLbQ==
+"@fs/jsbridge@^1.3.12-beta":
+  version "1.3.12-beta"
+  resolved "http://ops-nexus.fotechwealth.com.local/repository/npm-group/@fs/jsbridge/-/jsbridge-1.3.12-beta.tgz#73af11baab1081feae4404b3e556afa34a9a7ea5"
+  integrity sha512-CAHS9g5cqBfObDdTRLoQy/xMvWIzBP+8X7jST795Mj4bbe32bJga+aThYhz7C919Wdrm+iwd5+UZW/8WUR451g==
 
 "@fs/prettier-config@^1.3.1":
   version "1.3.1"

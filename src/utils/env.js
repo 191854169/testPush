@@ -1,7 +1,7 @@
 // 运行环境相关
 // 2022-04-14
 
-import { lupuJsbridge as JSBridge } from '@fs/jsbridge/dist/lib/lupu/jsBridge.js'
+import JSBridge from '@fs/jsbridge/dist/lib/lupu/jsBridge.js'
 import { getQueryString, isDeviceMobile, getRunEnv as _getRunEnv } from '@/utils/tools'
 
 export const getRunEnv = _getRunEnv
