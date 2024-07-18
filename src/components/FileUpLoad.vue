@@ -18,7 +18,7 @@
 <script>
 // api
 import { fileUpOss, fileDownOss } from '@/apis/openAccount'
-import { lupuJsbridge as JSBridge } from '@fs/jsbridge/dist/lib/lupu/jsBridge.js'
+import { lupuJsbridge as JSBridge, thsI18NJsBridge } from '@fs/jsbridge/dist/lib/lupu/jsBridge.js'
 export default {
     props: {
         /** 默认背景 */
