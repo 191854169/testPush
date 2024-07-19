@@ -8198,10 +8198,6 @@ jsbn@~0.1.0:
   resolved "http://ops-nexus.fotechwealth.com.local/repository/npm-group/jsbn/-/jsbn-0.1.1.tgz#a5e654c2e5a2deb5f201d96cefbca80c0ef2f513"
   integrity sha512-UVU9dibq2JcFWxQPA6KCqj5O42VOmAY3zQUfEKxU0KpTGXwNoCjkX1e13eHNvw/xPynt6pU0rZ1htjWTNTSXsg==
 
-"jsbridge@git+http://gl.fotechwealth.com.local/H5/JsBridge.git#semver:>=1.0.19":
-  version "1.1.0"
-  resolved "git+http://gl.fotechwealth.com.local/H5/JsBridge.git#3595e3906859c4cd1e8353ccda5439d407b3dfd5"
-
 jsdom@^20.0.0:
   version "20.0.3"
   resolved "http://ops-nexus.fotechwealth.com.local/repository/npm-group/jsdom/-/jsdom-20.0.3.tgz#886a41ba1d4726f67a8858028c99489fed6ad4db"
