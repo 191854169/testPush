@@ -25,6 +25,7 @@ const router = new VueRouter({
             name: 'wealth',
             meta: {
                 title: '',
+                noLoginAuth: true,
             },
             component: () => import(/* webpackChunkName: "commonOutsideRouter" */ '@/views/commonOutside/index.vue'),
         },
@@ -93,7 +94,7 @@ router.beforeEach(async (to, from, next) => {
         store.commit('user/updateSession', { session: to.query.fhsid })
     }
 
-    if (!store.state.user.session) {
+    if (!store.state.user.session && !to.meta.noLoginAuth) {
         await store.dispatch('user/login')
     }
 
