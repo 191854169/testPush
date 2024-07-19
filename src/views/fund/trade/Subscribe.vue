@@ -291,7 +291,7 @@ import { getAmount } from '@/apis/amount'
 import { productBuy, FundSubscribe, ecashSubscribe, ecashSubscribeWithOpen } from '@/apis/wealth/index.js'
 import { getArticleDetail } from '@/apis/cms.js'
 import { getLangType } from '../../../utils'
-import { isHLApp } from '@/utils/tools.js'
+import { isTenantApp } from '@/utils/tools.js'
 import { FUND_TYPE_MAP } from '../config/common'
 import { getFile, getPriDocument } from '@/apis/fund/fund'
 import dayjs from 'dayjs'
@@ -1011,7 +1011,7 @@ export default {
             const url = `${location.origin}/wealth/static/${fileName}`
             console.log('pdfUrl:', url)
             const title = this.$t('protocol.clientStatement')
-            if (isHLApp() && this.$jsBridge) {
+            if (isTenantApp() && this.$jsBridge) {
                 this.$jsBridge.openPDF({ url: encodeURIComponent(url), title })
             } else {
                 window.open(url)

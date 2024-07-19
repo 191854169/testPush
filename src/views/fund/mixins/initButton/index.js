@@ -1,4 +1,4 @@
-import { getQueryString, isHLApp } from '@/utils'
+import { getQueryString, isTenantApp } from '@/utils'
 import { UserRiskInfo } from '@/apis/riskAssessment.js'
 import { getHoldingsDetail } from '@/apis/wealth/index.js'
 import { getBasicInfo } from '@/apis/fund/fund.js'
@@ -35,7 +35,7 @@ export default {
             return this.type === 'public'
         },
         isInHlApp() {
-            return isHLApp()
+            return isTenantApp()
         },
         // 是否站内
         isInApp() {

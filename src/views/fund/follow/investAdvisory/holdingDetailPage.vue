@@ -32,7 +32,7 @@ import holdingDetail from './holdingDetail.vue'
 import html2canvas from 'html2canvas'
 import LogoAd from '@/components/logo.vue'
 
-import { isHLApp } from '@/utils'
+import { isTenantApp } from '@/utils'
 import { WEALTH_AMOUNT_STATUS_kEY } from '@/config/common.js'
 import { marketBreakDown } from '@/apis/portfolioFollow'
 import { mapState } from 'vuex'
@@ -176,7 +176,7 @@ export default {
             this.$jsBridge?.setButton('right1', { icon: null }, () => {})
         },
         share() {
-            if (!isHLApp()) return
+            if (!isTenantApp()) return
             const options = {
                 useCORS: true, // 开启跨域配置
                 backgroundColor: '#f9f9f9',

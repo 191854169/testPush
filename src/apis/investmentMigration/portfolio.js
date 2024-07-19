@@ -1,11 +1,11 @@
 import { ENCRYPT_TYPES } from '@/httpRequest/encrypt'
 import { post } from '@/httpRequest/http.js'
 const { VUE_APP_WEALTH = '', NODE_ENV, VUE_APP_ENV } = process.env
-import { Merge, isHLApp } from '@/utils'
+import { Merge, isTenantApp } from '@/utils'
 import { getPathVersion } from '@/utils/env'
 
 let domain = ''
-if (isHLApp() || NODE_ENV === 'production') domain = `${VUE_APP_WEALTH}`
+if (isTenantApp() || NODE_ENV === 'production') domain = `${VUE_APP_WEALTH}`
 
 // 合并请求参数
 const mergeInstance = new Merge({ defaultEncrypt: ENCRYPT_TYPES.LOGIN, needCommonParam: true })

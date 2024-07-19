@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import { isHLApp } from '@/utils'
+import { isTenantApp } from '@/utils'
 import { checkReleaseStatus } from '../utils/dialogUtil'
 export default {
     name: 'create-protfolio-btn',
@@ -47,7 +47,7 @@ export default {
             if (checkReleaseStatus(this, this.isCreater, this.releaseStatus)) return
             const url = `${location.origin}/wealth/fund.html#/create-portfolio?isProfessional=${this.isProfessional}`
             if (this.$jsBridge) {
-                this.$jsBridge.open({ url: encodeURIComponent(`${url}`), title: '', mode: 'immersive', inapp: isHLApp() })
+                this.$jsBridge.open({ url: encodeURIComponent(`${url}`), title: '', mode: 'immersive', inapp: isTenantApp() })
             } else {
                 this.$router.push({
                     path: `/create-portfolio`,

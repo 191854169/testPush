@@ -1,5 +1,5 @@
 import { queryClientSetting, setClientSetting } from '@/apis/uc.js'
-import { isFunction, isHLApp } from '@/utils'
+import { isFunction, isTenantApp } from '@/utils'
 
 export default {
     name: '',
@@ -23,7 +23,7 @@ export default {
                 }
             }
             //YLTODO: 站外先不请求接口, 等产品确认站外是否需要提示, 如果需要提示使用 localstorage
-            if (!isHLApp()) {
+            if (!isTenantApp()) {
                 execute(undefined)
                 return
             }

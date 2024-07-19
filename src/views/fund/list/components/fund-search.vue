@@ -62,7 +62,7 @@ import { getFund } from '@/apis/fund/search'
 import { floatToRatio } from '@/utils'
 import { Popup, Search } from 'vant'
 import { throttle } from 'lodash'
-import { isHLApp } from '@/utils/tools'
+import { isTenantApp } from '@/utils/tools'
 import { i18n } from '@/i18n/fund/index.js'
 
 const FUND_TYPE_ENUM = {
@@ -117,7 +117,7 @@ export default {
             return !this.fundList.length > 0
         },
         isApp() {
-            return isHLApp() && !!this.$jsBridge
+            return isTenantApp() && !!this.$jsBridge
         },
     },
     watch: {

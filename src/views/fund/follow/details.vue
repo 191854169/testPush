@@ -65,7 +65,7 @@ import PortfolioCommentCard from './components/portfolioCommentCard.vue'
 import soldoutTip from './components/soldoutTip.vue'
 import SharePortfolioDetail from './components/share/sharePortfolioDetail.vue'
 import { portfolioCommentList } from '@/apis/followInvest/index.js'
-import { isHLApp, getAppVersion, compareVersion } from '@/utils'
+import { isTenantApp, getAppVersion, compareVersion } from '@/utils'
 import { CUSTOMER_TYPE } from '../config/common'
 import watchPageVisibleMixin from '@/mixins/watchPageVisibleMixin'
 import { isEmpty } from '@/utils'
@@ -102,7 +102,7 @@ export default {
             return !this.$env.isInApp
         },
         isInAPP() {
-            return isHLApp()
+            return isTenantApp()
         },
         compatibility() {
             return this.$route.query.compatibility
@@ -195,7 +195,7 @@ export default {
                         if (shareImage) {
                             this.showShareDetail = false
                             this.showLoading = false
-                            if (isHLApp()) {
+                            if (isTenantApp()) {
                                 const curVersion = getAppVersion()
                                 const moreThanVersion = compareVersion(curVersion, '2.15.0') >= 0
                                 if (moreThanVersion) {

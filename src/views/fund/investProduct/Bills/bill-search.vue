@@ -48,7 +48,7 @@ import { getBill } from '@/apis/fund/note'
 import { floatToRatio, isUndefined, isNull } from '@/utils'
 import { Popup, Search } from 'vant'
 import { throttle } from 'lodash'
-import { isHLApp } from '@/utils/tools'
+import { isTenantApp } from '@/utils/tools'
 
 export default {
     name: 'fundSearch',
@@ -86,7 +86,7 @@ export default {
             return !this.fundList.length > 0
         },
         isApp() {
-            return isHLApp() && !!this.$jsBridge
+            return isTenantApp() && !!this.$jsBridge
         },
     },
     watch: {

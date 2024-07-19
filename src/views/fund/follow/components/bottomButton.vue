@@ -52,7 +52,7 @@
 </template>
 
 <script>
-import { isHLApp, customerService, getQueryString } from '@/utils'
+import { isTenantApp, customerService, getQueryString } from '@/utils'
 import { PORTFOLIO_TYPE_MAP, investmentSubAccountStatus } from '../../config/common'
 import { ActionSheet } from 'vant'
 import { portfolioFollow } from '@/apis/followInvest/index.js'
@@ -146,7 +146,7 @@ export default {
             return !!this.obj.relatedPortfolioID
         },
         isInHlApp() {
-            return isHLApp()
+            return isTenantApp()
         },
         // 不在恒利或网厅,站外
         isNotInHlOrWt() {
@@ -460,7 +460,7 @@ export default {
             const url = `${location.origin}${location.pathname}#${path}?portfolioId=${this.$route.query.portfolioId}`
 
             if (this.$jsBridge) {
-                this.$jsBridge.open({ url: encodeURIComponent(url), title: '', mode: immersive ? 'immersive' : '', inapp: isHLApp() })
+                this.$jsBridge.open({ url: encodeURIComponent(url), title: '', mode: immersive ? 'immersive' : '', inapp: isTenantApp() })
             } else {
                 this.$router.push({
                     path: path,

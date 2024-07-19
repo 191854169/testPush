@@ -128,7 +128,7 @@ import QuotePermission from './components/quotePermission.vue'
 import portfolioTradeCalcMixin from '@/views/fund/follow/mixins/portfolioTradeCalcMixin'
 import NP from 'number-precision'
 
-import { isHLApp } from '@/utils'
+import { isTenantApp } from '@/utils'
 import { PortfolioHoldingAllocation } from '@/apis/followInvest/index.js'
 import { amountFilter } from '@/config/filters.js'
 import { keepDecimals } from '@/utils'
@@ -178,7 +178,7 @@ export default {
             return !this.$env.isInApp
         },
         isInAPP() {
-            return isHLApp()
+            return isTenantApp()
         },
         portfolioId() {
             return Number(this.$route.query.portfolioId)

@@ -191,7 +191,7 @@ import { bondSubscribe, boedRedeem } from '@/apis/wealth/index.js'
 import { ENCRYPT_TYPES } from '@/httpRequest/encrypt.js'
 import tradeTool from './components/tradeTool.vue'
 import { addCurParamsForUrl, floatToRatio, getLangType } from '../../../../utils'
-import { isHLApp } from '@/utils/tools.js'
+import { isTenantApp } from '@/utils/tools.js'
 import { getFile as getBondFile } from '@/apis/bond/index'
 import TradeTip from './components/TradeToast.vue'
 import { BOND_ORDER_VALID_TIME_MAP, INVEST_FOCUS_DEGREE_MAP, ORDER_DIRECTION_MAP } from '../../config/common'
@@ -561,7 +561,7 @@ export default {
             const url = `${location.origin}/wealth/static/${fileName}`
             console.log('pdfUrl:', url)
             const title = this.$t('protocol.clientStatement')
-            if (isHLApp() && this.$jsBridge) {
+            if (isTenantApp() && this.$jsBridge) {
                 this.$jsBridge.openPDF({ url: encodeURIComponent(url), title })
             } else {
                 window.open(url)

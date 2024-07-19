@@ -74,7 +74,7 @@ import remainingDayFollower from './remainingDayFollower.vue'
 import headerPortrait from './headerPortrait'
 import portfolioBrief from './portfolioBrief.vue'
 import { Dialog } from 'vant'
-import { milliFormat, floatToRatio, isHLApp } from '@/utils'
+import { milliFormat, floatToRatio, isTenantApp } from '@/utils'
 import customerDetailMixin from '../mixins/customerDetailMixin'
 import { CUSTOMER_TYPE } from '../../config/common'
 import { isEmpty } from 'lodash'
@@ -148,7 +148,7 @@ export default {
         gotoEdit() {
             const url = `${location.origin}${location.pathname}#/edit-portfolio-info?portfolioId=${this.$route.query.portfolioId}`
             if (this.$jsBridge) {
-                this.$jsBridge.open({ url: encodeURIComponent(url), title: '', mode: 'immersive', inapp: isHLApp() })
+                this.$jsBridge.open({ url: encodeURIComponent(url), title: '', mode: 'immersive', inapp: isTenantApp() })
             } else {
                 this.$router.push({
                     path: '/edit-portfolio-info',

@@ -55,7 +55,7 @@ import starSelectItem from './components/starSelectionItem.vue'
 import sharePortfolioStarSelection from './components/share/sharePortfolioStarSelection.vue'
 import html2canvas from 'html2canvas'
 import dayjs from 'dayjs'
-import { isHLApp, getAppVersion, compareVersion } from '@/utils/tools.js'
+import { isTenantApp, getAppVersion, compareVersion } from '@/utils/tools.js'
 
 const periodUnit = {
     week: 'w1',
@@ -292,7 +292,7 @@ export default {
                         if (shareImage) {
                             this.showShareDetail = false
                             this.showLoading = false
-                            if (isHLApp()) {
+                            if (isTenantApp()) {
                                 const curVersion = getAppVersion()
                                 const moreThanVersion = compareVersion(curVersion, '2.15.0') >= 0
                                 if (moreThanVersion) {

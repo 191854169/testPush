@@ -95,7 +95,7 @@ import DynamicFont from '@/components/FosunDynamicFont.vue'
 import { getPortfolioOrders } from '@/apis/followInvest/index.js'
 import { Popup, Search } from 'vant'
 import { throttle } from 'lodash'
-import { isHLApp } from '@/utils/tools'
+import { isTenantApp } from '@/utils/tools'
 import { FOLLOW_TRADE_STATUS_MAP } from '@/views/fund/config/common'
 import { i18n } from '@/i18n/fund'
 
@@ -177,7 +177,7 @@ export default {
             return !this.orderRecordList.length > 0
         },
         isApp() {
-            return isHLApp() && !!this.$jsBridge
+            return isTenantApp() && !!this.$jsBridge
         },
     },
     watch: {

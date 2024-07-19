@@ -84,7 +84,7 @@
 import ResultDetailTable from './components/resultDetailTable.vue'
 import NP from 'number-precision'
 import { CURRENCY_MAP, PORTFOLIO_TYPE_MAP } from '../config/common'
-import { isHLApp, keepDecimals } from '@/utils'
+import { isTenantApp, keepDecimals } from '@/utils'
 import { thousandsFilter } from '@/config/filters.js'
 import NavigationBar from '@/components/NavigationBar.vue'
 import { AutoFxSetting } from '@/apis/cash'
@@ -166,7 +166,7 @@ export default {
             return this.result && this.result.portfolioType === PORTFOLIO_TYPE_MAP.keysMap.PUBLIC_FUND
         },
         isInHlApp() {
-            return isHLApp()
+            return isTenantApp()
         },
         isMixMarket() {
             return this.result.portfolioType === PORTFOLIO_TYPE_MAP.keysMap.mixin

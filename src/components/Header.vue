@@ -9,7 +9,7 @@
 </template>
 <script>
 import JSBridge from '@fs/jsbridge/dist/lib/lupu/jsBridge.js'
-import { isDeviceMobile, isHLApp } from '../utils'
+import { isDeviceMobile, isTenantApp } from '../utils'
 
 export default {
     props: {
@@ -44,7 +44,7 @@ export default {
     mounted() {},
     computed: {
         showCloseIcon() {
-            return this.showClose && (!isDeviceMobile() || isHLApp())
+            return this.showClose && (!isDeviceMobile() || isTenantApp())
         },
     },
     methods: {

@@ -37,7 +37,7 @@
 <script>
 import { Collapse, CollapseItem } from 'vant'
 import { getFile, getBrief } from '@/apis/fund/fund'
-import { isHLApp, getLangType } from '@/utils'
+import { isTenantApp, getLangType } from '@/utils'
 import pathnames from '@/config/H5Pathname.js'
 
 export default {
@@ -159,7 +159,7 @@ export default {
             }
             console.log('pdfUrl:', url)
             const title = item.fileType
-            if (isHLApp() && this.$jsBridge) {
+            if (isTenantApp() && this.$jsBridge) {
                 this.$jsBridge.openPDF({ url: encodeURIComponent(url), title })
             } else {
                 window.open(url)

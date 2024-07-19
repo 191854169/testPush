@@ -36,7 +36,7 @@
                     <multi-img name="icon_trade_order" directory="fund/follow"></multi-img>
                     {{ $t('customerDetail.realOrderRecond') }}
                 </div>
-                <div class="entrance" :class="{ disabled: !isHLApp() }" @click="gotoInvestAsset">
+                <div class="entrance" :class="{ disabled: !isTenantApp() }" @click="gotoInvestAsset">
                     <multi-img name="icon_invest_asset" directory="fund/follow"></multi-img>
                     {{ $t('customerDetail.myInvestAsset') }}
                 </div>
@@ -50,7 +50,7 @@ import { UserInfo } from '@/apis/followInvest/index.js'
 import headerPortrait from './headerPortrait'
 import customerDetailMixin from '../mixins/customerDetailMixin'
 import { followerNumFilter } from '../utils/filters'
-import { isHLApp } from '@/utils'
+import { isTenantApp } from '@/utils'
 
 // import store from '@/store/demo'
 export default {
@@ -91,7 +91,7 @@ export default {
         },
     },
     methods: {
-        isHLApp,
+        isTenantApp,
         // 获取数据
         async getData() {
             try {
@@ -120,7 +120,7 @@ export default {
             }
         },
         gotoInvestAsset() {
-            if (isHLApp()) {
+            if (isTenantApp()) {
                 this.$goPage('/invest-advisory/assets')
             } else {
                 this.$toast(this.$t('investAdvisory.pleaseContactService'))

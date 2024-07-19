@@ -20,7 +20,7 @@
 <script>
 import Empty from '@/components/Empty.vue'
 import { getFile } from '@/apis/fund/fund'
-import { isHLApp } from '@/utils/tools.js'
+import { isTenantApp } from '@/utils/tools.js'
 export default {
     name: 'fundFile',
     components: {
@@ -54,7 +54,7 @@ export default {
             }
         },
         pdfClickHandler(item) {
-            if (isHLApp() && this.$jsBridge) {
+            if (isTenantApp() && this.$jsBridge) {
                 this.$jsBridge.openPDF({ url: item.fileUrl, title: item.fileType })
             } else {
                 window.open(item.fileUrl)

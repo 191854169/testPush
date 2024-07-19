@@ -110,7 +110,7 @@
 
 <script>
 import NavigationBar from '@/components/NavigationBar.vue'
-import { composeParams, dynamicFontSize, getLangType, isHLApp } from '@/utils'
+import { composeParams, dynamicFontSize, getLangType, isTenantApp } from '@/utils'
 import { CURRENCY_MAP, ORDER_PATH_TYPE, PORTFOLIO_TYPE_MAP, stockOrderTypeMap } from '../config/common'
 import { amountFormatter } from '@/config/filters'
 import { PortfolioOrderCreate } from '@/apis/followInvest/index.js'
@@ -182,7 +182,7 @@ export default {
             return this.$route.query.portfolioId
         },
         isInAPP() {
-            return isHLApp()
+            return isTenantApp()
         },
         stockMarket() {
             return { 1: 'hk', 2: 'us' }[this.obj.portfolioType]
@@ -762,7 +762,7 @@ export default {
             const fileName = `static/客户声明_${getLangType()}.pdf`
             const url = `${location.origin}/wealth/static/${fileName}`
             const title = this.$t('protocol.clientStatement')
-            if (isHLApp() && this.$jsBridge) {
+            if (isTenantApp() && this.$jsBridge) {
                 this.$jsBridge.openPDF({ url: encodeURIComponent(url), title })
             } else {
                 window.open(url)

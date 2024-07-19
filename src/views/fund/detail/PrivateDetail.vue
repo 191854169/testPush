@@ -35,7 +35,7 @@ import RiskIndicator from './components/RiskIndicator.vue'
 import FundFile from './components/FundFile.vue'
 import Rule from './components/RulePrivate.vue'
 import RiskStatement from '../components/RiskStatement.vue'
-import { isHLApp } from '../../../utils'
+import { isTenantApp } from '../../../utils'
 import { isInRyH5 } from '@/utils'
 
 export default {
@@ -66,7 +66,7 @@ export default {
             return this.$route.query.symbol
         },
         isInHLApp() {
-            return isHLApp()
+            return isTenantApp()
         },
         // 睿银不展示广告、展示购买按钮
         isInRy() {

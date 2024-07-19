@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import { isHLApp } from '@/utils'
+import { isTenantApp } from '@/utils'
 export default {
     name: 'user-quote-permission',
     components: {},
@@ -49,7 +49,7 @@ export default {
             },
         },
         isImmersive() {
-            return this.immersive && isHLApp()
+            return this.immersive && isTenantApp()
         },
     },
     mounted() {

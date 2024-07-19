@@ -1,9 +1,9 @@
 import { post, get, path_version } from '@/httpRequest/http.js'
 const { VUE_APP_MKTDATA = '', NODE_ENV } = process.env
-import { isHLApp } from '@/utils'
+import { isTenantApp } from '@/utils'
 
 let domain = ''
-if (isHLApp() || NODE_ENV === 'production') domain = `${VUE_APP_MKTDATA}`
+if (isTenantApp() || NODE_ENV === 'production') domain = `${VUE_APP_MKTDATA}`
 
 const commonConfig = {
     encrypt: 0, // 1: 临时加密； 2 登录加密  0:所有状态不加密

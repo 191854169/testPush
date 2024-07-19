@@ -233,7 +233,7 @@ test('是否是钉钉浏览器', () => {
 })
 
 test('是否是恒利证券App中', () => {
-    expect(tools.isHLApp()).toBe(false)
+    expect(tools.isTenantApp()).toBe(false)
 })
 
 test('是否是同花顺App中', () => {

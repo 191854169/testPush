@@ -13,7 +13,7 @@ import MultiImg from '@/components/MultiImg.vue'
 import Loading from '@/components/Loading.vue'
 import { thousandsFilter, amountFilter } from '@/config/filters.js'
 import SvgIcon from '@/components/SvgIcon.vue'
-import { isHLApp } from '@/utils/tools.js'
+import { isTenantApp } from '@/utils/tools.js'
 import { i18n } from '@/i18n/fund/index.js'
 import { getAccountStatus, getInvesetmentAccountStatus, nextAfterJudgeAccountStatus } from './init'
 
@@ -123,7 +123,7 @@ initIsLoginStatus()
 /* 登录操作 - 内含各个环境的是否存在登录态及后续的登陆操作 */
 function login() {
     // 恒利
-    if (isHLApp()) {
+    if (isTenantApp()) {
         // 内部会进行是否登录状态判断
         store.dispatch('user/login', false).then(data => {
             if (data) {

@@ -1,11 +1,11 @@
 import { post, path_version, ENCRYPT_TYPES } from '@/httpRequest/http.js'
-import { isHLApp } from '@/utils'
+import { isTenantApp } from '@/utils'
 
 // import store from '@/store/fund'
 const { VUE_APP_JIAOYI = '', NODE_ENV } = process.env
 
 let domain = ''
-if (isHLApp() || NODE_ENV === 'production') domain = `${VUE_APP_JIAOYI}`
+if (isTenantApp() || NODE_ENV === 'production') domain = `${VUE_APP_JIAOYI}`
 const assignData = option => {
     const accts = (JSON.parse(localStorage.getItem('userInfo')) || {}).clientInfo?.accts?.[0] || {}
     const subAcctId = accts.subAcctId || localStorage.getItem('sub') || undefined

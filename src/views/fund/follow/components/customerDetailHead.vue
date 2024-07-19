@@ -118,7 +118,7 @@ import headerPortrait from './headerPortrait.vue'
 import { i18n } from '@/i18n/fund/index.js'
 import customerDetailMixin from '../mixins/customerDetailMixin'
 import { followerNumFilter } from '../utils/filters'
-import { isHLApp } from '@/utils'
+import { isTenantApp } from '@/utils'
 import portfolioBrief from './portfolioBrief.vue'
 import soldoutTip from './soldoutTip.vue'
 import { checkReleaseStatus } from '../utils/dialogUtil'
@@ -246,7 +246,7 @@ export default {
             const url = `${location.origin}${location.pathname}#/edit-customer-info?isProfessional=${isPro}`
 
             if (this.$jsBridge) {
-                this.$jsBridge.open({ url: encodeURIComponent(url), title: '', mode: 'immersive', inapp: isHLApp() })
+                this.$jsBridge.open({ url: encodeURIComponent(url), title: '', mode: 'immersive', inapp: isTenantApp() })
             } else {
                 this.$router.push({
                     path: `/edit-customer-info`,

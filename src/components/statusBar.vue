@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import { getValueForGlobalKey, isHLApp } from '@/utils'
+import { getValueForGlobalKey, isTenantApp } from '@/utils'
 
 export default {
     name: 'statusBar',
@@ -19,7 +19,7 @@ export default {
     },
     computed: {
         isInAPP() {
-            return isHLApp()
+            return isTenantApp()
         },
         statusBarHeight: {
             get() {

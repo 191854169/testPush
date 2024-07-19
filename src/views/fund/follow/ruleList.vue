@@ -73,7 +73,7 @@
 <script>
 import { getFiles } from '@/apis/fund/fund'
 import pathnames from '@/config/H5Pathname.js'
-import { isHLApp, getLangType } from '@/utils/tools.js'
+import { isTenantApp, getLangType } from '@/utils/tools.js'
 import { Collapse, CollapseItem } from 'vant'
 
 export default {
@@ -170,7 +170,7 @@ export default {
             this.getFilesList(symbolList.join(','))
         },
         goToDetail(file) {
-            if (isHLApp() && this.$jsBridge) {
+            if (isTenantApp() && this.$jsBridge) {
                 this.$jsBridge[file.isPdf ? 'openPDF' : 'open']({ url: encodeURIComponent(file.fileUrl), title: file.fileType || '' })
             } else {
                 window.open(file.fileUrl)
@@ -191,7 +191,7 @@ export default {
             }
             console.log('pdfUrl:', url)
             const title = item.fileType || ''
-            if (isHLApp() && this.$jsBridge) {
+            if (isTenantApp() && this.$jsBridge) {
                 this.$jsBridge.openPDF({ url: encodeURIComponent(url), title })
             } else {
                 window.open(url)

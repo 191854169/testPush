@@ -330,7 +330,7 @@ import { isUndefined, compatIOSLocalStorage } from '@/utils/tools'
 import { getUserDetail } from '@/apis/uc.js'
 import { getRunEnv, setTheme } from '@/utils/env.js'
 import checkPIMixin from '@/mixins/business/checkPIMixin'
-import { isHLApp, getAppVersion, compareVersion } from '@/utils/tools.js'
+import { isTenantApp, getAppVersion, compareVersion } from '@/utils/tools.js'
 import { thousandsFilter, currencyFilter } from '@/config/filters.js'
 import { getUsaBondList } from '@/apis/bond/index.js'
 import investmentPortfolioCard from './follow/components/investmentPortfolioCard.vue'
@@ -487,7 +487,7 @@ export default {
         // 是否显示app专属顾问
         showAppCounselor() {
             if (this.closeAppCounselor) return false
-            const inHL = isHLApp()
+            const inHL = isTenantApp()
             // 显示新手引导时不显示
             if (this.showNoobGuide) return false
             if (inHL) {
@@ -840,7 +840,7 @@ export default {
         gotoNewsDetail(item) {
             const url = `${location.origin}/pages/informationDetail.html#/?id=${item.id}&type=${encodeURIComponent('研报')}`
 
-            if (isHLApp() && this.$jsBridge) {
+            if (isTenantApp() && this.$jsBridge) {
                 this.$jsBridge.open({ url: encodeURIComponent(url), title: '' })
             } else {
                 window.open(url)

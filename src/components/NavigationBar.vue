@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import { isHLApp } from '@/utils'
+import { isTenantApp } from '@/utils'
 import statusBar from './statusBar.vue'
 import Header from './Header.vue'
 import NP from 'number-precision'
@@ -64,7 +64,7 @@ export default {
     },
     computed: {
         isInAPP() {
-            return isHLApp()
+            return isTenantApp()
         },
         statusNaviColor() {
             let after = this.shadeColor

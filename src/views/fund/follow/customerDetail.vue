@@ -45,7 +45,7 @@ import { i18n } from '@/i18n/fund/index.js'
 import { UserInfo } from '@/apis/followInvest/index.js'
 import { isNull, isUndefined } from '@/utils/tools'
 import createPortfolioBtn from './components/createPortfolioBtn'
-import { isHLApp } from '@/utils'
+import { isTenantApp } from '@/utils'
 import NavigationBar from '@/components/NavigationBar.vue'
 import watchPageVisibleMixin from '@/mixins/watchPageVisibleMixin'
 export default {
@@ -100,7 +100,7 @@ export default {
         },
 
         isInAPP() {
-            return isHLApp()
+            return isTenantApp()
         },
     },
 

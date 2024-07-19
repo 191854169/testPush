@@ -92,7 +92,7 @@
 import { i18n } from '@/i18n/fund/index.js'
 import textLimitedBox from './components/textLimitedBox.vue'
 import customerDetailMixin from './mixins/customerDetailMixin.js'
-import { isNull, isUndefined, isHLApp } from '@/utils'
+import { isNull, isUndefined, isTenantApp } from '@/utils'
 import { UserInfo, UserInfoUpdate } from '@/apis/followInvest/index.js'
 import { isEmpty, cloneDeep } from 'lodash'
 import NavigationBar from '@/components/NavigationBar.vue'
@@ -167,7 +167,7 @@ export default {
             return []
         },
         isInAPP() {
-            return isHLApp()
+            return isTenantApp()
         },
     },
     created() {},
