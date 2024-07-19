@@ -65,7 +65,7 @@ export default {
     },
     mounted() {
         this.active = 'account'
-        const queryActiveTab = this.$route.query[ACTIVE_TAB_STR]
+        const queryActiveTab = this.$route.query[ACTIVE_TAB_STR] || 'account'
         if (queryActiveTab) {
             // this.$router.replace({ path: '/', query: {} })
             this.active = queryActiveTab
