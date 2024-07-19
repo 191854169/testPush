@@ -1,4 +1,4 @@
-import { isHLApp } from '@/utils'
+import { isTenantApp } from '@/utils'
 
 export default {
     data() {
@@ -10,7 +10,7 @@ export default {
             if (portfolioId) {
                 const url = `${location.origin}/wealth/fund.html#/follow-details?portfolioId=${portfolioId}&compatibility=1`
                 if (this.$jsBridge) {
-                    this.$jsBridge.open({ url: encodeURIComponent(`${url}`), title: '', mode: 'immersive', inapp: isHLApp() })
+                    this.$jsBridge.open({ url: encodeURIComponent(`${url}`), title: '', mode: 'immersive', inapp: isTenantApp() })
                 } else {
                     this.$router.push({
                         path: `/follow-details`,

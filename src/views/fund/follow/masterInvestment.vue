@@ -71,7 +71,7 @@ import gotoFollowDetailsMixin from './mixins/gotoFollowDetailsMixin'
 import watchPageVisibleMixin from '@/mixins/watchPageVisibleMixin'
 import html2canvas from 'html2canvas'
 import dayjs from 'dayjs'
-import { isHLApp, getAppVersion, compareVersion } from '@/utils'
+import { isTenantApp, getAppVersion, compareVersion } from '@/utils'
 
 export default {
     name: 'master-investment',
@@ -277,7 +277,7 @@ export default {
                         if (shareImage) {
                             this.showShareDetail = false
                             this.showLoading = false
-                            if (isHLApp()) {
+                            if (isTenantApp()) {
                                 const curVersion = getAppVersion()
                                 const moreThanVersion = compareVersion(curVersion, '2.15.0') >= 0
                                 if (moreThanVersion) {

@@ -170,7 +170,7 @@
 <script>
 import { Skeleton } from 'vant'
 import { getRecommendList } from '@/apis/fund/fund.js'
-import { isHLApp } from '@/utils/tools'
+import { isTenantApp } from '@/utils/tools'
 // import pm1 from '@/assets/images/fund/pm1.png'
 // import pm2 from '@/assets/images/fund/pm2.png'
 // import pm3 from '@/assets/images/fund/pm3.png'
@@ -217,7 +217,7 @@ export default {
             return this.$route.query.isMore == 1
         },
         isApp() {
-            return isHLApp() && !!this.$jsBridge
+            return isTenantApp() && !!this.$jsBridge
         },
     },
     mounted() {

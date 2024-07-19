@@ -1,9 +1,9 @@
 import { path_version, get, post } from '@/httpRequest/http.js'
-import { isHLApp } from '@/utils'
+import { isTenantApp } from '@/utils'
 const { NODE_ENV, VUE_APP_OPERATION = '' } = process.env
 
 let operationDomain = ''
-if (isHLApp() || NODE_ENV === 'production') {
+if (isTenantApp() || NODE_ENV === 'production') {
     operationDomain = `${VUE_APP_OPERATION}`
 }
 

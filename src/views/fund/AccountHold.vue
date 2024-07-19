@@ -203,7 +203,7 @@ import { Overlay, Skeleton } from 'vant'
 import AccountCard from './components/AccountCard.vue'
 import riskAssessmentMixin from '@/mixins/business/riskAssessmentMixin.js'
 import { dynamicFontSize } from '../../utils'
-import { floatToRatio, isIos, isHLApp } from '@/utils'
+import { floatToRatio, isIos, isTenantApp } from '@/utils'
 import { FUND_MODE_MAP, ASSET_TYPE_MAP } from '@/views/fund/config/common'
 import checkPIMixin from '@/mixins/business/checkPIMixin'
 import privateMixin from './list/mixins/private'
@@ -356,7 +356,7 @@ export default {
                 }
                 // 投顾
                 if (type === 'investAdvisory') {
-                    if (isHLApp()) {
+                    if (isTenantApp()) {
                         this.$goPage('/invest-advisory/assets')
                     } else {
                         this.$toast(this.$t('investAdvisory.pleaseContactService'))

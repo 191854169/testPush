@@ -1,7 +1,7 @@
 import { PortfolioBasicInfo } from '@/apis/followInvest/index.js'
 import { PORTFOLIO_TYPE_MAP } from '../../config/common'
 import { getBasicInfo as getInvesetmentPortfolioBasicInfo } from '@/apis/portfolioFollow/index.js'
-import { isHLApp } from '@/utils'
+import { isTenantApp } from '@/utils'
 
 export default {
     data() {
@@ -25,7 +25,7 @@ export default {
                     result.portfolioType = result.portfolioType || PORTFOLIO_TYPE_MAP.keysMap.HK_STOCK
                     console.log('follow BasicInfo result', result)
                     // 在恒利 App 才请求，关联的投顾组合 id, 获取关联的投顾信息
-                    if (isHLApp()) {
+                    if (isTenantApp()) {
                         const invesetmentPortfolioId = result.relatedPortfolioID
                         console.log('getInvesetmentPortfolioBasicInfo portfolioID=', invesetmentPortfolioId)
                         this.getInvesetmentPortfolioBasicInfo(invesetmentPortfolioId)

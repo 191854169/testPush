@@ -49,7 +49,7 @@ import Empty from '@/components/Empty.vue'
 import FosunTabs from '@/components/FosunTabs.vue'
 import { Tab } from 'vant'
 import { getBrief, getManager, getFile } from '@/apis/fund/fund'
-import { isHLApp } from '@/utils/tools.js'
+import { isTenantApp } from '@/utils/tools.js'
 import { milliFormat } from '../../../../utils'
 
 export default {
@@ -212,7 +212,7 @@ export default {
         pdfClickHandler(item) {
             console.log('item----:', item)
             const { fileUrl: url, fileType: title } = item
-            if (isHLApp() && this.$jsBridge) {
+            if (isTenantApp() && this.$jsBridge) {
                 this.$jsBridge.openPDF({ url, title })
             } else {
                 window.open(url)

@@ -6,7 +6,7 @@ import { addCurParamsForUrl } from '@/utils/utils.js'
 import '@/config/globalProterties/index.js'
 import pathnames from '../config/H5Pathname.js'
 import initSensors from '@/utils/bury.js'
-import { isHLApp } from '@/utils/tools'
+import { isTenantApp } from '@/utils/tools'
 import { isInOutsideH5 } from '@/utils'
 import LogoAd from '@/components/logo.vue'
 
@@ -123,7 +123,7 @@ export function login(store, getApp = () => {}) {
     return () => {
         const app = getApp()
         // 恒利
-        if (isHLApp()) {
+        if (isTenantApp()) {
             // 内部会进行是否登录状态判断
             store.dispatch('user/login', false).then(data => {
                 if (data) {

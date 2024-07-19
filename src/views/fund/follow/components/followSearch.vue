@@ -82,7 +82,7 @@
 import { PortfolioList } from '@/apis/followInvest/index.js'
 import { Popup, Search } from 'vant'
 import { throttle } from 'lodash'
-import { isHLApp } from '@/utils/tools'
+import { isTenantApp } from '@/utils/tools'
 import gotoFollowDetailsMixin from '../mixins/gotoFollowDetailsMixin'
 
 export default {
@@ -129,7 +129,7 @@ export default {
             return !this.followList.length > 0
         },
         isApp() {
-            return isHLApp() && !!this.$jsBridge
+            return isTenantApp() && !!this.$jsBridge
         },
     },
     watch: {

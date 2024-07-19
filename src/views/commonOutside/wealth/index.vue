@@ -176,7 +176,7 @@ import { isUndefined, compatIOSLocalStorage } from '@/utils/tools'
 // import { getUserDetail } from '@/apis/uc.js'
 // import { getRunEnv } from '@/utils/env.js'
 import checkPIMixin from '@/mixins/business/checkPIMixin'
-import { isHLApp } from '@/utils/tools.js'
+import { isTenantApp } from '@/utils/tools.js'
 import RadarBanner from '@/views/commonOutside/components/radarBanner.vue'
 import FundChart from '@/views/fund/components/FundChart.vue'
 import pathnames from '@/config/H5Pathname.js'
@@ -440,7 +440,7 @@ export default {
         //跳转至研报详情
         gotoNewsDetail(item) {
             const url = `${location.origin}/pages/informationDetail.html#/?id=${item.id}&type=${encodeURIComponent('研报')}`
-            if (isHLApp() && this.$jsBridge) {
+            if (isTenantApp() && this.$jsBridge) {
                 this.$jsBridge.open({ url: encodeURIComponent(url), title: '' })
             } else {
                 window.open(url)

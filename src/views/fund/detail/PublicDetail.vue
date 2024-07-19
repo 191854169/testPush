@@ -45,7 +45,7 @@ import RiskIndicator from './components/RiskIndicator.vue'
 import TradeRule from './components/TradeRule.vue'
 import RadarMap from './components/RadarMap.vue'
 import RiskStatement from '../components/RiskStatement.vue'
-import { isHLApp } from '../../../utils'
+import { isTenantApp } from '../../../utils'
 import { isInRyH5 } from '@/utils'
 
 export default {
@@ -100,7 +100,7 @@ export default {
             return this.$route.query.symbol
         },
         isInHLApp() {
-            return isHLApp()
+            return isTenantApp()
         },
         // 睿银不展示广告
         isInRy() {

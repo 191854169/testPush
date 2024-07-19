@@ -1,6 +1,6 @@
 import { Dialog } from 'vant'
 import { i18n } from '@/i18n/common'
-import { getAppVersion, compareVersion, isHLApp } from '@/utils/tools'
+import { getAppVersion, compareVersion, isTenantApp } from '@/utils/tools'
 import JSBridge from '@fs/jsbridge/dist/lib/lupu/jsBridge.js'
 // tip实例 （单例）
 let intance = null
@@ -14,7 +14,7 @@ export const ignoreURLs = [{ pathname: 'fund', hash: '/' }]
  */
 const needVerifyByVersion = () => {
     // 不在app需要校验 (同花顺MR测试阶段打不开财富商城不考虑)
-    if (!isHLApp()) return true
+    if (!isTenantApp()) return true
     const curVersion = getAppVersion()
     const limitVersion = '2.3.0'
     // 当前版本小于2.3.0 需要校验

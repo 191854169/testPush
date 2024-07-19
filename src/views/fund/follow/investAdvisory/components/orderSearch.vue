@@ -94,7 +94,7 @@
 import DynamicFont from '@/components/FosunDynamicFont.vue'
 import { Popup, Search } from 'vant'
 import { throttle } from 'lodash'
-import { isHLApp } from '@/utils/tools'
+import { isTenantApp } from '@/utils/tools'
 import { INVEST_ADVISORY_TRADE_STATUS_MAP } from '@/views/fund/config/common'
 import { investAdvisoryStatusIconMap } from '../../utils/followConfig.js'
 import { i18n } from '@/i18n/fund'
@@ -156,7 +156,7 @@ export default {
             return !this.orderRecordList.length > 0
         },
         isApp() {
-            return isHLApp() && !!this.$jsBridge
+            return isTenantApp() && !!this.$jsBridge
         },
         STORAGEKEY() {
             return 'invest-advisory-order-search-history' // 本地缓存字段名

@@ -22,7 +22,7 @@ import BottomButton from './components/BottomButton.vue'
 import { noteCustomizationOrderCount } from '@/apis/wealth/index'
 import { getCustomProductList } from '@/apis/fund/note'
 import watchPageVisibleMixin from '@/mixins/watchPageVisibleMixin'
-import { isHLApp } from '@/utils'
+import { isTenantApp } from '@/utils'
 
 export default {
     name: 'CustomizeIndex',
@@ -43,7 +43,7 @@ export default {
         this.getNoteCustomizationOrderCount()
         this.getCustomProductListData()
         // 站外不能添加该属性，否则影响页面滚动
-        if (isHLApp()) {
+        if (isTenantApp()) {
             document.body.style.overflow = 'hidden'
         }
         this.watch(() => {

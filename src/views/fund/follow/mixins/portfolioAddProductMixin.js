@@ -4,7 +4,7 @@
 
 import { getFundInfo } from '@/apis/fund/fund.js'
 import { quote } from '@/apis/market.js'
-import { isHLApp, floatToRatio } from '@/utils'
+import { isTenantApp, floatToRatio } from '@/utils'
 import { isEmpty } from '@/utils'
 import NP from 'number-precision'
 
@@ -19,7 +19,7 @@ export default {
     created() {},
     computed: {
         isInAPP() {
-            return isHLApp()
+            return isTenantApp()
         },
         selectedList() {
             const list = []

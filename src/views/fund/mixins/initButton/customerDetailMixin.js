@@ -1,5 +1,5 @@
 import { getLangType } from '@/utils/tools'
-import { isHLApp } from '@/utils'
+import { isTenantApp } from '@/utils'
 
 export default {
     data() {
@@ -19,7 +19,7 @@ export default {
             if (uin || uin == 0) {
                 const url = `${location.origin}${location.pathname}#/customer-detail?otherUin=${uin}`
                 if (this.$jsBridge) {
-                    this.$jsBridge.open({ url: encodeURIComponent(url), title: '', mode: 'immersive', inapp: isHLApp() })
+                    this.$jsBridge.open({ url: encodeURIComponent(url), title: '', mode: 'immersive', inapp: isTenantApp() })
                 } else {
                     this.$router.push({
                         path: '/customer-detail',

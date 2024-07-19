@@ -1,9 +1,9 @@
 import { get, post, path_version, ENCRYPT_TYPES } from '@/httpRequest/http.js'
-import { isHLApp } from '@/utils'
+import { isTenantApp } from '@/utils'
 const { VUE_APP_UC = '', NODE_ENV } = process.env
 
 let domain = ''
-if (isHLApp() || NODE_ENV === 'production') domain = `${VUE_APP_UC}`
+if (isTenantApp() || NODE_ENV === 'production') domain = `${VUE_APP_UC}`
 
 // 统一处理参数
 const handleParams = option => {

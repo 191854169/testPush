@@ -1,13 +1,13 @@
 import { get, post, path_version } from '@/httpRequest/http'
 import { loginEncrypt } from '@/utils/crypto'
-import { isHLApp } from '@/utils'
+import { isTenantApp } from '@/utils'
 // console.log(process)
 // const { VUE_APP_UC = '', VUE_APP_ENV = 'sit' } = process.env
 // const BASEURL = VUE_APP_ENV === 'local' ? VUE_APP_UC : VUE_APP_UC
 const { VUE_APP_UC, NODE_ENV } = process.env
 
 let domain = ''
-if (isHLApp() || NODE_ENV === 'production') domain = `${VUE_APP_UC}`
+if (isTenantApp() || NODE_ENV === 'production') domain = `${VUE_APP_UC}`
 
 // https://www.tapd.cn/60236733/markdown_wikis/show/#1160236733001000142@toc23
 export const getUserDetail = () => {

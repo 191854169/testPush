@@ -151,7 +151,7 @@ import portfolioTag from './components/portfolioTag.vue'
 import { PortfolioHoldingAllocation, PortfolioOrderCreate } from '@/apis/followInvest/index.js'
 import NP from 'number-precision'
 import { ENCRYPT_TYPES } from '@/httpRequest/encrypt.js'
-import { getLangType, isHLApp } from '@/utils/tools.js'
+import { getLangType, isTenantApp } from '@/utils/tools.js'
 import MonitorKeyboard from '@/utils/monitorKeyboard'
 import { tradeCheck } from '@/apis/staffTrade.js'
 import { UserRiskInfo } from '@/apis/riskAssessment.js'
@@ -605,7 +605,7 @@ export default {
             const fileName = `客户声明_${getLangType()}.pdf`
             const title = this.$t('protocol.clientStatement')
             const url = `${location.origin}/wealth/static/${fileName}`
-            if (isHLApp() && this.$jsBridge) {
+            if (isTenantApp() && this.$jsBridge) {
                 this.$jsBridge.openPDF({ url: encodeURIComponent(url), title })
             } else {
                 window.open(url)

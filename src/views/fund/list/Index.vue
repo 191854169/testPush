@@ -88,7 +88,7 @@ import fundFilter from './components/fund-filter.vue'
 import { cloneDeep, throttle } from 'lodash'
 import { i18n } from '@/i18n/fund/index.js'
 import { thousandsFilter } from '@/config/filters.js'
-import { isHLApp } from '@/utils/tools'
+import { isTenantApp } from '@/utils/tools'
 import { isInRyH5 } from '@/utils'
 import { dealAssetValToString } from './utils'
 import H5BroserTitle from '../components/H5BroserTitle.vue'
@@ -348,7 +348,7 @@ export default {
             }, 0)
         },
         isApp() {
-            return isHLApp() && !!this.$jsBridge
+            return isTenantApp() && !!this.$jsBridge
         },
         // 是否从瑞银跳转
         isInRy() {

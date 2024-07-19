@@ -33,7 +33,7 @@
 import { Collapse, CollapseItem } from 'vant'
 import { getFile, getPriDocument } from '@/apis/fund/fund'
 import { getFile as getBondFile } from '@/apis/bond/index'
-import { isHLApp } from '@/utils/tools.js'
+import { isTenantApp } from '@/utils/tools.js'
 import { getLangType } from '../../utils'
 import { getBillsFiles } from '@/apis/fund/note'
 import pathnames from '@/config/H5Pathname.js'
@@ -389,7 +389,7 @@ export default {
                 url = `${pathnames.VUE_APP_BUILDER_PAGE}?key=${this.priRiskCode}`
                 console.log('private-url', url)
                 if (!this.priRiskCode) return
-                if (isHLApp() && this.$jsBridge) {
+                if (isTenantApp() && this.$jsBridge) {
                     this.$jsBridge.open({ url: encodeURIComponent(url), title: '' })
                 } else {
                     window.open(url)
@@ -401,7 +401,7 @@ export default {
                 url = `${location.origin}/wealth/static/${item.fileUrl}`
             }
             console.log('pdfUrl:', url)
-            if (isHLApp() && this.$jsBridge) {
+            if (isTenantApp() && this.$jsBridge) {
                 this.$jsBridge.openPDF({ url: encodeURIComponent(url), title: item.fileType })
             } else {
                 window.open(url)

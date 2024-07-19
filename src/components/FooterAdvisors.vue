@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import { isHLApp } from '@/utils'
+import { isTenantApp } from '@/utils'
 import pathnames from '@/config/H5Pathname'
 
 export default {
@@ -26,7 +26,7 @@ export default {
     destroyed() {},
     filters: {},
     methods: {
-        isHLApp,
+        isTenantApp,
         goAdvisor() {
             const { VUE_APP_WEALTH_COUNSELOR_PAGE: url } = pathnames
             if (!this.$root.isLogin) {

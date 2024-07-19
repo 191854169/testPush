@@ -444,7 +444,7 @@ import verifyMixin from '@/mixins/business/verifyMixins.js'
 
 import BillTags from './BillTags.vue'
 
-import { isHLApp, humanNum, floatToRatio, toFixed, isInRyH5, isInOutsideH5, isUndefined, isNull } from '@/utils'
+import { isTenantApp, humanNum, floatToRatio, toFixed, isInRyH5, isInOutsideH5, isUndefined, isNull } from '@/utils'
 import { accAdd, accMul, accSub } from '@/utils/accurate'
 
 import { getBillsDetail, getBillsFiles, getBillsQuoteInfo, getBillsProductList } from '@/apis/fund/note'
@@ -1363,7 +1363,7 @@ export default {
 
         // 点击产品文件
         handleFileClick({ fileUrl = '', fileName } = {}) {
-            if (isHLApp() && this.$jsBridge) {
+            if (isTenantApp() && this.$jsBridge) {
                 this.$jsBridge.openPDF({ url: fileUrl, title: fileName })
             } else {
                 window.open(fileUrl)
@@ -1565,7 +1565,7 @@ export default {
             const fileUrl = `static/客户声明_${getLangType()}.pdf`
             const url = `${location.origin}/wealth/${fileUrl}`
             const title = this.$t('protocol.clientStatement')
-            if (isHLApp() && this.$jsBridge) {
+            if (isTenantApp() && this.$jsBridge) {
                 this.$jsBridge.openPDF({ url: encodeURIComponent(url), title })
                 this.initWatchVisible()
             } else {

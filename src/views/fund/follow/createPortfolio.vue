@@ -145,7 +145,7 @@ import textLimitedBox from './components/textLimitedBox'
 import { Sticky } from 'vant'
 
 import { i18n } from '@/i18n/fund/index.js'
-import { isHLApp, floatToRatio } from '@/utils'
+import { isTenantApp, floatToRatio } from '@/utils'
 import NP from 'number-precision'
 import { isEmpty } from '../../../utils'
 import { FUND_TYPE_MAP } from '../config/common'
@@ -482,7 +482,7 @@ export default {
             const fileName = `客户声明_${getLangType()}.pdf`
             const url = `${location.origin}/wealth/static/${fileName}`
             const title = this.$t('protocol.clientStatement')
-            if (isHLApp() && this.$jsBridge) {
+            if (isTenantApp() && this.$jsBridge) {
                 this.$jsBridge.openPDF({ url: encodeURIComponent(url), title })
             } else {
                 window.open(url)
