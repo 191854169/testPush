@@ -13,8 +13,16 @@ const router = new VueRouter({
     mode: 'hash',
     routes: [
         {
-            path: '/',
-            name: 'index',
+            path: '/account',
+            name: 'account',
+            meta: {
+                title: '',
+            },
+            component: () => import(/* webpackChunkName: "commonOutsideRouter" */ '@/views/commonOutside/index.vue'),
+        },
+        {
+            path: '/wealth',
+            name: 'wealth',
             meta: {
                 title: '',
             },

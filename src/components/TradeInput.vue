@@ -281,7 +281,7 @@ export default {
 
         .text-btn {
             flex: 0 0 auto;
-            color: #ff6907;
+            color: @theme;
             font-weight: 400;
             font-size: 14px;
             line-height: 20px;

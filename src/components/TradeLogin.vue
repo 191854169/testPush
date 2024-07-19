@@ -297,7 +297,7 @@ export default {
         width: 100%;
         height: 44px;
         margin: 0 auto;
-        background: #ff6907;
+        background: @theme;
         border: 0;
         border-radius: 41px;
     }

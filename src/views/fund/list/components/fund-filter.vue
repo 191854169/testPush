@@ -150,15 +150,15 @@ export default {
                         { key: 'smallGrowth', name: this.$t('fundList.smallGrowth') },
                     ],
                 },
-                {
-                    type: 'mstarRating',
-                    typeName: this.$t('fundList.mstarRating'),
-                    items: [
-                        { key: 'three', name: this.$t('fundList.threeStar') },
-                        { key: 'four', name: this.$t('fundList.fourStar') },
-                        { key: 'five', name: this.$t('fundList.fiveStar') },
-                    ],
-                },
+                // {
+                //     type: 'mstarRating',
+                //     typeName: this.$t('fundList.mstarRating'),
+                //     items: [
+                //         { key: 'three', name: this.$t('fundList.threeStar') },
+                //         { key: 'four', name: this.$t('fundList.fourStar') },
+                //         { key: 'five', name: this.$t('fundList.fiveStar') },
+                //     ],
+                // },
             ],
         }
     },
@@ -290,7 +290,7 @@ export default {
                 }
 
                 .checked {
-                    color: #ff6907;
+                    color: @theme;
                     /* stylelint-disable-next-line number-max-precision */
                     background: rgba(255, 99, 7, 0.0698703);
                     /* stylelint-disable-next-line number-max-precision */
@@ -324,7 +324,7 @@ export default {
         box-shadow: inset 0 0.5px 0 #efefef;
 
         span:nth-of-type(2) {
-            color: #ff6907;
+            color: @theme;
         }
     }
 }

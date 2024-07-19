@@ -3,9 +3,9 @@
     <div class="statement-card">
         <div class="btn" @click="openPage">{{ $t('profitDesc') }}</div>
         <div class="msg">
-            {{ $t('serviceBy1') }}
+            <span>{{ $t('serviceBy1') }}</span>
             <span class="primary">{{ $t('tenant.company') }}</span>
-            {{ $t('serviceBy2') }}
+            <span>{{ $t('serviceBy2') }}</span>
         </div>
     </div>
 </template>
@@ -43,7 +43,7 @@ export default {
         color: #bfbfbf;
         font-size: 12px;
 
-        span {
+        .primary {
             color: @theme;
         }
     }

@@ -1,5 +1,5 @@
 <template>
-    <div class="ry-index" ref="stickyContainer" :class="{ clip: tradeLoginDialog && tradeLoginDialog.show }">
+    <div class="ry-index" ref="stickyContainer" :key="$route.path" :class="{ clip: tradeLoginDialog && tradeLoginDialog.show }">
         <div class="content-wrapper">
             <Account @onChange="changeActive" @getAssetSummarySuccess="initTradePwd" v-if="active === 'account'"></Account>
             <Wealth v-if="active === 'wealth'"></Wealth>
@@ -41,11 +41,6 @@ export default {
             isUnsetTradePwd: true, // 未设置交易密码
             propertyData: {},
             active: '',
-            tabs: [
-                { key: '1', name: '资产' },
-                { key: '2', name: '理财' },
-                { key: '3', name: '我的' },
-            ],
             showLogout: false, // 显示与隐藏退出登录弹窗
         }
     },
@@ -64,13 +59,7 @@ export default {
         },
     },
     mounted() {
-        this.active = 'account'
-        const queryActiveTab = this.$route.query[ACTIVE_TAB_STR]
-        if (queryActiveTab) {
-            // this.$router.replace({ path: '/', query: {} })
-            this.active = queryActiveTab
-            sessionStorage.setItem(ACTIVE_TAB_STR, queryActiveTab)
-        }
+        this.active = this.$route.path.replace(/\//, '')
         this.setTitle()
         this.pageShow()
 

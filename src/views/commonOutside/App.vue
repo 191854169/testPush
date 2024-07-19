@@ -1,6 +1,6 @@
 <template>
     <div class="index" ref="indexRef" :class="[showTradeLoginDialog ? 'active' : '', 'price-color-' + colorType]">
-        <router-view></router-view>
+        <router-view :key="$route.path"></router-view>
     </div>
 </template>
 

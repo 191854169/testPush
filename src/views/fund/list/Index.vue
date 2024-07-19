@@ -32,7 +32,7 @@
             <template v-slot:fixTitle>
                 <div v-if="!isManageMoney" class="fund-optional" @click="triggerFilter">
                     <div class="label" :class="{ 'checked-color': filterShow || isHasFilter }">{{ $t('fundList.filter') }}</div>
-                    <span class="fsfont" :style="{ color: filterShow || isHasFilter ? '#FF6907' : '#2F2F2F' }">&#xe612;</span>
+                    <span class="fsfont" :style="{ color: filterShow || isHasFilter ? variable.theme : '#2F2F2F' }">&#xe612;</span>
                 </div>
                 <div v-if="isManageMoney" class="fund-optional">
                     <span class="title">产品名称</span>
@@ -92,6 +92,7 @@ import { isHLApp } from '@/utils/tools'
 import { isInRyH5 } from '@/utils'
 import { dealAssetValToString } from './utils'
 import H5BroserTitle from '../components/H5BroserTitle.vue'
+import { variable } from '@/assets/css/variable'
 
 const filterUnit = {
     start: 1,
@@ -107,6 +108,7 @@ export default {
     },
     data() {
         return {
+            variable,
             table: null,
             canPullUp: true,
             showLoadingOver: false,
@@ -753,7 +755,7 @@ body {
     }
 
     & .checked-color {
-        color: #ff6907;
+        color: @theme;
     }
 
     & .filter__icon {
