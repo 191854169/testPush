@@ -533,7 +533,7 @@ export default {
             &.selected {
                 color: @theme;
                 font-weight: 500;
-                background: rgba(255, 99, 7, 0.1);
+                background: @tabBackground;
             }
 
             &.mask {

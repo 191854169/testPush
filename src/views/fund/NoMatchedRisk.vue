@@ -372,7 +372,7 @@ export default {
         font-size: 16px;
         line-height: 44px;
         text-align: center;
-        background: #ff6307;
+        background: @theme;
         border: none;
         border-radius: 22.5px;
         outline: none;

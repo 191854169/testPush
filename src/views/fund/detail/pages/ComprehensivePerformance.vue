@@ -26,7 +26,7 @@
         ></radar-map>
         <analysis-detail :period="period"></analysis-detail>
         <similar-fund :period="period"></similar-fund>
-        <template v-if="isInApp">
+        <template>
             <div class="footer-box">
                 <div ref="footerTemp"></div>
             </div>

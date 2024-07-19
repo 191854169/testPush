@@ -34,6 +34,8 @@ const variable = {
     'bg-color': '#fff',
     'font-color': '#FF6907',
     bgGreyColor: '#F9F9F9',
+
+    tabBackground: 'rgba(218, 184, 102, 0.15)',
 }
 
 module.exports = {
