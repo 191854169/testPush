@@ -1,6 +1,6 @@
 import { getUserDetail, getSubAcctDetail, getIpoQuestionnaireStatus } from '@/apis/uc.js'
 import { ecashUserStatus } from '@/apis/wealth/index.js'
-import JSBridge from '@fs/jsbridge/dist/lib/jsBridge.js'
+import JSBridge from '@fs/jsbridge/dist/lib/lupu/jsBridge.js'
 import { env } from '@/config/globalProterties/env'
 import { getQueryString, isEmpty, isUndefined } from '@/utils'
 

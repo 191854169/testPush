@@ -3,7 +3,7 @@ import VueRouter from 'vue-router'
 import store from '@/store/fund.js'
 import NProgress from 'nprogress'
 import '@/assets/css/nprogress.css'
-import JSBridge from '@fs/jsbridge/dist/lib/jsBridge.js' // 不在自研APP内获取的对象为  undefined
+import JSBridge from '@fs/jsbridge/dist/lib/lupu/jsBridge.js' // 不在自研APP内获取的对象为  undefined
 import { i18n } from '@/i18n/fund'
 import { setTheme, removeTheme, getRunEnv } from '@/utils/env'
 import { autoTrackSinglePage } from '@/utils/bury'

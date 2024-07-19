@@ -26,7 +26,7 @@
     "dependencies": {
         "@babel/polyfill": "^7.12.1",
         "@better-scroll/core": "^2.5.1",
-        "@fs/jsbridge": "^1.3.9",
+        "@fs/jsbridge": "^1.3.12-beta",
         "@fs/utils": "^1.2.11",
         "@fs/http": "^1.0.15-beta",
         "alife-logger": "^1.8.30",
@@ -40,7 +40,6 @@
         "html2canvas": "^1.4.1",
         "js-crypto-hash": "^1.0.4",
         "js-crypto-hkdf": "^1.0.4",
-        "jsbridge": "git+http://gl.fotechwealth.com.local/H5/JsBridge.git#semver:>=1.0.19",
         "jsrsasign": "^10.5.14",
         "normalize": "^0.3.1",
         "normalize.css": "^8.0.1",

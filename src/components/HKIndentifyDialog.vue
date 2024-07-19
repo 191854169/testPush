@@ -22,7 +22,7 @@
 
 <script>
 import { customerService } from '@/utils/utils.js'
-import JSBridge from '@fs/jsbridge/dist/lib/jsBridge.js'
+import JSBridge from '@fs/jsbridge/dist/lib/lupu/jsBridge.js'
 import { i18n } from '@/i18n/common'
 export default {
     name: 'HkIndentifyDialog',
