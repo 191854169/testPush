@@ -155,3 +155,12 @@ export const addQueryStr = (url, data = {}) => {
 
     return `${url}${url.includes('?') ? '&' : '?'}${query}`
 }
+
+/**
+ * 是否租户App
+ * @returns
+ */
+export const isTenantApp = () => {
+    console.error(navigator.userAgent.toLowerCase())
+    return !!navigator.userAgent.toLowerCase().match(/lupuhk/i)
+}
