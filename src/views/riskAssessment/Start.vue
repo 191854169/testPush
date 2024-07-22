@@ -367,7 +367,7 @@ export default {
 
             &.active {
                 color: @theme;
-                background: rgba(255, 105, 7, 0.08);
+                background: @tabBackground;
             }
         }
     }
