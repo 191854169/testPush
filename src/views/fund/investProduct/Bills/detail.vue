@@ -385,7 +385,7 @@
                 :title="$t('trade.rgqr')"
                 :show-cancel-button="true"
                 cancel-button-color="#2F2F2F"
-                confirm-button-color="#FF6307"
+                :confirm-button-color="variable.theme"
                 :confirm-button-text="$t('trade.queding')"
                 @confirm="handleSubmit"
                 :before-close="beforeCloseSubmit"
@@ -460,6 +460,7 @@ import { knockOutTypeMap, knockInTypeMap } from './common'
 import TradeLogin from '@/config/globalProterties/tradeLogin'
 import RiskStatement from '@/views/fund/components/RiskStatement.vue'
 import portfolioBrief from '../../follow/components/portfolioBrief.vue'
+import { variable } from '@/assets/css/variable'
 
 // 金额格式化
 const amountFilter = function (val) {
@@ -482,6 +483,7 @@ export default {
     },
     data() {
         return {
+            variable,
             // 数据
             notSell: true, // 是否禁止卖出
             detailData: {},

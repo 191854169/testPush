@@ -5,7 +5,7 @@
             :title="$t('piGuide.warmTip')"
             :show-cancel-button="true"
             cancel-button-color="#2F2F2F"
-            confirm-button-color="#FF6307"
+            :confirm-button-color="variable.theme"
             :confirm-button-text="$t('goonTrade')"
             @confirm="onConfirm"
             @closed="onClosed"
@@ -38,6 +38,8 @@
 import { getExchangeDateStatus } from '@/apis/info.js'
 import dayjs from 'dayjs'
 import { milliFormat } from '@/utils'
+import { variable } from '@/assets/css/variable'
+
 export default {
     name: 'trade-tip',
     props: {
@@ -48,6 +50,7 @@ export default {
     },
     data() {
         return {
+            variable,
             show: false,
             checked: false,
             type: '',

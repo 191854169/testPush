@@ -236,7 +236,7 @@
             :title="$t('prompt')"
             :show-cancel-button="true"
             cancel-button-color="#2F2F2F"
-            confirm-button-color="#FF6307"
+            :confirm-button-color="variable.theme"
             :confirm-button-text="$t('goRisk')"
             @confirm="cepingSure"
         >

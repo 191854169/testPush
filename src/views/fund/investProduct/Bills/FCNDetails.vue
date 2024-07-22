@@ -135,7 +135,7 @@
             class="custom-dialog"
             :show-cancel-button="!isInApp"
             cancel-button-color="#2F2F2F"
-            confirm-button-color="#FF6307"
+            :confirm-button-color="variable.theme"
             :confirm-button-text="$t(isInApp ? 'iKnow' : 'fcn.goApp')"
             @confirm="handleDialogConfirm"
         >
@@ -173,6 +173,7 @@ import pathnames from '@/config/H5Pathname'
 import LoadingView from '@/components/LoadingView.vue'
 import PrivateMixin from '../../list/mixins/private'
 import { isEmpty } from 'lodash'
+import { variable } from '@/assets/css/variable'
 
 const OrderStatusinvalid = 500
 
@@ -192,6 +193,7 @@ export default {
     props: {},
     data() {
         return {
+            variable,
             isInApp,
             InquiryItemMap,
             info: {},
