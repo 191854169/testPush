@@ -292,9 +292,8 @@ export default {
                 .checked {
                     color: @theme;
                     /* stylelint-disable-next-line number-max-precision */
-                    background: rgba(255, 99, 7, 0.0698703);
+                    background: @tabBackground;
                     /* stylelint-disable-next-line number-max-precision */
-                    border: 0.5px solid rgba(255, 99, 7, 0.600933);
                 }
 
                 .disabled {
