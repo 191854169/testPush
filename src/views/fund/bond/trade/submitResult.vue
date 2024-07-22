@@ -783,13 +783,13 @@ export default {
             font-size: 16px;
             line-height: 44px;
             text-align: center;
-            background: #ff6907;
+            background: @theme;
             border-radius: 49px;
         }
 
         p {
             padding-top: 12px;
-            color: #ff6907;
+            color: @theme;
             font-weight: 400;
             font-size: 14px;
             line-height: 20px;
@@ -846,7 +846,7 @@ export default {
             font-size: 14px;
             line-height: 20px;
             text-align: center;
-            background: #ff6907;
+            background: @theme;
             border-width: 0;
             border-radius: 14px;
         }

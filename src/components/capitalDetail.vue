@@ -372,7 +372,7 @@ export default {
                     color: @theme;
                     font-size: 11px;
                     line-height: 14px;
-                    background: rgba(255, 105, 7, 0.1);
+                    background: @tabBackground;
                     border: none;
                     border-radius: 28px;
                     outline: none;

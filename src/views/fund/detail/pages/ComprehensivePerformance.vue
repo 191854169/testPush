@@ -153,7 +153,7 @@ export default {
             &.selected {
                 color: #2f2f2f;
                 font-weight: 500;
-                background: rgba(255, 99, 7, 0.1);
+                background-color: #f6f0e1;
             }
 
             &.mask {
