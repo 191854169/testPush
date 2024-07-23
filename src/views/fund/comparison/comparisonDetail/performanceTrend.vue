@@ -565,7 +565,7 @@ export default {
                 border-radius: 18px;
 
                 button {
-                    color: #ff6907;
+                    color: @theme;
                     font-weight: 700;
                 }
             }

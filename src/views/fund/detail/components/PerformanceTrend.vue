@@ -1055,7 +1055,7 @@ export default {
     }
 
     .more-selected {
-        color: #ff6907;
+        color: @theme;
     }
 }
 

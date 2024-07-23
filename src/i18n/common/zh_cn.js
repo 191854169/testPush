@@ -243,4 +243,5 @@ export default {
     tenant: {
         company: '陆浦香港',
     },
+    enterpriseWeChat: '企业微信',
 }
