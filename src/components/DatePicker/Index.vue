@@ -249,8 +249,8 @@ export default {
                 box-sizing: border-box;
                 color: @theme;
                 /* stylelint-disable-next-line number-max-precision */
-                background: rgba(255, 99, 7, 0.0698703);
-                border: 0.5px solid rgba(255, 99, 7, 0.6);
+                background: @tabBackground;
+                // border: 0.5px solid rgba(255, 99, 7, 0.6);
                 border-radius: 32px;
             }
         }
@@ -275,7 +275,7 @@ export default {
 
             &.active {
                 color: @theme;
-                background: #fff5ef;
+                background: @tabBackground;
             }
         }
 

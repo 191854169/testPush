@@ -322,7 +322,7 @@ export default {
 
             &.select {
                 box-sizing: border-box;
-                color: #ff6907;
+                color: @theme;
                 /* stylelint-disable-next-line number-max-precision */
                 background: rgba(255, 99, 7, 0.0698703);
                 //border: 0.5px solid rgba(255, 99, 7, 0.6);
@@ -350,8 +350,8 @@ export default {
             border-radius: 4px;
 
             &.active {
-                color: #ff6907;
-                background: #fff5ef;
+                color: @theme;
+                background: @tabBackground;
             }
         }
 
@@ -396,7 +396,7 @@ export default {
         }
 
         .finish {
-            color: #ff6907;
+            color: @theme;
         }
     }
 }

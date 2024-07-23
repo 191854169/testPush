@@ -138,7 +138,7 @@ export default {
             padding: 20px 16px;
 
             &.current-active {
-                background: #fff5ef;
+                background: @tabBackground;
                 border-radius: 8px;
             }
 
@@ -158,4 +158,3 @@ export default {
     }
 }
 </style>
->

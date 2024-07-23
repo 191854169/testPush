@@ -824,7 +824,7 @@ export default {
             color: @fontLightColor;
             font-size: 12px;
             line-height: 16px;
-            background: linear-gradient(106deg, rgba(255, 141, 7, 0.09) 0%, rgba(255, 111, 7, 0.05) 100%);
+            background: linear-gradient(89.86deg, rgba(@theme, 0.09) 1.15%, rgba(@theme, 0.09) 101.25%);
             border-radius: 29px;
 
             &__left,
