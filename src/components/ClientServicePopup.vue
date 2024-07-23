@@ -7,7 +7,7 @@
                         <multi-img name="client_service_phone" directory="common" width="48" />
                         <div class="name">{{ $t('hkService') }}</div>
                     </a>
-                    <div class="item wechat-action" data-clipboard-text="lupu wechat" @click="onCopyWechat">
+                    <div class="item wechat-action" data-clipboard-text="+85254299780" @click="onCopyWechat">
                         <multi-img name="client_service_wechat" directory="common" width="48" />
                         <div class="name">{{ $t('enterpriseWeChat') }}</div>
                     </div>
@@ -52,6 +52,8 @@ export default {
 </script>
 <style scoped lang="less">
 .client-service {
+    text-align: center;
+
     .action {
         display: flex;
         justify-content: center;
