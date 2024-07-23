@@ -11,7 +11,7 @@
             <div class="mb-12">{{ $translate('freezeTips') }}</div>
 
             <div clas="row">
-                <span class="label">{{ $translate('hkService') }}：</span>
+                <span class="label">{{ $translate('hkService') }}</span>
                 <a href="tel:+852 3978 5095">+852 3978 5095</a>
             </div>
         </div>
