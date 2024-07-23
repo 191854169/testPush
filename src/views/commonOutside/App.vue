@@ -6,7 +6,6 @@
 
 <script>
 import { getPriceColorType } from '@/utils/env.js'
-import { isInRyH5 } from '@fs/utils'
 export default {
     name: 'App',
     data() {
@@ -19,7 +18,7 @@ export default {
         const colorType = getPriceColorType()
 
         this.colorType = colorType
-        sessionStorage.setItem('outsideSource', isInRyH5() ? 'ry' : 'common') // 暂时只有睿银和通用
+        // sessionStorage.setItem('outsideSource', isInRyH5() ? 'ry' : 'common') // 暂时只有睿银和通用
     },
 }
 </script>

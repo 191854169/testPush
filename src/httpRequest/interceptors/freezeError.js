@@ -1,5 +1,5 @@
 import { getFreezeErrorCode } from '../http.tool'
-import freezeService from '@/components/freezeService/index.js'
+import freezeService from '@/utils/freezeService/index'
 import { createUnreadableObject } from '@fs/utils'
 
 export default http => {
