@@ -11,7 +11,7 @@ import { ENCRYPT_TYPES as ENCRYPT_TYPES_TEMP, ERROR_COCES as ERROR_COCES_TEMP } 
 
 import { setUserInfoFromLocaltempFile } from './http.tool'
 // 按需引入
-import { FSHttp } from '@fs/http'
+import { FSHttp } from './lupuCustomizeHttp/index'
 import initInterceptors from './interceptors/index'
 
 const { VUE_APP_ENV } = process.env
