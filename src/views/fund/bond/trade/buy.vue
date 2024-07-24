@@ -121,7 +121,7 @@
             :title="$t('prompt')"
             :show-cancel-button="true"
             cancel-button-color="#2F2F2F"
-            confirm-button-color="#FF6307"
+            :confirm-button-color="variable.theme"
             :confirm-button-text="$t('goRisk')"
             @confirm="cepingSure"
         >
@@ -135,7 +135,7 @@
             :title="$t(isSubscribe ? 'trade.rgqr' : 'trade.shuhuiqueren')"
             :show-cancel-button="true"
             cancel-button-color="#2F2F2F"
-            confirm-button-color="#FF6307"
+            :confirm-button-color="variable.theme"
             :confirm-button-text="$t('trade.queding')"
             @confirm="confirmBuy"
         >
@@ -205,6 +205,8 @@ import verifyMixin from '@/mixins/business/verifyMixins.js'
 import wealthOrderInstructionMixin from '@/mixins/wealthOrderInstructionMixin.js'
 import InvestmentProDialogMixin from '@/views/fund/mixins/InvestmentProDialogMixin.js'
 import investmentProTradeDialog from '@/views/fund/components/investmentProTradeDialog.vue'
+import { variable } from '@/assets/css/variable'
+
 export default {
     name: 'bondBuy',
     mixins: [verifyMixin, wealthOrderInstructionMixin, InvestmentProDialogMixin],
@@ -224,6 +226,7 @@ export default {
     },
     data() {
         return {
+            variable,
             symbol: this.$route.params.symbol,
             agreeFlag: true,
             buySure: false,

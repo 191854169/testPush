@@ -163,8 +163,8 @@ export default {
                 .sort-up {
                     .sort-box();
 
-                    width: 6px;
-                    height: 5px;
+                    width: 5px;
+                    height: 3.5px;
                     margin-bottom: 1px;
                     background-image: url('~@/assets/images/common/sort-up.png');
                 }
@@ -176,8 +176,8 @@ export default {
                 .sort-down {
                     .sort-box();
 
-                    width: 6px;
-                    height: 5px;
+                    width: 5px;
+                    height: 3.5px;
                     margin-top: 1px;
                     background-image: url('~@/assets/images/common/sort-down.png');
                 }

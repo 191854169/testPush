@@ -124,7 +124,7 @@
             :title="$t('trade.shuhuiqueren')"
             :show-cancel-button="true"
             cancel-button-color="#2F2F2F"
-            confirm-button-color="#FF6307"
+            :confirm-button-color="variable.theme"
             :confirm-button-text="$t('trade.queding')"
             @confirm="confirmRedeem"
         >
@@ -147,13 +147,18 @@
                 </div>
             </div>
         </van-dialog>
-        <van-dialog v-model="showTip" :title="$t('tipTitle')" confirm-button-color="#FF6907" :confirm-button-text="$t('iKnow')">
+        <van-dialog v-model="showTip" :title="$t('tipTitle')" :confirm-button-color="variable.theme" :confirm-button-text="$t('iKnow')">
             <div class="dialogContent">{{ $t('trade.jsjebfzxjz') }}</div>
         </van-dialog>
-        <van-dialog v-model="buyFail" :title="$t('trade.shuhuishibai')" confirm-button-color="#FF6907" :confirm-button-text="$t('iGet')">
+        <van-dialog v-model="buyFail" :title="$t('trade.shuhuishibai')" :confirm-button-color="variable.theme" :confirm-button-text="$t('iGet')">
             <div class="dialogContent">{{ failText }}</div>
         </van-dialog>
-        <van-dialog v-model="showEstAmountDialog" :title="$t('estimateInto')" confirm-button-color="#FF6907" :confirm-button-text="$t('iGet')">
+        <van-dialog
+            v-model="showEstAmountDialog"
+            :title="$t('estimateInto')"
+            :confirm-button-color="variable.theme"
+            :confirm-button-text="$t('iGet')"
+        >
             <div class="est-dialog-content">
                 <p class="content-top">{{ $t('estimateIntoFormula') }}</p>
                 <p class="content-body">{{ $t('estimateIntoReference', { nav: navFormat(fundInfo.latestNav) }) }}</p>
@@ -181,6 +186,7 @@ import wealthOrderInstructionMixin from '@/mixins/wealthOrderInstructionMixin.js
 import { isInOutsideH5 } from '@/utils'
 import InvestmentProDialogMixin from '@/views/fund/mixins/InvestmentProDialogMixin.js'
 import investmentProTradeDialog from '@/views/fund/components/investmentProTradeDialog.vue'
+import { variable } from '@/assets/css/variable'
 
 const accountTypeKeyMap = accountTypeMap.keyValueMap
 
@@ -196,6 +202,7 @@ export default {
     components: { investmentProTradeDialog },
     data() {
         return {
+            variable,
             checked: true,
             number: '',
             show: false,
@@ -909,7 +916,7 @@ export default {
 
             .buyAll {
                 margin-left: 10px;
-                color: #ff6907;
+                color: @theme;
                 font-size: 14px;
 
                 &.hasAll {
@@ -929,11 +936,11 @@ export default {
                 min-width: 48px;
                 margin-right: 10px;
                 padding: 4px 14.5px;
-                color: #ff6907;
+                color: @theme;
                 font-size: 12px;
                 line-height: 16px;
                 text-align: center;
-                background: rgba(255, 105, 7, 0.08);
+                background: @tabBackground;
                 border-radius: 12px;
             }
 
@@ -962,7 +969,7 @@ export default {
             line-height: 20px;
 
             .amount {
-                color: #ff6307;
+                color: @theme;
                 font-style: normal;
             }
 
@@ -1096,7 +1103,7 @@ export default {
             font-size: 16px;
             line-height: 44px;
             text-align: center;
-            background: #ff6307;
+            background: @theme;
             border-radius: 22px;
             opacity: 0.3;
 

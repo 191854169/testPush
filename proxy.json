@@ -2,7 +2,7 @@
     "fund": "https://wealth-${mode}.fosunhanig.com",
     "fund,trade": "https://tapi-${mode}.fosunhanig.com",
     "wealth,trade": "https://tapi-${mode}.fosunhanig.com",
-    "uc": "https://uapi-${mode}.fosunhanig.com",
+    "uc": "https://lupu-uapi-${mode}.finloopg.com",
     "client": "https://uapi-${mode}.fosunhanig.com",
     "search": "https://mktdata-${mode}.fosunhanig.com",
     "news": "https://news-${mode}.fosunhanig.com",

@@ -194,7 +194,7 @@
             :title="$t('trade.rgqr')"
             :show-cancel-button="true"
             cancel-button-color="#2F2F2F"
-            confirm-button-color="#FF6307"
+            :confirm-button-color="variable.theme"
             :confirm-button-text="$t('trade.queding')"
             @confirm="confirmBuy"
         >
@@ -225,7 +225,7 @@
             class="outter-dialog"
             v-model="buyFail"
             :title="$t('trade.rgsb')"
-            confirm-button-color="#FF6907"
+            :confirm-button-color="variable.theme"
             :confirm-button-text="$t('iGet')"
         >
             <div class="dialogContent">{{ failText }}</div>
@@ -236,7 +236,7 @@
             :title="$t('prompt')"
             :show-cancel-button="true"
             cancel-button-color="#2F2F2F"
-            confirm-button-color="#FF6307"
+            :confirm-button-color="variable.theme"
             :confirm-button-text="$t('goRisk')"
             @confirm="cepingSure"
         >
@@ -260,7 +260,7 @@
             class="outter-dialog"
             v-model="ecashRedeemDialog"
             :title="$t('ecashTradeRollOutRemind')"
-            confirm-button-color="#FF6907"
+            :confirm-button-color="variable.theme"
             :confirm-button-text="$t('iGet')"
         >
             <div class="ecash-dialog-content">
@@ -304,6 +304,7 @@ import TradeLogin from '@/config/globalProterties/tradeLogin'
 import { getPageVisibleSupportProperty } from '@/utils/utils'
 import wealthOrderInstructionMixin from '@/mixins/wealthOrderInstructionMixin.js'
 import { isInOutsideH5 } from '@/utils'
+import { variable } from '@/assets/css/variable'
 
 const typeMap = FUND_TYPE_MAP.keyValueMap
 
@@ -328,6 +329,7 @@ export default {
     },
     data() {
         return {
+            variable,
             checked: true,
             number: '',
             show: false,
@@ -681,7 +683,7 @@ export default {
                     this.countTime = 0
                     clearInterval(this.timer)
                     if (this.countTime == 0 && this.scrollBottom) {
-                        this.confirmColor = '#FF6907'
+                        this.confirmColor = variable.theme
                         this.confirmText = this.$t('trade.wyydbqr')
                         this.hasView = true
                     }
@@ -697,7 +699,7 @@ export default {
                 this.scrollBottom = true
                 console.log('已到底部')
                 if (this.countTime == 0 && this.scrollBottom) {
-                    this.confirmColor = '#FF6907'
+                    this.confirmColor = variable.theme
                     this.confirmText = this.$t('trade.wyydbqr')
                     this.hasView = true
                 }
@@ -1084,7 +1086,7 @@ export default {
                         message,
                         overlayStyle: { backgroundColor: 'rgba(0, 0, 0, 0.3)', zIndex: 10000 },
                         showCancelButton: false,
-                        confirmButtonColor: '#ff6907',
+                        confirmButtonColor: variable.theme,
                         className: 'amout-tip',
                     })
                     return false
@@ -1439,7 +1441,7 @@ export default {
 
             span {
                 display: inline;
-                color: #ff6907;
+                color: @theme;
             }
         }
     }
@@ -1752,7 +1754,7 @@ export default {
 
             .buyAll {
                 margin-left: 10px;
-                color: #ff6907;
+                color: @theme;
                 font-size: 14px;
 
                 &.hasAll {
@@ -1771,11 +1773,11 @@ export default {
                 min-width: 48px;
                 margin-right: 10px;
                 padding: 4px 8px;
-                color: #ff6907;
+                color: @theme;
                 font-size: 12px;
                 line-height: 16px;
                 text-align: center;
-                background: rgba(255, 105, 7, 0.08);
+                background: @tabBackground;
                 border-radius: 12px;
             }
 
@@ -1837,7 +1839,7 @@ export default {
                 }
 
                 .colorsty {
-                    color: #ff6907;
+                    color: @theme;
                     font-style: normal;
                 }
             }
@@ -1883,7 +1885,7 @@ export default {
                 font-size: 14px;
                 line-height: 20px;
                 text-align: center;
-                background: #ff6907;
+                background: @theme;
                 border-radius: 31px;
                 user-select: none;
             }
@@ -1931,7 +1933,7 @@ export default {
                 font-size: 14px;
                 line-height: 20px;
                 text-align: center;
-                background: #ff6907;
+                background: @theme;
                 border-radius: 31px;
                 user-select: none;
             }
@@ -2034,7 +2036,7 @@ export default {
             font-size: 14px;
             line-height: 20px;
             text-align: center;
-            background: #ff6907;
+            background: @theme;
             border-width: 0;
             border-radius: 14px;
         }
@@ -2110,7 +2112,7 @@ export default {
             font-size: 16px;
             line-height: 44px;
             text-align: center;
-            background: #ff6307;
+            background: @theme;
             border-radius: 22px;
             opacity: 0.3;
 
@@ -2171,7 +2173,7 @@ export default {
         text-align: left;
 
         .text-link {
-            color: #ff6907;
+            color: @theme;
             font-weight: 500;
         }
     }

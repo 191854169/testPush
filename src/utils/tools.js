@@ -161,6 +161,5 @@ export const addQueryStr = (url, data = {}) => {
  * @returns
  */
 export const isTenantApp = () => {
-    console.error(navigator.userAgent.toLowerCase())
     return !!navigator.userAgent.toLowerCase().match(/lupuhk/i)
 }

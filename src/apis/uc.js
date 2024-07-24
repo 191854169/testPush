@@ -7,7 +7,7 @@ let domain = ''
 if (isTenantApp() || NODE_ENV === 'production') domain = `${VUE_APP_UC}`
 /** 查询用户详情 - 包含userInf和clientInfo - https://www.tapd.cn/60236733/markdown_wikis/show/#1160236733001000142@toc22 */
 export const getUserDetail = option => {
-    return get(`${domain}/uc/v1/UserDetail`, { ...option, origin: false, encrypt: ENCRYPT_TYPES.LOGIN })
+    return get(`${domain}/uc/v1/s1/UserDetail`, { ...option, origin: false, encrypt: ENCRYPT_TYPES.LOGIN })
 }
 
 /** （已废弃）根据subAccountId查询用户详情 - 供同花顺使用 */

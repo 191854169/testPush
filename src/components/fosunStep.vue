@@ -50,7 +50,7 @@ export default {
         position: relative;
         width: 100%;
         height: 1.5px;
-        background-color: #ff6907;
+        background-color: @theme;
     }
 
     .step-line::before {
@@ -71,7 +71,7 @@ export default {
         width: 10px;
         height: 10px;
         background-color: #fff;
-        border: @circleBorder solid #ff6907;
+        border: @circleBorder solid @theme;
         border-radius: 50%;
         transform: translateX(-50%);
         content: '';

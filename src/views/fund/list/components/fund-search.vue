@@ -64,7 +64,7 @@ import { Popup, Search } from 'vant'
 import { throttle } from 'lodash'
 import { isTenantApp } from '@/utils/tools'
 import { i18n } from '@/i18n/fund/index.js'
-
+import { variable } from '@/assets/css/variable'
 const FUND_TYPE_ENUM = {
     1: i18n.t('fundList.stockType'),
     2: i18n.t('fundList.bondType'),
@@ -240,7 +240,7 @@ export default {
                 const endIndex = startIndex + this.value.length
                 const fragment = name.slice(startIndex, endIndex)
                 const list = name.split(fragment)
-                const result = list.join(`<span style="color: #FF6907;">${fragment}</span>`)
+                const result = list.join(`<span style="color: ${variable.theme};">${fragment}</span>`)
                 return result
             }
             return `<span>${name}</span>`
@@ -468,7 +468,7 @@ export default {
                         }
 
                         .self-color {
-                            color: #ff6907;
+                            color: @theme;
                         }
                     }
                 }

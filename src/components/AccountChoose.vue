@@ -131,7 +131,7 @@ export default {
         }
 
         .current-active {
-            background-color: #fff5ef;
+            background-color: @tabBackground;
         }
     }
 }

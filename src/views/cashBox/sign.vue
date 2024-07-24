@@ -74,7 +74,7 @@
             :title="$t('tishi')"
             :show-cancel-button="true"
             cancel-button-color="#2F2F2F"
-            confirm-button-color="#FF6307"
+            :confirm-button-color="variable.theme"
             :confirm-button-text="$t('goRisk')"
             @confirm="cepingSure"
         >
@@ -146,6 +146,7 @@ import TradeLogin from '@/config/globalProterties/tradeLogin'
 import { isInOutsideH5 } from '@/utils'
 import { CASHBOXINPUTINFO } from './config/common'
 import { getPubList } from '@/apis/fund/fund'
+import { variable } from '@/assets/css/variable'
 
 const currencyKeyMap = currencyMap.keyValueMap
 const rangeKeyValueMap = rangeMap.keyValueMap // { DAY: '每日', ... }
@@ -174,6 +175,7 @@ export default {
     },
     data() {
         return {
+            variable,
             currencyKeyMap,
             symbolList: [],
             agreeFlag: false,

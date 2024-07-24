@@ -596,12 +596,11 @@ export default {
                     border-radius: 14px;
 
                     &.select {
-                        // border: 0.5px solid rgba(255, 99, 7, 0.6);
                         box-sizing: border-box;
                         color: #2f2f2f;
                         font-weight: bold;
                         /* stylelint-disable-next-line number-max-precision */
-                        background: rgba(255, 105, 7, 0.1);
+                        background: @tabBackground;
                     }
                 }
             }
@@ -746,7 +745,7 @@ export default {
                 #box_shadow_2();
 
                 &.selected {
-                    color: #ff6307;
+                    color: @theme;
                 }
             }
         }

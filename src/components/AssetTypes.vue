@@ -68,21 +68,21 @@ export default {
                     key: '1',
                     icon: 'publicFund',
                 },
-                {
-                    label: i18n.t('privateFund'),
-                    key: '2',
-                    icon: 'privateFund',
-                },
-                {
-                    label: i18n.t('bond'),
-                    key: '3',
-                    icon: 'bond',
-                },
-                {
-                    label: i18n.t('alterInvestment'),
-                    key: this.isAssetType ? '8' : '4',
-                    icon: 'alterinvestment',
-                },
+                // {
+                //     label: i18n.t('privateFund'),
+                //     key: '2',
+                //     icon: 'privateFund',
+                // },
+                // {
+                //     label: i18n.t('bond'),
+                //     key: '3',
+                //     icon: 'bond',
+                // },
+                // {
+                //     label: i18n.t('alterInvestment'),
+                //     key: this.isAssetType ? '8' : '4',
+                //     icon: 'alterinvestment',
+                // },
             ]
         },
     },
@@ -138,7 +138,7 @@ export default {
             padding: 20px 16px;
 
             &.current-active {
-                background: #fff5ef;
+                background: @tabBackground;
                 border-radius: 8px;
             }
 
@@ -158,4 +158,3 @@ export default {
     }
 }
 </style>
->

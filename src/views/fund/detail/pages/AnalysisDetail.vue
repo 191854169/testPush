@@ -548,7 +548,7 @@ export default {
                     line-height: 22px;
 
                     span {
-                        color: #ff6907;
+                        color: @theme;
                     }
                 }
 
@@ -566,7 +566,7 @@ export default {
                 font-weight: 500;
                 font-size: 16px;
                 line-height: 36px;
-                background: #ff6907;
+                background: @theme;
                 border: none;
                 border-radius: 18px;
                 outline: none;

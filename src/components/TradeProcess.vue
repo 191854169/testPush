@@ -128,7 +128,7 @@ export default {
                 width: 10px;
                 height: 10px;
                 background-color: #fff;
-                border: 2px solid #ff6907;
+                border: 2px solid @theme;
                 border-radius: 50%;
             }
 
@@ -143,8 +143,8 @@ export default {
             .circle-pending {
                 width: 16px;
                 height: 16px;
-                background-color: #ff6907;
-                border: 4px solid #ffe1cd;
+                background-color: @theme;
+                border: 4px solid rgb(248, 241, 224);
                 border-radius: 50%;
             }
 
@@ -174,7 +174,7 @@ export default {
                 left: 7px;
                 width: 2px;
                 height: 36px;
-                background-image: linear-gradient(to bottom, #ff6907 0%, #ff6907 50%, transparent 50%);
+                background-image: linear-gradient(to bottom, @theme 0%, @theme 50%, transparent 50%);
                 background-repeat: repeat-y;
                 background-size: 2px 8px;
                 transform: scaleX(0.7);
@@ -186,7 +186,7 @@ export default {
                 left: 7px;
                 width: 2px;
                 height: 36px;
-                background-color: #ff6907;
+                background-color: @theme;
                 transform: scaleX(0.7);
             }
         }
