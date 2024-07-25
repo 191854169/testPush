@@ -237,7 +237,7 @@ export default {
     submitted: '待受理',
     repeatOrderConfirm: '检测到您刚刚已下过一笔{direction}订单，请确认是否继续下单？',
     seeOrderDetail: '查看订单详情',
-    freezeTips: '账户已冻结，无法进行交易，请联系客服',
+    freezeTips: '账户已冻结，无法进行交易，请',
     onlineService: '在线客服',
     // 租户相关信息
     tenant: {

@@ -237,7 +237,7 @@ export default {
     submitted: '待受理',
     repeatOrderConfirm: '檢測到您剛剛已下過一筆{direction}訂單，請確認是否繼續下單？',
     seeOrderDetail: '查看訂單詳情',
-    freezeTips: '賬戶已凍結，無法進行交易，請聯繫客服',
+    freezeTips: '賬戶已凍結，無法進行交易，請',
     onlineService: '在線客服',
     // 租户相关信息
     tenant: {
