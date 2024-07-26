@@ -5,15 +5,15 @@
                 <div class="action">
                     <a href="tel:+852 3978 5095" class="item">
                         <multi-img name="client_service_phone" directory="common" width="48" />
-                        <div class="name">{{ $t('hkService') }}</div>
+                        <div class="name">{{ _t('hkService') }}</div>
                     </a>
                     <div class="item wechat-action" data-clipboard-text="+85254299780" @click="onCopyWechat">
                         <multi-img name="client_service_wechat" directory="common" width="48" />
-                        <div class="name">{{ $t('enterpriseWeChat') }}</div>
+                        <div class="name">{{ _t('enterpriseWeChat') }}</div>
                     </div>
                 </div>
 
-                <div class="cancel-btn" @click="show = false">{{ $t('cancel') }}</div>
+                <div class="cancel-btn" @click="show = false">{{ _t('cancel') }}</div>
             </div>
         </van-popup>
     </div>
@@ -21,6 +21,7 @@
 
 <script>
 import Clipboard from 'clipboard'
+import { i18n } from '@/i18n/common'
 
 export default {
     props: {
@@ -37,10 +38,11 @@ export default {
         },
     },
     methods: {
+        _t: v => i18n.t(v),
         onCopyWechat() {
             const clipboard = new Clipboard('.wechat-action')
             clipboard.on('success', () => {
-                this.$toast(this.$t('copySuccess'))
+                this.$toast(this._t('copySuccess'))
                 clipboard.destroy()
             })
             clipboard.on('error', () => {
@@ -58,7 +60,12 @@ export default {
         display: flex;
         justify-content: center;
         padding: 32px 0 24px;
-        column-gap: 90px;
+
+        .item {
+            & + .item {
+                margin-left: 90px;
+            }
+        }
 
         .name {
             margin-top: 12px;
