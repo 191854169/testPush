@@ -60,7 +60,12 @@ export default {
         display: flex;
         justify-content: center;
         padding: 32px 0 24px;
-        column-gap: 90px;
+
+        .item {
+            & + .item {
+                margin-left: 90px;
+            }
+        }
 
         .name {
             margin-top: 12px;
