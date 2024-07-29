@@ -6,64 +6,25 @@
         </div>
         <div class="tab_">
             <div class="tabs" ref="tabs">
-                <div :class="['tab', activeTab == 1 ? 'active' : '']" @click="checkitem(1)">
-                    <div v-if="activeTab == 1" class="activesty"></div>
+                <div v-for="item in topList" :key="item.id" :class="['tab', activeTab == item.id ? 'active' : '']" @click="checkitem(item.id)">
+                    <div v-if="activeTab == item.id" class="activesty"></div>
                     <div class="content">
                         <div class="bdicon">
-                            <multi-img class="arrowicon" name="sl" directory="fund" />
+                            <multi-img class="arrowicon" :name="item.iconName" directory="fund" />
                         </div>
-                        <p>{{ $t('fundText27') }}</p>
-                    </div>
-                </div>
-                <div :class="['tab', activeTab == 2 ? 'active' : '']" @click="checkitem(2)">
-                    <div v-if="activeTab == 2" class="activesty"></div>
-                    <div class="content">
-                        <div class="bdicon">
-                            <multi-img class="arrowicon" name="gsy" directory="fund" />
-                        </div>
-                        <p>{{ $t('fundText21') }}</p>
-                    </div>
-                </div>
-                <div :class="['tab', activeTab == 3 ? 'active' : '']" @click="checkitem(3)">
-                    <div v-if="activeTab == 3" class="activesty"></div>
-                    <div class="content">
-                        <div class="bdicon">
-                            <multi-img class="arrowicon" name="jylj" directory="fund" />
-                        </div>
-                        <p>{{ $t('fundText24') }}</p>
-                    </div>
-                </div>
-                <div :class="['tab', activeTab == 4 ? 'active' : '']" @click="checkitem(4)">
-                    <div v-if="activeTab == 4" class="activesty"></div>
-                    <div class="content">
-                        <div class="bdicon">
-                            <multi-img class="arrowicon" name="pxjj" directory="fund" />
-                        </div>
-                        <p>{{ $t('fundText11') }}</p>
+                        <p>{{ item.name }}</p>
                     </div>
                 </div>
             </div>
         </div>
         <div class="card tjlist">
             <div class="rule">
-                <span v-if="activeTab == 1">
+                <span>
                     <i>{{ $t('fundText10') }}：</i>
-                    {{ $t('fundText9') }}
-                </span>
-                <span v-if="activeTab == 2">
-                    <i>{{ $t('fundText10') }}：</i>
-                    {{ $t('fundText8') }}
-                </span>
-                <span v-if="activeTab == 3">
-                    <i>{{ $t('fundText10') }}：</i>
-                    {{ $t('fundText7') }}
-                </span>
-                <span v-if="activeTab == 4">
-                    <i>{{ $t('fundText10') }}：</i>
-                    {{ $t('fundText6') }}
+                    {{ ruleDesc }}
                 </span>
             </div>
-            <div class="select" v-if="activeTab == 1">
+            <div class="select" v-if="activeTab == 3">
                 <div class="top" @click="openSelect">
                     <span v-if="optionTrue == 'm3'">近3月</span>
                     <span v-if="optionTrue == 'm6'">近6月</span>
@@ -81,20 +42,59 @@
             </div>
             <van-list v-model="vanloading" :finished="finished" finished-text="" :loading-text="$t('loading')" @load="onLoad">
                 <div class="fund-item" v-for="(item, idx) in fundList" :key="item.symbol" @click="gotoFundDetail(item)">
-                    <!-- <van-skeleton row="4" :loading="loading"> -->
                     <div class="fund-item-top">
-                        <multi-img
-                            v-if="idx == 0 || idx == 1 || idx == 2 ? true : false"
-                            :name="idx == 0 ? 'pm1' : idx == 1 ? 'pm2' : idx == 2 ? 'pm3' : ''"
-                            directory="fund"
-                            :alt="idx == 0 ? 'pm1' : idx == 1 ? 'pm2' : idx == 2 ? 'pm3' : ''"
-                        ></multi-img>
+                        <multi-img v-if="idx < 3" :name="`pm${idx + 1}`" directory="fund"></multi-img>
                         <p v-else>{{ idx + 1 }}</p>
                         <h3 class="title_">{{ item.name }}</h3>
-                        <!-- <span :class="[item.currency=='USD'?'usdsty':'hkdsty']">{{item.currency}}</span> -->
                         <div :class="`currency-${item.currency}`"></div>
                     </div>
-                    <div class="fund-item-bottom" v-if="activeTab == 3">
+
+                    <!-- 陆浦香港、货基排行榜 -->
+                    <template v-if="[1, 2].includes(+activeTab)">
+                        <!-- 非货币基金展示近一年涨幅和最新净值 -->
+                        <TopListItemBottom
+                            v-if="item.fundType !== fundTypeKeysMap.currency"
+                            :config="[
+                                { label: '近1年涨幅', value: item.returnY3, isRiseFall: true },
+                                { label: '最新净值（2024/07/24）', value: item.returnY3, notBold: true },
+                            ]"
+                        ></TopListItemBottom>
+
+                        <!-- 货币基金展示近七日年化和日均万元收益 -->
+                        <TopListItemBottom
+                            v-if="item.fundType === fundTypeKeysMap.currency"
+                            :config="[
+                                { label: '近七日年化', value: item.returnD7ToY1, isRiseFall: true },
+                                { label: '日均万元收益', value: item.returnD7ToY1, notBold: true },
+                            ]"
+                        ></TopListItemBottom>
+                    </template>
+
+                    <!-- 业绩实力榜 -->
+                    <TopListItemBottom
+                        v-if="activeTab === 3"
+                        :config="[
+                            { label: `近${optionTrueText}${$t('priceChange')}`, value: item.returnY3, isRiseFall: true },
+                            { label: $t('fundText2'), value: item.dividendRatio || '--', notBold: true },
+                        ]"
+                    ></TopListItemBottom>
+
+                    <!-- 高收益风险比榜 -->
+                    <TopListItemBottom
+                        v-if="activeTab === 4"
+                        :config="[
+                            { label: `近${optionTrueText}${$t('priceChange')}`, value: item.returnY3, isRiseFall: true },
+                            { label: $t('fundList.sharpeRatioY1'), value: item.dividendRatio || '--' },
+                        ]"
+                    ></TopListItemBottom>
+
+                    <!-- 派息榜 -->
+                    <TopListItemBottom
+                        v-if="activeTab === 5"
+                        :config="[{ label: $t('fundText3'), value: item.dividendRatio, isRiseFall: true, isHorizontal: true }]"
+                    ></TopListItemBottom>
+
+                    <!-- <div v-if="activeTab == 1" class="fund-item-bottom">
                         <div class="left">
                             <div class="rate">{{ item.establishmentYear || '--' }}</div>
                             <p class="type">{{ $t('fundText5') }}</p>
@@ -103,10 +103,17 @@
                             <p class="rate" v-riseFall="item.avgYieldY10"></p>
                             <div class="type" v-if="activeTab == 3">{{ $t('fundText4') }}</div>
                         </div>
-                        <!-- <div class="zxicon" v-if="isApp" @click.stop="selfHandler(item)">
-                            <multi-img v-if="item.zxflag" name="active-taoxin" directory="fund" alt="active-taoxin"></multi-img>
-                            <multi-img v-else name="taoxin" directory="fund" alt="taoxin"></multi-img>
-                        </div> -->
+                    </div> -->
+
+                    <!-- <div class="fund-item-bottom" v-if="activeTab == 3">
+                        <div class="left">
+                            <div class="rate">{{ item.establishmentYear || '--' }}</div>
+                            <p class="type">{{ $t('fundText5') }}</p>
+                        </div>
+                        <div class="descript">
+                            <p class="rate" v-riseFall="item.avgYieldY10"></p>
+                            <div class="type" v-if="activeTab == 3">{{ $t('fundText4') }}</div>
+                        </div>
                     </div>
                     <div class="fund-item-bottom" v-else>
                         <div class="left">
@@ -152,17 +159,12 @@
                             <div class="type" v-if="activeTab == 1">{{ $t('fundText2') }}</div>
                             <div class="type" v-if="activeTab == 2">{{ $t('fundList.sharpeRatioY1') }}</div>
                         </div>
-                        <!-- <div class="zxicon" v-if="isApp" @click.stop="selfHandler(item)">
-                            <multi-img v-if="item.zxflag" name="active-taoxin" directory="fund" alt="active-taoxin"></multi-img>
-                            <multi-img v-else name="taoxin" directory="fund" alt="taoxin"></multi-img>
-                        </div> -->
-                    </div>
-                    <!-- </van-skeleton> -->
+                    </div> -->
                 </div>
             </van-list>
-            <!-- <loading :propsShow="true" :showLoading="loading"/> -->
             <div class="btdis">
-                {{ $t('fundText1') }}
+                TODO 文案待提供
+                <!-- {{ $t('fundText1') }} -->
             </div>
         </div>
     </div>
@@ -175,13 +177,21 @@ import { isTenantApp } from '@/utils/tools'
 // import pm2 from '@/assets/images/fund/pm2.png'
 // import pm3 from '@/assets/images/fund/pm3.png'
 import { getLangType } from '@/utils/tools.js'
+import TopListItemBottom from './components/TopListItemBottom.vue'
+import { FUND_MODE_MAP, FUND_TYPE_MAP } from '@/views/fund/config/common'
+
+const fundTypeKeysMap = FUND_TYPE_MAP.keysMap
+console.log('🚀 ~liujinhao~ ~ fundTypeKeysMap:', fundTypeKeysMap)
+
 export default {
     name: 'StrengthPage',
     components: {
         [Skeleton.name]: Skeleton,
+        TopListItemBottom,
     },
     data() {
         return {
+            fundTypeKeysMap,
             loading: true,
             symbol: this.$route.query.symbol,
             type: this.$route.query.type,
@@ -202,6 +212,44 @@ export default {
             lang: getLangType(),
             vanloading: false,
             finished: false,
+
+            topList: [
+                {
+                    id: 1,
+                    name: this.$t('topList1'),
+                    tips: this.$t('topList1Tips'),
+                    desc: this.$t('topList1Desc'),
+                    iconName: 'sl',
+                },
+                {
+                    id: 2,
+                    name: this.$t('topList2'),
+                    tips: this.$t('topList2Tips'),
+                    desc: this.$t('topList2Desc'),
+                    iconName: 'top-list_cash',
+                },
+                {
+                    id: 3,
+                    name: this.$t('fundText27'),
+                    tips: this.$t('fundText26'),
+                    desc: this.$t('fundText9'),
+                    iconName: 'jylj',
+                },
+                {
+                    id: 4,
+                    name: this.$t('fundText21'),
+                    tips: this.$t('fundText28'),
+                    desc: this.$t('fundText8'),
+                    iconName: 'gsy',
+                },
+                {
+                    id: 5,
+                    name: this.$t('fundText22'),
+                    tips: this.$t('fundText23'),
+                    desc: this.$t('fundText6'),
+                    iconName: 'pxjj',
+                },
+            ],
         }
     },
     computed: {
@@ -219,6 +267,22 @@ export default {
         isApp() {
             return isTenantApp() && !!this.$jsBridge
         },
+
+        ruleDesc() {
+            const topItem = this.topList.find(el => el.id == +this.activeTab)
+            return topItem?.desc
+        },
+
+        optionTrueText() {
+            const map = {
+                m3: '3月',
+                m6: '6月',
+                y3: '3年',
+                y5: '5年',
+            }
+
+            return map[this.optionTrue]
+        },
     },
     mounted() {
         this.activeTab = this.$route.query.id
@@ -227,7 +291,7 @@ export default {
         activeTab: {
             handler(v) {
                 const desObj = this.$refs.tabs
-                if (v == 1) {
+                if (v == 3 || v == 4) {
                     this.optionTrue = this.$route.query.period || 'y3'
                     if (desObj) {
                         desObj.scrollLeft = 0
@@ -579,11 +643,12 @@ export default {
             .top {
                 display: flex;
                 flex-direction: row;
+                align-items: center;
                 width: 60px;
-                height: 20px;
+                height: 24px;
                 color: #9c9c9c;
                 font-size: 12px;
-                line-height: 20px;
+                line-height: 24px;
 
                 span {
                     display: inline-block;
@@ -593,7 +658,7 @@ export default {
                 img {
                     width: 6px;
                     height: 6px;
-                    margin: 5px 5px 0;
+                    margin-left: 5px;
                 }
             }
 
@@ -617,7 +682,7 @@ export default {
                 }
 
                 .active {
-                    color: #ff6907;
+                    color: @theme;
                 }
 
                 .tip-trangle-top {

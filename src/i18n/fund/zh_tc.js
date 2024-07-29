@@ -1189,6 +1189,12 @@ export default {
     fundText27: '業績實力榜',
     fundText28: '高投資性價比',
     fundText29: '閑錢管家，自動申贖',
+    topList1: '陸浦香港推薦',
+    topList1Tips: '定期優選基金產品',
+    topList1Desc: '陸浦香港定期優選的各類基金產品',
+    topList2: '貨基排行榜',
+    topList2Tips: '閒錢配置，靈活取用',
+    topList2Desc: '陸浦香港已上架的貨幣基金產品，按照萬元收益從高到低排序展示。',
     ruleDescript:
         '說明：基金管理費、托管費等費用從基金資產中每日計提。頁面顯示的費用數據來自第三方，與基金公司實際情況可能存在一定差別，僅供參考，具體以銷售文件為準。',
     ji: '及',
