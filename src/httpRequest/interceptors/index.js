@@ -7,7 +7,7 @@ import {
     ArmsRquestInterceptor,
     ArmsResponseInterceptor,
     CommonErrorInterceptor,
-} from '@fs/http'
+} from '../lupuCustomizeHttp/index'
 import handleResponseInterceptor from './handleResponseInterceptor'
 import MRErrorTip from '@/config/MRErrorTip'
 import { Toast } from 'vant'
