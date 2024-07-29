@@ -710,7 +710,6 @@ export default {
             } else {
                 trackObj['redeem_num'] = this.detail.applyQuantity
             }
-            this.$sensorsTrack('FundTradeOperation', trackObj)
             try {
                 this.$loading.show = true
                 const { result } = await OrderCancel({

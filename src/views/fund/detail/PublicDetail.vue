@@ -170,9 +170,6 @@ export default {
         onTabClick(e) {
             const { id, label } = e.target.dataset
             console.log(`Feng.chen:: 19:20:28 ===> `, 'onTabClick', id)
-            this.$sensorsTrack('FundDetailTabClick', {
-                button_name: label,
-            })
             const dom = document.querySelector('#' + id)
             if (!dom) return
             const rect = dom.getBoundingClientRect()

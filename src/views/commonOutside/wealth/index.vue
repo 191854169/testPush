@@ -453,9 +453,6 @@ export default {
             const { link, key, label } = e ? e.target.dataset : value
             if (!link) return
 
-            this.$sensorsTrack('FinancialIconClick', {
-                button_name: label,
-            })
             if (key === 'cash') {
                 if (!this.tradeAccount || !this.fundAccount) {
                     // 星财宝未开户(证券账户、理财账户)前置校验

@@ -10,9 +10,6 @@ import { isTenantApp } from '@/utils/tools'
 import { isInOutsideH5 } from '@/utils'
 import LogoAd from '@/components/logo.vue'
 
-// 初始化神策埋点
-initSensors()
-
 Vue.prototype.$jsBridge = window.JSBridge
 Vue.component(LogoAd.name, LogoAd)
 

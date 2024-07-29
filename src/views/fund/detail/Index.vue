@@ -66,11 +66,6 @@ export default {
         }
         next()
     },
-    async created() {
-        this.$sensorsTrack('FundDetailView', {
-            forward_page: this.$sensors.getPresetProperties().$referrer,
-        })
-    },
     methods: {
         onChooseAccount({ type, goTransferOutPage }) {
             const { symbol } = this.$route.query

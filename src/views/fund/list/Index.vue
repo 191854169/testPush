@@ -492,10 +492,6 @@ export default {
         },
         // 埋点搜索
         async burySearch(options = {}) {
-            this.$sensorsTrack('FundList', {
-                fund_type: this.fundTypeMap[this.activeTab],
-                search_filter: JSON.stringify(this.filterList),
-            })
             await this.getPubList(options)
         },
         // 搜索
