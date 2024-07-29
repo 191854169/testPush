@@ -130,18 +130,10 @@
                         <multi-img class="arrowicon" name="icon_arrow_left" directory="fund" alt="icon_arrow_left" verifyTheme></multi-img>
                     </div>
                 </div>
-                <div
-                    class="fund-item"
-                    v-for="(item, idx) in loading ? getTempList(4) : bangdanList"
-                    :key="item.symbol"
-                    @click="toMorePage(5, item.id)"
-                >
+                <div class="fund-item" v-for="item in loading ? getTempList(4) : bangdanList" :key="item.symbol" @click="toMorePage(5, item.id)">
                     <van-skeleton row="4" :loading="loading">
                         <div class="bdicon">
-                            <multi-img v-if="idx == 0" name="sl" directory="fund" verifyTheme />
-                            <multi-img v-if="idx == 1" name="gsy" directory="fund" verifyTheme />
-                            <multi-img v-if="idx == 2" name="jylj" directory="fund" verifyTheme />
-                            <multi-img v-if="idx == 3" name="pxjj" directory="fund" verifyTheme />
+                            <multi-img :name="item.iconName" directory="fund" verifyTheme />
                         </div>
                         <div class="fund-item-right">
                             <h3 class="title_">{{ item.name }}</h3>
@@ -251,23 +243,33 @@ export default {
             bangdanList: [
                 {
                     id: 1,
-                    name: this.$t('fundText27'),
-                    tips: this.$t('fundText26'),
+                    name: this.$t('topList1'),
+                    tips: this.$t('topList1Tips'),
+                    iconName: 'sl',
                 },
                 {
                     id: 2,
-                    name: this.$t('fundText21'),
-                    tips: this.$t('fundText28'),
+                    name: this.$t('topList2'),
+                    tips: this.$t('topList2Tips'),
+                    iconName: 'top-list_cash',
                 },
                 {
                     id: 3,
-                    name: this.$t('fundText24'),
-                    tips: this.$t('fundText25'),
+                    name: this.$t('fundText27'),
+                    tips: this.$t('fundText26'),
+                    iconName: 'jylj',
                 },
                 {
                     id: 4,
+                    name: this.$t('fundText21'),
+                    tips: this.$t('fundText28'),
+                    iconName: 'gsy',
+                },
+                {
+                    id: 5,
                     name: this.$t('fundText22'),
                     tips: this.$t('fundText23'),
+                    iconName: 'pxjj',
                 },
             ],
             fundObj: {

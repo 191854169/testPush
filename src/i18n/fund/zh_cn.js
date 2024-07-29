@@ -1191,6 +1191,12 @@ export default {
     fundText27: '业绩实力榜',
     fundText28: '高投资性价比',
     fundText29: '闲钱管家，自动申赎',
+    topList1: '陆浦香港推荐',
+    topList1Tips: '定期优选基金产品',
+    topList1Desc: '陆浦香港定期优选的各类基金产品',
+    topList2: '货基排行榜',
+    topList2Tips: '闲钱配置，灵活取用',
+    topList2Desc: '陆浦香港已上架的货币基金产品，按照万元收益从高到低排序展示。',
     ruleDescript:
         '说明：基金管理费、托管费等费用从基金资产中每日计提。页面显示的费用数据来自第三方，与基金公司实际情况可能存在一定差别，仅供参考，具体以销售文件为准。',
     ji: '及',
