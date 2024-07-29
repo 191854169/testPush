@@ -552,15 +552,6 @@ export default {
                 this.buyFail = true
                 return
             }
-            this.$sensorsTrack('FundTradeOperation', {
-                operation_type: '下单',
-                deal_type: '赎回',
-                fund_type: this.fundInfo.type,
-                fund_code: this.fundInfo.ISIN,
-                fund_name: this.fundInfo.name,
-                redeem_num: this.number,
-                currency: this.fundInfo.currency,
-            })
             try {
                 let res = {}
                 // 显示loading

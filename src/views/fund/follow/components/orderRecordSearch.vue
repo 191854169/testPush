@@ -180,14 +180,6 @@ export default {
             return isTenantApp() && !!this.$jsBridge
         },
     },
-    watch: {
-        show(v) {
-            if (!v) return
-            this.$sensorsTrack('ordeRecordSearchPageView', {
-                forward_page: window.location.href,
-            })
-        },
-    },
     created() {
         // 本地缓存读取历史记录
         const list = JSON.parse(localStorage.getItem(this.STORAGEKEY)) || ''
@@ -206,11 +198,6 @@ export default {
                 })
                 const resultList = res?.result?.records || []
                 this.searchList = resultList
-                // 搜索结果埋点
-                this.$sensorsTrack('orderRecordSearchKeywordResult', {
-                    search_keyword: this.value,
-                    search_result_num: this.searchList.length,
-                })
             } catch (e) {
                 console.log('getOrderRecord:===>e', e)
             }
@@ -295,14 +282,6 @@ export default {
             // 加入缓存
             this.selectedOrderRecord(item)
             const id = item.id
-            // 点击跳转埋点
-            this.$sensorsTrack('orderRecordSearchResultClick', {
-                keyword_type: this.isSearch ? '自定义搜索词' : '历史搜索词',
-                id: id,
-                product_portfolioId: item.portfolioId,
-                product_portfolioName: item.portfolioName,
-                search_result_num: this.isSearch ? this.searchList.length : undefined,
-            })
 
             const url = `${location.origin}/wealth/fund.html#/follow-order-detail?id=${id}`
             if (this.$jsBridge) {

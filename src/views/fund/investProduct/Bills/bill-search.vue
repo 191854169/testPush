@@ -89,14 +89,6 @@ export default {
             return isTenantApp() && !!this.$jsBridge
         },
     },
-    watch: {
-        show(v) {
-            if (!v) return
-            this.$sensorsTrack('BillSearchPageView', {
-                forward_page: window.location.href,
-            })
-        },
-    },
     created() {
         // 本地缓存读取历史记录
         const list = JSON.parse(localStorage.getItem(this.STORAGEKEY)) || ''
@@ -114,11 +106,6 @@ export default {
                 console.log('BillSearch', res.result)
                 const resultList = res.result.list || []
                 this.searchList = resultList
-                // 搜索结果埋点
-                this.$sensorsTrack('BillSearchKeywordResult', {
-                    search_keyword: this.value,
-                    search_result_num: this.searchList.length,
-                })
             } catch (e) {
                 console.log('getBill:===>e', e)
             }
@@ -175,13 +162,6 @@ export default {
             // 加入缓存
             this.selectedBill(item)
             const symbol = item.symbol
-            // 点击跳转埋点
-            this.$sensorsTrack('BillSearchResultClick', {
-                keyword_type: this.isSearch ? '自定义搜索词' : '历史搜索词',
-                product_code: item.symbol,
-                product_name: item.name,
-                search_result_num: this.isSearch ? this.searchList.length : undefined,
-            })
 
             this.$goPage('/bills/detail', {
                 symbol: symbol,

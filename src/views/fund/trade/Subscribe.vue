@@ -1125,15 +1125,6 @@ export default {
             return numArr[intStr.length]
         },
         async confirmBuy() {
-            this.$sensorsTrack('FundTradeOperation', {
-                operation_type: '下单',
-                deal_type: '认购',
-                fund_type: this.fundInfo.type,
-                fund_code: this.fundInfo.ISIN,
-                fund_name: this.fundInfo.name,
-                subscribe_amount: this.number,
-                currency: this.fundInfo.currency,
-            })
             if (this.isPrivateFund) {
                 this.privateTrade()
             } else {

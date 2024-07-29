@@ -170,9 +170,6 @@ export default {
             const { link, key, label } = e.target.dataset
             if (!link) return
 
-            this.$sensorsTrack('FinancialIconClick', {
-                button_name: label,
-            })
             if (key === 'cash') {
                 if (!this.$root.isLogin) {
                     this.$root.login()

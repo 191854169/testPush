@@ -132,14 +132,6 @@ export default {
             return isTenantApp() && !!this.$jsBridge
         },
     },
-    watch: {
-        show(v) {
-            if (!v) return
-            this.$sensorsTrack('followSearchPageView', {
-                forward_page: window.location.href,
-            })
-        },
-    },
     created() {
         // 本地缓存读取历史记录
         const list = JSON.parse(localStorage.getItem(this.STORAGEKEY)) || ''
@@ -161,11 +153,6 @@ export default {
                 const resultList = res?.result?.records || []
                 this.searchList = resultList
                 console.log('searchHandler', `${JSON.stringify(this.searchList)}`)
-                // 搜索结果埋点
-                this.$sensorsTrack('followSearchKeywordResult', {
-                    search_keyword: this.value,
-                    search_result_num: this.searchList.length,
-                })
             } catch (e) {
                 console.log('getfollow:===>e', e)
             }
@@ -250,13 +237,6 @@ export default {
             // 加入缓存
             this.selectedFollow(item)
             const portfolioId = item.portfolioId
-            // 点击跳转埋点
-            this.$sensorsTrack('followSearchResultClick', {
-                keyword_type: this.isSearch ? '自定义搜索词' : '历史搜索词',
-                product_portfolioId: portfolioId,
-                product_portfolioName: item.portfolioName,
-                search_result_num: this.isSearch ? this.searchList.length : undefined,
-            })
 
             this.gotoFollowDetail(portfolioId)
         },

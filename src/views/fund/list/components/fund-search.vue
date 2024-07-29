@@ -120,14 +120,6 @@ export default {
             return isTenantApp() && !!this.$jsBridge
         },
     },
-    watch: {
-        show(v) {
-            if (!v) return
-            this.$sensorsTrack('FundSearchPageView', {
-                forward_page: window.location.href,
-            })
-        },
-    },
     created() {
         // 本地缓存读取历史记录
         const list = JSON.parse(localStorage.getItem(this.STORAGEKEY)) || ''
@@ -164,11 +156,6 @@ export default {
                     await Promise.all(checkList)
                 }
                 this.searchList = resultList
-                // 搜索结果埋点
-                this.$sensorsTrack('FundSearchKeywordResult', {
-                    search_keyword: this.value,
-                    search_result_num: this.searchList.length,
-                })
             } catch (e) {
                 console.log('getFund:===>e', e)
             }
@@ -249,14 +236,6 @@ export default {
             // 加入缓存
             this.selectedFund(item)
             const symbol = item.mkt + item.rawSymbol
-            // 点击跳转埋点
-            this.$sensorsTrack('FundSearchResultClick', {
-                keyword_type: this.isSearch ? '自定义搜索词' : '历史搜索词',
-                product_type: FUND_TYPE_ENUM[item.fundType],
-                product_code: item.ISIN,
-                product_name: item.name,
-                search_result_num: this.isSearch ? this.searchList.length : undefined,
-            })
 
             if (this.$jsBridge) {
                 const url = `${location.origin}/wealth/fund.html#/detail?type=public&symbol=${symbol}`
