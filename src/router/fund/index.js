@@ -6,7 +6,6 @@ import '@/assets/css/nprogress.css'
 import JSBridge from '@fs/jsbridge/dist/lib/lupu/jsBridge.js' // 不在自研APP内获取的对象为  undefined
 import { i18n } from '@/i18n/fund'
 import { setTheme, removeTheme, getRunEnv } from '@/utils/env'
-import { autoTrackSinglePage } from '@/utils/bury'
 import followRoutes from './follow'
 import pathnames from '@/config/H5Pathname'
 Vue.use(VueRouter)
@@ -554,9 +553,6 @@ router.beforeEach((to, from, next) => {
 
 router.afterEach(to => {
     !JSBridge && NProgress.done()
-    Vue.nextTick(() => {
-        autoTrackSinglePage()
-    })
     /*------- 在页面刷新之后才判断登录态（保证session的有效） -------*/
     const isLogin = !!localStorage.getItem('session')
     if (to.meta.login && !isLogin) {

@@ -9,7 +9,6 @@ import JSBridge from '@fs/jsbridge/dist/lib/lupu/jsBridge.js' // 不在自研APP
 //   isLogin
 // } from '@/utils/tools.js'
 import { i18n } from '@/i18n/cashBox'
-import { autoTrackSinglePage } from '@/utils/bury'
 Vue.use(VueRouter)
 
 NProgress.configure({ showSpinner: false })
@@ -224,9 +223,6 @@ router.beforeEach((to, from, next) => {
 
 router.afterEach(() => {
     !JSBridge && NProgress.done()
-    Vue.nextTick(() => {
-        autoTrackSinglePage()
-    })
 })
 
 export default router
