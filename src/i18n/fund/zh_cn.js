@@ -229,6 +229,8 @@ export default {
     tradeRuleDescTest3: '上述预估时间仅供参考，具体请以实际发生时间为准。',
     startAmount: '起投金额',
     subscribeFee: '买入费率',
+    subscribeFeeDesc1: '净买入金额 = 买入金额/(1+买入费率)',
+    subscribeFeeDesc2: '买入费用 = 买入金额 - 净买入金额',
     subscribeStatus: '买入状态',
     canSubscribe: '可买入',
     minRedeem: '最小卖出',

@@ -5,8 +5,14 @@
             <fosun-tabs v-model="active">
                 <van-tab class="tab-content" v-for="item in tabs" :key="item.key" :title="item.label" :name="item.key">
                     <div class="content-item" v-for="(i, index) in contentList[`${item.key}List`]" :key="index" v-show="i.hidden !== true">
-                        <div class="label">{{ i.label }}</div>
-                        <div class="value">{{ i.config ? i.config() : i.value }}</div>
+                        <div class="content-item__main">
+                            <div class="label">{{ i.label }}</div>
+                            <div class="value">{{ i.config ? i.config() : i.value }}</div>
+                        </div>
+                        <div v-if="i.desc" class="value-desc">
+                            <multi-img class="arrow" name="rule_desc_top" directory="fund" />
+                            <div v-for="text in i.desc" :key="text">{{ text }}</div>
+                        </div>
                     </div>
                 </van-tab>
             </fosun-tabs>
@@ -170,7 +176,11 @@ export default {
                         value: this.ruleInfo.minInitial || '--',
                         config: () => `${thousandFilter(this.ruleInfo.minInitial || '')}${currencyFilter(this.ruleInfo.currency) || ''}`,
                     },
-                    { label: this.$t('subscribeFee'), config: () => this.ruleInfo.buyRate },
+                    {
+                        label: this.$t('subscribeFee'),
+                        config: () => this.ruleInfo.buyRate,
+                        desc: [this.$t('subscribeFeeDesc1'), this.$t('subscribeFeeDesc2')],
+                    },
                     // { label: this.$t('subscribeStatus'), value: this.$t('canSubscribe') },
                 ],
                 sellList: [
@@ -280,9 +290,12 @@ export default {
     border-radius: 8px;
 
     .content-item {
-        display: flex;
-        justify-content: space-between;
         padding: 10px 12px;
+
+        &__main {
+            display: flex;
+            justify-content: space-between;
+        }
 
         & .label {
             color: #666;
@@ -298,6 +311,27 @@ export default {
             font-size: 14px;
             line-height: 20px;
             text-align: right;
+        }
+    }
+
+    .value-desc {
+        position: relative;
+        margin-top: 10px;
+        padding: 12px;
+        color: @fontBlackColor;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 22px;
+        text-align: left;
+        background-color: @bgGreyColor;
+        border-radius: 8px;
+
+        .arrow {
+            position: absolute;
+            top: -8px;
+            left: 20px;
+            width: 16px;
+            height: 8px;
         }
     }
 }
