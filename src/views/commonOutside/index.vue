@@ -1,7 +1,7 @@
 <template>
     <div class="ry-index" ref="stickyContainer" :key="$route.path" :class="{ clip: tradeLoginDialog && tradeLoginDialog.show }">
         <div class="content-wrapper">
-            <Account @onChange="changeActive" @getAssetSummarySuccess="initTradePwd" v-if="active === 'account'"></Account>
+            <Account @onChange="changeActive" v-if="active === 'account'"></Account>
             <Wealth v-if="active === 'wealth'"></Wealth>
             <Mine v-if="active === 'mine'"></Mine>
         </div>
@@ -79,19 +79,19 @@ export default {
             }
         },
 
-        initTradePwd() {
-            // 若无用户信息则延迟3秒处理
-            if (!this.userInfo) {
-                setTimeout(() => {
-                    this.initTradePwd()
-                }, 3000)
-                return
-            }
+        // initTradePwd() {
+        //     // 若无用户信息则延迟3秒处理
+        //     if (!this.userInfo) {
+        //         setTimeout(() => {
+        //             this.initTradePwd()
+        //         }, 3000)
+        //         return
+        //     }
 
-            if (!this.isUnsetTradePwd) {
-                this.validateIsFirstTime()
-            }
-        },
+        //     if (!this.isUnsetTradePwd) {
+        //         this.validateIsFirstTime()
+        //     }
+        // },
         pageShow() {
             this.propertyData = getPageVisibleSupportProperty()
             // 买入，卖出，开通星财宝返回时，刷新页面
@@ -102,19 +102,19 @@ export default {
             !document[this.propertyData.hidden] && this.init()
         },
         // 校验是否第一次进来的
-        validateIsFirstTime() {
-            const firstTimeFlag = sessionStorage.getItem('firstTimeFlag')
-            // 修改交易密码后，需重新校验密码 showTradeLoginDialog 1-是 0-否
-            const showTradeLoginDialog = sessionStorage.getItem('showTradeLoginDialog')
-            if (!firstTimeFlag || showTradeLoginDialog === '1') {
-                this.tradeLoginDialog =
-                    this.tradeLoginDialog ||
-                    new TradeLogin({ propsData: { subAcctId: this.accts.subAcctId, showCloseIcon: false, callBack: this.handleTradeConfirm } })
-                this.tradeLoginDialog.show = true
-                // 在资产页未输入交易密码时页面所有资产数据应该隐藏
-                this.$store.commit('user/updateShowAsset', false)
-            }
-        },
+        // validateIsFirstTime() {
+        //     const firstTimeFlag = sessionStorage.getItem('firstTimeFlag')
+        //     // 修改交易密码后，需重新校验密码 showTradeLoginDialog 1-是 0-否
+        //     const showTradeLoginDialog = sessionStorage.getItem('showTradeLoginDialog')
+        //     if (!firstTimeFlag || showTradeLoginDialog === '1') {
+        //         this.tradeLoginDialog =
+        //             this.tradeLoginDialog ||
+        //             new TradeLogin({ propsData: { subAcctId: this.accts.subAcctId, showCloseIcon: false, callBack: this.handleTradeConfirm } })
+        //         this.tradeLoginDialog.show = true
+        //         // 在资产页未输入交易密码时页面所有资产数据应该隐藏
+        //         this.$store.commit('user/updateShowAsset', false)
+        //     }
+        // },
         // 去设置交易密码页
         goSetPasswordPage() {
             Dialog.confirm({
