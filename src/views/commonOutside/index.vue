@@ -73,10 +73,10 @@ export default {
     },
     methods: {
         async init() {
-            this.isUnsetTradePwd = this.userInfo?.clientInfo?.pwdStatus === TRADE_PWD_STATUS.PWD_UNSET
-            if (this.isUnsetTradePwd) {
-                this.goSetPasswordPage()
-            }
+            // this.isUnsetTradePwd = this.userInfo?.clientInfo?.pwdStatus === TRADE_PWD_STATUS.PWD_UNSET
+            // if (this.isUnsetTradePwd) {
+            //     this.goSetPasswordPage()
+            // }
         },
 
         // initTradePwd() {
