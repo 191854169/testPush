@@ -6,7 +6,6 @@ import '@/assets/css/nprogress.css'
 import JSBridge from '@fs/jsbridge/dist/lib/lupu/jsBridge.js' // 不在自研APP内获取的对象为  undefined
 Vue.use(VueRouter)
 import { i18n } from '@/i18n/riskAssessment'
-import { autoTrackSinglePage } from '@/utils/bury'
 NProgress.configure({ showSpinner: false })
 
 const router = new VueRouter({
@@ -88,9 +87,9 @@ router.beforeEach(async (to, from, next) => {
 
 router.afterEach(() => {
     !JSBridge && NProgress.done()
-    Vue.nextTick(() => {
-        autoTrackSinglePage()
-    })
+    // Vue.nextTick(() => {
+    //     autoTrackSinglePage()
+    // })
 })
 
 export default router

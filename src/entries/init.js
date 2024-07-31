@@ -5,7 +5,6 @@ import { addCurParamsForUrl } from '@/utils/utils.js'
 // 注册全局属性
 import '@/config/globalProterties/index.js'
 import pathnames from '../config/H5Pathname.js'
-import initSensors from '@/utils/bury.js'
 import { isTenantApp } from '@/utils/tools'
 import { isInOutsideH5 } from '@/utils'
 import LogoAd from '@/components/logo.vue'
