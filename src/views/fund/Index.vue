@@ -298,19 +298,6 @@
             <span class="company">{{ $t('fundRelationCompany') }}</span>
             <span>{{ $t('provide') }}</span>
         </p>
-
-        <!-- app专属顾问 -->
-        <div
-            class="app-counselor"
-            :class="{ 'app-counselor-half': showHalfCounselor }"
-            ref="appCounselor"
-            v-if="showAppCounselor"
-            @click="goCounselor"
-        >
-            <multi-img name="close-full-gray" class="counselor-icon" directory="common" @click.stop="hiddenCounselor"></multi-img>
-            <span class="app-counselor__text">{{ $t('addWealthCounselor') }}</span>
-            <multi-img name="app_counselor" class="counselor-bg" directory="fund"></multi-img>
-        </div>
     </div>
 </template>
 
@@ -326,11 +313,11 @@ import riskAssessmentMixin from '@/mixins/business/riskAssessmentMixin.js'
 import { FINANCE_ACCOUNT, FUND_ACCOUNT } from '@/entries/Fund.js'
 import Banner from './components/Banner.vue'
 import { isNeedToSetTrade } from '@/mixins/initTradePwd'
-import { isUndefined, compatIOSLocalStorage } from '@/utils/tools'
+import { isUndefined } from '@/utils/tools'
 import { getUserDetail } from '@/apis/uc.js'
 import { getRunEnv, setTheme } from '@/utils/env.js'
 import checkPIMixin from '@/mixins/business/checkPIMixin'
-import { isTenantApp, getAppVersion, compareVersion } from '@/utils/tools.js'
+import { isTenantApp } from '@/utils/tools.js'
 import { thousandsFilter, currencyFilter } from '@/config/filters.js'
 import { getUsaBondList } from '@/apis/bond/index.js'
 import investmentPortfolioCard from './follow/components/investmentPortfolioCard.vue'
@@ -483,28 +470,6 @@ export default {
         cptPIDialogText() {
             const key = this.cptIsneedPI ? (this.clientType === 1 ? 'PIDialogPersonText' : 'PIDialogComText') : ''
             return this.$t(key, { date: this.cptDateText })
-        },
-        // 是否显示app专属顾问
-        showAppCounselor() {
-            if (this.closeAppCounselor) return false
-            const inHL = isTenantApp()
-            // 显示新手引导时不显示
-            if (this.showNoobGuide) return false
-            if (inHL) {
-                // app版本号大于2.10不展示
-                const curVersion = getAppVersion()
-                const moreThanVersion = compareVersion(curVersion, '2.10') >= 0
-                console.log('app专属顾问版本判断当前版本是否 >= 2.10：', moreThanVersion)
-                if (moreThanVersion) return
-                const counselorDate = localStorage.getItem(this.counselorStorageKey)
-                const today = dayjs().format('YYYY-MM-DD')
-                if (counselorDate && today === counselorDate) {
-                    // 当天关闭过icon,不再显示
-                    return false
-                }
-                return true
-            }
-            return false
         },
     },
     filters: {
@@ -1054,8 +1019,6 @@ export default {
                 }[type]
                 if (!key) return
                 if (this.$jsBridge) {
-                    // 兼容IOS
-                    if (!compatIOSLocalStorage()) return
                     const data = await this.$jsBridge.readLocalStorage(key)
                     this[guideFlag] = !(data && data.value)
                 }

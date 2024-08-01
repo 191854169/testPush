@@ -23,7 +23,7 @@ import masterSwipe from './components/masterSwipe.vue'
 import followStarSelection from './components/followStarSelection.vue'
 import Banner from '../../fund/components/Banner.vue'
 import customerDetailMixin from './mixins/customerDetailMixin'
-import { isTenantApp, getAppVersion, compareVersion } from '@/utils/tools.js'
+import { isTenantApp } from '@/utils/tools.js'
 
 function generateWatch() {
     return function fn(context) {
@@ -95,12 +95,7 @@ export default {
         registerSearchButton() {
             const inHL = isTenantApp()
             if (inHL) {
-                // app版本号大于2.15展示
-                const curVersion = getAppVersion()
-                const moreThanVersion = compareVersion(curVersion, '2.15.0') >= 0
-                if (moreThanVersion) {
-                    this.$jsBridge?.setButton('right1', { icon: 'search' }, this.goSearch)
-                }
+                this.$jsBridge?.setButton('right1', { icon: 'search' }, this.goSearch)
             }
         },
         unregisterSearchButton() {

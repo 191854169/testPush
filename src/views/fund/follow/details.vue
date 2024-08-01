@@ -65,7 +65,7 @@ import PortfolioCommentCard from './components/portfolioCommentCard.vue'
 import soldoutTip from './components/soldoutTip.vue'
 import SharePortfolioDetail from './components/share/sharePortfolioDetail.vue'
 import { portfolioCommentList } from '@/apis/followInvest/index.js'
-import { isTenantApp, getAppVersion, compareVersion } from '@/utils'
+import { isTenantApp } from '@/utils'
 import { CUSTOMER_TYPE } from '../config/common'
 import watchPageVisibleMixin from '@/mixins/watchPageVisibleMixin'
 import { isEmpty } from '@/utils'
@@ -196,26 +196,16 @@ export default {
                             this.showShareDetail = false
                             this.showLoading = false
                             if (isTenantApp()) {
-                                const curVersion = getAppVersion()
-                                const moreThanVersion = compareVersion(curVersion, '2.15.0') >= 0
-                                if (moreThanVersion) {
-                                    setTimeout(() => {
-                                        this.$jsBridge?.share({
-                                            title: portfolioName,
-                                            desc: `策略解读：${portfolioBrief}`,
-                                            pageUrl: pageUrl,
-                                            imageData: shareImage,
-                                            chooseShareType: true,
-                                        })
-                                        console.log('shareImage---------------2>', 'has share image, call share')
-                                    }, 100)
-                                } else {
+                                setTimeout(() => {
                                     this.$jsBridge?.share({
                                         title: portfolioName,
                                         desc: `策略解读：${portfolioBrief}`,
+                                        pageUrl: pageUrl,
                                         imageData: shareImage,
+                                        chooseShareType: true,
                                     })
-                                }
+                                    console.log('shareImage---------------2>', 'has share image, call share')
+                                }, 100)
                             }
                         }
                     })

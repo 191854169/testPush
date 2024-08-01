@@ -61,23 +61,6 @@ export const isAndroid = () => {
     return false
 }
 
-/* @name 是否兼容IOS本地存储 readLocalStorage
- * @return { Boolean } true: 兼容|非IOS, false 不兼容|查询不到version
- */
-export const compatIOSLocalStorage = () => {
-    if (isIos()) {
-        const appVersion = getAppVersion()
-        console.log('getAppVersion:', appVersion)
-        if (!appVersion) return false
-        // IOS 1.1.0 才有本地存储
-        if (compareVersion(appVersion, '1.1.0') === -1) {
-            console.warn('检查是否兼容IOS本地存储：ios版本低于1.1.0, version:', appVersion)
-            return false
-        }
-    }
-    return true
-}
-
 /**
  * 生成映射对象
  * @param {*} arr

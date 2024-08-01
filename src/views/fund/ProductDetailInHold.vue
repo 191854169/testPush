@@ -109,7 +109,6 @@ import Empty from '@/components/Empty.vue'
 import { Overlay, List, Field } from 'vant'
 import { orderList, getHoldingsDetail } from '@/apis/wealth/index.js'
 import riskAssessmentMixin from '@/mixins/business/riskAssessmentMixin.js'
-import { compareVersion, getAppVersion } from '../../utils/tools.js'
 import { floatToRatio, keepDecimals, milliFormat, isEmpty } from '@/utils'
 import { getRunEnv } from '../../utils/env.js'
 import { FUND_MODE_MAP } from '@/views/fund/config/common'
@@ -406,7 +405,7 @@ export default {
                 return !item.isNotSellable
             }
             const getShowShareBtnStatus = item => {
-                return getRunEnv() === 1 && item.fundMode === 0 && compareVersion(getAppVersion(), '1.3.0') >= 0 && !item.isEcash
+                return getRunEnv() === 1 && item.fundMode === 0 && !item.isEcash
             }
             // 详情按钮控制
             const getDetialBtnStatus = item => {

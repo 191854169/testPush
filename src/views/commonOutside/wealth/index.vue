@@ -164,7 +164,7 @@ import { getPiApplyDetail } from '@/apis/client.js'
 import { userRadar } from '@/apis/wealth'
 import riskAssessmentMixin from '@/mixins/business/riskAssessmentMixin.js'
 import { isNeedToSetTrade } from '@/mixins/initTradePwd'
-import { isUndefined, compatIOSLocalStorage } from '@/utils/tools'
+import { isUndefined } from '@/utils/tools'
 // import { getUserDetail } from '@/apis/uc.js'
 // import { getRunEnv } from '@/utils/env.js'
 import checkPIMixin from '@/mixins/business/checkPIMixin'
@@ -636,8 +636,6 @@ export default {
                 }[type]
                 if (!key) return
                 if (this.$jsBridge) {
-                    // 兼容IOS
-                    if (!compatIOSLocalStorage()) return
                     const data = await this.$jsBridge.readLocalStorage(key)
                     this[guideFlag] = !(data && data.value)
                 }

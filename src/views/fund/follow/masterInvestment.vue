@@ -71,7 +71,7 @@ import gotoFollowDetailsMixin from './mixins/gotoFollowDetailsMixin'
 import watchPageVisibleMixin from '@/mixins/watchPageVisibleMixin'
 import html2canvas from 'html2canvas'
 import dayjs from 'dayjs'
-import { isTenantApp, getAppVersion, compareVersion } from '@/utils'
+import { isTenantApp } from '@/utils'
 
 export default {
     name: 'master-investment',
@@ -278,28 +278,18 @@ export default {
                             this.showShareDetail = false
                             this.showLoading = false
                             if (isTenantApp()) {
-                                const curVersion = getAppVersion()
-                                const moreThanVersion = compareVersion(curVersion, '2.15.0') >= 0
-                                if (moreThanVersion) {
-                                    setTimeout(() => {
-                                        this.showShareDetail = false
-                                        this.showLoading = false
-                                        this.$jsBridge?.share({
-                                            title: title,
-                                            desc: desc,
-                                            pageUrl: pageUrl,
-                                            imageData: shareImage,
-                                            chooseShareType: true,
-                                        })
-                                        console.log('shareImage---------------2>', 'has share image, call share')
-                                    }, 100)
-                                } else {
+                                setTimeout(() => {
+                                    this.showShareDetail = false
+                                    this.showLoading = false
                                     this.$jsBridge?.share({
                                         title: title,
                                         desc: desc,
+                                        pageUrl: pageUrl,
                                         imageData: shareImage,
+                                        chooseShareType: true,
                                     })
-                                }
+                                    console.log('shareImage---------------2>', 'has share image, call share')
+                                }, 100)
                             }
                         }
                     })

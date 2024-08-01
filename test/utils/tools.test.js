@@ -1030,22 +1030,6 @@ test('是否安卓', () => {
     expect(tools.isAndroid()).toBe(false)
 })
 
-test('是否兼容IOS本地存储', () => {
-    expect(tools.compatIOSLocalStorage()).toBe(true)
-
-    navigator.userAgent = 'aaa Android xxx'
-    expect(tools.compatIOSLocalStorage()).toBe(true)
-
-    navigator.userAgent = 'aaa iPhone xxx'
-    expect(tools.compatIOSLocalStorage()).toBe(false)
-
-    navigator.userAgent = 'aaa iPhone xxx appVersion/1.2.0'
-    expect(tools.compatIOSLocalStorage()).toBe(true)
-
-    navigator.userAgent = 'aaa iPhone xxx appVersion/1.0.0'
-    expect(tools.compatIOSLocalStorage()).toBe(false)
-})
-
 test('生成映射对象', () => {
     let arr = []
     let result = tools.generateMap(arr)

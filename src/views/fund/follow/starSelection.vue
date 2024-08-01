@@ -55,7 +55,7 @@ import starSelectItem from './components/starSelectionItem.vue'
 import sharePortfolioStarSelection from './components/share/sharePortfolioStarSelection.vue'
 import html2canvas from 'html2canvas'
 import dayjs from 'dayjs'
-import { isTenantApp, getAppVersion, compareVersion } from '@/utils/tools.js'
+import { isTenantApp } from '@/utils/tools.js'
 
 const periodUnit = {
     week: 'w1',
@@ -293,26 +293,16 @@ export default {
                             this.showShareDetail = false
                             this.showLoading = false
                             if (isTenantApp()) {
-                                const curVersion = getAppVersion()
-                                const moreThanVersion = compareVersion(curVersion, '2.15.0') >= 0
-                                if (moreThanVersion) {
-                                    setTimeout(() => {
-                                        this.$jsBridge?.share({
-                                            title: title,
-                                            desc: desc,
-                                            pageUrl: pageUrl,
-                                            imageData: shareImage,
-                                            chooseShareType: true,
-                                        })
-                                        console.log('shareImage---------------2>', 'has share image, call share')
-                                    }, 100)
-                                } else {
+                                setTimeout(() => {
                                     this.$jsBridge?.share({
                                         title: title,
                                         desc: desc,
+                                        pageUrl: pageUrl,
                                         imageData: shareImage,
+                                        chooseShareType: true,
                                     })
-                                }
+                                    console.log('shareImage---------------2>', 'has share image, call share')
+                                }, 100)
                             }
                         }
                     })

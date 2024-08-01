@@ -215,7 +215,7 @@
 import { Overlay } from 'vant'
 import { getAssetsSummary, getOrderStatistics } from '@/apis/wealth/index.js'
 import { FUND_ACCOUNT } from '@/entries/Fund.js'
-import { floatToRatio, addOrUpdateQuery, getAppVersion, compareVersion, dynamicFontSize } from '@/utils'
+import { floatToRatio, addOrUpdateQuery, dynamicFontSize } from '@/utils'
 import AccountChoose from '@/components/AccountChoose'
 import { WEALTH_ACCOUNT_MAP, WEALTH_AMOUNT_STATUS_kEY } from '@/config/common.js'
 import dayjs from 'dayjs'
@@ -614,9 +614,6 @@ export default {
         async setTradePageCurrency(currency = 'HKD') {
             try {
                 if (this.$jsBridge) {
-                    const currVersion = getAppVersion()
-                    const targetVersion = '2.5.0'
-                    if (compareVersion(currVersion, targetVersion) < 0) return
                     await this.setTradeSyncCurrency(currency)
                 }
             } catch (e) {
@@ -687,9 +684,6 @@ export default {
             try {
                 // 全部账户tab下 && app内部
                 if (this.isAllAccount && this.$jsBridge) {
-                    const currVersion = getAppVersion()
-                    const targetVersion = '2.5.0'
-                    if (compareVersion(currVersion, targetVersion) < 0) return
                     await this.getTradeSyncCurrency()
                 }
             } catch (e) {

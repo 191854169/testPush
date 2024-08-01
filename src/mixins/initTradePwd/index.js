@@ -17,13 +17,14 @@ export function isNeedToSetTrade(store) {
 export default ({ store } = {}) => {
     if (isNeedToSetTrade(store)) {
         // 跳转到交易页面
-        const supportVerifyTradePwdVersion = '1.1.0'
-        const supportVerifyTradePwd = compareVersion(getAppVersion(), supportVerifyTradePwdVersion) >= 0
-        if (supportVerifyTradePwd) {
-            JSBridge.verifyTradePwd()
-        } else {
-            JSBridge.tradeLogin()
-        }
+        // const supportVerifyTradePwdVersion = '1.1.0'
+        // const supportVerifyTradePwd = compareVersion(getAppVersion(), supportVerifyTradePwdVersion) >= 0
+        // if (supportVerifyTradePwd) {
+        //     JSBridge.verifyTradePwd()
+        // } else {
+        //     JSBridge.tradeLogin()
+        // }
+        JSBridge.verifyTradePwd()
         return false
     }
     return true
