@@ -95,7 +95,7 @@ export default {
         font-size: 16px;
         line-height: 44px;
         text-align: center;
-        background: #ff6907;
+        background: @theme;
         border-radius: 49px;
     }
 }

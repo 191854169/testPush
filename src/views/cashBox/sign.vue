@@ -441,7 +441,7 @@ export default {
 
     div {
         padding: 0 16px;
-        color: #ff6907;
+        color: @theme;
         font-weight: 400;
         font-size: 14px;
         line-height: 14px;
@@ -466,7 +466,7 @@ header {
     }
 
     /deep/.van-picker__confirm {
-        color: #ff6907;
+        color: @theme;
     }
 }
 
@@ -597,7 +597,7 @@ header {
     font-size: 16px;
     line-height: 44px;
     text-align: center;
-    background: #ff6307;
+    background: @theme;
     border-radius: 22px;
     opacity: 0.3;
 

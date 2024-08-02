@@ -195,6 +195,7 @@ import TradeLogin from '@/config/globalProterties/tradeLogin'
 import { keepDecimals } from '@/utils'
 import { isInOutsideH5 } from '@/utils'
 import { getPubList } from '@/apis/fund/fund'
+import { variable } from '@/assets/css/variable'
 
 const accountTypeKeyMap = accountTypeMap.keyValueMap
 const rangeKeyValueMap = rangeMap.keyValueMap // { DAY: '每日', ... }
@@ -358,7 +359,7 @@ export default {
                         value: true,
                         title: this.$t('confirmCloseSmart', { market: marketTypeMap[type] }),
                         message: this.$t('closeSmartRemind', { market: marketTypeMap[type], currency: currencyTypeMap[type] }),
-                        confirmButtonColor: '#ff6907',
+                        confirmButtonColor: variable.theme,
                         confirmButtonText: this.$t('stopConfirm'),
                         cancelButtonText: this.$t('thinkTwice'),
                     })
@@ -1003,7 +1004,7 @@ export default {
         font-size: 16px;
         line-height: 44px;
         text-align: center;
-        background: #ff6307;
+        background: @theme;
         border-radius: 22px;
     }
 

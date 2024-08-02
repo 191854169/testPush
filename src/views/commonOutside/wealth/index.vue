@@ -94,7 +94,7 @@
                 </div>
             </div>
             <!-- 星选理财(货币基金精选) -->
-            <div class="card cash-fund" v-if="!(cashFundListRequested && cashFundList.length === 0)">
+            <div class="card cash-fund" v-if="cashFundListRequested && cashFundList.length !== 0">
                 <h2>{{ $t('xxlc') }}</h2>
                 <div class="cash-fund-list">
                     <div

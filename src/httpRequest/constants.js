@@ -1,16 +1,8 @@
 // wiki链接：https://www.tapd.cn/60236733/markdown_wikis/show/#1160236733001003613
 // IOS请求头值需要是String，不然无法解析
 export const X_SOURCES_MAP = {
-    HLAPP: '100', // 星财富APP
-    HLAPP_WEB: '102', // 星财富H5 web
-    HLAPP_MOBILE: '103', // 星财富H5 移动端
-    THS_OEM_APP: '110', // 同花顺 APP 同花顺 OEM 版本
-    THS_PC: '111', // 同花顺 PC
-    WANG_TING: '112', // 网厅
-    THS_APP: '113', // 同花顺公版
-    THS_I18N_APP: '116', // 同花顺国际版
-    PAY_WEB: '122', // 派安盈 Web
-    MYLINK_APP: '130', // 中移动香港 APP MyLink
+    TENANT_APP: '105', // 渠道陆浦App
+    TENANT_WEB: '1052', // 渠道陆浦web，暂未使用
 }
 
 export const APP_ERROR_CODE_MAP = {

@@ -39,7 +39,7 @@ export const getWithDrawalBalance = (data = {}, config = {}) => {
  * @link https://www.tapd.cn/60236733/markdown_wikis/show/#1160236733001005259
  */
 export const getAssetSummary = (data = {}, config = {}) => {
-    return post(`${domain}/portfolio/v3/AssetSummary`, marginOptions(data, config))
+    return post(`${domain}/portfolio/v1/AssetSummary`, marginOptions(data, config))
 }
 
 /**
@@ -47,7 +47,7 @@ export const getAssetSummary = (data = {}, config = {}) => {
  * @link https://www.tapd.cn/60236733/markdown_wikis/show/#1160236733001005259
  */
 export const getHolding = (data = {}, config = {}) => {
-    return post(`${domain}/portfolio/v3/holdingsGroup`, marginOptions(data, config))
+    return post(`${domain}/portfolio/v1/holdingsGroup`, marginOptions(data, config))
 }
 
 /**
@@ -55,5 +55,5 @@ export const getHolding = (data = {}, config = {}) => {
  * @link https://www.tapd.cn/60236733/markdown_wikis/show/#1160236733001005259@toc6
  */
 export const cashFlowList = data => {
-    return post(`${domain}/portfolio/v3/CashFlowList`, marginOptions(data))
+    return post(`${domain}/portfolio/v1/CashFlowList`, marginOptions(data))
 }
