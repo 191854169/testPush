@@ -131,7 +131,7 @@ import { GridComponent, TooltipComponent, DatasetComponent, MarkLineComponent, M
 import { LineChart } from 'echarts/charts'
 import { UniversalTransition } from 'echarts/features'
 import { CanvasRenderer } from 'echarts/renderers'
-import { getCurrencyTrend, getPerfTrendV2 } from '@/apis/fund/fund.js'
+import { getCurrencyTrend, getPerfTrend } from '@/apis/fund/fund.js'
 import { floatToRatio } from '@/utils'
 import { thousandsFilter } from '@/config/filters.js'
 import JSBridge from '@fs/jsbridge/dist/lib/lupu/jsBridge.js'
@@ -352,7 +352,7 @@ export default {
                 let resData
                 // 非货币基金
                 if (!this.isCurrencyFund || this.isPerformanceTrend) {
-                    resData = (await getPerfTrendV2(params)) || {}
+                    resData = (await getPerfTrend(params)) || {}
                 } else {
                     resData = (await getCurrencyTrend(params_)) || {}
                 }
@@ -381,7 +381,7 @@ export default {
                 this.list[this.activeTab] = res
                 return res
             } catch (e) {
-                console.error('getPerfTrendV2===>error:', e)
+                console.error('getPerfTrend===>error:', e)
                 return {
                     performance: performanceRes,
                 }

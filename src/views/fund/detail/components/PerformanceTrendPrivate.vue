@@ -58,7 +58,7 @@ import { GridComponent, TooltipComponent, DatasetComponent, MarkLineComponent, M
 import { LineChart } from 'echarts/charts'
 import { UniversalTransition } from 'echarts/features'
 import { CanvasRenderer } from 'echarts/renderers'
-import { getPerfTrendV2, getDrawdownTrend } from '@/apis/fund/fund.js'
+import { getPerfTrend, getDrawdownTrend } from '@/apis/fund/fund.js'
 import { floatToRatio } from '@/utils'
 import { thousandsFilter } from '@/config/filters.js'
 
@@ -179,7 +179,7 @@ export default {
                     symbol: this.$route.query.symbol,
                     period: this.activeTab,
                 }
-                let { result } = (await getPerfTrendV2(params)) || {}
+                let { result } = (await getPerfTrend(params)) || {}
                 result = result || {}
                 list = result.data || []
                 const res = {

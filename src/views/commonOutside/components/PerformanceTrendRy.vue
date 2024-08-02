@@ -91,7 +91,7 @@ export default {
                 this.list[this.activeTab] = res
                 return res
             } catch (e) {
-                console.error('getPerfTrendV2===>error:', e)
+                console.error('getPerfTrend===>error:', e)
                 return {
                     performance: performanceRes,
                 }
