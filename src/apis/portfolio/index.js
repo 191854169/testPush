@@ -55,5 +55,5 @@ export const getHolding = (data = {}, config = {}) => {
  * @link https://www.tapd.cn/60236733/markdown_wikis/show/#1160236733001005259@toc6
  */
 export const cashFlowList = data => {
-    return post(`${domain}/portfolio/v3/CashFlowList`, marginOptions(data))
+    return post(`${domain}/portfolio/v1/CashFlowList`, marginOptions(data))
 }
