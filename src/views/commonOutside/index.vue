@@ -1,10 +1,29 @@
 <template>
     <div class="ry-index" ref="stickyContainer" :key="$route.path" :class="{ clip: tradeLoginDialog && tradeLoginDialog.show }">
+        <!-- pi年审提示 -->
+        <p class="risk-tool-tip" id="pi-tool-tip" v-if="showPITooltip">
+            <span>{{ cptPITooltipText }}</span>
+            <span class="go-risk" @click="jumpToPI">{{ cptPTupdateText }}</span>
+        </p>
         <div class="content-wrapper">
             <Account @onChange="changeActive" v-if="active === 'account'"></Account>
             <Wealth v-if="active === 'wealth'"></Wealth>
             <Mine v-if="active === 'mine'"></Mine>
         </div>
+        <van-dialog
+            width="280px"
+            class="pi-dialog"
+            v-model="showPIDialog"
+            :title="$t('sweetTip')"
+            confirm-button-color="#2f2f2f"
+            :confirm-button-text="$t('cancel')"
+            @confirm="cancelPI"
+        >
+            <div class="pi-dialog-content">
+                <p class="content-msg">{{ cptPIDialogText }}</p>
+                <button class="pi-btn" block round @click="jumpToPI">{{ $t('PIuploadText') }}</button>
+            </div>
+        </van-dialog>
 
         <!-- 退出登录 -->
         <Logout :show="showLogout" @cancel="showLogout = false" />
@@ -24,6 +43,9 @@ import Wealth from './wealth/index.vue'
 import Mine from './mine/index.vue'
 import { ACTIVE_TAB_STR } from './config/common'
 import Logout from './mine/logout'
+import pathnames from '@/config/H5Pathname.js'
+import { getPiApplyDetail } from '@/apis/client.js'
+import { FINANCE_ACCOUNT } from '@/entries/commonOutside'
 
 export default {
     name: 'CommonOutsideIndex',
@@ -42,11 +64,69 @@ export default {
             propertyData: {},
             active: '',
             showLogout: false, // 显示与隐藏退出登录弹窗
+            PIkey: 'showPIDialog',
+            showPIDialog: false, //pi年审弹框控制
+            showPITooltip: false, //pi小黄条显示
+            clientType: '',
+            auditType: 1, //审核类型
+            showPistatus: [100, 110, 500], //小黄条显示的状态  // 100待提交、550待PI年审 110驳回待提交、500已驳回
+            // Riskcounter: 0, //初始化次数
+            Personcounter: 0,
         }
     },
     computed: {
         ...mapState('user', ['accts', 'userInfo']),
         ...mapGetters({ getSubAccountId: 'user/getSubAccountId' }),
+        // 是否显示新手引导
+        showNoobGuide() {
+            return this.showCashBoxNoobGuide || this.showFollowNoobGuide
+        },
+        // 是否个人账户/公司户
+        cptIsneedPI() {
+            const PERSONCOR_FLAG = [1, 4] // 个人账户/公司户
+            return PERSONCOR_FLAG.includes(this.clientType)
+        },
+        cptIsStatus() {
+            return this.status == 550
+        },
+        // 是否需要pi年审
+        cptIsPIexpire() {
+            return this.cptIsneedPI && (this.cptIsStatus || (this.auditType == 2 && this.showPistatus.includes(this.status)))
+        },
+        //是否在3/9月份
+        cptIsInmonth() {
+            return [3, 9].includes(new Date().getMonth() + 1)
+        },
+        // pi截至日期
+        cptDateText() {
+            const month = new Date().getMonth() + 1
+            const strs = ['3月28日 12:00', '9月27日 12:00']
+            return this.cptIsInmonth ? ([3].includes(month) ? strs[0] : strs[1]) : '--'
+        },
+        // pi年审小黄条信息
+        cptPITooltipText() {
+            let text = ''
+            if (this.cptIsneedPI) {
+                if ([100, 550].includes(this.status)) {
+                    if (this.clientType === 1) text = 'PITooltipPersonText'
+                    else text = 'PITooltipComText'
+                } else if ([110, 500].includes(this.status)) {
+                    if (this.clientType === 1) text = 'PIReTooltipPersonText'
+                    else text = 'PIReTooltipComText'
+                } else {
+                    text = ''
+                }
+            }
+            return this.$t(text, { date: this.cptDateText })
+        },
+        cptPTupdateText() {
+            return [110, 500].includes(this.status) ? this.$t('PIupdateText') : this.$t('PIuploadText')
+        },
+        // pi年审弹框信息
+        cptPIDialogText() {
+            const key = this.cptIsneedPI ? (this.clientType === 1 ? 'PIDialogPersonText' : 'PIDialogComText') : ''
+            return this.$t(key, { date: this.cptDateText })
+        },
     },
     watch: {
         userInfo: {
@@ -77,6 +157,8 @@ export default {
             // if (this.isUnsetTradePwd) {
             //     this.goSetPasswordPage()
             // }
+            this.getPersonType()
+            this.getPersonType.watch()
         },
 
         // initTradePwd() {
@@ -174,6 +256,67 @@ export default {
             // 回退时显示退出登录弹窗
             this.showLogout = true
         },
+        getPersonType() {
+            try {
+                if (this.$root.isLogin && this.$root.getAccountStatus(FINANCE_ACCOUNT) && !this.showNoobGuide) {
+                    // 3月9月年审
+                    // if (!this.cptIsInmonth) {
+                    //     this.initRiskTooltip()
+                    //     this.initRiskTooltip.watch()
+                    //     return
+                    // }
+                    // 判断用户是否是个人账户 1个人户/2Esop/3联名户/4公司户/5机构户
+                    const subAcctId = this.$store.getters['user/getSubAccountId']
+                    const params = { data: { subAcctId: subAcctId || undefined } }
+                    getPiApplyDetail(params)
+                        .then(data => {
+                            const { status, clientType, auditType } = data?.result
+                            this.status = status || ''
+                            this.clientType = clientType || ''
+                            this.auditType = auditType
+                            // 弹框提示
+                            const showPIDialog = localStorage.getItem(this.PIkey)
+                            if (this.cptIsPIexpire) {
+                                if (!showPIDialog) {
+                                    this.showPIDialog = true
+                                } else {
+                                    this.showPITooltip = true
+                                }
+                            } else {
+                                // this.initRiskTooltip()
+                                // this.initRiskTooltip.watch()
+                            }
+                        })
+                        .catch(() => {})
+                }
+            } finally {
+                // 页面显示的时候同步用户信息在获取PI状态
+                this.getPersonType.watch = () => {
+                    if (!this.Personcounter) {
+                        this.$jsBridge &&
+                            this.$jsBridge.watchPageVisible(() => {
+                                this.$store.dispatch('user/getUserInfo', false).then(() => {
+                                    this.getPersonType()
+                                })
+                            })
+                        this.Personcounter++
+                    }
+                }
+            }
+        },
+        cancelPI() {
+            localStorage.setItem(this.PIkey, true)
+            this.showPIDialog = false
+            this.showPITooltip = true
+        },
+        //跳转pi年审
+        jumpToPI() {
+            localStorage.setItem(this.PIkey, true)
+            this.showPIDialog = false
+            this.showPITooltip = false
+            const url = `${pathnames.VUE_APP_PI_APPLY}index?auditType=2`
+            this.$jsBridge ? this.$jsBridge.open({ url: encodeURIComponent(url), title: '' }) : (location.href = this.$addCurParamsForUrl(url))
+        },
     },
 }
 </script>
@@ -185,6 +328,43 @@ export default {
     // overflow: hidden;
     // overflow-y: scroll;
     background: @bgGreyColor;
+
+    .risk-tool-tip {
+        position: relative;
+        // margin-top: -12px;
+        margin-bottom: 12px;
+        padding: 8px 12px;
+        color: @theme;
+        font-size: 12px;
+        line-height: 18px;
+        background-color: @tabBackground;
+
+        &::before,
+        &::after {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 12px;
+            content: '';
+            #warn_bg();
+        }
+
+        &::before {
+            left: -12px;
+        }
+
+        &::after {
+            right: -12px;
+        }
+
+        .go-risk {
+            margin-left: 8px;
+            color: #ee884a;
+            background: none;
+            border: none;
+            outline: none;
+        }
+    }
 
     .nav-wrapper {
         position: absolute;
@@ -346,6 +526,47 @@ export default {
         max-width: 750PX;
         margin: 0 auto;
         background: #f6f6f6;
+    }
+}
+</style>
+/* PI年审 */
+<style lang="less" scoped>
+.pi-dialog {
+    /deep/ .van-dialog__header {
+        font-weight: 500;
+    }
+
+    /deep/ .van-button__content {
+        font-weight: 400;
+        font-size: 14px;
+    }
+
+    .pi-dialog-content {
+        padding: 0 16px;
+        font-size: 14px;
+
+        .content-msg {
+            line-height: 22px;
+        }
+
+        .pi-btn {
+            width: 100%;
+            margin-top: 28px;
+            padding: 0 15px;
+            font-weight: 500;
+            font-size: 16px;
+            line-height: 44px;
+            text-align: center;
+            border: none;
+            border-radius: 35px;
+            outline: none;
+            #bg_theme();
+            #button_font();
+        }
+    }
+
+    /deep/ .van-hairline--top::after {
+        border: none;
     }
 }
 </style>

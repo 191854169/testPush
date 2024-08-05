@@ -43,7 +43,7 @@ Object.entries(pathnames).forEach(([k, v]) => {
             let origin = location.origin
             // 开发状态下 origin默认跳转到sit域名，方便查看跳转是否正确
             if (process.env.NODE_ENV === 'development') {
-                origin = `https://${process.env.VUE_APP_ENV}.mfosunhani.com`
+                origin = `https://lupu-h5-${process.env.VUE_APP_ENV}.finloopfintech.com`
             }
             return `${origin}${v}`
         },
