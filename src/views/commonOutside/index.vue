@@ -64,6 +64,7 @@ export default {
             propertyData: {},
             active: '',
             showLogout: false, // 显示与隐藏退出登录弹窗
+            status: '', //pi年审详情状态 550:待PI年审（凭证已过期）
             PIkey: 'showPIDialog',
             showPIDialog: false, //pi年审弹框控制
             showPITooltip: false, //pi小黄条显示
