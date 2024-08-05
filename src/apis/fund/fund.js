@@ -3,7 +3,7 @@ const { VUE_APP_WEALTH = '', NODE_ENV } = process.env
 import { isTenantApp } from '@/utils'
 
 let domain = ''
-if (isTenantApp() || NODE_ENV === 'production') domain = `${VUE_APP_WEALTH}`
+if (isTenantApp() || NODE_ENV === 'production') domain = `${VUE_APP_WEALTH}/saas-fund-product-api`
 
 const commonConfig = {
     encrypt: 0, // 1: 临时加密； 2 登录加密  0:所有状态不加密
