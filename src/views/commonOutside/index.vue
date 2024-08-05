@@ -93,14 +93,14 @@ export default {
         cptIsPIexpire() {
             return this.cptIsneedPI && (this.cptIsStatus || (this.auditType == 2 && this.showPistatus.includes(this.status)))
         },
-        //是否在3/9月份
+        //是否在6/12月份
         cptIsInmonth() {
-            return [3, 9].includes(new Date().getMonth() + 1)
+            return [6, 12].includes(new Date().getMonth() + 1)
         },
         // pi截至日期
         cptDateText() {
             const month = new Date().getMonth() + 1
-            const strs = ['3月28日 12:00', '9月27日 12:00']
+            const strs = ['6月27日 12:00', '12月27日 12:00']
             return this.cptIsInmonth ? ([3].includes(month) ? strs[0] : strs[1]) : '--'
         },
         // pi年审小黄条信息
