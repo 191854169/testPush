@@ -178,9 +178,9 @@ export const getRiskIndicator = (data = {}, config = {}) => {
  * @name 基金风险指标v2
  * @link https://www.tapd.cn/60236733/markdown_wikis/show/#1160236733001001930
  */
-export const getRiskIndicatorV2 = (data = {}, config = {}) => {
-    return get(`${domain}/fund/v2/risk_indicator`, marginOptions(data, config))
-}
+// export const getRiskIndicatorV2 = (data = {}, config = {}) => {
+//     return get(`${domain}/fund/v2/risk_indicator`, marginOptions(data, config))
+// }
 
 /*
  * @name 基金基础信息

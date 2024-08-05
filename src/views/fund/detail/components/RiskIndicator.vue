@@ -18,7 +18,7 @@
 <script>
 import Empty from '@/components/Empty.vue'
 import Table from '@/components/Table.vue'
-import { getRiskIndicatorV2 } from '@/apis/fund/fund'
+import { getRiskIndicator } from '@/apis/fund/fund'
 export default {
     name: 'risk',
     components: {
@@ -115,7 +115,7 @@ export default {
         },
         async getRiskIndicator() {
             try {
-                const { result = {} } = await getRiskIndicatorV2({ symbol: this.symbol })
+                const { result = {} } = await getRiskIndicator({ symbol: this.symbol })
                 const list = result[`${this.isPublic ? 'pubFund' : 'priFund'}`] || []
                 Object.keys(this.keyMap).forEach(key => {
                     const sign = !['beta', 'rSquare', 'sharpRatio'].includes(key)
