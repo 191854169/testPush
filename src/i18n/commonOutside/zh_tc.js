@@ -183,4 +183,12 @@ export default {
     flow: '流水',
     aggressiveInvest: '進取投資',
     publicFundFullName: '公募基金',
+    PIuploadText: '去補充',
+    PIupdateText: '去修改',
+    PIDialogPersonText: '尊敬的客戶，您的專業投資者資產證明已過期，為保障您的投資活動不受影響，請您於{date}前補充最新的資產證明，謝謝!',
+    PIDialogComText: '尊敬的客戶，貴公司的專業投資者資產證明已過期，為保障貴公司的投資活動不受影響，請貴公司於{date}前補充最新的資產證明，謝謝!',
+    PITooltipPersonText: '您的專業投資者資產證明已過期，請您於{date}前補充最新的資產證明，謝謝!',
+    PITooltipComText: '貴公司的專業投資者資產證明已過期，請貴公司於{date}前補充最新的資產證明，謝謝!',
+    PIReTooltipPersonText: '您提交的專業投資者資產證明審批未通過，請您於{date}前重新提交資產證明',
+    PIReTooltipComText: '貴公司提交的專業投資者資產證明審批未通過，請貴公司於{date}前重新提交資產證明',
 }
