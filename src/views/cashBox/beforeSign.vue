@@ -205,7 +205,7 @@ export default {
         line-height: 45px;
 
         .point {
-            color: #ff6907;
+            color: @theme;
         }
     }
 
@@ -272,7 +272,7 @@ export default {
         font-size: 16px;
         line-height: 44px;
         text-align: center;
-        background: #ff6907;
+        background: @theme;
         border-radius: 22px;
     }
 
@@ -309,7 +309,7 @@ export default {
                 color: #fff;
                 font-size: 14px;
                 line-height: 20px;
-                background: #ff6907;
+                background: @theme;
                 border-radius: 31px;
             }
         }
@@ -343,7 +343,7 @@ export default {
 
         div {
             padding: 0 16px;
-            color: #ff6907;
+            color: @theme;
             font-weight: 400;
             font-size: 14px;
             line-height: 14px;

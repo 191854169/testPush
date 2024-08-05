@@ -156,7 +156,7 @@ export default {
             const url1 = encodeURIComponent(this.$addCurParamsForUrl(pathnames.VUE_APP_WEALTH_COMMONOUTSIDE_PAGE + '?activeTab=1'))
             const url2 = encodeURIComponent(this.$addCurParamsForUrl(pathnames.VUE_APP_WEALTH_COMMONOUTSIDE_PAGE + '?activeTab=2'))
             if (item.key === 'riskAssessment') {
-                this.$goPage(`${location.origin}${item.link}?url=${url1}`)
+                this.$goPage(`${location.origin}${item.link}`)
             } else if (item.key === 'derivative') {
                 this.$goPage(`${location.origin}${item.link}?url=${url2}`)
             } else {

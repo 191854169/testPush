@@ -45,18 +45,10 @@ export const getPriList = (data = {}, config = {}) => {
 
 /**
  * @name 基金收益趋势数据
- * @link https://www.tapd.cn/60236733/markdown_wikis/show/#1160236733001001816
+ * @link ttps://www.tapd.cn/60236733/markdown_wikis/show/#1160236733001001814
  */
 export const getPerfTrend = (data = {}, config = {}) => {
     return get(`${domain}/fund/v1/perf_trend`, marginOptions(data, config))
-}
-
-/**
- * @name 基金收益趋势数据v2
- * @link https://www.tapd.cn/60236733/markdown_wikis/show/#1160236733001001814
- */
-export const getPerfTrendV2 = (data = {}, config = {}) => {
-    return get(`${domain}/fund/v2/perf_trend`, marginOptions(data, config))
 }
 
 /**

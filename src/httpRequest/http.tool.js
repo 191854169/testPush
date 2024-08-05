@@ -204,13 +204,13 @@ export const checkFreeze = response => {
  * 根据环境来区分x-source值
  */
 export function getXSource() {
-    let ret = isDeviceMobile() ? X_SOURCES_MAP.HLAPP_MOBILE : X_SOURCES_MAP.HLAPP_WEB
-    const runenv = getRunEnv()
-    if (runenv === 1) {
-        ret = X_SOURCES_MAP.HLAPP
-    }
+    // let ret = isDeviceMobile() ? X_SOURCES_MAP.HLAPP_MOBILE : X_SOURCES_MAP.HLAPP_WEB
+    // const runenv = getRunEnv()
+    // if (runenv === 1) {
+    //     ret = X_SOURCES_MAP.HLAPP
+    // }
 
-    return ret
+    return X_SOURCES_MAP.TENANT_APP
 }
 
 // 设置用户信息从本地localtemp/proxy/xxx.js文件到localstorage中

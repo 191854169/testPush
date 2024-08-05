@@ -27,7 +27,7 @@ export const getC2MApplyStatus = option => {
 
 // h5交易登录
 export const TradeLogin = data => {
-    return post(domain + '/uc/v1/TradeLogin', { data, encrypt: ENCRYPT_TYPES.LOGIN, origin: false })
+    return post(domain + '/uc/v1/s1/TradeLogin', { data, encrypt: ENCRYPT_TYPES.LOGIN, origin: false })
 }
 
 /** ‒ 查询用户的账号信息及策略子账户开户申请状态。 */
