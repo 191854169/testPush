@@ -50,7 +50,7 @@
 </template>
 <script>
 import Empty from '@/components/Empty.vue'
-import { getHistoryNav, getHistoryReturnV2 } from '@/apis/fund/fund'
+import { getHistoryNav, getHistoryReturn } from '@/apis/fund/fund'
 import Table from '@/components/Table.vue'
 import { floatToRatio } from '@/utils'
 import { thousandsFilter } from '@/config/filters.js'
@@ -161,7 +161,7 @@ export default {
         // 历史业绩
         async getHistoryReturn() {
             try {
-                const res = await getHistoryReturnV2({
+                const res = await getHistoryReturn({
                     symbol: this.symbol,
                 })
                 const stage = res.result?.stage || {}

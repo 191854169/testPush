@@ -24,7 +24,7 @@
 </template>
 <script>
 import Empty from '@/components/Empty.vue'
-import { getHistoryReturnV2 } from '@/apis/fund/fund'
+import { getHistoryReturn } from '@/apis/fund/fund'
 
 const keyMap = {
     STAGE: 'stage',
@@ -110,7 +110,7 @@ export default {
                 return `${date.slice(2, 4)}${this.$t('annual')}`
             }
             try {
-                const { result = {} } = await getHistoryReturnV2({ symbol: this.symbol })
+                const { result = {} } = await getHistoryReturn({ symbol: this.symbol })
                 const { stage = {}, quarter = [], year = [] } = result
                 Object.keys(stage).forEach(key => {
                     this.listMap[keyMap.STAGE].list.push({
