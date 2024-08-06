@@ -519,25 +519,6 @@ export default {
                 const data = res.result || {}
                 if (data.list) {
                     const resultList = data.list
-                    if (this.isApp) {
-                        const checkList = []
-                        resultList.forEach(item => {
-                            checkList.push(
-                                new Promise((resolve, reject) => {
-                                    this.checkFavstock(`${item.symbol}`)
-                                        .then(res => {
-                                            item.isSelf = res
-                                            resolve()
-                                        })
-                                        .catch(err => {
-                                            item.isSelf = err
-                                            reject()
-                                        })
-                                })
-                            )
-                        })
-                        await Promise.all(checkList)
-                    }
                     if (reset || sort) this.list = []
                     this.list = this.list.concat(resultList)
                     this.start = this.list.length + 1
