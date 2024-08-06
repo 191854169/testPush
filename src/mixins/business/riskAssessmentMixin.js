@@ -4,7 +4,7 @@
 
 import { Dialog } from 'vant'
 import { AssessStatus } from '@/apis/riskAssessment.js'
-import JSBridge from '@fs/jsbridge/dist/lib/lupu/jsBridge.js'
+import { lupuJsBridge as JSBridge } from '@fs/jsbridge'
 import { i18n } from '@/i18n/riskAssessment/index.js'
 import { getQueryString } from '@/utils'
 import { isInOutsideH5 } from '@/utils'

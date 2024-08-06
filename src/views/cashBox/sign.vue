@@ -131,7 +131,7 @@
     </div>
 </template>
 <script>
-import JSBridge from '@fs/jsbridge/dist/lib/lupu/jsBridge.js'
+import { lupuJsBridge as JSBridge } from '@fs/jsbridge'
 import { thousandsFilter } from '@/config/filters.js'
 import { ecashOpen } from '@/apis/wealth/index.js'
 import { Toast, Overlay, Switch, Area, ActionSheet, Picker } from 'vant'

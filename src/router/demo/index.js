@@ -3,7 +3,7 @@ import VueRouter from 'vue-router'
 import store from '@/store/demo'
 import NProgress from 'nprogress'
 import '@/assets/css/nprogress.css'
-import JSBridge from '@fs/jsbridge/dist/lib/lupu/jsBridge.js'
+import { lupuJsBridge as JSBridge } from '@fs/jsbridge'
 Vue.use(VueRouter)
 
 NProgress.configure({ showSpinner: false })
