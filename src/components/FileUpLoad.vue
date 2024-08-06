@@ -18,7 +18,7 @@
 <script>
 // api
 import { fileUpOss, fileDownOss } from '@/apis/openAccount'
-import JSBridge from '@fs/jsbridge/dist/lib/lupu/jsBridge.js'
+import { lupuJsBridge as JSBridge } from '@fs/jsbridge'
 export default {
     props: {
         /** 默认背景 */
@@ -26,7 +26,7 @@ export default {
             type: String,
             default: () => '',
         },
-        /** 身份证方向 最后返回出去 */
+        /** 身份证方向 最后返回出去 *
         direction: {
             type: String,
             default: () => '',

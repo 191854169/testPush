@@ -128,7 +128,7 @@ import { CanvasRenderer } from 'echarts/renderers'
 import { getCurrencyTrend, getPerfTrend, getFundQuote } from '@/apis/fund/fund.js'
 import { floatToRatio } from '@/utils'
 import { thousandsFilter } from '@/config/filters.js'
-import JSBridge from '@fs/jsbridge/dist/lib/lupu/jsBridge.js'
+import { lupuJsBridge as JSBridge } from '@fs/jsbridge'
 import { CURRENCY_FUND_TREND_TYPE, FUND_TYPE_MAP } from '../../config/common'
 const plugins = [
     GridComponent,

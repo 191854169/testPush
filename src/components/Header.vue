@@ -8,7 +8,7 @@
     </header>
 </template>
 <script>
-import JSBridge from '@fs/jsbridge/dist/lib/lupu/jsBridge.js'
+import { lupuJsBridge as JSBridge } from '@fs/jsbridge'
 import { isDeviceMobile, isTenantApp } from '../utils'
 
 export default {

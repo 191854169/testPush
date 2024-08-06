@@ -31,7 +31,7 @@
 <script>
 import { ecashClose } from '@/apis/wealth/index.js'
 import { Toast } from 'vant'
-import JSBridge from '@fs/jsbridge/dist/lib/lupu/jsBridge.js'
+import { lupuJsBridge as JSBridge } from '@fs/jsbridge'
 export default {
     name: 'closeService',
     components: {},
