@@ -19,7 +19,7 @@
             :style="{ 'margin-top': isNotInHLAndWTAppAndRY ? '0.08rem' : '0.11rem' }"
             @getFundInfo="getFundInfo"
         ></basic-info>
-        <!-- <radar-map></radar-map> -->
+        <radar-map></radar-map>
         <performance-trend></performance-trend>
         <history-module></history-module>
         <holding></holding>
