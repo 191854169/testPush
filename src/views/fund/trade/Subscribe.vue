@@ -447,7 +447,7 @@ export default {
         },
         // 返回的为半分比数据
         quanityPercent() {
-            const { remainingVol = '', totalVol = '' } = this.privateFundAmount
+            const { remainingVol = '', totalVol = '' } = this.privateFundAmount || {}
             if (remainingVol === '' || totalVol === '') return 100 // 为空表示认购份额无上限
             return accMul(accDiv(remainingVol, totalVol), 100)
         },
