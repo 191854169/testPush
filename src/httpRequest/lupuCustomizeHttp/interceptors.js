@@ -18,7 +18,7 @@ import H5ECDHDecryptInterceptor from '@fs/http/dist/lib/http/FSH5Http/decryptInt
 import H5LOGINEncryptInterceptor from '@fs/http/dist/lib/http/FSH5Http/encryptInterceptors/LOGINEncryptInterceptor'
 // 解密
 import H5LOGINDecryptInterceptor from '@fs/http/dist/lib/http/FSH5Http/decryptInterceptors/LOGINDecryptInterceptor'
-import JSBridge from '@fs/jsbridge/dist/lib/lupu/jsBridge'
+import { lupuJsBridge as JSBridge } from '@fs/jsbridge'
 
 const emptyInterceptor = res => Promise.resolve(res)
 

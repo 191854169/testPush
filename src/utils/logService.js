@@ -1,6 +1,6 @@
 import { LogNew } from '@/apis/h5Log'
 import UAParser from 'ua-parser-js'
-import JSBridge from '@fs/jsbridge/dist/lib/lupu/jsBridge.js'
+import { lupuJsBridge as JSBridge } from '@fs/jsbridge'
 import { getLangType } from '@/utils/tools'
 
 const UA = new UAParser().getResult()

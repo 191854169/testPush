@@ -273,7 +273,7 @@
     </div>
 </template>
 <script>
-import JSBridge from '@fs/jsbridge/dist/lib/lupu/jsBridge.js'
+import { lupuJsBridge as JSBridge } from '@fs/jsbridge'
 import { AssetsDetail } from '@/apis/fund/index.js'
 import InvestmentProDialogMixin from '@/views/fund/mixins/InvestmentProDialogMixin.js'
 import investmentProTradeDialog from '@/views/fund/components/investmentProTradeDialog.vue'

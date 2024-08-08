@@ -226,7 +226,7 @@ import {
 import { thousandsFilter } from '@/config/filters'
 import { CURRENCY_MAP, BILL_CUSTOMIZE_STATUS_MAP, RISK_RATING_MAP, BILL_COMPLEX_MAP, BILL_UNIT_MAP } from '@/views/fund/config/common'
 import { Toast } from 'vant'
-import JSBridge from '@fs/jsbridge/dist/lib/lupu/jsBridge.js'
+import { lupuJsBridge as JSBridge } from '@fs/jsbridge'
 
 const tradeStatusKeyValueMap = BILL_CUSTOMIZE_STATUS_MAP.keyValueMap
 
