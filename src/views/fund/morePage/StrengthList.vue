@@ -303,25 +303,6 @@ export default {
                 const list = result.list || []
                 // this.fundList = []
                 const arr = list.length ? list[0].info : []
-                if (this.isApp) {
-                    const checkList = []
-                    arr.forEach(item => {
-                        checkList.push(
-                            new Promise((resolve, reject) => {
-                                this.checkFavstock(item.symbol)
-                                    .then(res => {
-                                        item.zxflag = res
-                                        resolve()
-                                    })
-                                    .catch(err => {
-                                        item.zxflag = err
-                                        reject()
-                                    })
-                            })
-                        )
-                    })
-                    await Promise.all(checkList)
-                }
                 this.fundList = arr
             } catch (e) {
                 console.error(e)
