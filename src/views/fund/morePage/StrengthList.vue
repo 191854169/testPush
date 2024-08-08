@@ -339,16 +339,14 @@ export default {
             try {
                 this.loading = true
                 this.count += 10
-                let fundParams = 5 // 业绩实力榜
-                if (this.activeTab == 1) {
-                    fundParams = 5
-                } else if (this.activeTab == 2) {
-                    fundParams = 6
-                } else if (this.activeTab == 3) {
-                    fundParams = 7
-                } else if (this.activeTab == 4) {
-                    fundParams = 8
+                const fundMap = {
+                    1: 21,
+                    2: 22,
+                    3: 5,
+                    4: 6,
+                    5: 8,
                 }
+                const fundParams = fundMap[this.activeTab]
                 let paramsData = {}
                 paramsData = { type: fundParams, start: this.start, count: this.count }
                 if (fundParams == 5) {

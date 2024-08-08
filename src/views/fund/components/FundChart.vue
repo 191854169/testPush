@@ -81,7 +81,7 @@ export default {
                 }
                 let { result } = (await getPerfTrend(params)) || {}
                 result = result || {}
-                const list = ((result.list || [])[0] || {}).data || []
+                const list = (result || {}).data || []
                 this.list = list
             } catch (e) {
                 console.error(e)
