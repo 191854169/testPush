@@ -20,7 +20,10 @@
 export default {
     components: {},
     props: {
-        config: () => [],
+        config: {
+            type: Array,
+            default: () => [],
+        },
     },
     data() {
         return {}
@@ -59,15 +62,12 @@ export default {
         }
 
         .label {
+            min-width: 120px;
             margin-top: 4px;
             color: #9c9c9c;
             font-weight: 400;
             font-size: 12px;
             line-height: 16px;
-        }
-
-        & + .item {
-            margin-left: 56px;
         }
     }
 }
