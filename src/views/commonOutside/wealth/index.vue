@@ -9,7 +9,7 @@
                             <van-skeleton row="4" :loading="loading">
                                 <div class="item__type">
                                     <multi-img name="xingxuan_bg" class="xingxuan-bg" directory="commonOutside"></multi-img>
-                                    <h2>{{ $t('xxlc') }}</h2>
+                                    <h2>{{ $t('jxlc') }}</h2>
                                 </div>
 
                                 <div class="item__header">
@@ -21,7 +21,8 @@
                                 <div class="item__body">
                                     <div class="item__body-left">
                                         <span class="rate" v-riseFall="{ value: item.returnY3, base: 2 }"></span>
-                                        <p class="type">{{ $t('jqrnh') }}</p>
+                                        <p v-if="fundTypeKeysMap.currency === item.fundType" class="type">{{ $t('jqrnh') }}</p>
+                                        <p v-else class="type">{{ $t('nearOneYearChg') }}</p>
                                     </div>
                                     <PerformanceTrend class="item__body-right" :symbol="item.symbol"></PerformanceTrend>
                                 </div>
@@ -180,6 +181,7 @@ import { PUB_LIST_FILTER_MAP } from '@/config/common'
 import Banner from '@/views/fund/components/Banner.vue'
 import { getRecommendList } from '@/apis/fund/fund.js'
 import { thousandsFilter, currencyFilter } from '@/config/filters.js'
+import { FUND_TYPE_MAP } from '../config/common'
 
 const FINANCE_ACCOUNT = 1 // 资金账户
 const FUND_ACCOUNT = 2 // 基金账户
@@ -199,6 +201,7 @@ export default {
     mixins: [riskAssessmentMixin, checkPIMixin],
     data() {
         return {
+            fundTypeKeysMap: FUND_TYPE_MAP.keysMap,
             cashBoxNoobKey: 'WEALTH_NOOB_KEY',
             followNoobKey: 'FOLLOW_NOOB_KEY',
             showCashBoxNoobGuide: false,

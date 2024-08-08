@@ -14,7 +14,8 @@ import { GridComponent, DatasetComponent } from 'echarts/components'
 import { LineChart } from 'echarts/charts'
 import { UniversalTransition } from 'echarts/features'
 import { CanvasRenderer } from 'echarts/renderers'
-import { getCurrencyTrend } from '@/apis/fund/fund.js'
+import { getCurrencyTrend, getPerfTrend } from '@/apis/fund/fund.js'
+import { FUND_TYPE_MAP } from '../config/common'
 
 const plugins = [GridComponent, LineChart, CanvasRenderer, UniversalTransition, DatasetComponent]
 
@@ -31,6 +32,9 @@ export default {
             type: String,
             default: 'mf0P0001HPDQ',
         },
+        fundType: {
+            type: Number,
+        },
     },
     data() {
         return {
@@ -45,6 +49,11 @@ export default {
             },
             loading: true, // 是否处于切换净值趋势|万元中
         }
+    },
+    computed: {
+        isCurrencyFund() {
+            return this.isFundType === FUND_TYPE_MAP.keysMap.currency
+        },
     },
     async mounted() {
         this.init()
@@ -71,20 +80,41 @@ export default {
                 const data = this.list[this.activeTab]
                 if (data) return data
                 let performance = data ? data.performance : []
+                const params = {
+                    symbol: this.symbol,
+                    period: this.activeTab,
+                }
                 const params_ = {
                     symbol: this.symbol,
-                    type: 1, //type为1: 单独获取七日年化 2: 单独获取万份收益
-                    period: 'y1',
+                    type: this.isDay7Annual ? 1 : 2, //type为1: 单独获取七日年化 2: 单独获取万份收益
+                    period: this.activeTab,
                 }
-                const resData = (await getCurrencyTrend(params_)) || {}
-
+                let resData
+                // 非货币基金
+                if (!this.isCurrencyFund || this.isPerformanceTrend) {
+                    resData = (await getPerfTrend(params)) || {}
+                } else {
+                    resData = (await getCurrencyTrend(params_)) || {}
+                }
                 const result = resData.result || {}
                 performance = result.data || result.list || []
+
                 performance.forEach(i => {
                     performanceRes.xData.push(i.date.replace(/-/g, '/'))
-                    performanceRes.yData.push(i.returnD7ToY1)
+                    performanceRes.acumNavList.push(i.acumNav)
+                    let key = ''
+                    if (!this.isCurrencyFund || this.isPerformanceTrend) {
+                        key = 'return'
+                    } else {
+                        if (this.isDay7Annual) {
+                            key = 'returnD7ToY1'
+                        } else if (this.isIncome10k) {
+                            key = 'income10k'
+                        }
+                    }
+                    performanceRes.yData.push(i[key])
+                    performanceRes.profit.push(i[key])
                 })
-
                 const res = {
                     performance: performanceRes,
                 }

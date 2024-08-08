@@ -1845,4 +1845,5 @@ export default {
         leverageRatio: '杠杆比例',
         managementAgreement: '具体投资策略说明内容请参阅《全权委托投资管理协议》',
     },
+    jxlc: '精选理财',
 }

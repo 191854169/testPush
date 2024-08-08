@@ -78,3 +78,12 @@ export const flowType2Icon = {
 }
 
 export const ACTIVE_TAB_STR = 'module'
+
+// 基金类型 1-股票，2-债券，3-混合，4-货币，5-股权
+export const FUND_TYPE_MAP = generateMap([
+    [1, i18n.t('stockType'), 'stock'],
+    [2, i18n.t('bondType'), 'bond'],
+    [3, i18n.t('mixedType'), 'mixed'],
+    [4, i18n.t('currencyType'), 'currency'],
+    [5, i18n.t('stockRightType'), 'stockRight'],
+])

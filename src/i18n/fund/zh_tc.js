@@ -1843,4 +1843,5 @@ export default {
         leverageRatio: '槓桿比例',
         managementAgreement: '具體投資策略説明內容請參閱《全權委托投資管理協議》',
     },
+    jxlc: '精選理財',
 }
