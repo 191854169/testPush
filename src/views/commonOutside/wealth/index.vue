@@ -20,11 +20,17 @@
                                 </div>
                                 <div class="item__body">
                                     <div class="item__body-left">
-                                        <span class="rate" v-riseFall="{ value: item.returnY3, base: 2 }"></span>
-                                        <p v-if="fundTypeKeysMap.currency === item.fundType" class="type">{{ $t('jqrnh') }}</p>
-                                        <p v-else class="type">{{ $t('nearOneYearChg') }}</p>
+                                        <template v-if="fundTypeKeysMap.currency === item.fundType">
+                                            <span class="rate" v-riseFall="{ value: item.returnD7ToY1, base: 4 }"></span>
+                                            <p class="type">{{ $t('jqrnh') }}</p>
+                                        </template>
+
+                                        <template v-else>
+                                            <span class="rate" v-riseFall="{ value: item.returnY1, base: 2 }"></span>
+                                            <p class="type">{{ $t('nearOneYearChg') }}</p>
+                                        </template>
                                     </div>
-                                    <PerformanceTrend class="item__body-right" :symbol="item.symbol"></PerformanceTrend>
+                                    <PerformanceTrend class="item__body-right" :symbol="item.symbol" :fundType="item.fundType"></PerformanceTrend>
                                 </div>
                                 <div class="item__footer">
                                     <Button>{{ $t('mr') }}</Button>
@@ -979,7 +985,9 @@ export default {
 
             &-left {
                 display: flex;
+                flex-shrink: 0;
                 align-items: flex-end;
+                margin-right: 16px;
 
                 .rate {
                     margin-right: 6px;

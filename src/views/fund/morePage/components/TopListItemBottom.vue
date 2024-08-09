@@ -9,7 +9,14 @@
                 'not-bold': item.notBold,
             }"
         >
-            <div v-if="item.isRiseFall" v-riseFall="item.value" class="value"></div>
+            <div
+                v-if="item.isRiseFall"
+                v-riseFall="{
+                    value: item.value,
+                    base: item.base ?? 2,
+                }"
+                class="value"
+            ></div>
             <div v-else class="value">{{ item.value }}</div>
             <div class="label">{{ item.label }}</div>
         </div>

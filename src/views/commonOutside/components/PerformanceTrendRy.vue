@@ -52,7 +52,7 @@ export default {
     },
     computed: {
         isCurrencyFund() {
-            return this.isFundType === FUND_TYPE_MAP.keysMap.currency
+            return this.fundType === FUND_TYPE_MAP.keysMap.currency
         },
     },
     async mounted() {
@@ -86,7 +86,7 @@ export default {
                 }
                 const params_ = {
                     symbol: this.symbol,
-                    type: this.isDay7Annual ? 1 : 2, //type为1: 单独获取七日年化 2: 单独获取万份收益
+                    type: 1, //type为1: 单独获取七日年化 2: 单独获取万份收益
                     period: this.activeTab,
                 }
                 let resData
@@ -106,11 +106,7 @@ export default {
                     if (!this.isCurrencyFund || this.isPerformanceTrend) {
                         key = 'return'
                     } else {
-                        if (this.isDay7Annual) {
-                            key = 'returnD7ToY1'
-                        } else if (this.isIncome10k) {
-                            key = 'income10k'
-                        }
+                        key = 'returnD7ToY1'
                     }
                     performanceRes.yData.push(i[key])
                     performanceRes.profit.push(i[key])
@@ -167,7 +163,7 @@ export default {
                 },
                 grid: {
                     right: '2',
-                    left: '12%',
+                    left: '0',
                     top: '4%',
                     bottom: '12%',
                 },
@@ -334,7 +330,7 @@ export default {
 
     .chart-trend {
         position: relative;
-        width: 108px;
+        width: 100%;
         height: 40px;
     }
 

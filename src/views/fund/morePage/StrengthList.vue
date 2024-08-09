@@ -64,7 +64,7 @@
                         <TopListItemBottom
                             v-if="item.fundType === fundTypeKeysMap.currency"
                             :config="[
-                                { label: $t('jqrnh'), value: item.returnD7ToY1, isRiseFall: true },
+                                { label: $t('jqrnh'), value: item.returnD7ToY1, base: 4, isRiseFall: true },
                                 { label: $t('wfIncome'), value: item.returnD7ToY1, notBold: true },
                             ]"
                         ></TopListItemBottom>
