@@ -538,7 +538,6 @@ export default {
         console.warn('accts:', this.accts.type)
         this.symbol = this.$route.params.symbol
         this.getRiskassessmentFile()
-        this.getPrivateFundAmount()
     },
     async mounted() {
         if (this.$jsBridge) {
@@ -578,6 +577,7 @@ export default {
         if (this.isPrivateFund) {
             // 私募调老接口查询资产
             // await this.getPrivateAssetsDeatil()
+            this.getPrivateFundAmount()
         } else {
             // 公募调新接口查购买力
             // await this.getPublicAssetsDetail()

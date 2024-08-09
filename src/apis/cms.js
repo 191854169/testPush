@@ -13,5 +13,5 @@ const baseConfig = {
  * Get Article Detail
  */
 export const getArticleDetail = (params, config = {}) => {
-    return get(`${baseURL}/cms/v1/Article`, { params, ...baseConfig, ...config })
+    return get(`${baseURL}/cmsapi/v1/Article`, { params, ...baseConfig, ...config })
 }
