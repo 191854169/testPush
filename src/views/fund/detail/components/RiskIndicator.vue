@@ -116,7 +116,8 @@ export default {
         async getRiskIndicator() {
             try {
                 const { result = {} } = await getRiskIndicator({ symbol: this.symbol })
-                const list = result[`${this.isPublic ? 'pubFund' : 'priFund'}`] || []
+                // const list = result[`${this.isPublic ? 'pubFund' : 'priFund'}`] || []
+                const list = result?.list || []
                 Object.keys(this.keyMap).forEach(key => {
                     const sign = !['beta', 'rSquare', 'sharpRatio'].includes(key)
                     this.list.push({
