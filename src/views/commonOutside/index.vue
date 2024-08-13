@@ -64,6 +64,7 @@ export default {
             propertyData: {},
             active: '',
             showLogout: false, // 显示与隐藏退出登录弹窗
+            status: '', //pi年审详情状态 550:待PI年审（凭证已过期）
             PIkey: 'showPIDialog',
             showPIDialog: false, //pi年审弹框控制
             showPITooltip: false, //pi小黄条显示
@@ -339,23 +340,23 @@ export default {
         line-height: 18px;
         background-color: @tabBackground;
 
-        &::before,
-        &::after {
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            width: 12px;
-            content: '';
-            #warn_bg();
-        }
+        // &::before,
+        // &::after {
+        //     position: absolute;
+        //     top: 0;
+        //     bottom: 0;
+        //     width: 12px;
+        //     content: '';
+        //     #warn_bg();
+        // }
 
-        &::before {
-            left: -12px;
-        }
+        // &::before {
+        //     left: -12px;
+        // }
 
-        &::after {
-            right: -12px;
-        }
+        // &::after {
+        //     right: -12px;
+        // }
 
         .go-risk {
             margin-left: 8px;
