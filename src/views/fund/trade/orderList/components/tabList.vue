@@ -251,7 +251,8 @@ export default {
             return isInRyH5()
         },
         isFromCommonOutside() {
-            return this.$route.query.fromSource === 'commonOutside' || !!sessionStorage.getItem('outsideSource')
+            // return this.$route.query.fromSource === 'commonOutside' || !!sessionStorage.getItem('outsideSource')
+            return false
         },
     },
     watch: {
@@ -344,6 +345,13 @@ export default {
                 if (this.tableLoading) return
                 this.tableLoading = true
                 const productType = this.productType === 'all' ? undefined : +this.productType
+
+                let productTypes = [...this.productTypes]
+
+                if (productType) {
+                    productTypes = [productType]
+                }
+
                 const params = {
                     start: this.start,
                     count: this.count,
@@ -351,8 +359,7 @@ export default {
                     toDate: this.rangeEndSelect.replace(new RegExp('/', 'g'), '-'),
                     orderDirection: this.orderDirection == 0 ? [] : [this.orderDirection],
                     orderStatus: this.orderStatus,
-                    productType,
-                    productTypes: this.productTypes,
+                    productTypes,
                     account: this.account,
                 }
                 console.log('order list params:', params)
@@ -639,10 +646,10 @@ export default {
 
             &.select {
                 box-sizing: border-box;
-                color: #ff6907;
+                color: @theme;
                 /* stylelint-disable-next-line number-max-precision */
-                background: rgba(255, 99, 7, 0.0698703);
-                border: 0.5px solid rgba(255, 99, 7, 0.6);
+                background: @tabBackground;
+                // border: 0.5px solid rgba(255, 99, 7, 0.6);
                 border-radius: 32px;
             }
         }
@@ -666,8 +673,8 @@ export default {
             border-radius: 4px;
 
             &.active {
-                color: #ff6907;
-                background: #fff5ef;
+                color: @theme;
+                background: @tabBackground;
             }
         }
 
@@ -698,7 +705,7 @@ export default {
         }
 
         .finish {
-            color: #ff6907;
+            color: @theme;
         }
     }
 
@@ -707,7 +714,7 @@ export default {
         top: 0;
         right: 0;
         padding: 12px 16px;
-        color: #ff6907;
+        color: @theme;
         font-size: 14px;
         line-height: 20px;
     }
