@@ -37,13 +37,6 @@
                                     <div class="item-earn__value" v-riseFall="item.returnYtd"></div>
                                     <div class="item-earn__time">{{ item.ytdType | ytdTypeFilter }}</div>
                                 </div>
-                                <multi-img
-                                    v-if="isApp"
-                                    class="self-size"
-                                    :name="`icon-self-${item.isSelf ? 'checked' : 'uncheck'}`"
-                                    directory="fund"
-                                    @click.stop="selfHandler(item)"
-                                ></multi-img>
                             </div>
                         </div>
                     </div>
@@ -135,26 +128,6 @@ export default {
                     q: this.value,
                 })
                 const resultList = res.result || []
-                // TODO:(能否从app中获取所有自选) 检查列表每项是否自选
-                if (this.isApp) {
-                    const checkList = []
-                    resultList.forEach(item => {
-                        checkList.push(
-                            new Promise((resolve, reject) => {
-                                this.checkFavstock(`${item.mkt}${item.rawSymbol}`)
-                                    .then(res => {
-                                        item.isSelf = res
-                                        resolve()
-                                    })
-                                    .catch(err => {
-                                        item.isSelf = err
-                                        reject()
-                                    })
-                            })
-                        )
-                    })
-                    await Promise.all(checkList)
-                }
                 this.searchList = resultList
             } catch (e) {
                 console.log('getFund:===>e', e)
