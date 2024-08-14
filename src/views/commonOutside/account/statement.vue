@@ -12,11 +12,12 @@
 
 <script>
 import { getLangType } from '@/utils/tools'
+import pageUrl from '@/config/pageUrl'
 
 export default {
     methods: {
         openPage() {
-            const url = 'https://h5.fotechwealth.com/faq/#/article/649491648588515328?langType=' + getLangType()
+            const url = `${pageUrl.FAQ_PROFIT_DESC}?langType=` + getLangType()
             this.$goPage(url)
         },
     },
