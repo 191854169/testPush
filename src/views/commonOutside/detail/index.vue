@@ -25,8 +25,8 @@
 import TelContact from '../components/TelContact.vue'
 import Profile from './profile.vue'
 import Asset from './asset.vue'
-import Purchase from './purchase.vue'
-import Finance from './finance.vue'
+// import Purchase from './purchase.vue'
+// import Finance from './finance.vue'
 import Risk from './risk.vue'
 import { getAssetSummary } from '@/apis/portfolio/index.js'
 import NP from 'number-precision'
@@ -35,8 +35,8 @@ export default {
     components: {
         Profile,
         Asset,
-        Purchase,
-        Finance,
+        // Purchase,
+        // Finance,
         Risk,
         TelContact,
     },

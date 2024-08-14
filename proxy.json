@@ -4,7 +4,7 @@
     "wealth,trade": "https://lupu-tapi-${mode}.finloopg.com",
     "uc": "https://lupu-uapi-${mode}.finloopg.com",
     "client": "https://lupu-uapi-${mode}.finloopg.com",
-    "search": "https://mktdata-${mode}.finloopg.com",
+    "search": "http://lupu-capi-${mode}.finloopg.com",
     "news": "https://news-${mode}.finloopg.com",
     "ad": "https://operationapi-${mode}.finloopg.com",
     "operation": "https://operationapi-${mode}.finloopg.com",

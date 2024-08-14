@@ -53,6 +53,7 @@ import NP from 'number-precision'
 import { mapState } from 'vuex'
 import { floatToRatio, milliFormat } from '@/utils'
 import pathnames from '@/config/H5Pathname'
+import pageUrl from '@/config/pageUrl'
 
 // 需要注意一个为产品可支持的认购类型，
 // 一个为用户的账户类型
@@ -266,7 +267,7 @@ export default {
                 })
                 .then(() => {
                     // 帮助中心文章
-                    const href = 'https://h5.fotechwealth.com/faq/#/article/490702228690304000/1'
+                    const href = pageUrl.FAQ_ACCOUNT
                     goPage(href)
                 })
         },

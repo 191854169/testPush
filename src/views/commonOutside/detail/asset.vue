@@ -254,6 +254,7 @@ import { mapState } from 'vuex'
 import { Swipe, SwipeItem } from 'vant'
 import { CURRENCY_MAP, CURRENCY_LIST, SWIPE_MAP } from '../config/common.js'
 import { getLangType } from '@/utils/tools'
+import pageUrl from '@/config/pageUrl'
 
 export default {
     props: {
@@ -287,7 +288,7 @@ export default {
             this.$refs.swipe.swipeTo(index)
         },
         openPage() {
-            const url = 'https://h5.fotechwealth.com/faq/#/article/490702228690304000/1?langType=' + getLangType()
+            const url = `${pageUrl.FAQ_ACCOUNT}?langType=` + getLangType()
             this.$goPage(url)
         },
     },

@@ -2,7 +2,7 @@
     <!-- 风险水平 -->
     <div class="common-card">
         <div class="common-head flex-s">
-            <div class="flex-c" @click="openPage">
+            <div class="flex-c">
                 <div class="f16 c-main bold mar-r6">{{ $t('riskLevel') }}</div>
                 <!-- <multi-img name="icon_about" directory="commonOutside" class="icon-about"></multi-img> -->
             </div>
@@ -43,11 +43,6 @@ export default {
     computed: {
         ...mapState('user', ['currency', 'showAsset']),
     },
-    methods: {
-        openPage() {
-            const url = 'https://h5.fotechwealth.com/faq/#/article/490712493934771200/1?langType=' + getLangType()
-            this.$goPage(url)
-        },
-    },
+    methods: {},
 }
 </script>
