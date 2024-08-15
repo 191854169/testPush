@@ -1,10 +1,10 @@
 {
-    "fund": "http://lupu-capi-${mode}.finloopg.com/saas-fund-product-api",
+    "fund": "http://lupu-papi-${mode}.finloopg.com/saas-fund-product-api",
     "fund,trade": "https://lupu-tapi-${mode}.finloopg.com",
     "wealth,trade": "https://lupu-tapi-${mode}.finloopg.com",
     "uc": "https://lupu-uapi-${mode}.finloopg.com",
     "client": "https://lupu-uapi-${mode}.finloopg.com",
-    "search": "http://lupu-capi-${mode}.finloopg.com",
+    "search": "http://lupu-papi-${mode}.finloopg.com",
     "news": "https://news-${mode}.finloopg.com",
     "ad": "https://operationapi-${mode}.finloopg.com",
     "operation": "https://operationapi-${mode}.finloopg.com",
