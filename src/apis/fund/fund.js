@@ -120,18 +120,10 @@ export const getHistoryNav = (data = {}, config = {}) => {
 
 /**
  * @name 历史收益
- * @link https://www.tapd.cn/60236733/markdown_wikis/show/#1160236733001001179
+ * @link https://www.tapd.cn/60236733/markdown_wikis/show/#1160236733001001895
  */
 export const getHistoryReturn = (data = {}, config = {}) => {
     return get(`${domain}/fund/v1/history_return`, marginOptions(data, config))
-}
-
-/**
- * @name 历史收益v2
- * @link https://www.tapd.cn/60236733/markdown_wikis/show/#1160236733001001895
- */
-export const getHistoryReturnV2 = (data = {}, config = {}) => {
-    return get(`${domain}/fund/v2/history_return`, marginOptions(data, config))
 }
 
 /**

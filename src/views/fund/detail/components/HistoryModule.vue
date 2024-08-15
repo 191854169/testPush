@@ -66,7 +66,7 @@
 </template>
 <script>
 import Empty from '@/components/Empty.vue'
-import { getHistoryNav, getHistoryReturnV2, getFundQuote } from '@/apis/fund/fund'
+import { getHistoryNav, getHistoryReturn, getFundQuote } from '@/apis/fund/fund'
 import Table from '@/components/Table.vue'
 import { floatToRatio } from '@/utils'
 import { thousandsFilter } from '@/config/filters.js'
@@ -232,7 +232,7 @@ export default {
         // 历史收益
         async getHistoryReturn() {
             try {
-                const { result = {} } = await getHistoryReturnV2({
+                const { result = {} } = await getHistoryReturn({
                     symbol: this.symbol,
                 })
                 const stage = result.stage || {} // 历史收益
@@ -252,7 +252,7 @@ export default {
                     })
                 })
             } catch (e) {
-                console.log('getHistoryReturnV2=>e:', e)
+                console.log('getHistoryReturn=>e:', e)
             }
         },
         showMoreHandler(val) {

@@ -41,6 +41,12 @@ export const get = (url, paramet) => {
         },
         paramet
     )
+
+    // dev环境不做加密
+    if (VUE_APP_ENV === 'dev') {
+        config.encrypt = ENCRYPT_TYPES.NO_ENCRYPT
+    }
+
     return http.request({ url, method: 'get', ...config })
 }
 
@@ -53,6 +59,12 @@ export const post = (url, paramet) => {
         jsBridge: true,
     }
     const params = Object.assign({}, postConfig, paramet)
+
+    // dev环境不做加密
+    if (VUE_APP_ENV === 'dev') {
+        params.encrypt = ENCRYPT_TYPES.NO_ENCRYPT
+    }
+
     return http.request({ url, method: 'post', ...params })
 }
 

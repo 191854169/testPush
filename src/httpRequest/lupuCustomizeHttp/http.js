@@ -1,6 +1,6 @@
 import { FSH5Http } from '@fs/http'
 import { FSAppHttp } from '@fs/http/dist/lib/http/FSAppHttp/FSAppHttp'
-import JSBridge from '@fs/jsbridge/dist/lib/lupu/jsBridge'
+import { lupuJsBridge as JSBridge } from '@fs/jsbridge'
 import axios from 'axios'
 
 export function FSHttp(options) {

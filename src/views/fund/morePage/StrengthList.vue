@@ -46,17 +46,17 @@
                         <multi-img v-if="idx < 3" :name="`pm${idx + 1}`" directory="fund"></multi-img>
                         <p v-else>{{ idx + 1 }}</p>
                         <h3 class="title_">{{ item.name }}</h3>
-                        <div :class="`currency-${item.currency}`"></div>
+                        <div :class="`currency-${item.currency}`" style="flex-shrink: 0"></div>
                     </div>
 
                     <!-- 陆浦香港、货基排行榜 -->
                     <template v-if="[1, 2].includes(+activeTab)">
-                        <!-- 非货币基金展示近一年涨幅和最新净值 -->
+                        <!-- 非货币基金展示近一年涨跌幅和最新净值 -->
                         <TopListItemBottom
                             v-if="item.fundType !== fundTypeKeysMap.currency"
                             :config="[
-                                { label: '近1年涨幅', value: item.returnY3, isRiseFall: true },
-                                { label: '最新净值（2024/07/24）', value: item.returnY3, notBold: true },
+                                { label: $t('nearOneYearChg'), value: item.returnY1, isRiseFall: true },
+                                { label: `${$t('latestNet')}(${formatDate(item.latestNavDate)})`, value: item.latestNav, notBold: true },
                             ]"
                         ></TopListItemBottom>
 
@@ -64,8 +64,8 @@
                         <TopListItemBottom
                             v-if="item.fundType === fundTypeKeysMap.currency"
                             :config="[
-                                { label: '近七日年化', value: item.returnD7ToY1, isRiseFall: true },
-                                { label: '日均万元收益', value: item.returnD7ToY1, notBold: true },
+                                { label: $t('jqrnh'), value: item.returnD7ToY1, base: 4, isRiseFall: true },
+                                { label: $t('wfIncome'), value: item.returnD7ToY1, notBold: true },
                             ]"
                         ></TopListItemBottom>
                     </template>
@@ -74,8 +74,12 @@
                     <TopListItemBottom
                         v-if="activeTab === 3"
                         :config="[
-                            { label: `近${optionTrueText}${$t('priceChange')}`, value: item.returnY3, isRiseFall: true },
-                            { label: $t('fundText2'), value: item.dividendRatio || '--', notBold: true },
+                            { label: `近${optionTrueText}${$t('priceChange')}`, value: item[optionTrueKey], isRiseFall: true },
+                            {
+                                label: $t('fundText2'),
+                                value: item.fundRank && item.categorySize ? `${item.fundRank}/${item.categorySize}` : '--',
+                                notBold: true,
+                            },
                         ]"
                     ></TopListItemBottom>
 
@@ -84,7 +88,7 @@
                         v-if="activeTab === 4"
                         :config="[
                             { label: `近${optionTrueText}${$t('priceChange')}`, value: item.returnY3, isRiseFall: true },
-                            { label: $t('fundList.sharpeRatioY1'), value: item.dividendRatio || '--' },
+                            { label: $t('fundList.sharpeRatioY1'), value: item.sharpeRatios || '--' },
                         ]"
                     ></TopListItemBottom>
 
@@ -93,78 +97,10 @@
                         v-if="activeTab === 5"
                         :config="[{ label: $t('fundText3'), value: item.dividendRatio, isRiseFall: true, isHorizontal: true }]"
                     ></TopListItemBottom>
-
-                    <!-- <div v-if="activeTab == 1" class="fund-item-bottom">
-                        <div class="left">
-                            <div class="rate">{{ item.establishmentYear || '--' }}</div>
-                            <p class="type">{{ $t('fundText5') }}</p>
-                        </div>
-                        <div class="descript">
-                            <p class="rate" v-riseFall="item.avgYieldY10"></p>
-                            <div class="type" v-if="activeTab == 3">{{ $t('fundText4') }}</div>
-                        </div>
-                    </div> -->
-
-                    <!-- <div class="fund-item-bottom" v-if="activeTab == 3">
-                        <div class="left">
-                            <div class="rate">{{ item.establishmentYear || '--' }}</div>
-                            <p class="type">{{ $t('fundText5') }}</p>
-                        </div>
-                        <div class="descript">
-                            <p class="rate" v-riseFall="item.avgYieldY10"></p>
-                            <div class="type" v-if="activeTab == 3">{{ $t('fundText4') }}</div>
-                        </div>
-                    </div>
-                    <div class="fund-item-bottom" v-else>
-                        <div class="left">
-                            <p class="rate" v-riseFall="item.dividendRatio" v-if="activeTab == 4"></p>
-                            <p class="rate" v-riseFall="item.returnY3" v-if="activeTab == 2"></p>
-                            <p
-                                class="rate"
-                                v-riseFall="
-                                    optionTrue == 'm3'
-                                        ? item.returnM3
-                                        : optionTrue == 'm6'
-                                        ? item.returnM6
-                                        : optionTrue == 'y3'
-                                        ? item.returnY3
-                                        : item.returnY5
-                                "
-                                v-if="activeTab == 1"
-                            ></p>
-                            <p class="type" v-if="activeTab == 4">{{ $t('fundText3') }}</p>
-                            <p class="type" v-else>
-                                近{{
-                                    optionTrue == 'm3'
-                                        ? '3月'
-                                        : optionTrue == 'm6'
-                                        ? '6月'
-                                        : optionTrue == 'y3'
-                                        ? '3年'
-                                        : optionTrue == 'y5'
-                                        ? '5年'
-                                        : ''
-                                }}{{ $t('priceChange') }}
-                            </p>
-                        </div>
-                        <div class="descript">
-                            <div class="rate numjg" v-if="activeTab == 1">
-                                {{ item.fundRank }}
-                                <i>/</i>
-                                {{ item.categorySize }}
-                            </div>
-                            <div class="rate" v-if="activeTab == 2">
-                                {{ item.sharpeRatios }}
-                            </div>
-                            <div class="type" v-if="activeTab == 1">{{ $t('fundText2') }}</div>
-                            <div class="type" v-if="activeTab == 2">{{ $t('fundList.sharpeRatioY1') }}</div>
-                        </div>
-                    </div> -->
                 </div>
             </van-list>
             <div class="btdis">
-                TODO 文案待提供
-                <!-- {{ $t('fundText1') }} -->
+                {{ $t('fundText1') }}
             </div>
         </div>
     </div>
@@ -283,6 +219,16 @@ export default {
 
             return map[this.optionTrue]
         },
+
+        optionTrueKey() {
+            const map = {
+                m3: 'returnM3',
+                m6: 'returnM6',
+                y3: 'returnY3',
+                y5: 'returnY5',
+            }
+            return map[this.optionTrue]
+        },
     },
     mounted() {
         this.activeTab = this.$route.query.id
@@ -339,16 +285,14 @@ export default {
             try {
                 this.loading = true
                 this.count += 10
-                let fundParams = 5 // 业绩实力榜
-                if (this.activeTab == 1) {
-                    fundParams = 5
-                } else if (this.activeTab == 2) {
-                    fundParams = 6
-                } else if (this.activeTab == 3) {
-                    fundParams = 7
-                } else if (this.activeTab == 4) {
-                    fundParams = 8
+                const fundMap = {
+                    1: 21,
+                    2: 22,
+                    3: 5,
+                    4: 6,
+                    5: 8,
                 }
+                const fundParams = fundMap[this.activeTab]
                 let paramsData = {}
                 paramsData = { type: fundParams, start: this.start, count: this.count }
                 if (fundParams == 5) {
@@ -359,25 +303,6 @@ export default {
                 const list = result.list || []
                 // this.fundList = []
                 const arr = list.length ? list[0].info : []
-                if (this.isApp) {
-                    const checkList = []
-                    arr.forEach(item => {
-                        checkList.push(
-                            new Promise((resolve, reject) => {
-                                this.checkFavstock(item.symbol)
-                                    .then(res => {
-                                        item.zxflag = res
-                                        resolve()
-                                    })
-                                    .catch(err => {
-                                        item.zxflag = err
-                                        reject()
-                                    })
-                            })
-                        )
-                    })
-                    await Promise.all(checkList)
-                }
                 this.fundList = arr
             } catch (e) {
                 console.error(e)
@@ -406,6 +331,9 @@ export default {
             } else {
                 this.$router.push(`/detail?type=${type}&symbol=${item.symbol}`)
             }
+        },
+        formatDate(val) {
+            return val.replace(/-/g, '/') || '--'
         },
         // 检查自选
         async checkFavstock(symbol) {

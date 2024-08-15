@@ -19,6 +19,8 @@ import riskAssessmentMixin from '@/mixins/business/riskAssessmentMixin.js'
 import initButtonMixin from '../mixins/initButton/index'
 import { getProfessionalStatus } from '@/utils'
 import SellCashBox from '@/components/SellCashBox.vue'
+import { FUND_TYPE_MAP } from '../config/common'
+
 export default {
     name: 'fund-detail',
     components: {

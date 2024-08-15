@@ -1,7 +1,7 @@
 import { Dialog } from 'vant'
 import { i18n } from '@/i18n/common'
 import { isTenantApp } from '@/utils/tools'
-import JSBridge from '@fs/jsbridge/dist/lib/lupu/jsBridge.js'
+import { lupuJsBridge as JSBridge } from '@fs/jsbridge'
 // tip实例 （单例）
 let intance = null
 

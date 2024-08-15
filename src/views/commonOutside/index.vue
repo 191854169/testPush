@@ -159,7 +159,7 @@ export default {
             //     this.goSetPasswordPage()
             // }
             this.getPersonType()
-            this.getPersonType.watch()
+            // this.getPersonType.watch()
         },
 
         // initTradePwd() {

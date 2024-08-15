@@ -14,9 +14,10 @@
                     <div class="title">{{ $t('smsxcb') }}</div>
                 </div>
                 <div class="txt">{{ $t('xcbsm') }}</div>
+                <div class="txt">{{ $t('xcbsm2') }}</div>
             </div>
         </div>
-        <div class="bg-border">
+        <!-- <div class="bg-border">
             <div class="jstop_">
                 <div class="left"></div>
                 <div class="title">{{ $t('tradingScenario') }}</div>
@@ -31,7 +32,7 @@
                     <p>{{ $t('repaymentAccount') }}</p>
                 </div>
             </div>
-        </div>
+        </div> -->
         <div class="bg-border">
             <div class="jstop_">
                 <div class="left"></div>
@@ -45,13 +46,13 @@
                         {{ $t('xuanzexcb') }}
                     </div>
                 </div>
-                <div class="sell">
+                <!-- <div class="sell">
                     <multi-img name="maichucelue" directory="cashBox" />
                     <div class="contxt">
                         <p>{{ $t('sellingStrategy') }}</p>
                         {{ $t('xuyaozhuanchu') }}
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
         <div class="bg-border">
@@ -68,31 +69,31 @@
                         <div class="top">
                             {{ $t('toTheTime') }}
                         </div>
-                        <div class="time">{{ $t('zhou') }}一09:45{{ $t('hou') }}～{{ $t('zhou') }}二09:45</div>
-                        <div class="time">{{ $t('zhou') }}二09:45{{ $t('hou') }}～{{ $t('zhou') }}三09:45</div>
+                        <div class="time">T-1日09:30{{ $t('hou') }}～T日09:30</div>
+                        <!-- <div class="time">{{ $t('zhou') }}二09:45{{ $t('hou') }}～{{ $t('zhou') }}三09:45</div>
                         <div class="time">{{ $t('zhou') }}三09:45{{ $t('hou') }}～{{ $t('zhou') }}四09:45</div>
                         <div class="time">{{ $t('zhou') }}四09:45{{ $t('hou') }}～{{ $t('zhou') }}五09:45</div>
-                        <div class="time no-border-bottom">{{ $t('zhou') }}五09:45{{ $t('hou') }}～下{{ $t('zhou') }}一09:45</div>
+                        <div class="time no-border-bottom">{{ $t('zhou') }}五09:45{{ $t('hou') }}～下{{ $t('zhou') }}一09:45</div> -->
                     </div>
                     <div class="mid">
                         <div class="top midbor">
                             {{ $t('acknowledgingTime') }}
                         </div>
-                        <div class="time">{{ $t('zhou') }}二</div>
-                        <div class="time">{{ $t('zhou') }}三</div>
+                        <div class="time">T日</div>
+                        <!-- <div class="time">{{ $t('zhou') }}三</div>
                         <div class="time">{{ $t('zhou') }}四</div>
                         <div class="time">{{ $t('zhou') }}五</div>
-                        <div class="time no-border-bottom">下{{ $t('zhou') }}一</div>
+                        <div class="time no-border-bottom">下{{ $t('zhou') }}一</div> -->
                     </div>
                     <div class="right">
                         <div class="top">
                             {{ $t('cksy') }}
                         </div>
-                        <div class="time no-border-right">{{ $t('zhou') }}三</div>
-                        <div class="time no-border-right">{{ $t('zhou') }}四</div>
+                        <div class="time no-border-right">T日</div>
+                        <!-- <div class="time no-border-right">{{ $t('zhou') }}四</div>
                         <div class="time no-border-right">{{ $t('zhou') }}五</div>
                         <div class="time no-border-right">下{{ $t('zhou') }}一</div>
-                        <div class="time no-border-bottom no-border-right">下{{ $t('zhou') }}二</div>
+                        <div class="time no-border-bottom no-border-right">下{{ $t('zhou') }}二</div> -->
                     </div>
                 </div>
             </div>
@@ -110,7 +111,8 @@ export default {
     // height: 100%;
     padding-bottom: 70px;
     /* stylelint-disable-next-line number-max-precision */
-    background: linear-gradient(180deg, #fff9f4 0%, rgba(255, 229, 205, 0.782851) 19.85%, rgba(255, 246, 238, 0.794282) 24.26%, #fff3e8 100%);
+    // background: linear-gradient(180deg, #fff9f4 0%, rgba(255, 229, 205, 0.782851) 19.85%, rgba(255, 246, 238, 0.794282) 24.26%, #fff3e8 100%);
+    background: linear-gradient(180deg, #fffcec 0%, rgba(255, 235, 195, 0.782851) 19.85%, rgba(255, 249, 238, 0.794282) 36.5%, #fff8ea 100%);
 
     .clear {
         clear: both;
@@ -123,7 +125,7 @@ export default {
             position: absolute;
             top: 42px;
             left: 24px;
-            color: #ff6500;
+            color: #d7903b;
 
             span {
                 font-weight: 600;
@@ -177,7 +179,7 @@ export default {
                 width: 6px;
                 height: 18px;
                 margin-right: 4px;
-                background: #ff7e07;
+                background: @theme;
                 border-radius: 2px;
             }
         }
@@ -291,7 +293,7 @@ export default {
                     font-size: 14px;
                     line-height: 22px;
                     text-align: center;
-                    background: #ff7e07;
+                    background: @theme;
                 }
 
                 .left {
@@ -339,7 +341,7 @@ export default {
             width: 6px;
             height: 18px;
             margin-right: 4px;
-            background: #ff7e07;
+            background: @theme;
             border-radius: 2px;
         }
     }

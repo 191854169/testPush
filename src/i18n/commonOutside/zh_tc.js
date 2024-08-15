@@ -191,4 +191,6 @@ export default {
     PITooltipComText: '貴公司的專業投資者資產證明已過期，請貴公司於{date}前補充最新的資產證明，謝謝!',
     PIReTooltipPersonText: '您提交的專業投資者資產證明審批未通過，請您於{date}前重新提交資產證明',
     PIReTooltipComText: '貴公司提交的專業投資者資產證明審批未通過，請貴公司於{date}前重新提交資產證明',
+    nearOneYearChg: '近一年漲跌幅',
+    jxlc: '精選理財',
 }

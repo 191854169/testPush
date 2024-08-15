@@ -202,8 +202,9 @@ export default {
             try {
                 if (!this.isPublic) return
                 const res = await getFile({ symbol: this.symbol })
-                if (res.result && res.result.list) {
-                    this.fundFile.list = res.result.list
+                const fileItem = res?.result?.fileMap[this.symbol]
+                if (fileItem) {
+                    this.fundFile.list = fileItem
                 }
             } catch (e) {
                 console.log('getFile=>e:', e)

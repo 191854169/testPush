@@ -273,7 +273,7 @@
     </div>
 </template>
 <script>
-import JSBridge from '@fs/jsbridge/dist/lib/lupu/jsBridge.js'
+import { lupuJsBridge as JSBridge } from '@fs/jsbridge'
 import { AssetsDetail } from '@/apis/fund/index.js'
 import InvestmentProDialogMixin from '@/views/fund/mixins/InvestmentProDialogMixin.js'
 import investmentProTradeDialog from '@/views/fund/components/investmentProTradeDialog.vue'
@@ -447,7 +447,7 @@ export default {
         },
         // 返回的为半分比数据
         quanityPercent() {
-            const { remainingVol = '', totalVol = '' } = this.privateFundAmount
+            const { remainingVol = '', totalVol = '' } = this.privateFundAmount || {}
             if (remainingVol === '' || totalVol === '') return 100 // 为空表示认购份额无上限
             return accMul(accDiv(remainingVol, totalVol), 100)
         },
@@ -538,7 +538,6 @@ export default {
         console.warn('accts:', this.accts.type)
         this.symbol = this.$route.params.symbol
         this.getRiskassessmentFile()
-        this.getPrivateFundAmount()
     },
     async mounted() {
         if (this.$jsBridge) {
@@ -578,6 +577,7 @@ export default {
         if (this.isPrivateFund) {
             // 私募调老接口查询资产
             // await this.getPrivateAssetsDeatil()
+            this.getPrivateFundAmount()
         } else {
             // 公募调新接口查购买力
             // await this.getPublicAssetsDetail()

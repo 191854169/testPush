@@ -9,7 +9,14 @@
                 'not-bold': item.notBold,
             }"
         >
-            <div v-if="item.isRiseFall" v-riseFall="item.value" class="value"></div>
+            <div
+                v-if="item.isRiseFall"
+                v-riseFall="{
+                    value: item.value,
+                    base: item.base ?? 2,
+                }"
+                class="value"
+            ></div>
             <div v-else class="value">{{ item.value }}</div>
             <div class="label">{{ item.label }}</div>
         </div>
@@ -20,7 +27,10 @@
 export default {
     components: {},
     props: {
-        config: () => [],
+        config: {
+            type: Array,
+            default: () => [],
+        },
     },
     data() {
         return {}
@@ -59,15 +69,12 @@ export default {
         }
 
         .label {
+            min-width: 120px;
             margin-top: 4px;
             color: #9c9c9c;
             font-weight: 400;
             font-size: 12px;
             line-height: 16px;
-        }
-
-        & + .item {
-            margin-left: 56px;
         }
     }
 }

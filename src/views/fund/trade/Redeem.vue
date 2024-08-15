@@ -169,7 +169,7 @@
     </div>
 </template>
 <script>
-import JSBridge from '@fs/jsbridge/dist/lib/lupu/jsBridge.js'
+import { lupuJsBridge as JSBridge } from '@fs/jsbridge'
 import { FundRedeem, holdingsTradeable, ecashRedeem, getHoldingsDetail } from '@/apis/wealth/index.js'
 import { ENCRYPT_TYPES } from '@/httpRequest/http.js'
 import { thousandsFilter, currencyFilter } from '@/config/filters.js'

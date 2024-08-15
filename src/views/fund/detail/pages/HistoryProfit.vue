@@ -19,7 +19,7 @@
     </div>
 </template>
 <script>
-import { getHistoryReturnV2 } from '@/apis/fund/fund'
+import { getHistoryReturn } from '@/apis/fund/fund'
 import Table from '@/components/Table.vue'
 export default {
     name: 'historyProfit',
@@ -75,7 +75,7 @@ export default {
     methods: {
         async getHistoryReturn() {
             try {
-                const { result = {} } = await getHistoryReturnV2({
+                const { result = {} } = await getHistoryReturn({
                     symbol: this.symbol,
                 })
                 const stage = result.stage || {} // 历史收益
@@ -87,7 +87,7 @@ export default {
                     })
                 })
             } catch (e) {
-                console.log('getHistoryReturnV2=>e:', e)
+                console.log('getHistoryReturn=>e:', e)
             }
         },
     },

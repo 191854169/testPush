@@ -9,7 +9,7 @@
                             <van-skeleton row="4" :loading="loading">
                                 <div class="item__type">
                                     <multi-img name="xingxuan_bg" class="xingxuan-bg" directory="commonOutside"></multi-img>
-                                    <h2>{{ $t('xxlc') }}</h2>
+                                    <h2>{{ $t('jxlc') }}</h2>
                                 </div>
 
                                 <div class="item__header">
@@ -20,10 +20,17 @@
                                 </div>
                                 <div class="item__body">
                                     <div class="item__body-left">
-                                        <span class="rate" v-riseFall="{ value: item.returnY3, base: 2 }"></span>
-                                        <p class="type">{{ $t('jqrnh') }}</p>
+                                        <template v-if="fundTypeKeysMap.currency === item.fundType">
+                                            <span class="rate" v-riseFall="{ value: item.returnD7ToY1, base: 4 }"></span>
+                                            <p class="type">{{ $t('jqrnh') }}</p>
+                                        </template>
+
+                                        <template v-else>
+                                            <span class="rate" v-riseFall="{ value: item.returnY1, base: 2 }"></span>
+                                            <p class="type">{{ $t('nearOneYearChg') }}</p>
+                                        </template>
                                     </div>
-                                    <PerformanceTrend class="item__body-right" :symbol="item.symbol"></PerformanceTrend>
+                                    <PerformanceTrend class="item__body-right" :symbol="item.symbol" :fundType="item.fundType"></PerformanceTrend>
                                 </div>
                                 <div class="item__footer">
                                     <Button>{{ $t('mr') }}</Button>
@@ -94,7 +101,7 @@
                 </div>
             </div>
             <!-- 星选理财(货币基金精选) -->
-            <div class="card cash-fund" v-if="cashFundListRequested && cashFundList.length !== 0">
+            <div class="card cash-fund" v-if="cashFundList.length !== 0">
                 <h2>{{ $t('xxlc') }}</h2>
                 <div class="cash-fund-list">
                     <div
@@ -180,6 +187,7 @@ import { PUB_LIST_FILTER_MAP } from '@/config/common'
 import Banner from '@/views/fund/components/Banner.vue'
 import { getRecommendList } from '@/apis/fund/fund.js'
 import { thousandsFilter, currencyFilter } from '@/config/filters.js'
+import { FUND_TYPE_MAP } from '../config/common'
 
 const FINANCE_ACCOUNT = 1 // 资金账户
 const FUND_ACCOUNT = 2 // 基金账户
@@ -199,6 +207,7 @@ export default {
     mixins: [riskAssessmentMixin, checkPIMixin],
     data() {
         return {
+            fundTypeKeysMap: FUND_TYPE_MAP.keysMap,
             cashBoxNoobKey: 'WEALTH_NOOB_KEY',
             followNoobKey: 'FOLLOW_NOOB_KEY',
             showCashBoxNoobGuide: false,
@@ -976,7 +985,9 @@ export default {
 
             &-left {
                 display: flex;
+                flex-shrink: 0;
                 align-items: flex-end;
+                margin-right: 16px;
 
                 .rate {
                     margin-right: 6px;
