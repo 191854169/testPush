@@ -146,14 +146,8 @@ export default {
                         y2: 1,
                         // background: linear-gradient(18.08deg, rgba(255, 105, 7, 0) 22.28%, rgba(255, 105, 7, 0.4) 101.22%);
                         colorStops: [
-                            {
-                                offset: 0.7,
-                                color: 'rgba(255, 105, 7, 0.3)', // 0% 处的颜色
-                            },
-                            {
-                                offset: 1,
-                                color: 'rgba(255, 105, 7, 0)', // 100% 处的颜色
-                            },
+                            { offset: 0.7, color: 'rgba(255, 60, 60, 0.3)' },
+                            { offset: 1, color: 'rgba(255, 60, 60, 0)' },
                         ],
                         global: false, // 缺省为 false
                     },
@@ -262,7 +256,7 @@ export default {
                         },
                         showSymbol: false,
                         lineStyle: {
-                            color: '#ff6907',
+                            color: this.$colorVariable.riseColor1,
                             width: 1,
                         },
                         seriesLayoutBy: 'row',

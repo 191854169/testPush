@@ -964,11 +964,11 @@ export default {
             }
 
             &.selected {
-                background: rgba(255, 99, 7, 0.1);
+                background: @tabBackground;
                 border-radius: 18px;
 
                 button {
-                    color: #ff6907;
+                    color: @theme;
                 }
             }
 

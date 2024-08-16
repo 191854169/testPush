@@ -8,8 +8,9 @@ import pathnames from '../config/H5Pathname.js'
 import { isTenantApp } from '@/utils/tools'
 import { isInOutsideH5 } from '@/utils'
 import LogoAd from '@/components/logo.vue'
+import { variable } from '@/assets/css/variable'
 
-Vue.prototype.$jsBridge = window.JSBridge
+Vue.prototype.$colorVariable = variable
 Vue.component(LogoAd.name, LogoAd)
 
 export const FINANCE_ACCOUNT = 1 // 资金账户

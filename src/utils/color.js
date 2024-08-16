@@ -5,7 +5,7 @@ const riseOrFallColors = {
     white: {
         // 橙涨绿跌
         1: {
-            riseColor: '#FF6907',
+            riseColor: '#FF3C3C',
             fallColor: '#29C277',
             flatColor: '#9C9C9C',
         },
@@ -31,7 +31,7 @@ const riseOrFallColors = {
     black: {
         // 橙涨绿跌
         1: {
-            riseColor: '#EB5528',
+            riseColor: '#FF3C3C',
             fallColor: '#20BF86',
             flatColor: '#858585',
         },
