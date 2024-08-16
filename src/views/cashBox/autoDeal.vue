@@ -255,7 +255,7 @@ export default {
         chooseProduct,
     },
     async created() {
-        this.getGuide()
+        // this.getGuide()
         Object.keys(this.singleWithdrawMap).forEach(currency => {
             this.getDrawBalance(currency)
         })

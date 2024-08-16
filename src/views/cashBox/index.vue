@@ -451,7 +451,7 @@ export default {
         },
     },
     async created() {
-        this.getGuide()
+        // this.getGuide()
         // 同步币种
         this.chooseHandler(this.accountType)
 
