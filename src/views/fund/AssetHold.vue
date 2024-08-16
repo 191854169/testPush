@@ -239,12 +239,12 @@ export default {
             account: this.$route.query.accountType || 'ALL',
             cashBoxOpenStatus: 1, // 开通状态(Number) 0-未开通，1-已开通
             cashBoxDialog: false,
-            cashOpenSuggest: 'ASSET-CASH-OPEN-SUGGEST', // 资产页开通星财宝建议
-            cashTransSuggest: 'ASSET-CASH-TRANS-SUGGEST', // 资产页货基转到星财宝建议
+            cashOpenSuggest: 'ASSET-CASH-OPEN-SUGGEST', // 资产页开通现金宝建议
+            cashTransSuggest: 'ASSET-CASH-TRANS-SUGGEST', // 资产页货基转到现金宝建议
             publicSwitchStatus: {
-                // 开关状态 (持有货基但未开通星财宝的弹窗)
-                dialogHaveButNotOpenEcash: false, // 持有货基但未开通星财宝的弹窗：true 开启，false 关闭
-                dialogHaveButNotOpenEcashInterval: 0, // 持有货基但未开通星财宝的弹窗间隔(自然日，单位：天)
+                // 开关状态 (持有货基但未开通现金宝的弹窗)
+                dialogHaveButNotOpenEcash: false, // 持有货基但未开通现金宝的弹窗：true 开启，false 关闭
+                dialogHaveButNotOpenEcashInterval: 0, // 持有货基但未开通现金宝的弹窗间隔(自然日，单位：天)
             },
         }
     },
@@ -468,7 +468,7 @@ export default {
             }
         },
 
-        // 开关状态 (持有货基但未开通星财宝的弹窗)
+        // 开关状态 (持有货基但未开通现金宝的弹窗)
         async getSwitchStatus() {
             try {
                 const { result = {} } = await getSwitchStatus()
@@ -479,9 +479,9 @@ export default {
             }
         },
 
-        // 持有货基星财宝相关提醒
+        // 持有货基现金宝相关提醒
         async verifyCurrencyFundTrade() {
-            // 持有货基但未开通星财宝的弹窗
+            // 持有货基但未开通现金宝的弹窗
             if (!this.publicSwitchStatus.dialogHaveButNotOpenEcash) return
             // 时间间隙
             const intervalDay = this.publicSwitchStatus.dialogHaveButNotOpenEcashInterval ?? 0
@@ -522,10 +522,10 @@ export default {
             return localStorage.getItem(key)
         },
 
-        // 确认dialog 跳转开通星财宝
+        // 确认dialog 跳转开通现金宝
         ecashConfirmHandler() {
             if (!this.cashBoxOpenStatus) {
-                // 未开通前往开通星财宝
+                // 未开通前往开通现金宝
                 this.$goPage(
                     '/beforeSign',
                     {},

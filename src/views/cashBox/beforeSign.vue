@@ -130,7 +130,7 @@ export default {
                             items: ['mmf'],
                         },
                     ],
-                    buyable: PUB_LIST_FILTER_MAP.BUYABLE, // 只筛选可买的星财宝
+                    buyable: PUB_LIST_FILTER_MAP.BUYABLE, // 只筛选可买的现金宝
                 })
                 const list = result?.list || []
                 if (list.length) {

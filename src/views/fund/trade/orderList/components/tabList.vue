@@ -269,7 +269,7 @@ export default {
                 } else {
                     this.typeArr = [...this.commonTypeList]
                     if ([3, 4].includes(this.orderDirection)) {
-                        // 非星财宝产品选择 自动买入卖出 则切换到全部
+                        // 非现金宝产品选择 自动买入卖出 则切换到全部
                         this.orderDirection = 0
                     }
                 }

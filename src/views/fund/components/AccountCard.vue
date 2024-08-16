@@ -377,11 +377,11 @@ export default {
             const lng = this.doingOrderMap[this.accountType]?.xjbSettled ?? 0
             return lng
         },
-        // 是否有星财宝专户到期回款的订单
+        // 是否有现金宝专户到期回款的订单
         haveXcbRepayment() {
             return this.xcbRepaymentNum > 0
         },
-        // 星财宝专户订单回款描述语
+        // 现金宝专户订单回款描述语
         xcbRepaymentOrderMsg() {
             const lng = this.xcbRepaymentNum
             const text = this.amountStatus ? lng : '*'

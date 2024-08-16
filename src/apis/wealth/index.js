@@ -83,7 +83,7 @@ export const ecashUserSetting = (data = {}, config = {}) => {
     return post(`${domain}/wealth/${path_version}/ecash/UserSetting`, marginOptions(data, config))
 }
 /**
- * @name 星财宝开通
+ * @name 现金宝开通
  * @link https://www.tapd.cn/60236733/markdown_wikis/show/#1160236733001002415@toc2
  */
 export const ecashOpen = (data = {}, config = { encrypt: ENCRYPT_TYPES.APP_TRADE_ENC }) => {
@@ -266,7 +266,7 @@ export const getLatestProfitLossDetail = (data = {}, config = {}) => {
     return post(`${domain}/wealth/${path_version}/LatestProfitLossDetail`, marginOptions(data, config))
 }
 
-/** TODO: 兼容之前的版本 星财宝开通状态用v2接口
+/** TODO: 兼容之前的版本 现金宝开通状态用v2接口
  * @name  查询用户状态 (开通状态）
  * @link https://www.tapd.cn/60236733/markdown_wikis/show/#1160236733001002415@toc3
  */
@@ -275,7 +275,7 @@ export const ecashUserStatus = (data = {}, config = {}) => {
 }
 
 /**
- * @name  开关状态 (持有货基但未开通星财宝的弹窗)
+ * @name  开关状态 (持有货基但未开通现金宝的弹窗)
  * @link https://www.tapd.cn/60236733/markdown_wikis/show/#1160236733001002415@toc2
  */
 export const getSwitchStatus = (data = {}, config = {}) => {

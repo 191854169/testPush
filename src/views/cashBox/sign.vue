@@ -287,7 +287,7 @@ export default {
             this.keepAmount = this[`amountDisplay${currency}`] === '0.00' ? '' : this[`amountDisplay${currency}`]
             this.amountShow = true
         },
-        // (星财宝)货币基金自动买入及赎回服务协议
+        // (现金宝)货币基金自动买入及赎回服务协议
         goServiceProtocol() {
             const { VUE_APP_BUILDER_PAGE } = pathnames
             const key = 'CASH_BOX'
@@ -332,7 +332,7 @@ export default {
                             items: ['mmf'],
                         },
                     ],
-                    buyable: PUB_LIST_FILTER_MAP.BUYABLE, // 只筛选可买的星财宝
+                    buyable: PUB_LIST_FILTER_MAP.BUYABLE, // 只筛选可买的现金宝
                 })
                 const list = result.list || []
                 this.symbolList = list.map(item => item.symbol)
@@ -355,7 +355,7 @@ export default {
                 }
             }
         },
-        //开通星财宝
+        //开通现金宝
         async open() {
             if (!this.canSign) return
             if (this.$jsBridge) {

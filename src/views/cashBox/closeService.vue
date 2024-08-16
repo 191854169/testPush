@@ -24,7 +24,7 @@
             </div>
         </div>
         <div class="footer">
-            <van-button type="primary" class="close" @click="closeEvent">关闭星财宝</van-button>
+            <van-button type="primary" class="close" @click="closeEvent">关闭现金宝</van-button>
         </div>
     </div>
 </template>

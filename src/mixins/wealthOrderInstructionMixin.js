@@ -45,7 +45,7 @@ export default {
          * @param {*} config.callback 普通错误回调
          * @param {*} config.timeoutCallback 超时下单成功回调
          * @param {*} config.direction 买卖方向 subscribe买入 redeem卖出
-         * @param {*} config.showOrderDetail 重复下单是否展示订单详情文字链（星财宝不展示）
+         * @param {*} config.showOrderDetail 重复下单是否展示订单详情文字链（现金宝不展示）
          */
         async handleOrderError(config) {
             const { error, orderFunction, callback, timeoutCallback, direction, showOrderDetail = true } = config

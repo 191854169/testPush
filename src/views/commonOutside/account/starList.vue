@@ -4,7 +4,7 @@
         <div class="flex-s pad-t16 pad-b8">
             <!-- 基金类型 -->
             <div class="f16 font-bold">{{ $t('cashBox') }}</div>
-            <!-- 星财宝显示自动买入设置按钮 -->
+            <!-- 现金宝显示自动买入设置按钮 -->
             <div class="flex-c lh-16 f12" @click="openPage">
                 <multi-img name="icon_set" directory="commonOutside" class="icon-set"></multi-img>
                 <div class="h2-white">{{ $t('autoTradeSetting') }}</div>
@@ -188,7 +188,7 @@ export default {
             this.$goPage('/autoDeal', {}, { pathname: '/wealth/cashBox.html' })
         },
 
-        // 点击跳转至星财宝主页携带币种
+        // 点击跳转至现金宝主页携带币种
         listClickHander(rowData) {
             this.$goPage('/', { accountType: rowData.currency }, { pathname: '/wealth/cashBox.html' })
         },

@@ -23,15 +23,15 @@ const pathnames = {
     VUE_APP_FIXEDDEPOSIT_PAGE: '/wealth/fixedDepositTreasure.html#/', // 定存宝主页
     VUE_APP_FIXEDDEPOSIT_ABOUT_PAGE: '/wealth/fixedDepositTreasure.html#/about', // 定存宝开通介绍页面
     VUE_APP_FIXEDDEPOSIT_LIST_PAGE: '/wealth/fixedDepositTreasure.html#/list', // 定存宝产品列表页
-    VUE_APP_STARSPECIALACCOUNT_OPEN_ACCOUNT_PAGE: '/pages/openAccountXCBPro.html#/', // 星财宝专户开户页面
-    VUE_APP_STARSPECIALACCOUNT_PAGE: '/wealth/starTreasureAccount.html#/', // 星财宝专户主页
-    VUE_APP_STARSPECIALACCOUNT_ABOUT_PAGE: '/wealth/starTreasureAccount.html#/about', // 星财宝专户开通介绍页面
-    VUE_APP_STARSPECIALACCOUNT_LIST_PAGE: '/wealth/starTreasureAccount.html#/list', // 星财宝专户产品列表页
+    VUE_APP_STARSPECIALACCOUNT_OPEN_ACCOUNT_PAGE: '/pages/openAccountXCBPro.html#/', // 现金宝专户开户页面
+    VUE_APP_STARSPECIALACCOUNT_PAGE: '/wealth/starTreasureAccount.html#/', // 现金宝专户主页
+    VUE_APP_STARSPECIALACCOUNT_ABOUT_PAGE: '/wealth/starTreasureAccount.html#/about', // 现金宝专户开通介绍页面
+    VUE_APP_STARSPECIALACCOUNT_LIST_PAGE: '/wealth/starTreasureAccount.html#/list', // 现金宝专户产品列表页
     VUE_APP_FOSUN_DOWNLOAD_PAGE: '/m', // 复星APP下载页
     VUE_APP_WEALTH_COUNSELOR_PAGE: '/pages/appAdvisor.html#/', // 专属顾问页
     VUE_APP_WEALTH_FUND_PAGE: '/wealth/fund.html#/', // 理财页
     VUE_APP_WEALTH_COMMONOUTSIDE_PAGE: '/wealth/commonOutside.html#/', // 睿银站外通用h5页面
-    VUE_APP_WEALTH_CASHBOX_PAGE: '/wealth/cashBox.htmsl#/', // 星财宝主页
+    VUE_APP_WEALTH_CASHBOX_PAGE: '/wealth/cashBox.htmsl#/', // 现金宝主页
     VUE_APP_INVESTMENT_V2_OPEN_ACCOUNT_PAGE: '/pages/openAccountInvestmentV2.html', // 投顾组合开户页面
     VUE_APP_ETF_QUESTION: '/pages/IPO.html#/etfQuestion', // 虚拟资产认识评估
 }

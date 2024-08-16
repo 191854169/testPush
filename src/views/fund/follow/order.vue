@@ -779,7 +779,7 @@ export default {
             let avaliableCash = parseFloat(withdrawBalance?.singleWithdrawBalance || 0)
             //现金可用<0时按0处理
             avaliableCash = Math.max(avaliableCash, 0)
-            //同币种星财宝抵押值
+            //同币种现金宝抵押值
             const ecashHolding = parseFloat(ecashHoldingResult?.[`${currency}SellableAmount`] || 0)
 
             const insufficientAmount = NP.minus(orderAmountF, avaliableCash, ecashHolding) //跨币种交易/使用到融资的金额

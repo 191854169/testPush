@@ -117,7 +117,7 @@ export default {
         isRise() {
             return [orderDirectionKeysMap.SUBSCRIBE, orderDirectionKeysMap.AUTO_SUBSCRIBE].includes(this.row.orderDirection)
         },
-        // 星财宝
+        // 现金宝
         isCashBox() {
             return this.row.productType === productKeyMap.CASHBOX
         },

@@ -65,7 +65,7 @@
                                         </div>
                                         <div class="holding-detail">
                                             <ul class="detail-types">
-                                                <!-- 持有金额: 星财宝、公募、债券、另类、私募、投顾 展示 -->
+                                                <!-- 持有金额: 现金宝、公募、债券、另类、私募、投顾 展示 -->
                                                 <li v-if="item.showHoldingAmount">
                                                     <p class="label">{{ $t('holdlingAmount') }}</p>
                                                     <p
@@ -81,7 +81,7 @@
                                                         }"
                                                     ></p>
                                                 </li>
-                                                <!-- 持有总额: 定存宝、星财宝专户 展示 -->
+                                                <!-- 持有总额: 定存宝、现金宝专户 展示 -->
                                                 <li v-if="item.showTotalHolding">
                                                     <p class="label">{{ $t('totalHolding') }}</p>
                                                     <p
@@ -97,7 +97,7 @@
                                                         }"
                                                     ></p>
                                                 </li>
-                                                <!-- 持有收益: 定存宝、星财宝专户 展示 -->
+                                                <!-- 持有收益: 定存宝、现金宝专户 展示 -->
                                                 <li v-if="item.showHoldingCount">
                                                     <p class="label">{{ $t('holdingCount') }}</p>
                                                     <p
@@ -116,7 +116,7 @@
                                                         {{ assetsStatus ? item.numHoldings : '*' }}
                                                     </p>
                                                 </li>
-                                                <!-- 昨日收益: 星财宝、公募、债券、私募 -->
+                                                <!-- 昨日收益: 现金宝、公募、债券、私募 -->
                                                 <li v-if="item.showLatestProfit">
                                                     <p class="label">
                                                         <span>{{ $t('yesterdayProfit') }}</span>
@@ -158,7 +158,7 @@
                                                         ></span>
                                                     </p>
                                                 </li>
-                                                <!-- 累计收益: 另类、星财宝 -->
+                                                <!-- 累计收益: 另类、现金宝 -->
                                                 <li v-if="item.showAccumulatedProfitloss">
                                                     <p class="label">{{ $t('accumulatedProfit') }}</p>
                                                     <p
@@ -250,7 +250,7 @@ export default {
             account: this.$route.query.accountType || 'ALL',
             // 开通状态(Boolean) false-未开通，true-已开通
             fixedDepositTreasureOpenStatus: true,
-            // 星财宝专户开通状态(Boolean) false-未开通，true-已开通
+            // 现金宝专户开通状态(Boolean) false-未开通，true-已开通
             starSpecialAccountOpenStatus: true,
             types: [],
             specialAccountHideKey: 'SPECIAL_ACCOUNT_ASSET',
@@ -320,7 +320,7 @@ export default {
         async getEcashUserStatus() {
             try {
                 const result = await this.$store.dispatch('user/getEcashStatus')
-                console.log('星财宝开通状态ecashUserStatus-res:', result)
+                console.log('现金宝开通状态ecashUserStatus-res:', result)
                 this.cashBoxOpenStatus = result?.openStatus || 0
             } catch (e) {
                 console.error('ecashUserStatus===>e:', e)
@@ -331,7 +331,7 @@ export default {
             try {
                 const { type } = e.target.dataset || {}
                 if (!type) return
-                // 星财宝
+                // 现金宝
                 if (type === 'cashBox') {
                     const href = `${location.origin}/wealth/cashBox.html#/?accountType=${this.account}&currency=${this.currency}`
                     this.$goPage(href)
@@ -346,7 +346,7 @@ export default {
                     this.$goPage(href)
                     return
                 }
-                // 星财宝专户
+                // 现金宝专户
                 if (type === 'starSpecialAccount') {
                     const { VUE_APP_STARSPECIALACCOUNT_PAGE } = pathnames
                     const href = `${VUE_APP_STARSPECIALACCOUNT_PAGE}?accountType=${this.account}&currency=${this.currency}`
@@ -384,7 +384,7 @@ export default {
                             const url = encodeURIComponent(location.href)
                             location.href = `${location.origin}/wealth/cashBox.html#/sign?url=${url}`
                         } else {
-                            // 已开通 新开webview去星财宝首页
+                            // 已开通 新开webview去现金宝首页
                             this.$goPage('/', {}, { pathname: '/wealth/cashBox.html' })
                         }
                     },
@@ -420,7 +420,7 @@ export default {
                     starSpecialAccount: () => {
                         const { VUE_APP_STARSPECIALACCOUNT_OPEN_ACCOUNT_PAGE: url1, VUE_APP_STARSPECIALACCOUNT_LIST_PAGE: url2 } = pathnames
                         if (!this.starSpecialAccountOpenStatus) {
-                            // 跳转到星财宝专户开通页
+                            // 跳转到现金宝专户开通页
                             this.$goPage(url1)
                         } else {
                             this.$goPage(url2)
@@ -514,7 +514,7 @@ export default {
                 if (c.numHoldings > 0 || (c.assets > 0 && c.assetsType === ASSET_TYPE_MAP.keysMap.investAdvisory)) {
                     o.hasHolding.push(c)
                 } else {
-                    // 星财宝专户未开通不放入数组
+                    // 现金宝专户未开通不放入数组
                     if (c.assetsType === ASSET_TYPE_MAP.keysMap.starSpecialAccount) {
                         console.log('classifyHasHoldingAndNoHolding starSpecialAccountOpenStatus', this.starSpecialAccountOpenStatus)
                         if (this.starSpecialAccountOpenStatus) {
@@ -568,7 +568,7 @@ export default {
             this.getAssetsDetail()
         },
 
-        // 是否展示昨日收益（公募、私募、债券、星财宝）
+        // 是否展示昨日收益（公募、私募、债券、现金宝）
         getShowLatestProfit(data) {
             const { keysMap: k } = assetTypeMap
             const ret = [k.publicFund, k.privateFund, k.bond, k.cashBox].includes(data.assetsType)
@@ -580,25 +580,25 @@ export default {
             const ret = [k.publicFund, k.privateFund, k.bond, k.investAdvisory].includes(data.assetsType)
             return ret
         },
-        // 是否展示 累计收益（另类、星财宝）
+        // 是否展示 累计收益（另类、现金宝）
         getShowAccumulatedProfitloss(data) {
             const { keysMap: k } = assetTypeMap
             const ret = [k.alterInvestment, k.cashBox].includes(data.assetsType)
             return ret
         },
-        // 是否展示 持有总额（定存宝、星财宝专户）
+        // 是否展示 持有总额（定存宝、现金宝专户）
         getShowTotalHolding(data) {
             const { keysMap: k } = assetTypeMap
             const ret = [k.fixedDepositTreasure, k.starSpecialAccount].includes(data.assetsType)
             return ret
         },
-        // 是否展示 持有收益（定存宝、星财宝专户）
+        // 是否展示 持有收益（定存宝、现金宝专户）
         getShowHoldingCount(data) {
             const { keysMap: k } = assetTypeMap
             const ret = [k.fixedDepositTreasure, k.starSpecialAccount].includes(data.assetsType)
             return ret
         },
-        // 是否展示 持有金额（星财宝、公募、私募、债券、另类、投顾）
+        // 是否展示 持有金额（现金宝、公募、私募、债券、另类、投顾）
         getShowHoldingAmount(data) {
             const { keysMap: k } = assetTypeMap
             const ret = [k.publicFund, k.privateFund, k.bond, k.cashBox, k.alterInvestment, k.investAdvisory].includes(data.assetsType)

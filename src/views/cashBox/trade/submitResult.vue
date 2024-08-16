@@ -74,10 +74,10 @@ export default {
             result: null,
             orderNumbers: this.$route.query.orderNumbers,
             orient: this.$route.query.orient,
-            ecashUserSetting: {}, // 星财宝设置状态
-            ecashOpenStatus: 1, // 星财宝开通状态 1：开通，0：未开通
+            ecashUserSetting: {}, // 现金宝设置状态
+            ecashOpenStatus: 1, // 现金宝开通状态 1：开通，0：未开通
             ecashKeepAmountStorageKey: 'SUBMIT-ECASH-KEEP-AMOUNT-DATE-STORAGE',
-            ecashKeepAmountStorageDate: '', // 星财宝保留金额引导存储时间
+            ecashKeepAmountStorageDate: '', // 现金宝保留金额引导存储时间
             resultList: [
                 {
                     key: 'productName',
@@ -131,7 +131,7 @@ export default {
                 rollOut: this.$t('rollOut'),
             }[this.orient]
         },
-        // 显示星财宝自动买入引导
+        // 显示现金宝自动买入引导
         showEcashAutoRollIn() {
             if (this.ecashOpenStatus) {
                 // 港美股两个市场都没有开通自动买入
@@ -143,7 +143,7 @@ export default {
             }
             return false
         },
-        // 显示星财宝账户保留金额引导
+        // 显示现金宝账户保留金额引导
         showEcashKeepAmount() {
             if (this.ecashOpenStatus) {
                 // 港美股两个市场的账户保留金额都 <= 0
@@ -197,7 +197,7 @@ export default {
                 this.getEcashUserStatus()
             })
         if (!isAndroid() && isInOutsideH5()) {
-            // fix  ios下 買入卖出星财宝页面上移问题
+            // fix  ios下 買入卖出现金宝页面上移问题
             window.setTimeout(() => {
                 window.scrollTo(0, 0)
             }, 100)
@@ -252,13 +252,13 @@ export default {
             window.location.replace(url)
         },
 
-        // 星财宝开通信息
+        // 现金宝开通信息
         async getEcashUserStatus() {
             try {
                 const result = await this.$store.dispatch('user/getEcashStatus', true)
                 this.ecashOpenStatus = result?.openStatus || 0
                 if (this.ecashOpenStatus) {
-                    // 已开通 查询 星财宝设置状态
+                    // 已开通 查询 现金宝设置状态
                     this.getEcashUserSetting()
                     this.getKeepAmountStorageDate()
                 }
@@ -267,7 +267,7 @@ export default {
             }
         },
 
-        // 获取星财宝设置信息
+        // 获取现金宝设置信息
         async getEcashUserSetting() {
             try {
                 const { result } = await ecashUserSetting()
@@ -277,7 +277,7 @@ export default {
             }
         },
 
-        // 获取星财宝保留金额引导存储时间
+        // 获取现金宝保留金额引导存储时间
         async getKeepAmountStorageDate() {
             const date = await this.getCashCache(this.ecashKeepAmountStorageKey)
             console.warn('getKeepAmountStorageDate-date:', date)
@@ -286,7 +286,7 @@ export default {
                 this.setKeepAmountStorageDate()
             }
         },
-        // 设置星财宝保留金额引导存储时间
+        // 设置现金宝保留金额引导存储时间
         async setKeepAmountStorageDate() {
             console.warn('setKeepAmountStorageDate')
             this.setCashCache(this.ecashKeepAmountStorageKey, dayjs().format('YYYY-MM-DD'))

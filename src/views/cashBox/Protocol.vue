@@ -50,7 +50,7 @@ export default {
         return {
             symbols: [],
             activeNames: [1, 2, 3, 4, 5, 6],
-            // 星财宝服务
+            // 现金宝服务
             cashService: {
                 fileType: this.$t('cashTradeProtocolSimple'),
             },
@@ -166,7 +166,7 @@ export default {
             }
         },
 
-        // (星财宝)货币基金自动买入及赎回服务协议
+        // (现金宝)货币基金自动买入及赎回服务协议
         goServiceProtocol() {
             const { VUE_APP_BUILDER_PAGE } = pathnames
             const key = 'CASH_BOX'

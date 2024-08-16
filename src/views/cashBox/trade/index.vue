@@ -203,7 +203,7 @@ export default {
             autoAllotList: [], // 自动分配转入明细
             chooseProduct: {}, // 选择的产品
             sellableAmountMap: {}, // 可转出金额Object key: [账户类型]SellableAmount
-            ecashStatusInfo: {}, // 星财宝开通信息
+            ecashStatusInfo: {}, // 现金宝开通信息
             capitalGap: 0,
             myLinkTradeLogin: null, // 中移动交易密码登录、站外通用卖出校验交易密码
             symbolCalendar: {},
@@ -346,7 +346,7 @@ export default {
         // const availableQuantity = this.$route.query.availableQuantity // 份额
         // const prevClose = this.$route.query.prevClose // 净值
         if (symbol) {
-            // 代表是星财宝指定跳转过来的产品 watch中处理其他任务
+            // 代表是现金宝指定跳转过来的产品 watch中处理其他任务
             this.symbol = symbol
             if (this.$refs.tradeAccount && this.$refs.tradeAccount.$refs.chooseProduct) {
                 this.$refs.tradeAccount.$refs.chooseProduct.$on('getProductList', list => {
@@ -707,17 +707,17 @@ export default {
             }
         },
 
-        // 获取星财宝开通状态
+        // 获取现金宝开通状态
         async getEcashStatus() {
             try {
                 this.ecashStatusInfo = await this.$store.dispatch('user/getEcashStatus')
-                console.warn('星财宝开通状态：', this.ecashStatusInfo)
+                console.warn('现金宝开通状态：', this.ecashStatusInfo)
             } catch (e) {
                 console.log('getEcashStatus===>e:', e)
             }
         },
 
-        // 星财宝货币基金买入提示
+        // 现金宝货币基金买入提示
         async ecashTradeRemind() {
             try {
                 await this.$dialog({

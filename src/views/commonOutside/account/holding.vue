@@ -58,7 +58,7 @@
                         ></div>
                     </div>
 
-                    <!-- 分割线显示规则：买入待确认和卖出将到账为空 且 星财宝或票据有数据 -->
+                    <!-- 分割线显示规则：买入待确认和卖出将到账为空 且 现金宝或票据有数据 -->
                     <div
                         v-if="showMore"
                         class="flex-s pad-b16"
@@ -149,7 +149,7 @@
                     </div>
                 </div>
 
-                <!-- 星财宝 -->
+                <!-- 现金宝 -->
                 <StarList :holdDataList="item.starHolding" v-if="showMore" />
 
                 <!-- 票据 -->
@@ -205,12 +205,12 @@ export default {
                 // 筛选持仓数据类型为 Wealth-HKD, Wealth-USD
                 this.holdingsGroup = holdingsGroup.filter(item => {
                     if (['Wealth-HKD', 'Wealth-USD'].includes(item.marketGroup)) {
-                        // 理财持仓数量 9-星财宝
+                        // 理财持仓数量 9-现金宝
                         item.starHolding = item.holdings.filter(val => val.productType === 9)
                         // 理财持仓数量 4-票据
                         item.billHolding = item.holdings.filter(val => val.productType === 4)
 
-                        // 持仓数量 = 星财宝 + 票据
+                        // 持仓数量 = 现金宝 + 票据
                         this.holdingsNum += item.starHolding?.length + item.billHolding?.length
                         return item
                     }

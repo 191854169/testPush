@@ -364,7 +364,7 @@ export default {
         '$route.query': {
             handler(v) {
                 if (v && v.activeTab) {
-                    // 现金管理只展示星财宝数据
+                    // 现金管理只展示现金宝数据
                     this.isManageMoney ? (this.activeTab = 'mmf') : (this.activeTab = v.activeTab)
                 }
             },

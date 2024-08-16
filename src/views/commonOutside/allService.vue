@@ -29,7 +29,7 @@ export default {
     },
     data() {
         return {
-            productTypes: [1, 4, 9], // 产品类型 1-公募 9-星财宝
+            productTypes: [1, 4, 9], // 产品类型 1-公募 9-现金宝
         }
     },
     computed: {

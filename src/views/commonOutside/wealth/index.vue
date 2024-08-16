@@ -239,7 +239,7 @@ export default {
             Riskcounter: 0, //初始化次数
             Personcounter: 0,
             openFundTrade: false,
-            cashBoxData: {}, // 非睿银展示星财宝数据
+            cashBoxData: {}, // 非睿银展示现金宝数据
 
             hotFundList: [], // 明星精选
             advancedInvestList: [],
@@ -464,7 +464,7 @@ export default {
 
             if (key === 'cash') {
                 if (!this.tradeAccount || !this.fundAccount) {
-                    // 星财宝未开户(证券账户、理财账户)前置校验
+                    // 现金宝未开户(证券账户、理财账户)前置校验
                     this.gotoOpenAccount()
                     return
                 }
@@ -629,7 +629,7 @@ export default {
         },
         /**
          * @name 检查新手引导任务项
-         * @param {string} type  cashBox: 星财宝引导，follow：跟投引导
+         * @param {string} type  cashBox: 现金宝引导，follow：跟投引导
          */
         async checkNoobTask(type = '') {
             try {

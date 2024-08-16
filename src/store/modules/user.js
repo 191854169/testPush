@@ -42,9 +42,9 @@ const state = () => ({
     subAccountId: '', // 临时登陆账号
     accts: userInfo?.clientInfo ? userInfo.clientInfo?.accts?.[0] || {} : {}, //登录账号信息
     hlId: '',
-    ecashStatusInfo: {}, // 星财宝信息； openStatus：int，开通状态 0-未开通，1-已开通,openTime：int,开通时间 "YY-MM-DD HH:MM:SS"，effectiveStatus: int,生效状态 0-未生效 1-已生效  timesteamp: 当前服务器时间
+    ecashStatusInfo: {}, // 现金宝信息； openStatus：int，开通状态 0-未开通，1-已开通,openTime：int,开通时间 "YY-MM-DD HH:MM:SS"，effectiveStatus: int,生效状态 0-未生效 1-已生效  timesteamp: 当前服务器时间
     ftdAccountInfo: undefined, // 定存宝信息； undefined - 未获取接口 null - 表示未开通 {} - 表示已开通
-    starSpecialAccountInfo: undefined, // 星财宝专户信息； undefined - 未获取接口 null - 表示未开通 {} - 表示已开通
+    starSpecialAccountInfo: undefined, // 现金宝专户信息； undefined - 未获取接口 null - 表示未开通 {} - 表示已开通
     investmentAccountInfo: undefined, // 投顾组合信息； undefined - 未获取接口 null - 表示未开通 {} - 表示已开通
     tzymAccountInfo: undefined, // 投资移居专户信息； undefined - 未获取接口 null - 表示未开通 {} - 表示已开通
 
@@ -243,7 +243,7 @@ const actions = {
                         if (res.clientInfo?.accts[0]?.ftdInfo) {
                             commit('updateFtdAccountInfo', res.clientInfo?.accts[0]?.ftdInfo)
                         }
-                        // 兼容app版本低没有星财宝专户开户状态的情况
+                        // 兼容app版本低没有现金宝专户开户状态的情况
                         if (res.clientInfo?.accts[0]?.xjbInfo) {
                             commit('updateStarSpecialAccountInfo', res.clientInfo?.accts[0]?.xjbInfo)
                         }
@@ -351,7 +351,7 @@ const actions = {
             session2: res.session2,
         })
     },
-    // 获取星财宝开通信息  force:是否强制刷新重新获取信息
+    // 获取现金宝开通信息  force:是否强制刷新重新获取信息
     getEcashStatus({ commit, state }, force = false) {
         return new Promise((resolve, reject) => {
             if (!isEmpty(state.ecashStatusInfo) && !force) {
@@ -372,7 +372,7 @@ const actions = {
     },
     /**
      * NOTE: 主要是为了兼容APP内低版本的UserInfo接口不会返回专户信息字段 - 尽量都使用该action来判断
-     * 获取专户的开通信息（包含定存宝、星财宝专户、投顾组合）第一次会更新全部专户的信息到本地
+     * 获取专户的开通信息（包含定存宝、现金宝专户、投顾组合）第一次会更新全部专户的信息到本地
      * @param {*} param0
      * @param {*} param1
      * @param {*} param1.force 是否强制刷新重新获取信息
@@ -490,7 +490,7 @@ const actions = {
 
         return retPromise
     },
-    // 获取星财宝专户开通信息  force:是否强制刷新重新获取信息
+    // 获取现金宝专户开通信息  force:是否强制刷新重新获取信息
     // NOTE：主要是为了兼容APP内低版本的UserInfo接口不会返回ftdInfo字段 - 尽量都使用改action来判断
     async getStarSpecialAccountStatus({ commit, state }, force = false) {
         const fetchStarSpecialAccountInfo = async function (resFnc, rejFnc) {

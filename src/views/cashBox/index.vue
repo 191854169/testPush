@@ -172,7 +172,7 @@ export default {
     },
     data() {
         return {
-            ecashHomeGuideKey: 'ECASH_HOME_GUIDE_KEY', // 星财宝首页新手引导key
+            ecashHomeGuideKey: 'ECASH_HOME_GUIDE_KEY', // 现金宝首页新手引导key
             showGuide: false, // 新手引导
             guideStep: 1, // 新手引导步骤几
             dynamicFontOptions: {
@@ -315,7 +315,7 @@ export default {
             accountListMap: accountKeyValueMap,
             chooseFlag: false,
             userSetting: null, // 用户设置信息
-            ecashStatusInfo: {}, // 星财宝开通状态
+            ecashStatusInfo: {}, // 现金宝开通状态
             openStatusMap: {}, // 开户状态
             sellCashBoxVisible: false,
         }
@@ -369,7 +369,7 @@ export default {
             }
             return this.accountType === accountKeyMap.HKD ? HKDTime : USDTime
         },
-        // 展示星财宝开通引导 （未开通）
+        // 展示现金宝开通引导 （未开通）
         showEcashIntro() {
             return this.ecashStatusInfo.openStatus !== 1
         },
@@ -465,7 +465,7 @@ export default {
                 this.showAssets = data
             })
         } else if (isInOutsideH5()) {
-            // 睿银项目中，星财宝与资产首页显示与隐藏状态保持一致
+            // 睿银项目中，现金宝与资产首页显示与隐藏状态保持一致
             this.showAssets = this.showAsset
         }
     },
@@ -678,11 +678,11 @@ export default {
             this.$goPage('/sign')
         },
 
-        // 获取星财宝开通状态
+        // 获取现金宝开通状态
         async getEcashUserStatus() {
             try {
                 this.ecashStatusInfo = await this.$store.dispatch('user/getEcashStatus', true)
-                console.warn('星财宝开通状态：', this.ecashStatusInfo)
+                console.warn('现金宝开通状态：', this.ecashStatusInfo)
             } catch (e) {
                 console.error('ecashUserStatus===>e:', e)
             }

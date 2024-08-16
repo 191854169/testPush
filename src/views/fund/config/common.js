@@ -44,7 +44,7 @@ export const CURRENCY_MAP = generateMap([
     ['USD', i18n.t('USD'), 'USD'],
 ])
 
-// 产品类型 1-公募，2-私募，3-债券，4-票据，9-星财宝
+// 产品类型 1-公募，2-私募，3-债券，4-票据，9-现金宝
 export const PRODUCT_TYPE_MAP = generateMap([
     [1, i18n.t('publicFund'), 'PUBLIC'],
     [2, i18n.t('privateFund'), 'PRIVATE'],
@@ -144,7 +144,7 @@ export const INVEST_FOCUS_DEGREE_MAP = generateMap([
     [4, 60, 'sixty'],
     [128, 61, 'moreThanSixty'],
 ])
-// 资产类型 1-公募，2-私募，3-债券，8-另类，9-星财宝 10-定存宝 11-星财宝专户 13-投顾
+// 资产类型 1-公募，2-私募，3-债券，8-另类，9-现金宝 10-定存宝 11-现金宝专户 13-投顾
 // 展示顺序 10, 11, 9, 1, 3, 8, 2, 13
 export const ASSET_TYPE_MAP = generateMap([
     ['all', i18n.t('allAssets'), 'all'],

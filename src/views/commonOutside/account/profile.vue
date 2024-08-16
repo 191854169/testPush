@@ -193,7 +193,7 @@ export default {
                 creditLimit: {}, // 最大借贷额
             },
             orderNum: 0, // 正在进行中的订单
-            productTypes: [1, 4, 9], // 产品类型 1-公募 9-星财宝 4-票据
+            productTypes: [1, 4, 9], // 产品类型 1-公募 9-现金宝 4-票据
             showPopover: false, // 切换币种框显示与隐藏
         }
     },
@@ -233,7 +233,7 @@ export default {
         /**
          * 查询进行中订单
          * account 账户类型 ALL-所有账户 HKD-港元账户 USD-美元账户
-         * productTypes 产品类型 1-公募 9-星财宝
+         * productTypes 产品类型 1-公募 9-现金宝
          **/
         async getOrderData() {
             try {
@@ -291,7 +291,7 @@ export default {
         /**
          * 查看进行中的订单
          * haveDoing 1-进行中
-         * productTypes 产品类型 1-公募 9-星财宝 4-票据
+         * productTypes 产品类型 1-公募 9-现金宝 4-票据
          **/
         goOrder() {
             const productTypes = encodeURIComponent(JSON.stringify(this.productTypes))

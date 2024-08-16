@@ -675,7 +675,7 @@ export default {
         showWithDrawDialog() {
             let message = `${this.$t('trade.qrysh')}${this.direction[this.detail.orderDirection]}${this.$t('trade.ma')}`
 
-            // 星财宝赎回出金提示
+            // 现金宝赎回出金提示
             if (this.detail.sourceType === 4) {
                 message = this.$t('trade.confirmCashBoxBankWithdarw')
             }

@@ -91,7 +91,7 @@
         </div>
         <!-- 投资组合 -->
         <investmentPortfolioCard />
-        <!-- 星财宝 -->
+        <!-- 现金宝 -->
         <div class="card tjlist" v-if="spareFundList.length">
             <div class="title">
                 <div>{{ $t('cashBox') }}</div>
@@ -818,7 +818,7 @@ export default {
 
             if (key === 'cash') {
                 if (!this.tradeAccount || !this.fundAccount) {
-                    // 星财宝未开户(证券账户、理财账户)前置校验
+                    // 现金宝未开户(证券账户、理财账户)前置校验
                     this.gotoOpenAccount()
                     return
                 }
@@ -1003,7 +1003,7 @@ export default {
         },
         /**
          * @name 检查新手引导任务项
-         * @param {string} type  cashBox: 星财宝引导，follow：跟投引导
+         * @param {string} type  cashBox: 现金宝引导，follow：跟投引导
          */
         async checkNoobTask(type = '') {
             try {
@@ -1036,7 +1036,7 @@ export default {
         },
         /**
          * @name 完成新手引导
-         * @param {string} type  cashBox: 星财宝引导，follow：跟投引导
+         * @param {string} type  cashBox: 现金宝引导，follow：跟投引导
          */
         async finishGuidehandler(type = '') {
             // 键
@@ -1063,7 +1063,7 @@ export default {
         // 点击完成新手指导
         finishGuideAction() {
             if (this.showCashBoxNoobGuide) {
-                // step 1: 如果显示星财宝引导
+                // step 1: 如果显示现金宝引导
                 return this.finishGuidehandler('cashBox')
             }
             if (this.showFollowNoobGuide) {

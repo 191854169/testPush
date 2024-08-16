@@ -130,7 +130,7 @@ export default {
                     this.showAssets = data
                 })
             } else if (this.isInOutside) {
-                // 睿银项目中，星财宝与资产首页显示与隐藏状态保持一致
+                // 睿银项目中，现金宝与资产首页显示与隐藏状态保持一致
                 this.showAssets = this.showAsset
             } else {
                 this.showAssets = getValueFromLocalStorage(WEALTH_AMOUNT_STATUS_kEY, true, true)

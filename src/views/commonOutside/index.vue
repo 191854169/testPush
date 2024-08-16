@@ -177,7 +177,7 @@ export default {
         // },
         pageShow() {
             this.propertyData = getPageVisibleSupportProperty()
-            // 买入，卖出，开通星财宝返回时，刷新页面
+            // 买入，卖出，开通现金宝返回时，刷新页面
             document.addEventListener(this.propertyData.visibilityChange, this.handlePageShow, false)
         },
 

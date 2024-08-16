@@ -46,7 +46,7 @@ export default {
                     this.$router.replace({ path: url })
                 }
             } else {
-                // 回到星财宝首页
+                // 回到现金宝首页
                 this.$router.replace({ path: '/' })
             }
         },

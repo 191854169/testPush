@@ -37,7 +37,7 @@ export const productTypeMap = generateMap([
 ])
 
 // 资产类型枚举
-// 资产类型 1-公募，2-私募，3-债券，8-另类，9-星财宝 10-定存宝 11-星财宝专户 13-投顾
+// 资产类型 1-公募，2-私募，3-债券，8-另类，9-现金宝 10-定存宝 11-现金宝专户 13-投顾
 // 展示顺序 10, 11, 9, 1, 3, 8, 2, 13
 export const assetTypeMap = generateMap([
     ['all', i18n.t('allProduct'), 'all'],

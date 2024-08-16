@@ -441,7 +441,7 @@ export default {
                             this.$router.push(`/subscribe/${symbol}`)
                             break
                         case 'sell':
-                            // 星财宝选择卖出至证券或银行账户
+                            // 现金宝选择卖出至证券或银行账户
                             if (this.basicInfoFund.isMMF == 1) {
                                 this.sellCashBoxVisible = true
                             } else {

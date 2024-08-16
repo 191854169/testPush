@@ -94,7 +94,7 @@ export default {
         return {
             avaliableCash: '', // 现金可用
             summaryWithdrawBalance: '', // 综合现金可用
-            ecashHolding: '', // 星财宝可卖出持仓
+            ecashHolding: '', // 现金宝可卖出持仓
             purchasingPower: '', // 最大购买力
             marginToastShow: false,
             cashToastShow: false,
@@ -185,7 +185,7 @@ export default {
             // 是否用到购买力
             let isUsePurchasingPower = this.isMarginType
             if (this.isCashAccount) {
-                // 现金用户会减去星财宝的资产
+                // 现金用户会减去现金宝的资产
                 insufficientAmount = NP.minus(v, NP.plus(avaliableCash, this.ecashHolding || 0))
             }
             isUsePurchasingPower = isUsePurchasingPower && insufficientAmount > 0
@@ -195,9 +195,9 @@ export default {
             async handler(v) {
                 if (!v) return
                 this.getAssetsDetail()
-                // 支持购买力的产品才需要获取星财宝资产
+                // 支持购买力的产品才需要获取现金宝资产
                 if (this.isMarginType) {
-                    // 开通星财宝的用户才有必要获取
+                    // 开通现金宝的用户才有必要获取
                     if (await this.getEcashUserStatus()) {
                         this.getEcashHolding()
                     }

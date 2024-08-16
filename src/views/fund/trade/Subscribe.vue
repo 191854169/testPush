@@ -335,8 +335,8 @@ export default {
             show: false,
             selectIndex: 0,
             agreeFlag: true,
-            ecashAutoRollOut: true, // 星财宝自动赎回协议
-            ecashAutoRollIn: false, // 星财宝自动买入协议
+            ecashAutoRollOut: true, // 现金宝自动赎回协议
+            ecashAutoRollIn: false, // 现金宝自动买入协议
             radio: '',
             buySure: false,
             buyFail: false,
@@ -404,12 +404,12 @@ export default {
             showTips: false,
             typeMap: typeMap,
             fileList: [],
-            cashBoxMap: {}, // 星财宝开通信息,
+            cashBoxMap: {}, // 现金宝开通信息,
             myLinkTradeLogin: null, // 中移动交易密码登录、站外通用卖出校验交易密码
-            ecashRedeemDialog: false, // 星财宝自动赎回提示 dialog
+            ecashRedeemDialog: false, // 现金宝自动赎回提示 dialog
             capitalGap: 0,
             propertyData: {}, // 页面监听属性
-            isGoEcashOpen: false, // 是否前往星财宝开通页
+            isGoEcashOpen: false, // 是否前往现金宝开通页
         }
     },
     computed: {
@@ -493,9 +493,9 @@ export default {
         isMMF() {
             return this.fundInfo.isMMF === 1
         },
-        // 展示星财宝协议文件
+        // 展示现金宝协议文件
         showEcashProtocol() {
-            // MMF基金 并且 未开通星财宝
+            // MMF基金 并且 未开通现金宝
             return this.isMMF && !this.cashBoxMap.openStatus
         },
         tradeAmount() {
@@ -548,7 +548,7 @@ export default {
         } else {
             // 非app页面重新显示事件
             this.propertyData = getPageVisibleSupportProperty()
-            // 买入，卖出，开通星财宝返回时，刷新页面
+            // 买入，卖出，开通现金宝返回时，刷新页面
             document.addEventListener(this.propertyData.visibilityChange, this.handlePageShow, false)
         }
 
@@ -564,7 +564,7 @@ export default {
         let instuctionKey = ''
         if (this.isMMF) {
             instuctionKey = 'CASHBOX'
-            // MMF基金查询星财宝开通状态
+            // MMF基金查询现金宝开通状态
             await this.getEcashUserStatus()
         } else {
             instuctionKey = this.fundMode === 0 ? 'PUBLIC' : 'PRIVATE'
@@ -603,10 +603,10 @@ export default {
             if (document[this.propertyData.hidden]) return
             this.showReGetEcashStatus()
         },
-        // 重新获取星财宝开通状态
+        // 重新获取现金宝开通状态
         showReGetEcashStatus() {
             if (this.isMMF && this.isGoEcashOpen) {
-                // MMF基金查询星财宝开通状态
+                // MMF基金查询现金宝开通状态
                 console.log('返回页面获取开通状态')
                 this.isGoEcashOpen = false
                 this.getEcashUserStatus()
@@ -615,7 +615,7 @@ export default {
         async getEcashUserStatus() {
             try {
                 const result = await this.$store.dispatch('user/getEcashStatus', true)
-                console.log('星财宝开通状态：', result)
+                console.log('现金宝开通状态：', result)
                 this.cashBoxMap = result
             } catch (e) {
                 console.error('ecashUserStatus===>e:', e)
@@ -1140,7 +1140,7 @@ export default {
          */
         async ecashContinueTradeVerify() {
             if (!this.isMMF || this.accts.type !== 1) return true
-            // MMF基金认购显示未生效弹框 && 星财宝服务开通 && 未生效 && 在T日(4:00 ~ 11:00)
+            // MMF基金认购显示未生效弹框 && 现金宝服务开通 && 未生效 && 在T日(4:00 ~ 11:00)
             const openTime = this.cashBoxMap.openTime ? dayjs(this.cashBoxMap.openTime).valueOf() : ''
             const timestampDate = this.cashBoxMap.timestamp ? dayjs(this.cashBoxMap.timestamp).format('YYYY-MM-DD') : ''
             const startTime = timestampDate ? dayjs(timestampDate).hour(4).valueOf() : 0
@@ -1152,7 +1152,7 @@ export default {
             return true
         },
 
-        // 星财宝货币基金买入提示
+        // 现金宝货币基金买入提示
         async ecashTradeRemind() {
             try {
                 await this.$dialog({
@@ -1186,7 +1186,7 @@ export default {
                         instructionId: this.getInstructionId(),
                     }
                     if (this.showEcashProtocol) {
-                        // 未开通星财宝
+                        // 未开通现金宝
                         params = {
                             ...params,
                             buyKeepAmountUSD: '0', // USD自动转入金额
@@ -1358,7 +1358,7 @@ export default {
             }
         },
 
-        // 星财宝前往详情页
+        // 现金宝前往详情页
         goEcashProtocol(type = '') {
             const key =
                 {
@@ -1373,7 +1373,7 @@ export default {
             location.href = url
         },
 
-        // 前往星财宝开通页
+        // 前往现金宝开通页
         goEcashOpen() {
             this.isGoEcashOpen = true
             let params = { close: true }
@@ -1388,7 +1388,7 @@ export default {
                 pathname: '/wealth/cashBox.html',
             })
         },
-        // 了解星财宝
+        // 了解现金宝
         goWhatsEcash() {
             this.$goPage('/xcbExplain', {}, { pathname: '/wealth/cashBox.html' })
         },

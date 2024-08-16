@@ -248,7 +248,7 @@ export default {
                 return ''
             }
 
-            // 公募基金和星财宝基金不可买卖显示该产品暂不支持交易
+            // 公募基金和现金宝基金不可买卖显示该产品暂不支持交易
             if ([PRODUCT_TYPE_MAP.keysMap.PUBLIC, PRODUCT_TYPE_MAP.keysMap.CASHBOX].includes(this.info?.productType)) {
                 const { buyable, sellable } = this.info || {}
                 if (!buyable && !sellable) {
