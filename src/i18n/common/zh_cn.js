@@ -184,7 +184,7 @@ export default {
         customerServiceTips: '忘记交易密码，请联系客服',
         wrongPasswordTips: '交易密码错误，请重试',
         forgotPassword: '忘记密码',
-        noticeText: '当前账户类型暂不支持此功能，如有疑问，请联系复星财富客服。',
+        noticeText: '当前账户类型暂不支持此功能，如有疑问，请联系陆浦香港客服。',
         freezeText: '当前账户已冻结，请联系在线客服',
         freezeText2: '账户已冻结，请联系在线客服',
     },

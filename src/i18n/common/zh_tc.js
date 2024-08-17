@@ -184,7 +184,7 @@ export default {
         customerServiceTips: '忘記交易密碼，請聯系客服',
         wrongPasswordTips: '交易密碼錯誤，請重試',
         forgotPassword: '忘記密碼',
-        noticeText: '當前賬戶類型暫不支持此功能，如有疑問，请联系復星財富客服。',
+        noticeText: '當前賬戶類型暫不支持此功能，如有疑問，请联系陸浦香港客服。',
         freezeText: '當前帳戶已凍結，請聯繫在線客服',
         freezeText2: '帳戶已凍結，請聯繫在線客服',
     },

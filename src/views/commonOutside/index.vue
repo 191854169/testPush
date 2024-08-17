@@ -244,7 +244,7 @@ export default {
         },
         // 设置标题
         setTitle() {
-            window.document.title = this.active === '1' ? '复星财富' : this.$t('title')
+            window.document.title = this.$t('title')
         },
         // 浏览器回退监听
         handleListener() {
