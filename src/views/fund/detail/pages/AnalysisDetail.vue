@@ -19,10 +19,10 @@
         >
             <template v-slot:name="{ item }">
                 <div class="basic-column">
-                    <div class="select">
+                    <!-- <div class="select">
                         <multi-img v-show="!item.selected" name="icon_agreement_normal" directory="fund"></multi-img>
                         <multi-img v-show="item.selected" name="icon_agreement_select" directory="fund"></multi-img>
-                    </div>
+                    </div> -->
                     <div class="basic-info">
                         <div class="fund-name line-elipsis">{{ item.name }}</div>
                         <ul class="tags">
@@ -44,7 +44,7 @@
                 <span>{{ props.item.rank }}</span>
             </template>
         </fosun-table>
-        <footer>
+        <!-- <footer>
             <div class="tabs-box fund" v-show="selectedFundList.length">
                 <ul class="tabs" @click="onFundClick">
                     <li class="tab" :class="{ selected: item.key === activeTab }" v-for="item in selectedFundList" :key="item.symbol">
@@ -62,7 +62,7 @@
                 </div>
                 <button class="btn" :class="{ disabled: isDisabled }" @click="goFundComparison">{{ $t('compare.startCompare') }}</button>
             </div>
-        </footer>
+        </footer> -->
     </div>
 </template>
 
