@@ -81,6 +81,7 @@ export default {
                 this.$loading.show = true
                 const res = await getAssetSummary()
                 const { assetsSummary, assetsBreakdown } = res.result || {}
+                assetsBreakdown['CNH'].currency = 'CNH'
                 this.assetsSummary = { ...this.assetsSummary, ...assetsSummary }
                 this.assetsBreakdown = { ...this.assetsBreakdown, ...assetsBreakdown }
                 this.handleSort()
