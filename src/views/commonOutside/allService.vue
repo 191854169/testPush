@@ -134,7 +134,7 @@ export default {
                         {
                             key: 'profitDetail',
                             label: this.$t('profitDetail'),
-                            name: 'icon_profit_detail',
+                            name: 'icon_asset_profit_detail_black',
                             link: `/wealth/fund.html#/profit?accountType=ALL&currency=${this.currency}`,
                         },
                     ],
