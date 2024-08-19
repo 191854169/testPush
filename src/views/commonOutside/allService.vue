@@ -115,7 +115,7 @@ export default {
                         {
                             key: 'myStatement',
                             label: this.$t('myStatement'),
-                            name: 'icon_trade_all_funds',
+                            name: 'icon_statement',
                             link: '/pages/tradeStatement.html#/', // todo 待开发
                         },
                     ],
