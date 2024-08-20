@@ -68,18 +68,18 @@ export default {
             }
 
             // 1年内已做了6次
-            if (yearRetryTimes == 0) {
-                this.confirmDialog(6)
-                return
-            }
+            // if (yearRetryTimes == 0) {
+            //     this.confirmDialog(6)
+            //     return
+            // }
             // 一年内做了5次
-            if (yearRetryTimes <= 1) {
-                // 当日剩余大于0
-                dayRetryTimes > 0 ? this.confirmDialog(3, url) : this.confirmDialog(2)
-            } else {
-                // 当日剩余大于0
-                dayRetryTimes > 0 ? this.confirmDialog(1, url) : this.confirmDialog(2)
-            }
+            // if (yearRetryTimes <= 1) {
+            //     // 当日剩余大于0
+            //     dayRetryTimes > 0 ? this.confirmDialog(3, url) : this.confirmDialog(2)
+            // } else {
+            //     // 当日剩余大于0
+            //     dayRetryTimes > 0 ? this.confirmDialog(1, url) : this.confirmDialog(2)
+            // }
         },
 
         /**
@@ -126,10 +126,10 @@ export default {
                 .then(() => {
                     if (flag) {
                         // 一年测评超过6次，第7次测评时提示
-                        if (type === 6) {
-                            location.href = `${location.origin}/wealth/fund.html#/services`
-                            return
-                        }
+                        // if (type === 6) {
+                        //     location.href = `${location.origin}/wealth/fund.html#/services`
+                        //     return
+                        // }
                         const queryType = getQueryString('type', true)
                         const symbol = getQueryString('symbol', true)
                         // 站外睿银等h5从产品详情跳转风险测试不使用goPage方法跳转，防止已经编码的url参数被goPage方法解码无法正常带到风险测评页
