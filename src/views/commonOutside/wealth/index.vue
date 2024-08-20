@@ -42,7 +42,7 @@
             </div>
 
             <!-- 功能排列卡片 -->
-            <div class="features" :class="{ 'z-index-highest': showNoobGuide }">
+            <div class="features">
                 <div @click="onFeaturesClick" class="features-container">
                     <div
                         v-for="item in features"
@@ -353,7 +353,7 @@ export default {
         },
     },
     created() {
-        this.checkNoobGuide()
+        // this.checkNoobGuide()
     },
     async mounted() {
         if (!isUndefined(this.$root.isLogin)) {
