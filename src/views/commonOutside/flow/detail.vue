@@ -13,7 +13,7 @@
 
             <div class="flow-number">
                 <div class="name">{{ $t('flow') }}</div>
-                <div class="value">{{ record.flowId }}</div>
+                <div class="value">{{ record.counterNo }}</div>
             </div>
         </div>
     </div>
