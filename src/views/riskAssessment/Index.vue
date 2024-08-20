@@ -31,7 +31,7 @@ export default {
             // isAssessed是否已经评测，1，是，2，否
             // isExpired是否评测过期，1，是，2，否
             // 已测评未过期，跳至结果页
-            if (isAssessed == 1 && isExpired == 2 && !isApp) {
+            if (isAssessed == 1 && isExpired == 2) {
                 const url = getQueryString('url', true)
                 const title = getQueryString('title', true)
                 const origin = getQueryString('origin', true)
