@@ -1149,18 +1149,15 @@
     typescript "5.0.4"
     vue-eslint-parser "^9.3.1"
 
-"@fs/http@^1.0.15-beta":
-  version "1.0.15-beta"
-  resolved "http://flp-nexus.fotechwealth.com.local/repository/npm-group/@fs/http/-/http-1.0.15-beta.tgz#48104b56513c44a8ade139595d765caeff032e41"
-  integrity sha512-1CfQt1qMRmihaD/adQHKmjfP8jpDSD8KOTnsdcrX9F1i1hse2XNZ2oegOsTdk0wGSEeUjHpkN2KYLIITwx68iw==
+"@fs/http@^1.1.1-beta":
+  version "1.1.1-beta"
+  resolved "http://flp-nexus.fotechwealth.com.local/repository/npm-group/@fs/http/-/http-1.1.1-beta.tgz#fbf159a27d1dbc19f4b8fc3f12d5b4b0375fd828"
+  integrity sha512-NyB55oO7Q+MhtZYBidkie0V3NbzOZu2RSxvCSnnG9QG4aFDYF6YIzeD57IXcWZ+z51bM+hJSbEnfxFUi3hDzlw==
   dependencies:
-    "@fs/jsbridge" "^1.3.10"
-    "@fs/utils" "^1.2.15-beta"
     axios "^1.5.0"
     rollup-plugin-polyfill-node "^0.12.0"
-    ua-parser-js "1.0.36"
 
-"@fs/jsbridge@^1.1.0", "@fs/jsbridge@^1.3.10":
+"@fs/jsbridge@^1.1.0":
   version "1.3.10"
   resolved "http://flp-nexus.fotechwealth.com.local/repository/npm-group/@fs/jsbridge/-/jsbridge-1.3.10.tgz#398a1fff3d7cef0006b08fb8a9b112ad208bd33f"
   integrity sha512-2/dQJrwRhcLBjlGvQmyYF7cUV8iS3d+lv5za8suiUyh1MGqVvQbmPoW0lD3rIRqBibdcbbLzL86hpHdhL+Yxrg==
@@ -1203,44 +1200,17 @@
     stylelint-less "^2.0.0"
     stylelint-scss "^5.2.1"
 
-"@fs/utils@^1.2.11":
-  version "1.2.11"
-  resolved "http://flp-nexus.fotechwealth.com.local/repository/npm-group/@fs/utils/-/utils-1.2.11.tgz#988299e974bf716820289a65a1332b40e54e8f2b"
-  integrity sha512-Z06W5spJxKuf9Uo5walGc+NWe+Sato44UKK5Xd3hrbLQBEL/L48bFoJ684jhRsntwFKqIuVwI29b/DG9OxTT8Q==
+"@fs/utils@^1.3.3-beta":
+  version "1.3.3-beta"
+  resolved "http://flp-nexus.fotechwealth.com.local/repository/npm-group/@fs/utils/-/utils-1.3.3-beta.tgz#fc26628f1c4786b27e12ba4a57fbd0210ee73f39"
+  integrity sha512-L0YbNxdPx2+gGmqiKqe47T/69VkNv0e2CYmwhvU68yQiuUJfBHlIRbsFMt0Zm3nXcg4MikHjp8/Fv7tAqmRKfA==
   dependencies:
     "@fs/jsbridge" "^1.1.0"
     "@types/elliptic" "^6.4.14"
     "@types/jsrsasign" "^10.5.8"
     "@types/uuid" "^8.3.2"
     alife-logger "^1.8.30"
-    asmcrypto.js "^2.3.2"
-    axios "^1.5.0"
     elliptic "^6.5.4"
-    js-crypto-hash "^1.0.6"
-    js-crypto-hkdf "^1.0.6"
-    jsrsasign "^10.8.6"
-    rollup-plugin-polyfill-node "^0.12.0"
-    sa-sdk-javascript "^1.26.5"
-    sjcl "^1.0.8"
-    ua-parser-js "1.0.36"
-    uuid "^8.3.2"
-
-"@fs/utils@^1.2.15-beta":
-  version "1.2.15-beta"
-  resolved "http://flp-nexus.fotechwealth.com.local/repository/npm-group/@fs/utils/-/utils-1.2.15-beta.tgz#5600058049eb0405f6743ee97827131052abe154"
-  integrity sha512-DWA9npGPkkM5yKLafXhQ7UjG22XZ44OkZjMziM4M0k40pI8KbwtIVHg5T9OPniLF3iURFvSzzfxxLO6Ktt45Ig==
-  dependencies:
-    "@fs/jsbridge" "^1.1.0"
-    "@types/elliptic" "^6.4.14"
-    "@types/jsrsasign" "^10.5.8"
-    "@types/uuid" "^8.3.2"
-    alife-logger "^1.8.30"
-    asmcrypto.js "^2.3.2"
-    axios "^1.5.0"
-    elliptic "^6.5.4"
-    js-crypto-hash "^1.0.6"
-    js-crypto-hkdf "^1.0.6"
-    jsrsasign "^10.8.6"
     rollup-plugin-polyfill-node "^0.12.0"
     sa-sdk-javascript "^1.26.5"
     sjcl "^1.0.8"
@@ -8101,7 +8071,7 @@ js-crypto-hash@^1.0.4:
     md5 "~2.3.0"
     sha3 "~2.1.0"
 
-js-crypto-hash@^1.0.6, js-crypto-hash@^1.0.7:
+js-crypto-hash@^1.0.7:
   version "1.0.7"
   resolved "http://flp-nexus.fotechwealth.com.local/repository/npm-group/js-crypto-hash/-/js-crypto-hash-1.0.7.tgz#a8cae28366739244601a8af8c8b9621dd742a922"
   integrity sha512-GdbcVKjplbXJdR9oF2ks8+sBCLD7BUZ144Bc+Ie8OJuBHSIiHyMzdg2eD+ZYf87awTsKckNn1xIv+31+V2ewcA==
@@ -8122,18 +8092,7 @@ js-crypto-hkdf@^1.0.4:
     js-crypto-random "^1.0.4"
     js-encoding-utils "0.7.1"
 
-js-crypto-hkdf@^1.0.6:
-  version "1.0.7"
-  resolved "http://flp-nexus.fotechwealth.com.local/repository/npm-group/js-crypto-hkdf/-/js-crypto-hkdf-1.0.7.tgz#fc70cb9a22aee788c7fe9ae29b7d5400e764b9be"
-  integrity sha512-zRbFh9FGp00KFI9/opuJK2++hPyQz8aHRKdW9P46d3mO5I+5cB+ewuvrXYnkTy4WwMco0TC2saH4Fjx0UsMWaQ==
-  dependencies:
-    js-crypto-env "^1.0.5"
-    js-crypto-hash "^1.0.7"
-    js-crypto-hmac "^1.0.7"
-    js-crypto-random "^1.0.5"
-    js-encoding-utils "0.7.3"
-
-js-crypto-hmac@^1.0.4, js-crypto-hmac@^1.0.7:
+js-crypto-hmac@^1.0.4:
   version "1.0.7"
   resolved "http://flp-nexus.fotechwealth.com.local/repository/npm-group/js-crypto-hmac/-/js-crypto-hmac-1.0.7.tgz#a32ea9762d1f001d4985743a8ac58639a60a8d1e"
   integrity sha512-OVn2wjAuOV7ToQYvRKY2VoElCHoRW7BepycPPuH73xbLygDczkef41YsXMpKLnVAyS5kdwMJQy9qlMR9touHTg==
@@ -8141,7 +8100,7 @@ js-crypto-hmac@^1.0.4, js-crypto-hmac@^1.0.7:
     js-crypto-env "^1.0.5"
     js-crypto-hash "^1.0.7"
 
-js-crypto-random@^1.0.4, js-crypto-random@^1.0.5:
+js-crypto-random@^1.0.4:
   version "1.0.5"
   resolved "http://flp-nexus.fotechwealth.com.local/repository/npm-group/js-crypto-random/-/js-crypto-random-1.0.5.tgz#a588cb6fa0413b2a9cbca5fa4eb5707045f9c184"
   integrity sha512-WydEQ5rrWLzgSkX1QNsuGinkv7z57UkYnDGo5f5oGtBe9QeUWUehdmPNNG4a4Sf8xGkjZBOhKaZqT1ACnyYCBA==
@@ -8152,11 +8111,6 @@ js-encoding-utils@0.7.1:
   version "0.7.1"
   resolved "http://flp-nexus.fotechwealth.com.local/repository/npm-group/js-encoding-utils/-/js-encoding-utils-0.7.1.tgz#2c1a4b83e3437ccd7b84add3d3af9ae142eb9d3a"
   integrity sha512-b17H4Se1eCMiAyLZ0WloE6Y9ilsggI0XnJsRKAxYxJQyRlNtunwjkvppxJwpsyT7n/5zmEIg2of7sKJWj7qcxA==
-
-js-encoding-utils@0.7.3:
-  version "0.7.3"
-  resolved "http://flp-nexus.fotechwealth.com.local/repository/npm-group/js-encoding-utils/-/js-encoding-utils-0.7.3.tgz#e442fbfddf5ec7ae148f5ed83c6b76cc3242e01c"
-  integrity sha512-cfjcyPOzkZ2esMAi6eAjuto7GiT6YpPan5xIeQyN/CFqFHTt1sdqP0PJPgzi3HqAqXKN9j9hduynkgwk+AAJOw==
 
 js-message@1.0.7:
   version "1.0.7"
@@ -8323,11 +8277,6 @@ jsrsasign@^10.5.14:
   version "10.8.6"
   resolved "http://flp-nexus.fotechwealth.com.local/repository/npm-group/jsrsasign/-/jsrsasign-10.8.6.tgz#ebf7f3c812c6517af84f0d8a10115e0dbfabe145"
   integrity sha512-bQmbVtsfbgaKBTWCKiDCPlUPbdlRIK/FzSwT3BzIgZl/cU6TqXu6pZJsCI/dJVrZ9Gir5GC4woqw9shH/v7MBw==
-
-jsrsasign@^10.8.6:
-  version "10.9.0"
-  resolved "http://flp-nexus.fotechwealth.com.local/repository/npm-group/jsrsasign/-/jsrsasign-10.9.0.tgz#cc3f316e7e4c112a976193f9d2c93deb5a0745ee"
-  integrity sha512-QWLUikj1SBJGuyGK8tjKSx3K7Y69KYJnrs/pQ1KZ6wvZIkHkWjZ1PJDpuvc1/28c1uP0KW9qn1eI1LzHQqDOwQ==
 
 keyv@^4.5.3:
   version "4.5.4"
