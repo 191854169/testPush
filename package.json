@@ -28,7 +28,7 @@
         "@better-scroll/core": "^2.5.1",
         "@fs/http": "^1.1.1-beta",
         "@fs/jsbridge": "^1.4.2-beta",
-        "@fs/utils": "^1.3.3-beta",
+        "@fs/utils": "^1.3.4-beta",
         "alife-logger": "^1.8.30",
         "asmcrypto.js": "^2.3.2",
         "axios": "^0.26.0",
